@@ -1,286 +1,4 @@
-start close
-	
-start
-New Script
-close
-total
-	
-showLinkedRecords
-CHUNK_recalculateTotal
-CHUNK_recalculateGrandTotal
-triggered scripts
-	
-linkDeny
-linkGrandDeny
-addToLinkDeny
-addToGrandtotalDeny
-action buttons
-	
-total
-newTotal
-grandTotal
-addToTotalPart1
-addToTotalPart2
-addToTotalPart2 CHUNK
-	
-CHUNK addToTotalPart3
-addToGrandtotalPart1
-addToGrandtotalPart2
-cancelTotal
-cancelAddToTotal
-cancelAddToGrandtotal
-seperateFromTotal
-seperateFromGrandtotal
-newLinkedRecord
-falsified ideas
-	
-UpdateTimeAfterSeperate (OLD)
-CHUNK_deleteRecordsTimeFromGrandtotal
-navigation
-	
-gotoLibraryDatabase
-gotoLibraryDatabaseUsingGoButton
-gotoHelp
-gotoOtherDatabase
-gotoDatabaseFMER
-gotoDatabaseBudget
-gotoTimer
-gotoSpecificAction
-gotoOrder
-help
-	
-dashboard
-goDay
-goDayLastDayUsed
-goPlus1
-goPlus1iphone
-goMinus1
-goMinus1iphone
-goWeekPlus1
-goWeekMinus1
-goMonthPlus
-goMonthMinus
-goToFarmer
-CalendarDayCalc
-CalendarDayCalciphone
-CalendarWeekCalc
-CalendarMonthCalc
-CalendarMonthCalcChartSortN
-to 1
-to 1 chart
-to 7
-to 7 chart
-to 31
-to 31 chart
-iphoneModegotoSort
-iphoneModegotoSortBack
-iphoneModegotoSortTotal
-iphoneModegotoSortBackTotal
-EditTimePart1
-EditTimePart2
-total
-	
-goDayTotal
-goWeekTotal
-goMonthTotal
-CalendarDayCalcTotal
-CalendarWeekCalcTotal
-CalendarMonthCalcTotal
-CalendarMonthCalcChartTotal
-to 1 Total
-to 1 chart Total
-to 7 Total
-to 7 chart Total
-to 32 Total
-to 31 chart Total
-goAndComeBackPart1Total
-goAndComeBackPart2Total
-goAndComeBackPart1
-goAndComeBackPart2
-goBackButton
-goBackButton & goToFarmer CHUNK
-	
-CHUNK_createRecordsForNewUsers
-log
-	
-logShowAll
-gotoSpecificIssuesLog
-openSpecificAction
-gotoLogs
-changeLogs Copy
-gotoIssueLog
-logOpen
-logClose
-logViewByDate
-logViewByAction
-logHideBlanks
-RemoveTextFormatting
-resetRememberTags
-action buttons
-	
-note veto view
-note veto view (old: opened things in new windows)
-timerCloseWindow
-UpdateTime
-CHUNK_lastDayUsed
-UpdateTime (old: opened things in new windows)
-UpdatePauseTotals
-clearPart1
-clearPart2
-Clear (old: opens windows to perform)
-newBrainstateOnTotalLayouts
-newBrainstateOnMainLayouts
-newFarmer
-info
-iphoneCut
-FindSpecificAction
-FindSpecificActionCancel
-iphoneCopy
-iphonePaste
-DeleteBrainstate
-DeleteBrainstateFromTotal
-DeleteBrainstate CHUNKS
-	
-CHUNK_deleteTotalOrGrandtotalRecord
-CHUNK_deleteRecordsTimeFromTotal
-DeleteFarmer
-editFarmer
-otherSolutionsMenu
-switchFarmer
-time
-falsified idea
-	
-edit
-show/hide buttons and checkboxes
-	
-retireButton
-CHUNK_retire
-retireButtonOnViewLayout
-retireCheckbox
-HideButton
-goBackButton_FindRecordsChunk
-ShowButton
-Sorts
-	
-sortRestoreAfterScript
-DaySelectSortThenSort
-CHUNK_DaySelectSortThenSort
-WeekMonthSelectSortThenSort
-sortBrainstate
-sortBrainstateWeekMonth
-sortNumbers
-sortMergeTo
-sortAlpha
-sortSubNumbers
-sortSubAlpha
-sortStart
-sortStop
-sortActivity
-sortActivityWeek
-sortID
-sortBrainstateTotal
-sortNumbersTotal
-sortAlphaTotal
-sortSubNumbersTotal
-sortSubAlphaTotal
-sortStartTotal
-sortStopTotal
-sortActivityTotal
-sortActivityWeekTotal
-sortIDTotal
-issueSortCategory
-issueSortStatus
-issueSortOrderNumber
-issueSortDate
-backup
-	
-backup
-restoreBackup
-triggered scripts
-	
-clear
-layoutStatus
-sortByNumber
-layoutExit
-xpLayout
-exitField
-goToField
-not sure if these are being used
-	
-clearAndExit
-ShowInactiveToo????
-CloseWindow???
-chartTime???
-zzzzzz print log
-to 31 Copy
-TimerPart2
-TimerRepeatAlarm
-TimerPart1
-MoveToNewDayPart2
-zoom150
-CheckRepeatDates
-CheckRepeatDatesMonth
-MarkAllDays
-FolderStopwatchCheck
-hideCheckbox
-recordLoad
-LoadIssuerecordID
-LoadLogrecordID
-CheckForChanges
-iphoneFitToScreen
-updateNumberOfDaysSince
-DaysSinceLastUseToggle
-statusChangeDate
-refreshWindow
-newActPart1
-newActPart2
-newActPart2cancel
-newItem
-newPrefix
-newIssueGroup
-issueCancelNewIssueScript
-uniqueCateogryNameRequired
-uniqueStatusNameRequired
-TsubtotalTimeByGroup
-TsubtotalTimeByGroupForStatus
-findGroupPart2
-findGroupPart1
-TsubtotalTimeByOrder
-gotoFieldItemPart3a
-Tstatus
-gotoIssueOrder
-gotoIssues
-keepblankstatusrecord
-keepBlankGroupRecord
-deleteObservation
-deleteIssue
-deletePrefix
-deleteStatus
-deleteGroup
-PHASEDOUTgotoIssueResolution
-gotoDayOnMainScreen
-IssueToLog
-viewLogIssues
-viewAllLogIssues
-dateStampIssue
-timeStampIssue
-addTimeSegmentToIssue
-ActivityLog!!!!findAllBrainstateLogs
-CHUNK_updateIssueCategoryTime
-gotoIssuesLog
-gotoTagMenus
-zoomLogIN_DELETE!!!!!!
-zoomMainIN
-zoomLogOUT_DELETE!!!!!!
-zoomMainOUT
-goToIssueFromAssignedTimeSegment
-stopSortWhileReviewChangingStatusAndGroup
-orderTagsA
-orderTagsB
-orderTagsC
-orderTagsD
 
-		Next Script: [to 31 Copy]
 Script Name	zzzzzz print log
 Run script with full access privileges	Off
 Include In Menu	Yes
@@ -13760,124 +13478,366 @@ Scripts that use this script
 Script Definition
 Script Steps	
 
-    #PURPOSE merge selected record's time data into one total record and then link these records so that time added in the future to any of the merge records will be automatically added to the one total record.
-    #
-    #
-    Set Variable [ $$recordFIXTOMANYVARIABLES; Value:brainstate::_lockBrainstateID ]
-    Set Variable [ $$record; Value:Get (RecordNumber) ]
-    Set Variable [ $$recordnumber; Value:Get ( RecordNumber ) ]
-    Freeze Window
-    #needed by folderstopwatchcheck script in case the stopwatch being started or stopped belongs to a total record
-    Set Variable [ $$folderon; Value:brainstate::groupID ]
-    #
-    #
-    #
-    If [ brainstate::sortRetired ≠ "" ]
-    Show Custom Dialog [ Title: "!"; Message: "This record is currently retired. To make it active again, click on the r to the immediate left of the record title (if the edit controls are hidden, then first click the edit button (top left corner of this window)."; Buttons: “OK” ]
-    Halt Script
-    End If
-    If [ brainstate::description = "" ]
-    Exit Script [ ]
-    End If
-    #
-    #1 if the view button is showing: determine if the record is total record, and it is show the these linked records, unless the user is on the total record layout in which case halt the script. (From the user's point of view the stopwatch button will say 'view' instead of 'note' if it is a total record, and this part of the script will be activitated.)
-    If [ brainstate::_lockBrainstateID = brainstate::groupID or brainstate::_lockBrainstateID = brainstate::groupOfGroupID ]
-    If [ Left ( Get ( LayoutName ) ; 5 ) = "total" or Left ( Get ( LayoutName ) ; 5 ) = "grand" ]
-    Halt Script
-    End If
-    Set Variable [ $$record; Value:1 ]
-    Perform Script [ “showLinkedRecords” ]
-    Halt Script
-    End If
-    #
-    #1 if the note button is showing first determine if there is a day record to update
-    If [ day1::swSymbols = "" ]
-    Set Variable [ $$stopwatchON; Value:"t" ]
-    #
-    #1 capture record number user is currently on
-    Set Variable [ $record; Value:Get ( RecordNumber ) ]
-    // Go to Record/Request/Page [ $record ] [ No dialog ]
-    #2 if not create a new one for this brainstate record and do it a new window so the user's focus is maintained (just going to the day layout and back resest the scroll bar unfortunately and I can't find away around this, but I want too!)
-    #
-    Set Variable [ $kpnBrainstateID; Value:brainstate::_lockBrainstateID ]
-    Set Variable [ $userID; Value:reference::farmerID ]
-    // New Window [ Name: "!"; Height: 100; Width: 100 ]
-    // Adjust Window [ Hide ]
-    Go to Layout [ “calcDayTable” (day1) ]
-    New Record/Request
-    Set Field [ day1::_keyBrainstate; $kpnBrainstateID ]
-    Set Field [ day1::_keyUser; $userID ]
-    Set Field [ day1::_keyDay; reference::day1 ]
-    #
-    #3 start the timer by inserting the current time in the start field
-    Set Field [ day1::swStart; Get ( CurrentTimeStamp ) ]
-    #this sets a flag for the updateTime script telling it to ignore this stopwatches time for updates to total records because until it is stopped its time has not changed and does not need to be included in an update.
-    Set Field [ day1::updateTimeSymbol; day1::swSymbols ]
-    Set Field [ day1::updateTime; day1::updateTimeCurrentTimeCalc ]
-    Go to Layout [ original layout ]
-    Go to Record/Request/Page [ $record ] [ No dialog ]
-    Perform Script [ “CHUNK_lastDayUsed” ]
-    #
-    // #See if Activity Log window is open and if so
-    // #show user new day record for log.
-    // Select Window [ Name: "Activity Log"; Current file ]
-    // If [ Get (LastError) ≠ 112 //window missing ]
-    // Perform Script [ “ActivityLog!!!!findAllBrainstateLogs” ]
-    // End If
-    Select Window [ Name: "Timer"; Current file ]
-    #
-    #4 check if the record belongs to a total record and modify its foldercheck field if so to inform user on main screen that a stopwatch may be activite that is not currently shown
-    Perform Script [ “FolderStopwatchCheck” ]
-    #4 sort the records if the current sort is based on time which will make this record with zero current time shoot the top or bottom of the list depending on how the user is currently shorting time. The point is to keep the focus where the user expects it to be so the sort, which removes the focus from the current record is only done if the user wants the records sorted by time, in which case after the sort the focus is returned to the first record.
-    Perform Script [ “DaySelectSortThenSort” ]
-    Halt Script
-    End If
-    #
-    #5 if the veto button is showing stop the stopwatch and put in the in the time stopped
-    If [ day1::swSymbols = "veto" ]
-    Set Variable [ $$stopwatchON; Value:"f" ]
-    Set Field [ day1::swPause[day1::swOccurances]; Get ( CurrentTimeStamp ) ]
-    #
-    #5 recalculate the time for this record and check and see if is linked to any total records and if so update their time too
-    Perform Script [ “UpdateTime” ]
-    End If
-    #
-    #6 if the note button is showing restart the timer by putting a new start time in next available start field for this day record
-    Set Variable [ $$stopwatchON; Value:"t" ]
-    Set Field [ day1::swStart[day1::swOccurances + 1]; Get ( CurrentTimeStamp ) ]
-    If [ day1::swOccurances = 29 ]
-    Set Field [ day1::swStart[29]; Get ( CurrentTimeStamp ) ]
-    End If
-    #
-    // #See if Activity Log window is open and if so
-    // #show user new time slot ( 0:00 ).
-    // Set Variable [ $$stopRecordLoad; Value:1 ]
-    // Select Window [ Name: "Activity Log"; Current file ]
-    // If [ Get (LastError) ≠ 112 //window missing ]
-    // If [ daylog::swActivityLength[11] ≠ "" ]
-    // Go to Layout [ “logs3rows” (logs) ]
-    // Else If [ daylog::swActivityLength[6] ≠ "" ]
-    // Go to Layout [ “logs2rows” (logs) ]
-    // Else If [ daylog::swActivityLength[6] = "" ]
-    // Go to Layout [ “logs1row” (logs) ]
-    // End If
-    // Refresh Window
-    // End If
-    // Set Variable [ $$stopRecordLoad ]
-    Select Window [ Name: "Timer"; Current file ]
-    #
-    #7 recalculate the pause between stop and start times to show user the amount of time that has passed since the last time this brainstate was active
-    Perform Script [ “UpdatePauseTotals” ]
-    #this sets a flag for the updateTime script telling it to ignore this stopwatches time for updates to total records because until it is stopped its time has not changed and does not need to be included in an update.
-    Set Field [ day1::updateTimeSymbol; day1::swSymbols ]
-    Set Field [ day1::updateTime; day1::updateTimeCurrentTimeCalc ]
-    #4 check if the record belongs to a total record and modify its foldercheck field if so to inform user on main screen that a stopwatch may be activite that is not currently shown
-    Perform Script [ “FolderStopwatchCheck” ]
-    #Go back to original record number so sort script
-    #gets ID number.(Would be better to fix sort
-    #script so it exits rather than halts all scripts.)
-    Go to Record/Request/Page [ $$recordnumber ] [ No dialog ]
-    Perform Script [ “DaySelectSortThenSort” ]
+    #total: action buttons: total
+#PURPOSE merge selected record's time data into one total record and then link these records so that time added in the future to any of the
+merge records will be automatically added to the one total record.
+#
+#
+#
+#NOTE: the three # symbols set apart chunks of script.
+#NOTE: the ﬁnish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
+they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them apart.
+#
+#
+#
+#basic administration tasks
+Set Error Capture [ On ]
+Allow User Abort [ Off ]
+Set Variable [ $userID; Value:reference::farmerID ]
+#
+#
+#
+#A) BEGIN ﬁnd selected merge records and create new total record and link all records together
+#
+#1 check if there are 1 or more records to merge and if not halt the script. (Can't merge if zero records are selected. 1 record can be merged
+which is really making a copy of that record for instances where the user has been tracking 2 things with one brainstate but now wants to
+separate the tracking of these with 2 separate brainstate records.)
+If [ brainstate::groupAddCheckboxCount < 1 ]
+Show Custom Dialog [ Title: "!"; Message: "At least 1 brainstates must be selected for a merge."; Buttons: “OK” ]
+Halt Script
+End If
+#
+#2 make a list of only the records to be merged
+Enter Find Mode [ ]
+Set Field [ brainstate::_keyUser; $userID ]
+Set Field [ brainstate::groupAddCheckbox; "t" ]
+Perform Find [ ]
+#
+#
+#
+#BEGIN ﬁnd error 1
+If [ Get ( LastError ) ≠ 0 ]
+#tell user the error number.
+Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming merge script part A2."; Buttons: “OK” ]
+#Find all records user had showing when they clicked the merge button
+Enter Find Mode [ ]
+Set Field [ brainstate::_keyUser; $userID ]
+Perform Find [ ]
+If [ steward::retiredStatus = "r" ]
+Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+[ Restore ]
+End If
+If [ steward::hideStatus = "" and steward::showORhide = "hide" ]
+Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
+[ Restore ]
+Sort Records [ ]
+[ No dialog ]
+Halt Script
+End If
+If [ steward::showStatus ≠ "" and steward::showORhide = "show" ]
+Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
+[ Restore ]
+December 1, 2013 17:28:54 ActionLog.fp7 - total -1-total: action buttons: total
+Sort Records [ ]
+[ No dialog ]
+Halt Script
+End If
+Sort Records [ ]
+[ No dialog ]
+Go to Record/Request/Page
+[ First ]
+Go to Field [ ]
+Halt Script
+End If
+#END ﬁnd error 1
+#
+#
+#
+#3 create the new total record
+Go to Layout [ “01SortAndSchedule” (brainstate) ]
+New Record/Request
+Set Field [ brainstate::_keyUser; $userID ]
+Set Field [ brainstate::linkinfo; "total of: " ]
+Set Field [ brainstate::description; "NEW TOTAL RECORD the ID numbers of the records totaled by this record can be seen by either clicking or
+hovering over the i at the far right of this description ﬁeld." ]
+Set Field [ brainstate::groupType; "merge" ]
+#
+#4 link all records
+Set Variable [ $brainstateID; Value:brainstate::_lockBrainstateID ]
+Set Variable [ $brainstateDisplayID; Value:brainstate::_Number ]
+Go to Record/Request/Page
+[ First ]
+Loop
+Set Field [ brainstate::groupID; $brainstateID ]
+Set Field [ brainstate::groupDisplayID; $brainstateDisplayID ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
+End Loop
+#
+#A) END ﬁnd selected merge records and create new total record and link all records together
+#
+#
+#
+Loop
+#B) BEGIN add a merge record's ID# to the description of the new total record.
+#
+#1 make sure there is a record to be merged (this step will be important when this loop is repeated after the ﬁrst record to be merged is
+omitted).
+Go to Record/Request/Page
+[ First ]
+If [ brainstate::_lockBrainstateID ≠ brainstate::groupID ]
+#
+#2 capture merged ID number for total's linkinfo ﬁeld: total of: ID, ID, ID, etc.
+Set Variable [ $CurrentBrainstateID; Value:brainstate::_lockBrainstateID ]
+Set Variable [ $CurrentBrainstateDisplayID; Value:brainstate::_Number ]
+Go to Record/Request/Page
+[ Last ]
+Set Field [ brainstate::linkinfo; If ( WordCount ( brainstate::linkinfo ) = 2 ;
+brainstate::linkinfo & $CurrentBrainstateDisplayID ;
+brainstate::linkinfo & ", " & $CurrentBrainstateDisplayID ) ]
+Go to Record/Request/Page
+[ First ]
+December 1, 2013 17:28:54 ActionLog.fp7 - total -2-total: action buttons: total Go to Record/Request/Page
+[ First ]
+#
+#
+#
+#BEGIN ﬁnish
+Else If [ brainstate::_lockBrainstateID = brainstate::groupID ]
+#If all records are empty then the merge is complete and now the user needs to be shown the new total record and all the records that
+will feed into it until they are separated.
+Enter Find Mode [ ]
+Set Field [ brainstate::groupID; $brainstateID ]
+Perform Find [ ]
+Sort Records [ Speciﬁed Sort Order: brainstate::_lockBrainstateID; descending ]
+[ Restore; No dialog ]
+Go to Record/Request/Page
+[ First ]
+Go to Layout [ “TotalSort” (brainstate) ]
+Go to Field [ ]
+Halt Script
+#END ﬁnish
+#
+#
+#
+End If
+#
+#B) END add a merge record's ID# to the description of the new total record.
+#
+#
+#
+#C BEGIN ﬁnd merge record's related day records
+#
+#1 make a list of the ﬁrst brainstate's day records in a new window
+Go to Layout [ “calcTotalSelectedList” (day1) ]
+Enter Find Mode [ ]
+Set Field [ day1::_keyBrainstate; $CurrentBrainstateID ]
+Perform Find [ ]
+#
+#C END ﬁnd merge record's related day records
+#
+#
+#
+#D BEGIN no records found loop (this loop will either complete the merge process or ﬁnd a merge record with related day records)
+#
+Loop
+#
+#1 if records are found exit loop
+Exit Loop If [ Get ( LastError ) = 0 ]
+#
+#2 clear the merge ﬁeld (the big X in the box on the ToBeMerged layout) and omit this record
+If [ Get ( LastError ) = 401 ]
+Go to Layout [ “01SortAndSchedule” (brainstate) ]
+Set Field [ brainstate::groupAddCheckbox; "" ]
+Omit Record
+#
+#
+#
+#BEGIN ﬁnish
+If [ brainstate::_lockBrainstateID = brainstate::groupID ]
+December 1, 2013 17:28:54 ActionLog.fp7 - total -3-total: action buttons: total
+#If all records are empty then the merge is complete and now the user needs to be shown the new total record and all the
+records that will feed into it until they are separated.
+Enter Find Mode [ ]
+Set Field [ brainstate::groupID; $brainstateID ]
+Perform Find [ ]
+Sort Records [ Speciﬁed Sort Order: brainstate::_lockBrainstateID; descending ]
+[ Restore; No dialog ]
+Go to Record/Request/Page
+[ First ]
+Go to Layout [ “TotalSort” (brainstate) ]
+Go to Field [ ]
+Halt Script
+End If
+#END ﬁnish
+#
+#
+#
+#BEGIN ﬁnd error 2
+Else If [ Get ( LastError ) ≠ 0 ]
+#tell user the error number
+Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming merge script part D2.";
+Buttons: “OK” ]
+#Find all records user had showing when they clicked the merge button
+Enter Find Mode [ ]
+Set Field [ brainstate::_keyUser; $userID ]
+Perform Find [ ]
+If [ steward::retiredStatus = "r" ]
+Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+[ Restore ]
+End If
+If [ steward::hideStatus = "" and steward::showORhide = "hide" ]
+Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
+[ Restore ]
+Sort Records [ ]
+[ No dialog ]
+Halt Script
+End If
+If [ steward::showStatus ≠ "" and steward::showORhide = "show" ]
+Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
+[ Restore ]
+Sort Records [ ]
+[ No dialog ]
+Halt Script
+End If
+Sort Records [ ]
+[ No dialog ]
+Go to Record/Request/Page
+[ First ]
+Go to Field [ ]
+Halt Script
+End If
+#END ﬁnd error 2
+#
+#
+#
+#3 capture next records ID number for total's linkinfo ﬁeld: total of: ID, ID, ID, etc.
+Set Variable [ $CurrentBrainstateID; Value:brainstate::_lockBrainstateID ]
+Set Variable [ $CurrentBrainstateDisplayID; Value:brainstate::_Number ]
+Go to Record/Request/Page
+[ Last ]
+December 1, 2013 17:28:54 ActionLog.fp7 - total -4-total: action buttons: total Go to Record/Request/Page
+[ Last ]
+Set Field [ brainstate::linkinfo; If ( WordCount ( brainstate::linkinfo ) = 2 ;
+brainstate::linkinfo & $CurrentBrainstateDisplayID ;
+brainstate::linkinfo & ", " & $CurrentBrainstateDisplayID ) ]
+Go to Record/Request/Page
+[ First ]
+#
+#4 make a list of this record's day records in a new window.
+Go to Layout [ “calcTotalSelectedList” (day1) ]
+Enter Find Mode [ ]
+Set Field [ day1::_keyBrainstate; $CurrentBrainstateID ]
+Perform Find [ ]
+End Loop
+#
+#D END no records found loop
+#
+#
+#
+#E BEGIN create new related day records and add selected record's time to them
+#
+Loop
+#1 ﬁnd any day records for the new brainstate that match the kfDay of the ﬁrst merge record. If this new record already has data in it,
+then we want to add new data to the old data; not replace the old data with new data.
+Set Variable [ $mergeDay; Value:day1::_keyDay ]
+Enter Find Mode [ ]
+Go to Layout [ “calcTotalNewRecord” (day2) ]
+Set Field [ day2::_keyBrainstate; $brainstateID ]
+Set Field [ day2::_keyDay; $mergeDay ]
+Perform Find [ ]
+#
+#2 if no matches are found, create a new day record and put in the time of the ﬁrst the current day record
+If [ Get ( LastError ) = 401 ]
+New Record/Request
+Set Field [ day2::_keyBrainstate; $brainstateID ]
+Set Field [ day2::_keyDay; $mergeDay ]
+Set Field [ day2::swStart; day2::_keyDay & " 0:00:00" ]
+Go to Layout [ “calcTotalSelectedList” (day1) ]
+Set Variable [ $TotalActivity; Value:day1::swTotalActivity ]
+Go to Layout [ “calcTotalNewRecord” (day2) ]
+Set Field [ day2::swPause; Case (
+$TotalActivity > Time ( 23 ; 59 ; 59 ) ; day2::_keyDay & " 24:00:00" ;
+$TotalActivity < Time ( 0 ; 0 ; 0 ) ; day2::_keyDay & " 00:00:00" ;
+day2::_keyDay & " " & $TotalActivity )
+//insures that no more than 24 hours will be put into a day and that a day with negative time does not cause an error. ]
+#
+#
+#
+#BEGIN ﬁnd error 3
+Else If [ Get ( LastError ) ≠ 0 ]
+#tell user the error number
+Show Custom Dialog [ Title: "!"; Message: "Unexpected error" & Get ( LastError ) & "peforming merge script part E2."; Buttons:
+“OK” ]
+#Find all records user had showing when they clicked the merge button.
+Enter Find Mode [ ]
+December 1, 2013 17:28:54 ActionLog.fp7 - total -5-total: action buttons: total
+Set Field [ brainstate::_keyUser; $userID ]
+Perform Find [ ]
+If [ steward::retiredStatus = "r" ]
+Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+[ Restore ]
+End If
+If [ steward::hideStatus = "" and steward::showORhide = "hide" ]
+Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
+[ Restore ]
+Sort Records [ ]
+[ No dialog ]
+Halt Script
+End If
+If [ steward::showStatus ≠ "" and steward::showORhide = "show" ]
+Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
+[ Restore ]
+Sort Records [ ]
+[ No dialog ]
+Halt Script
+End If
+Sort Records [ ]
+[ No dialog ]
+Go to Record/Request/Page
+[ First ]
+Go to Field [ ]
+Halt Script
+#END ﬁnd error 3
+#
+#
+#
+#3 if a match is found, then add the current day's time to this day's time.
+Else If [ Get ( LastError ) = 0 ]
+Go to Layout [ “calcTotalSelectedList” (day1) ]
+Set Variable [ $TotalActivity; Value:day1::swTotalActivity ]
+Go to Layout [ “calcTotalNewRecord” (day2) ]
+Set Field [ day2::swPause; Case (
+$TotalActivity + day2::swTotalActivity > Time ( 23 ; 59 ; 59 ) ; day2::_keyDay & " 24:00:00" ;
+$TotalActivity + day2::swTotalActivity < Time ( 0 ; 0 ; 0 ) ; day2::_keyDay & " 00:00:00" ;
+day2::_keyDay & " " & ($TotalActivity + day2::swTotalActivity) )
+//insures that no more than 24 hours will be put into a day and that a day with negative time does not cause an error. ]
+End If
+#
+#4 repeat loop for found record's next related day record.
+Go to Layout [ “calcTotalSelectedList” (day1) ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
+End Loop
+#
+#E END create new related day records and add selected record's time to them
+#
+#
+#
+#F BEGIN go to next record with related day records to be added to the new total record.
+#
+Go to Layout [ “01SortAndSchedule” (brainstate) ]
+#Clear the merge ﬁeld (the big X in the box on the ToBeMerged layout).
+Set Field [ brainstate::groupAddCheckbox; "" ]
+December 1, 2013 17:28:54 ActionLog.fp7 - total -6-total: action buttons: total
+Omit Record
+#
+#F END go to next record with related day records to be added to the new total record.
+#
+#
+#
+End Loop
+December 1, 2013 17:28:54 ActionLog.fp7 - total -7-
 
 Fields used in this script	
 
