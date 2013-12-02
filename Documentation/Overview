@@ -1,4 +1,4 @@
-total: action buttons: total
+#!/usr/bin/env python3
 #PURPOSE merge selected record's time data into one total record and then link these records so that time added in the future to any of the
 merge records will be automatically added to the one total record.
 #
