@@ -10,7 +10,7 @@ Script Steps
 
     #PURPOSE save out graphic objects to external folder for reference in graphs and then go to the user layout
     #
-    #
+    #test
     #
     #1 save out graphic objects to external folder for reference in graphs
     Set Variable [ $path; Value:"file:" & Get(TemporaryPath) & "1.gif" ]
