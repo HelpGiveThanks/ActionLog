@@ -1,69 +1,279 @@
-Script Name	start
-Run script with full access privileges	Off
-Include In Menu	Yes
-Layouts that use this script	
-
-Scripts that use this script	
-
-Script Definition
-Script Steps	
-
-    #PURPOSE save out graphic objects to external folder for reference in graphs and then go to the user layout
-    #
-    #test
-    #
-    #1 save out graphic objects to external folder for reference in graphs
-    Set Variable [ $path; Value:"file:" & Get(TemporaryPath) & "1.gif" ]
-    Export Field Contents [ reference::gResources; “$path” ]
-    Set Variable [ $path; Value:"file:" & Get(TemporaryPath) & "2.gif" ]
-    Export Field Contents [ reference::gResources[3]; “$path” ]
-    #
-    #2 go to the user layout
-    Go to Layout [ “users” (steward) ]
-    Show All Records
-    Sort Records [ Specified Sort Order: steward::FirstName; ascending steward::LastName; ascending ] [ Restore; No dialog ]
-    If [ steward::windowZoom = 150 ]
-    Set Zoom Level [ 100% ]
-    Else If [ steward::windowZoom = 200 ]
-    Set Zoom Level [ 100% ]
-    Else If [ steward::windowZoom = 300 ]
-    Set Zoom Level [ 100% ]
-    Else If [ steward::windowZoom = 400 ]
-    Set Zoom Level [ 100% ]
-    End If
-    // Adjust Window [ Maximize ]
-    Adjust Window [ Resize to Fit ]
-    Move/Resize Window [ Current Window; Width: Get (ScreenWidth) * .8; Top: Get (ScreenHeight) * .05; Left: Get (ScreenWidth) * .1 ]
-    Set Window Title [ Current Window; New Title: "HelpGiveThanks Solutions" ]
-    #
-    #Show regular menus if Admin logs in only.
-    Show/Hide Text Ruler [ Hide ]
-    If [ Get ( AccountName ) = "Admin" ]
-    Show/Hide Status Area [ Hide ]
-    Install Menu Set [ “[Standard FileMaker Menus]” ]
-    Else
-    Show/Hide Status Area [ Lock; Hide ]
-    End If
-
-Fields used in this script	
-
-    reference::gResources
-    steward::FirstName
-    steward::LastName
-    steward::windowZoom
-
-Scripts used in this script	
-
-Layouts used in this script	
-
-    users
-
-Tables used in this script	
-
-Table occurrences used by this script	
-
-Custom Functions used by this script	
-
-Custom menu set used by this script	
-
-    [Standard FileMaker Menus]
+total: action buttons: total
+#PURPOSE merge selected record's time data into one total record and then link these records so that time added in the future to any of the
+merge records will be automatically added to the one total record.
+#
+#
+#
+#NOTE: the three # symbols set apart chunks of script.
+#NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
+they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them apart.
+#
+#
+#
+#basic administration tasks
+Set Error Capture
+[
+On
+]
+Allow User Abort
+[
+Off
+]
+Set Variable
+[
+$userID
+; Value:reference::farmerID
+]
+#
+#
+#
+#A) BEGIN find selected merge records and create new total record and link all records together
+#
+#1 check if there are 1 or more records to merge and if not halt the script. (Can't merge if zero records are selected. 1 record can be merged
+which is really making a copy of that record for instances where the user has been tracking 2 things with one brainstate but now wants to
+separate the tracking of these with 2 separate brainstate records.)
+If
+[
+brainstate::groupAddCheckboxCount < 1
+]
+Show Custom Dialog
+[
+Title:
+"!"; Message: "At least 1 brainstates must be selected for a merge."; Buttons:
+“OK” ]
+Halt Script
+End If
+#
+#2 make a list of only the records to be merged
+Enter Find Mode
+[ ]
+Set Field
+[
+brainstate::_keyUser
+; $userID
+]
+Set Field
+[
+brainstate::groupAddCheckbox
+; "t"
+]
+Perform Find
+[ ]
+#
+#
+#
+#BEGIN find error 1
+If
+[
+Get ( LastError )
+≠
+0
+]
+#tell user the error number.
+Show Custom Dialog
+[
+Title:
+"!"; Message: "Unexpected error " & Get ( LastError ) & " peforming merge script part A2."; Buttons:
+“OK” ]
+#Find all records user had showing when they clicked the merge button
+Enter Find Mode
+[ ]
+Set Field
+[
+brainstate::_keyUser
+; $userID
+]
+Perform Find
+[ ]
+If
+[
+steward::retiredStatus = "r"
+]
+Constrain Found Set
+[
+Specified Find Requests:
+Omit Records
+; Criteria:
+brainstate::sortRetired
+: “r”
+]
+[
+Restore
+]
+End If
+If
+[
+steward::hideStatus = "" and steward::showORhide = "hide"
+]
+Constrain Found Set
+[
+Specified Find Requests:
+Omit Records
+; Criteria:
+brainstate::hide
+: “t”
+]
+[
+Restore
+]
+Sort Records
+[ ]
+[
+No dialog
+]
+Halt Script
+End If
+If
+[
+steward::showStatus
+≠
+"" and steward::showORhide = "show"
+]
+Constrain Found Set
+[
+Specified Find Requests:
+Omit Records
+; Criteria:
+brainstate::Show
+: “=”
+]
+[
+Restore
+]
+December 1, 2013 17:28:54
+-1-
+ActionLog.fp7 - total
+total: action buttons: total
+Sort Records
+[ ]
+[
+No dialog
+]
+Halt Script
+End If
+Sort Records
+[ ]
+[
+No dialog
+]
+Go to Record/Request/Page
+[
+First
+]
+Go to Field
+[ ]
+Halt Script
+End If
+#END find error 1
+#
+#
+#
+#3 create the new total record
+Go to Layout
+[
+“01SortAndSchedule” (brainstate)
+]
+New Record/Request
+Set Field
+[
+brainstate::_keyUser
+; $userID
+]
+Set Field
+[
+brainstate::linkinfo
+; "total of: "
+]
+Set Field
+[
+brainstate::description
+; "NEW TOTAL RECORD the ID numbers of the records totaled by this record can be seen by either clicking or
+hovering over the i at the far right of this description field."
+]
+Set Field
+[
+brainstate::groupType
+; "merge"
+]
+#
+#4 link all records
+Set Variable
+[
+$brainstateID
+; Value:brainstate::_lockBrainstateID
+]
+Set Variable
+[
+$brainstateDisplayID
+; Value:brainstate::_Number
+]
+Go to Record/Request/Page
+[
+First
+]
+Loop
+Set Field
+[
+brainstate::groupID
+; $brainstateID
+]
+Set Field
+[
+brainstate::groupDisplayID
+; $brainstateDisplayID
+]
+Go to Record/Request/Page
+[
+Next; Exit after last
+]
+End Loop
+#
+#A) END find selected merge records and create new total record and link all records together
+#
+#
+#
+Loop
+#B) BEGIN add a merge record's ID# to the description of the new total record.
+#
+#1 make sure there is a record to be merged (this step will be important when this loop is repeated after the first record to be merged is
+omitted).
+Go to Record/Request/Page
+[
+First
+]
+If
+[
+brainstate::_lockBrainstateID
+≠
+brainstate::groupID
+]
+#
+#2 capture merged ID number for total's linkinfo field: total of: ID, ID, ID, etc.
+Set Variable
+[
+$CurrentBrainstateID
+; Value:brainstate::_lockBrainstateID
+]
+Set Variable
+[
+$CurrentBrainstateDisplayID
+; Value:brainstate::_Number
+]
+Go to Record/Request/Page
+[
+Last
+]
+Set Field
+[
+brainstate::linkinfo
+; If ( WordCount ( brainstate::linkinfo ) = 2 ;
+brainstate::linkinfo & $CurrentBrainstateDisplayID ;
+brainstate::linkinfo & ", " & $CurrentBrainstateDisplayID )
+]
+Go to Record/Request/Page
+[
+First
+]
+December 1, 2013 17:28:54
+-2-
+ActionLog.fp7 - total
