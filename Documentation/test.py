@@ -1,11 +1,8 @@
 switchTestList
 #
 #If the user selected the list currently showing then
-#stop the script.
-If [ TEMP::ktestItemList = TEMP::ktestItemListOLD ]
 Go to Field [ ]
 Exit Script [ ]
-End If
 #
 #switch to the selected test, which may or may
 #not have a test-item list.
@@ -18,16 +15,10 @@ Perform Find [ ]
 #
 #If there is no list, then inform the user of this fact
 #at the end of the script, after the name of the list
-#is updated. To do that capture the 401 error message.
 If [ Get (LastError) = 401 ]
 Set Variable [ $emptyList; Value:1 ]
 End If
 Set Variable [ $$stopLoadTagRecord ]
-Sort Records [ Speciﬁed Sort Order: ruleTagMenuTestGroups::order; based on value list: “order”
-ruleTagMenuTestGroups::_Lgroup; ascending
-tagMenus::orderOrLock; based on value list: “order”
-tagMenus::tag; ascending ]
-[ Restore; No dialog ]
 #
 #assign newly selected test item list to test
 Select Window [ Name: "Setup"; Current ﬁle ]
@@ -66,6 +57,9 @@ Set Variable [ $currentTest; Value:test::_Ltest ]
 #Turn of the record load triggered script to speed
 #up this loop search.
 Set Variable [ $$ID; Value:"ignore" ]
+Set Variable [ $$ID; Value:"ignore" ]
+Set Variable [ $$ID; Value:"ignore" ]
+Set Variable [ $$ID; Value:"ignore" ]
 #
 #Go to the ﬁrst record and then test it and every
 #other record until the test in question is found.
@@ -86,7 +80,6 @@ Set Field [ TEMP::ktestListtTestName; test::testName ]
 Go to Record/Request/Page
 [ First ]
 Loop
-Exit Loop If [ test::_Ltest = $currentTest ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
@@ -95,9 +88,6 @@ Refresh Window
 #
 #make new and old tag keys identical, so when
 #a switch is made this copy can be used as the old key
-#in the ﬁrst part of this script. Switching automatically
-#replaces the current key with whatever is selected,
-#thus the need to preserve a copy now, before a switch is made.
 Set Field [ TEMP::ktestItemListOLD; TEMP::ktestItemList ]
 #
 #Update key used for the move pulldown to the new test.
@@ -115,4 +105,4 @@ Go to Field [ ]
 If [ $emptyList = 1 ]
 Show Custom Dialog [ Message: "This test-item list contains no test items. You are welcome to create new ones."; Buttons: “OK” ]
 End If
-December 2, 平成25 21:02:05 Imagination Quality Management.fp7 - switchTestList
+December 3, 平成25 14:31:27 Imagination Quality Management.fp7 - switchTestList -1-
