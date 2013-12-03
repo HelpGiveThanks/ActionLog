@@ -115,4 +115,3 @@ Go to Field [ ]
 If [ $emptyList = 1 ]
 Show Custom Dialog [ Message: "This test-item list contains no test items. You are welcome to create new ones."; Buttons: “OK” ]
 End If
-December 2, 平成25 21:02:05 Imagination Quality Management.fp7 - switchTestList
