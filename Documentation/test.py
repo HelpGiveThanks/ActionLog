@@ -43,11 +43,6 @@ Set Field [ test::ktestItemList; TEMP::ktestItemList ]
 #This is because the key to unlock the display of
 #a test's name is in a keychain ﬁeld where many
 #keys may exist in list. Filemaker cannot match
-#a lock in one table to list of keys in another table.
-#There must be only one key in a ﬁeld in order
-#for Filemaker to know which key to use in a lock.
-#The database does not have the intellegence or
-#programming to search through a list of keys
 #to make a match to a lock ﬁeld in another table.
 #Thus, in order to display the name of the test in use
 #we must have the system put that name in a temp
@@ -171,10 +166,6 @@ Source ﬁeld 6 import to test::order
 Source ﬁeld 7 import to test::retire
 Source ﬁeld 8 import to test::kgtester
 Source ﬁeld 9 import to test::glocationNameGlobal
-Source ﬁeld 10 import to test::gcontactNameGlobal
-Source ﬁeld 11 import to test::kgaudienceLocation
-Source ﬁeld 12 import to test::gprogressGlobal
-Source ﬁeld 13 import to test::ksection
 Source ﬁeld 14 import to test::kgreportNumber
 Source ﬁeld 15 import to test::mtestGroup
 Source ﬁeld 16 import to test::ktestItemList
@@ -396,11 +387,6 @@ Source ﬁeld 24 import to report::_kfPhoto4
 Source ﬁeld 25 import to report::pagenumberTheme
 Source ﬁeld 26 import to report::TOC
 Source ﬁeld 27 import to report::TOCnumbers
-Source ﬁeld 28 import to report::ReportCover
-Source ﬁeld 29 import to report::ReportPDFtitle
-Source ﬁeld 30 import to report::kreportNumber
-Source ﬁeld 31 import to report::ksection
-Source ﬁeld 32 import to report::kRecordCreatorNode
 Source ﬁeld 33 import to report::kRecordModiﬁerNode
 Source ﬁeld 34 import to report::RecordModifyDate
 Source ﬁeld 35 import to report::khealth
