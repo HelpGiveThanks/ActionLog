@@ -3,6 +3,7 @@ switchTestList
 #If the user selected the list currently showing then
 Go to Field [ ]
 Exit Script [ ]
+a
 #
 #switch to the selected test, which may or may
 #not have a test-item list.
