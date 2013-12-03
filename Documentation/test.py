@@ -272,7 +272,6 @@ Source ﬁeld 25 import to tagTable::kRecordModiﬁerNode ]
 [ No dialog ]
 #
 Go to Layout [ “tableGroupTag” (groupTest) ]
-December 2, 平成25 21:02:05 Imagination Quality Management.fp7 - update -6-update
 Show All Records
 Import Records [ Source: “$ﬁlepath”; Target: “groupTest”; Method: Update matching; Add remaining; Character Set: “Unicode”; Field Mapping: Source ﬁeld 1 match with groupTest::_Lgroup
 Source ﬁeld 2 import to groupTest::_Number
