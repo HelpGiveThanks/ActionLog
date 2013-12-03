@@ -115,7 +115,6 @@ Go to Field [ ]
 If [ $emptyList = 1 ]
 Show Custom Dialog [ Message: "This test-item list contains no test items. You are welcome to create new ones."; Buttons: “OK” ]
 End If
-December 2, 平成25 21:02:05 Imagination Quality Management.fp7 - switchTestList -5-update
 Go to Layout [ “backup” (backup) ]
 Delete All Records
 [ No dialog ]
@@ -281,11 +280,6 @@ Source ﬁeld 3 import to groupTest::match
 Source ﬁeld 4 import to groupTest::name
 Source ﬁeld 5 import to groupTest::ksection
 Source ﬁeld 6 import to groupTest::defaultSectionInfo
-sdfdsf
-sdf
-sd
-sd
-ffdfdfsdfsdf		
 Source ﬁeld 7 import to groupTest::testReportPicture
 Source ﬁeld 8 import to groupTest::CaptionORinuseCheck
 Source ﬁeld 9 import to groupTest::URLORHealth
@@ -430,4 +424,3 @@ Go to Layout [ “defaultSetup” (tempSetup) ]
 #
 Set Variable [ $$import; Value:1 ]
 #
-December 2, 平成25 21:02:05 Imagination Quality Management.fp7 - update -7-
