@@ -171,11 +171,6 @@ Source ﬁeld 6 import to test::order
 Source ﬁeld 7 import to test::retire
 Source ﬁeld 8 import to test::kgtester
 Source ﬁeld 9 import to test::glocationNameGlobal
-wd
-wd
-wd
-wed
-wdewdwedewdewde
 Source ﬁeld 10 import to test::gcontactNameGlobal
 Source ﬁeld 11 import to test::kgaudienceLocation
 Source ﬁeld 12 import to test::gprogressGlobal
