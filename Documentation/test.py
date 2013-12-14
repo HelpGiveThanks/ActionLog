@@ -103,6 +103,9 @@ Set Field [ TEMP::ktestItemListOLD; TEMP::ktestItemList ]
 #Update key used for the move pulldown to the new test.
 Set Field [ TEMP::mTag; TEMP::ktestItemList ]
 #
+asdf
+adsf
+asdf
 #return to tag layout and show all selected items
 Select Window [ Name: "Tag Menus"; Current ﬁle ]
 Go to Layout [ “setupTestItem” (tagMenus) ]
