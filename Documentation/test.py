@@ -3,7 +3,7 @@ switchTestList
 #If the user selected the list currently showing then
 #stop the script.
 If [ TEMP::ktestItemList = TEMP::ktestItemListOLD ]
-github test 5
+github test 6
 #
 #switch to the selected test, which may or may
 #not have a test-item list.
