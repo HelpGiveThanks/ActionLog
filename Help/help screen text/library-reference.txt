@@ -55,8 +55,8 @@ Reference Window: Find
 91. Cancels find.
 92. This is the complete reference search box, so you can put almost anything in here that you think might be in the reference or references you wish to find.
 93. Possible search strategies.  Click to insert into text box.
-a. Inserts ÒreplaceÓ in the find text box.  A quote search finds text that matches from the beginning of words only.  For example: The quoted phrase Òcovered the birdsÓ will find, ÒI covered the birds' cage at night,Ó but not, ÒI discovered the birds in the attic.Ó
-b. Inserts *ÒreplaceÓ in the find text box.  The star-quote search       *Òcovered the birdsÓ will find both, ÒI discovered the birds in the attic,Ó and, ÒI covered the birds' cage at night.Ó
+a. Inserts ureplace" in the find text box.  A quote search finds text that matches from the beginning of words only.  For example: The quoted phrase "covered the birds" will find, "I covered the birds' cage at night," but not, "I discovered the birds in the attic."
+b. Inserts *"replace" in the find text box.  The star-quote search       *"covered the birds" will find both, "I discovered the birds in the attic," and, "I covered the birds' cage at night."
 94. Possible search strategies.  Click to insert into date field.
 a. Inserts the greater-than symbol followed by the date shown:      > 1/1/2012.  Replace the date  with your own date to show all records greater than it.
 b. Inserts the less-than symbol followed by the date shown:      < 1/1/2012. Replace the date with your own date to show all records less than it.
@@ -101,9 +101,9 @@ Tags applied to other records cannot be deleted.                     Copyright r
 121. Opens new set of windows that enables you to add to the selected tag three pictures and three links to webpages and files to help you remember the tag's meaning and purpose (why you have it).          
 122. Tag group name.  Click to edit. 
 123. Copyright icon. Click on the box to see a larger version of the icon in a new window.
-124. Text box for name of copyright.  Any changes made to locked copyright tags will be removed by the system.  So if you see errors or have ideas for changes, please post them on the forum with the tag ÒChangeTextÓ so they can be considered for future releases of the library app.
+124. Text box for name of copyright.  Any changes made to locked copyright tags will be removed by the system.  So if you see errors or have ideas for changes, please post them on the forum with the tag "ChangeText" so they can be considered for future releases of the library app.
 125. Adds selected copyright to learn record.  (Selected copyright is highlighted dark green with white text. See   127     below.)
-126. Text box for optional description of copyright.  Any changes made to locked copyright-tag descriptions will be removed by the system.  So, if you see errors or have ideas for changes, please post them on the forum with the tag ÒChangeTextÓ so that they can be considered for future releases of the library app.
+126. Text box for optional description of copyright.  Any changes made to locked copyright-tag descriptions will be removed by the system.  So, if you see errors or have ideas for changes, please post them on the forum with the tag "ChangeText" so that they can be considered for future releases of the library app.
 127. Selected copyright is highlighted dark green with white text.
 
 Tag Menus: Publication, Publisher, Key (Keyword), Path
