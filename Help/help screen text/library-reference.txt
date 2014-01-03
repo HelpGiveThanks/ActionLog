@@ -41,8 +41,8 @@ for screenshots shown below
 29. Capitalizes every word in the selected text box.
 30. Default primary node at time reference was created.
 31. Last modified date and time.
-32. Green means Ôshow in learn' check box 34 checked: see  19  below left for more information.
-33. Red means Ôincomplete' check box 35 checked: see 20 below left for more information.
+32. Green means 'show in learn' check box 34 checked: see  19  below left for more information.
+33. Red means 'incomplete' check box 35 checked: see 20 below left for more information.
 34. Check to show in learn section. See 21 below left for more info.
 35. Uncheck when you are satisfied reference is accurate and complete.
 36. Display of reference based on fields filled in below it.
@@ -55,7 +55,7 @@ Reference Window: Find
 91. Cancels find.
 92. This is the complete reference search box, so you can put almost anything in here that you think might be in the reference or references you wish to find.
 93. Possible search strategies.  Click to insert into text box.
-a. Inserts ureplace" in the find text box.  A quote search finds text that matches from the beginning of words only.  For example: The quoted phrase "covered the birds" will find, "I covered the birds' cage at night," but not, "I discovered the birds in the attic."
+a. Inserts "replace" in the find text box.  A quote search finds text that matches from the beginning of words only.  For example: The quoted phrase "covered the birds" will find, "I covered the birds' cage at night," but not, "I discovered the birds in the attic."
 b. Inserts *"replace" in the find text box.  The star-quote search       *"covered the birds" will find both, "I discovered the birds in the attic," and, "I covered the birds' cage at night."
 94. Possible search strategies.  Click to insert into date field.
 a. Inserts the greater-than symbol followed by the date shown:      > 1/1/2012.  Replace the date  with your own date to show all records greater than it.
