@@ -31,6 +31,10 @@ a. Record is active if Yellow or light gray, if you have difficulty seeing color
 25. Opps, I skipped 25 and went right to 26 in the next column.  In the next version, I will take the time to change change all the numbers and fix this oversight. Sorry for any confusion.
 
 Reference Window: Edit
+numbered help below 
+for screenshots shown right
+numbered help left 
+for screenshots shown below
 26. Reference edit window.
 27. Returns you to the main reference window.  Click when you are in one of the following fields to identify the copyright holder or holders:     PrimaryNode 42, OtherNodes 43, AuthorListForCitation 44, Editor 54, Publication 62, Publisher 68.
 28. Removes formatting from the text in the selected text box.
@@ -57,3 +61,84 @@ b. Inserts *ÒreplaceÓ in the find text box.  The star-quote search       *Òcover
 a. Inserts the greater-than symbol followed by the date shown:      > 1/1/2012.  Replace the date  with your own date to show all records greater than it.
 b. Inserts the less-than symbol followed by the date shown:      < 1/1/2012. Replace the date with your own date to show all records less than it.
 c. Inserts the two dates shown separated by an ellipse/three periods: 1/01/2012 ... 3/01/2012.  Replace with your own dates to find all records between them.
+
+Tag Menus: Node Tags
+95. Opens the node tag menu.
+a. Scroll right to see help for the other tag menus: copyright, publication, publisher, key, path, cite, and find.   
+96. Creates a new tag.
+97. Creates a new group of tags.  
+98. Deletes a tag not in use after insuring that you really want to delete it with a red highlight and dialogue box: see   118a      right.  
+Tags applied to other records cannot be deleted. 
+99. Highlights selected tag light-green (luminosity 73%)   a  , opens pulldown list of all groups  b  , and allows you to select to move the tag to another tag group.  Do not worry about creating new tags in just the right group.  You can always change your mind.
+100. Toggles sort between default of alpha order by groups or alpha order by tags only.
+101. Click to cycle thru four different views of tag information: see    111   below.
+102. Opens new set of windows that enables you to add to the selected tag three pictures and three links to webpages and files to help you remember the tagÕs meaning and purpose (why you have it).
+103. Name of group of tags.  Click to edit it.  
+104. Picture of tag or picture that helps you understand a tag (in the example the picture is of the node Thomas Aquinas). Click on the picture to see a larger version of it in a new window. 
+Click  add button   58   to add, edit, or delete tag pictures.
+105. Tag name.  Click to edit.
+106. Adds tag as primary tag to learn record.
+107. Adds tag to learn recordÕs other tag list.
+108. Blue highlight with gray text is for current learn-noteÕs other tags.
+109. Green highlight with white text is for current learn-noteÕs primary tag.
+110. Italicized text indicates locked record, tag, etc.
+111. Four different views of tag information that you can toggle thru using the view   72    button.
+112. Text box for note about this tag.
+113. Pictures added by tagging tag with a reference record containing a picture.  Click to open picture full size.
+The 1, 2 and 3 buttons in add mode (click the add button   73  ) takes you to each pictureÕs reference record in the reference window.
+114. Links to webpages or files.  Click to open.
+The 4, 5  and 6 buttons in add mode (click the add button  73   ) takes you to each links reference record in the reference window.
+
+Tag Menus: Copyright Tags
+115. Opens the copyright tag menu (scroll left to see the node tag menu explained and right to see publication, publisher, key, path, cite, and find menusÕ help).
+116. Creates copyright tag.
+117. Creates group of copyright tags.  The ability to move records from one group to another was turned off for copyright records starting with version 1.04.
+118. Deletes a tag not in use after insuring that you really want to delete it with a red highlight and dialogue box.  
+A tag record cannot be deleted if it is set as a default on  the library Setup screen. 
+Tags applied to other records cannot be deleted.                     Copyright records cannot be deleted if they belong to the system.  This is to insure that copies of this database shared with others always include the default set of creative commons copyrights and other copyrights.
+119. Toggles sorting groups by increasing copyright restrictions (from no rights reserved to all rights reserved), and by all copyright tags in alpha order.
+120. Opens webpage about selected copyright, but only when yellow (luminosity 65%).  If the web button is grey (luminosity 40%), there is no webpage to open.  See   121    to learn how to add, edit, or delete webpage links.
+121. Opens new set of windows that enables you to add to the selected tag three pictures and three links to webpages and files to help you remember the tagÕs meaning and purpose (why you have it).          
+122. Tag group name.  Click to edit. 
+123. Copyright icon. Click on the box to see a larger version of the icon in a new window.
+124. Text box for name of copyright.  Any changes made to locked copyright tags will be removed by the system.  So if you see errors or have ideas for changes, please post them on the forum with the tag ÒChangeTextÓ so they can be considered for future releases of the library app.
+125. Adds selected copyright to learn record.  (Selected copyright is highlighted dark green with white text. See   127     below.)
+126. Text box for optional description of copyright.  Any changes made to locked copyright-tag descriptions will be removed by the system.  So, if you see errors or have ideas for changes, please post them on the forum with the tag ÒChangeTextÓ so that they can be considered for future releases of the library app.
+127. Selected copyright is highlighted dark green with white text.
+
+Tag Menus: Publication, Publisher, Key (Keyword), Path
+128. Opens key (short for keyword) menu which works exactly like node menu.  See   95   left. 
+129. Opens path menu which works exactly like the node menu (95 left) minus one button.  See 132 below.
+130. Opens publication menu which works exactly like the node menu  (95 left) minus one button.  See 132   below.
+131. Opens publisher menu which works exactly like the node menu  (95 left) minus one button.  See 132   below.
+132. Tags a reference record with the selected tag.  Unlike node and key tags, which have two tagging buttons -- primary and other -- path, publication, and copyist tags have just this one tagging button, and that is all they need.
+
+Tag Menus: Cite (Citation) Tags
+133. Opens the cite tag menu (scroll left to see the node, copyright, publication, publisher, key, and path tag menusÕ help and right to see find menusÕ help).
+The only time you will probably need to cite another reference record in the reference section is when you alter an image   a   by cropping it to add to a tag.  You will then need to cite the original image   b  . 
+If you create a collage out of several images, you would need to reference all the images used.  However, because this is your own remixing of otherÕs works, you would store your remix of otherÕs images, the collage, in the learn section.  The reference section is for references to otherÕs works.  The learn section is for your works.  So in the case of a collage made from otherÕs images, you would import the picture into a new learn noteÕs picture holder (see  18c   in Help for Learn solution) and then tag the note with the reference tags for each of the pictures used.  Then when you decided to share the collage with others using the print function (see  15   in Help for Learn solution) the collage plus all the references would be shown together in one view.
+134. Primary keyword header under which are all reference records tagged with this primary keyword.
+135. Picture belonging to reference record. Click on the picture to see a larger version of it in a new window.
+136. Reference.  Click into this box to see the full reference.
+137. Adds reference as a citation to selected reference record.  
+a. Red button indicates that the reference is incomplete and is either missing information or creator of reference is not satisfied with its accuracy. (My references are often incomplete because I cannot determine who owns to owns the copyright.)
+
+Tag Menus: Find
+find tagged learn records or find tags
+138. Opens a dialogue box that gives you the three options  (scroll left to see help for node, copyright, publication, publisher, key, path and find tag menus).
+139. Cancels the find.
+140. Opens window for finding tags in the current tag menu: node, key, copyright, etc.  See 142 below.
+141. Opens window that allows you to find learn notes tagged with various tags.  See 147   below.
+142. Window for entering find requests for tags.
+143. Tag you can make find request for is light green (luminosity 67%).  
+144. Performs find.
+145. Cancels find.
+146. Find request text box for entering anything you can remember about a tagÕs name.
+147. Window for making multiple find requests for tagged learn notes  by clicking multiple P 152 and  O 153 buttons More than one request is allowed from each of the tag menus: node, copyright, publication, publisher, key, and path.  Each successful find adds  more reference records to total found, which are displayed in the reference list window (top far left).
+148. Tag menu buttons are highlighted after a successful find request, to help you remember on which tag menus you made successful find request.  In the example above, the key tag menu is active.  The highlight on it and the publication button tells us that reference records have been found with selected key tags and publication tags.
+149. Tag menu button for tag list currently showing is light green (luminosity 67%).   
+150. Performs find.  
+151. Cancels find.
+152. Finds all reference records for which the selected tag is their primary tag.
+153. Finds all reference records for which the selected tag is one of the other keyword tags.
+154. Highlighted tags indicate that reference records have been found tagged with them.
