@@ -21,12 +21,12 @@ You will be required after clicking to select a specific-action group from the t
 11. Removes all text formatting in selected text box.
 12. Toggles text ruler  1  on/off.
 13. Inserts a date stamp that looks like this: [7/24/2012].  I use it for my exercise specific actions like pull-ups to note within my pull-up record, for example, each date I do pull-ups.  Thus, you can use the date stamp instead of new specific action every time you perform a repeating specific action.
-14. Creates a link between a specific action and a day record, so that when you click find 23 , a list of that dayÕs specific actions shows up both those to be done, in progress, and completed.  
+14. Creates a link between a specific action and a day record, so that when you click find 23 , a list of that dayï¿½s specific actions shows up both those to be done, in progress, and completed.  
 15. Name of specific actions timer.
 16. Status 45 header.
 17. Group 52 header.
-18. Total time logged for all a groupÕs specific actions.
-19. Total time logged for a groupÕs specific actions with a particular status 45.
+18. Total time logged for all a groupï¿½s specific actions.
+19. Total time logged for a groupï¿½s specific actions with a particular status 45.
 20. Description of specific action.  Click on it to edit 20a.
 21. Record number.
 22. Creation date.  Click on it to edit.
@@ -53,14 +53,14 @@ timer activity day-by-day
 Plain text = am, italics = pm, and underline = at least a day later, which in this example would be 7/24 or later.
 31. Chunks of time the timer specified 32 was active during the selected day 36. 
 Before time is assigned to a specific action it has a yellow      a       (luminosity 97%) background.  
-White-text  b  time chunks are assigned, but not t o the current specific-actionÕs total time  c   .  
-Green (luminosity 75%) d  highlighted times have been added to the current specific-actionÕs total time  e  . See  23. 
+White-text  b  time chunks are assigned, but not t o the current specific-actionï¿½s total time  c   .  
+Green (luminosity 75%) d  highlighted times have been added to the current specific-actionï¿½s total time  e  . See  23. 
 Click on assigned times  b  or   d    to unassign them  f   , or to go to their specific actions   g   .
-32. Current timerÕs label.
+32. Current timerï¿½s label.
 33. Bar indicates day selected.
 34. Note field. Click to add/edit.
 35. Date of a day record.
-36. TimerÕs total time for a day.
+36. Timerï¿½s total time for a day.
 
 Tag Window: Tag
 remember-tags and group-tags
@@ -78,7 +78,7 @@ Turns green (light gray) if the specific action record you are on is tagged with
 45. Editable set of tags for grouping specific action records.  By default they are about how frequently you feel the need to remember their existence. 
 The dates will go away if you change the spelling of weekly or monthly.  
 Dates shown are first day of the current week and first day of next month.  You must click the refresh button 43 to see the current dates.
-46. Current timerÕs label.
+46. Current timerï¿½s label.
 47. Creates a new specific-actions group tag.
 48. Deletes a group after insuring that you really want to delete it. See 10a   far right.  
 Groups in use cannot be deleted.
@@ -98,7 +98,7 @@ order specific actions & group-tags
 58. Activates specific-action group tags order menu. Turns green (light gray) when this tag menu is selected. 
 59. Activates specific-action group tags find menu. Turns green (light gray) when this tag menu is selected. 
 ?. Opens and activates this help window.
-60. Current timerÕs label.
+60. Current timerï¿½s label.
 61. Creates a new specific-actions group tag.
 62. Sorts list by order number you assign.  Items with same order number, or with no order number, are ordered alphabetically.
 63. Sorts list alphabetically. 
@@ -115,10 +115,10 @@ find groups of specific actions
 68. Activates specific-action group tags order menu. Turns green (light gray) when this tag menu is selected. 
 69. Activates specific-action group tags find menu. Turns green (light gray) when this tag menu is selected. 
 ?. This button you clicked to open this help window.
-70. Current timerÕs label.
+70. Current timerï¿½s label.
 71. Click these buttons to find all specific actions tagged with a group tag.
 You can click more than one group button at a time.
-This feature is useful for clustering all a groupÕs specific actions no matter which status tag youÕve applied to them.  
+This feature is useful for clustering all a groupï¿½s specific actions no matter which status tag youï¿½ve applied to them.  
 For example, you could cluster daily actions followed complete actions to get a sense of how a particular group of actions are proceeding.
 72. Sorts list by order number you assign.  Items with same order number, or with no order number, are ordered alphabetically.
 73. Sorts list alphabetically. 
