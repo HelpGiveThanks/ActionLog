@@ -34,4 +34,20 @@ Tag and untag learn records with this button to create and modify a theory tags 
 16 99 Learn window
 Read help topic 99 to learn what highlight colors mean.
 17 Learn window
-3) Order grouped notes to your liking in the learn window.
+3) Order grouped notes to your liking in the learn window.use theory tag to link and order learn records to make a theory
+18 b Learn window
+You can change the sort order of the selected and tagged learn record by clicking on the # button, and then selecting a number from the list the opens up that would sort it above or below its current position. Record must tagged to apply order number.
+19 c Learn window
+Toggle back and forth between sorting learn records by date and time or by order number.
+20 b Learn window
+NOTE: a learn record can have different order numbers for each theory tag assigned to it. This allows you to experiment with trying out different arrangements of a group of learn records to make a theory stronger, or easier to understand, etc.
+21 Learn window
+4) Share group of notes with others via paper, e-mail, web posting, etc.,
+22 a Learn window
+Click the share button to open the share window.
+23 Learn window
+ See notes 45 to 47a to learn about all the sections of the share window.
+24 43 Learn window
+Click the copytext button to copy all that you see in the share window and then paste this text into an email, a web post, a word processor to print it, etc.
+25 44 Learn window
+Click the back button to return to the learn-note window.
