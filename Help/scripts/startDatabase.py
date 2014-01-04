@@ -20,6 +20,8 @@ Set Window Title [ Current Window; New Title: "Help" ]
 Adjust Window
 [ Resize to Fit ]
 Go to Layout [ MemorySwitch::helpLayoutName ]
+#
+#If there is no pause the script fails to work.  
 Pause/Resume Script [ Duration (seconds): .1 ]
 Go to Object [ Object Name: MemorySwitch::helpObjectName ]
 Go to Field [ ]
