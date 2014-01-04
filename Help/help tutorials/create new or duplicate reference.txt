@@ -1,0 +1,38 @@
+create new or duplicate reference
+1 Setup window
+How to create references 1) find reference section 2) create or duplicate a reference 3) important things to know about creating references 4) complete your reference 5) make your
+reference available
+2 Setup window
+1) find reference section
+a) from library setup b) from learn section
+3 Setup window
+a) from library setup
+4 54 Setup window
+Starting from the library setup, tag menu window click on library.
+5 55 Setup window
+Go to the reference section by clicking on the reference button.
+6 Learn window
+b) from learn section
+7 105 Learn window
+Go to the reference section by clicking on the cite or reference button ...
+8 106 Learn window
+then click on the new/edit button.
+9 Learn window
+2) create or duplicate a reference
+10 10 Reference window
+Create Ñ If the source article you are going to reference is not from a website or other publication used by a reference already in the library, then click the new button.
+11 11 Reference window
+Duplicate Ñ If the source article you are going to reference is from a website or other publication used by a reference already in the library, then duplicate that reference by clicking the "d" button.
+12 edit g Reference window
+Clicking the "d" or new button will open the edit window. Help for this window is in 2 columns. Explanations are to the left of screen shots of new and completed reference records.
+13 Reference window
+3) important things to know about creating references
+a) selecting type of reference b) reference author options c) web address information
+14 Reference window
+a) selecting type of reference
+15 37 Reference window
+Your selections for 37 and 38 create the green and yellow bars on the edge of the reference screen, highlighting what you'll need to gather from your referenced item to create a good reference for it.
+16 Reference window
+Green bars indicate information usually found for the type of reference selected. Yellow bars indicate information that is sometimes available. Black indicates a completed selection.
+17 Reference window
+b) reference author options
