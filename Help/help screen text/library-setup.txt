@@ -1,0 +1,103 @@
+Library Setup
+
+Library Defaults
+1. Opens pulldown menu of all libraries in use.  Select a library from the list to open it and close the current library.  To get a library on the switch-libraries list, double click on it  a  .   
+If you have changed a library's name or deleted it, the app will  remove it from this list.
+2. Closes the library. 
+3. Moves focus to Tag Menus window.
+4. Moves focus to Timer or HelpGiveThanks Apps window depending on which is open.
+5. Opens this help window.
+6. Default primary node name that will be applied to all new records in all sections of the library.  Select names from the Tag Menus' node list.
+7. Primary node's picture. Click on the box to see a larger version of the picture in a new window.
+8. The names of other nodes to apply to all new learn notes as contributers, which you would need if you are making notes during a meeting, like a family meeting to come up with some  rules where each rule is new learn note and all family members are tagged as contributers via the other node and primary node tags.  
+To add names to the other-node default list, select names from the Tag Menus' node list.  Click on the O (for other) button next to a name.  
+Most of the time, learn notes are personal ideas, so typically the OtherNodes list will be blank.
+9. The copyright selected will be applied to all new learn records.  Select copyright from the Tag Menus' copyright list.
+10. Test subject's name that will be applied to all tests performed. Select names from the Tag Menus' node list. Tests of building efficiency would be performed on 319 H Street, for example.  If no test subjects are being tested, then no name will be selected.
+11. Test subject's picture. Click on the box to see a larger version of the picture in a new window.
+12. Full name of library (versus the abbreviated file name).  Edit this name in the Tag Menus window. 
+13. Text box for information about the library.
+14. Version number of the Library solution.  Each solution has its own version number.  Check  HelpGiveThanks.org periodically for updates to solutions. 
+15. A few of the many people whose scholarship, science, etc. can be tested and benefited from using these Help Give Thanks Research Project solutions. 
+16. Your rights to share and use these solutions.  Click the text to view the actual license.
+
+Tag Menus: Copyright Tags
+17. Opens copyright menu.
+18. Opens webpage about selected copyright, but only when yellow.  If the web button is grey, there is no webpage to open.  See    23     to learn how to add, edit, or delete webpage links.
+19. Creates copyright tag.
+20. Creates group of copyright tags.  The ability to move records from one group to another is turned off for copyright records starting with version 1.04.
+21. Deletes a user created tag that is not in use after insuring you really want to delete it by highlighting it red.  
+A tag record cannot be deleted if it is set as a default (default records are highlighted dark green. See   29    below.)
+Tags applied to other records cannot be deleted.
+Copyright records cannot be deleted if they belong to the system.  This is to insure that copies of this database shared with others always include the default set of creative commons copyrights and other copyrights.
+22. Toggles sorting groups by increasing in copyright restrictions, or by just tags in alpha order.
+23. Opens new set of windows that enables you to add to a tag pictures and links to webpages and files.
+24. Text box for group name.  
+25. Copyright icon. Click on the box to see a larger version of the icon in a new window.
+26. Text box for name of copyright.  Any changes made to locked copyright tags will be removed by the system.  So if you see errors or have ideas for changes, please post them on the forum with the tag “ChangeText” so they can be considered for future releases of the library app.
+27. Makes selected copyright the default copyright.  (default records are highlighted dark green. See          29   below.)
+28. Text box for optional description of copyright.  Any changes made to locked copyright tags will be removed by the system.  So, if you see errors or have ideas for changes, please post them on the forum with the tag “ChangeText” so they can be considered for future releases of the library app.
+29. Selected default is highlighted dark green.
+
+Tag Menus: Node Tags
+30. Opens node menu.
+31. If the lock button    32   is yellow, x-ing this box will italicize all records (see   49   below) created by node selected node: see   32    .
+32. Opens a dialogue that asks you to create password for locking all records created by the selected node.  
+Locked records cannot be changed or deleted without the password.
+new records cannot be created by this node without the password.  
+Unlocked node creations can continue to be edited.
+33. Creates node tag.
+If no default node is selected, you are asked if you would like to select yourself to be the default node or if you need to create a node record for yourself.  
+If you choose the select option, select yourself from the list of nodes to be the default creator of all new records in the library by clicking on the P button:    43    below.  If you choose the create option, a node record will created for you to put in your last and first name. It will be automatically assigned as the creator node of all new library records.
+34. Creates group of node tags.  If no default node is selected you are asked if you wish to select yourself as the default node or if you need to create a node record for yourself.  See    33    above for more information. 
+35. Deletes a tag not in use after insuring that you really want to delete it with a red highlight and dialogue box: see   5a    .  
+A tag record cannot be deleted if it is set as a default (default records are highlighted dark green. See    29    below.)
+Tags applied to other records cannot be deleted.
+36. Highlights selected tag light-green, opens pulldown list of all groups, and allows you to select to move the the tag to one of these other groups.  With this feature, you do not have to worry about creating new tags in just the right group.  You can always change your mind.
+37. Toggles sort between default of alpha order by groups or alpha order by tags only.
+38. Click to cycle thru three different views of tag information: see    50   below.
+39. Opens new set of windows that enables you to add to a tag pictures and links to webpages and files.
+40. Text box for group name.  
+41. Picture of node. Click on the picture to see a larger version of the icon in a new window. Click  add button   39   to add, edit, or delete pictures.
+42. Text box for name of node.
+43. Sets primary default node.
+44. Adds node to other nodes default list.
+45. Sets test subject node.
+46. Gray highlight is for test subject.
+47. Blue highlight is for other default node.
+48. Green highlight is for primary default node.
+49. Italicized text indicates locked record, tag, etc.
+50. Three different views of tag information that you can toggle thru using the view button.
+51. Text box for a note.
+52. Pictures added by tagging tag with a reference record containing a picture.  Click to open picture full size.
+The 1, 2 and 3 buttons in add mode (click the add button   39   ) takes you to each picture's reference record in the reference window.
+53. Links to webpages or files.  Click to open.
+The 4, 5  and 6 buttons in add mode (click the add button   39   ) takes you to each links reference record in the reference window.
+
+Tag Menus: Other Buttons
+54. Opens library menu.
+55. Opens libraries reference section.
+56. Opens libraries learn section.
+57. Moves focus to Setup window.
+58. Opens help window.
+59. Text box to edit the full name of library (versus the abbreviated file name).
+60. Refreshes the library name after in the Setup window after you have edited it.
+
+Tag Menus: Test Select
+61. Opens setup test windows.
+62. Opens test menus.
+63. Opens add test set controls.
+64. Deletes a tag not in use after insuring that you really want to delete it with a red highlight and dialogue box: see     21a    .  
+Tags applied to other records cannot be deleted.
+65. Adds a new test set   66    to a test subject's    69    test     70    . 
+66. Test set that will be applied to a test subject's test when the add button is clicked.  A list of test sets to choose from is opened when you click in the box.
+67. Number of test a test-set is applied to when the add button is clicked.  If there is no test with the selected number, a new test with the number showing is created.  Clicking the number box opens a pulldown menu of numbers.
+68. Closes add test set controls.
+69. Test subject.
+70. Test for test subject. A test subject may have multiple tests under them.
+71. Opens test report windows.
+72. Text box for modifying name of test set.
+No highlight (or tan) indicates  test has not started.
+73. Opens test set windows.
+74. Yellow highlight indicates partially completed test.
+75. Green highlight indicates test is complete.
