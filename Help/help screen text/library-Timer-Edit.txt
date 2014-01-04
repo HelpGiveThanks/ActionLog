@@ -1,4 +1,4 @@
-Timer Edit
+Timer Edit 
 3 columns of help for graphic to right
 1. Opens edit time window.
 2. Opens window showing bar-graphs 7b of time chunks instead of amounts of 16 time.

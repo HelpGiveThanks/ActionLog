@@ -1,5 +1,5 @@
 Specific Action Windows
-
+ 
 Specific Action Window
 a list of specific actions
 1. Text ruler.  Click 12 below to toggle text ruler on/off.  Move gray sliders to control indentation of text.
