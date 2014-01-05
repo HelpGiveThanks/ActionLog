@@ -2,13 +2,13 @@ helpBackButton
 #
 #
 If [ MemorySwitch::backToSolution = "Library" ]
-Perform Script [ ?CHUNK_backToLibrary? ]
+Perform Script [ “CHUNK_backToLibrary” ]
 Else If [ MemorySwitch::backToSolution = "ActionLog" ]
 // Set Field [ MemorySwitch::currentLibraryMainWIndow; Get ( WindowName ) ]
 // Set Field [ MemorySwitch::currentLibraryPath; Get ( FilePath ) ]
 Select Window [ Name: "Tag" ]
 Select Window [ Name: "Day" ]
-Select Window [ Name: "Speci?c Action" ]
+Select Window [ Name: "Speciﬁc Action" ]
 Select Window [ Name: "Timer" ]
 If [ Get (LastError) = 112 ]
 Set Variable [ $timer; Value:Get (LastError) ]
@@ -59,7 +59,7 @@ Select Window [ Name: "Select Workout" ]
 Select Window [ Name: "Workout" ]
 End If
 Else If [ MemorySwitch::helpLayoutName = "Users, Exercises and Conditions" ]
-Select Window [ Name: "Fat and Muscle Ef?ciency Research" ]
+Select Window [ Name: "Fat and Muscle Efﬁciency Research" ]
 End If
 Else If [ MemorySwitch::backToSolution = "Budget Research" ]
 If [ MemorySwitch::helpLayoutName = "Users and Budgets" ]
@@ -99,4 +99,4 @@ End If
 // Set Variable [ $value1; Value:GetValue ( tutorial::layoutName ; 1 ) ]
 // Go to Layout [ $value1 ]
 // End If
-January 4, ??26 18:57:07 help.fp7 - helpBackButton -1-
+January 4, 平成26 18:57:07 help.fp7 - helpBackButton -1-
