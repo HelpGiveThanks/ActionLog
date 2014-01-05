@@ -4,7 +4,7 @@ Allow User Abort [ Off ]
 Set Variable [ $kTutorial; Value:tutorialGroup::_Ltutorial ]
 Go to Field [ ]
 Set Variable [ $$stopScript; Value:1 ]
-Go to Layout [ ?tutorialUse? (tutorial) ]
+Go to Layout [ “tutorialUse” (tutorial) ]
 Enter Find Mode [ ]
 Set Field [ tutorial::kTutorial; $kTutorial ]
 Perform Find [ ]
@@ -14,11 +14,11 @@ New Record/Request
 Set Field [ tutorial::kTutorial; $kTutorial ]
 End If
 Set Variable [ $$stopScript ]
-Sort Records [ Speci?ed Sort Order: tutorial::kTutorial; ascending
+Sort Records [ Speciﬁed Sort Order: tutorial::kTutorial; ascending
 tutorial::number; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
-Perform Script [ ?performTutorialStep? ]
+Perform Script [ “performTutorialStep” ]
 Scroll Window
 [ Home ]
