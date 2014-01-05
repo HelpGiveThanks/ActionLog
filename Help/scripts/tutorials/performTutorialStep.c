@@ -7,7 +7,7 @@ Exit Script [ ]
 End If
 #
 If [ tutorial::layoutName = "" ]
-Show Custom Dialog [ Message: "Select a tutorial to do."; Buttons: "OK" ]
+Show Custom Dialog [ Message: "Select a tutorial to do."; Buttons: “OK” ]
 Go to Field [ tutorial::layoutName ]
 [ Select/perform ]
 Exit Script [ ]
@@ -19,7 +19,7 @@ Set Variable [ $$number; Value:Get (RecordNumber) ]
 Set Variable [ $column; Value:tutorial::changeHelpObjectName ]
 #
 Set Variable [ $$layout; Value:tutorial::klayout ]
-If [ tutorial::anchor ? "" ]
+If [ tutorial::anchor ≠ "" ]
 Set Variable [ $$anchor; Value:tutorial::anchor ]
 Else
 Set Variable [ $$anchor; Value:tutorial::helpNumber ]
@@ -27,14 +27,14 @@ End If
 Set Variable [ $$helpNumber; Value:tutorial::helpNumber ]
 Refresh Window
 #
-Select Window [ Name: "Help"; Current ?le ]
+Select Window [ Name: "Help"; Current ﬁle ]
 #
-If [ Get (LayoutName) ? $$layout ]
+If [ Get (LayoutName) ≠ $$layout ]
 Go to Layout [ $$layout ]
 Refresh Window
 End If
 #
-If [ $column ? "" ]
+If [ $column ≠ "" ]
 Set Field [ MemorySwitch::helpObjectName; $column ]
 End If
 #
@@ -49,7 +49,7 @@ Refresh Window
 // Go to Field [ ]
 #
 #
-Select Window [ Name: "Tutorial"; Current ?le ]
+Select Window [ Name: "Tutorial"; Current ﬁle ]
 Go to Field [ ]
 Scroll Window
 [ To Selection ]
