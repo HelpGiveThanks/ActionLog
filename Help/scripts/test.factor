@@ -1,9 +1,5 @@
 CHUNK_backToLibrary
 // Select Window [ Name: "Test" ]
-// Select Window [ Name: "Learn" ]
-// Select Window [ Name: "Setup" ]
-// Select Window [ Name: "Report" ]
-// Select Window [ Name: "References" ]
 Select Window [ Name: MemorySwitch::currentLibraryMainWIndow ]
 If [ Get (LastError) = 112 and MemorySwitch::currentLibraryPath ≠ "" ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
@@ -13,21 +9,9 @@ Substitute ( Substitute ( MemorySwitch::currentLibraryPath ; "ﬁle:/" ; "ﬁle:
 If [ Get (LastError) = 5 ]
 Set Variable [ $$stopRecordLoad; Value:1 ]
 New Window [ Name: "library" ]
-Go to Layout [ “MemorySwitch” (MemorySwitch) ]
-Set Variable [ $$stopRecordLoad ]
-Go to Record/Request/Page
-[ First ]
-Loop
-Exit Loop If [ Get (FoundCount) = 0 ]
 #
 #These disabled script steps deleted all invalid paths
 #to libraries and opened the ﬁrst path that was valid.
-// Open URL [ Substitute ( Substitute ( MemorySwitch::path ; "ﬁle:/" ; "ﬁle://" ) ; " " ; "%20" ) ]
-[ No dialog ]
-// Exit Loop If [ Get (LastError) = 0 ]
-// Delete Record/Request
-[ No dialog ]
-// Exit Loop If [ Get (LastError) = 101 ]
 Exit Loop If [ MemorySwitch::currentLibraryPath = MemorySwitch::path ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
