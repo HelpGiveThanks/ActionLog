@@ -1,0 +1,21 @@
+triggered scripts: layoutStatus
+#PURPOSE set the layout status ﬁeld with the layout that triggers this script when it loads
+#
+#
+If [ Get (LayoutName) = $$loglayout or $$otherApps = 1 ]
+Exit Script [ ]
+End If
+#
+#1 set the layout status ﬁeld
+Set Field [ steward::chosenLayout; Get ( LayoutName ) ]
+#
+#2 set the layout variable (I think I created this and then didn't end up using it, I think. I can't ﬁnd it being used in any scripts, but due to paranoia
+I'm leaving it here. I'm just to tired at this point to look for it.)
+Set Variable [ $$layout; Value:Get ( LayoutName ) ]
+#
+Set Field [ steward::windowSizeAndPlace; Get ( WindowHeight ) ]
+Set Field [ steward::windowSizeAndPlace[2]; Get ( WindowWidth ) ]
+Set Field [ steward::windowSizeAndPlace[3]; Get ( WindowTop ) ]
+Set Field [ steward::windowSizeAndPlace[4]; Get ( WindowLeft ) ]
+Set Field [ steward::windowZoom; Get ( WindowZoomLevel ) ]
+January 6, 平成26 1:02:28 ActionLog.fp7 - layoutStatus -1-
