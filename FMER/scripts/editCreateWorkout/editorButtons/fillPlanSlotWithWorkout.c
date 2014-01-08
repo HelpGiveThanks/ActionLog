@@ -1,4 +1,4 @@
-editCreateWorkout: editorButtons: FillPlanSlotWithWorkout
+editCreateWorkout: editorButtons: fillPlanSlotWithWorkout
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
 #
