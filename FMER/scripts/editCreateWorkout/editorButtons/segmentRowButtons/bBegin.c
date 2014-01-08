@@ -17,7 +17,7 @@ End If
 #the workout first to take account of the modification.
 Set Field [ activity::go; "" ]
 #
-#If filed is occupied then clear it and exit script.
+#If field is occupied then clear it and exit script.
 If [ Get ( ActiveFieldContents ) ≠ "" ]
 Set Field [ "" ]
 Go to Field [ ]
