@@ -1,4 +1,4 @@
-editCreateWorkout: editorButtons: NewSegment
+editCreateWorkout: editorButtons: newSegment
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
 #
