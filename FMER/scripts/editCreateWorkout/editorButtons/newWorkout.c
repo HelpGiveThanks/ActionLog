@@ -1,4 +1,4 @@
-editCreateWorkout: editorButtons: NewWorkout
+editCreateWorkout: editorButtons: newWorkout
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
 #
