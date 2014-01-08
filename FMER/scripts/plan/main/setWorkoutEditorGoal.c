@@ -1,4 +1,4 @@
-plan: main: SetWorkoutEditorGoal
+plan: main: setWorkoutEditorGoal
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
 #
