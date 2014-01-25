@@ -1,1 +1,1 @@
-![Tmer Edit Screen](http://example.com/images/logo.png)
+![Tmer Edit Screen](https://github.com/HelpGiveThanks/ActionLog/blob/master/ActionLog/layouts/Timer%20Edit.pdf)
