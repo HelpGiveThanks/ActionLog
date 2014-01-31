@@ -28,22 +28,22 @@ If [ Get (LastError) = 112 ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (
 Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle:/" )
-& "Fat and Muscle Efﬁciency Research." & Right ( Get ( FilePath ) ; 3 )
+& "Heart Whisperer." & Right ( Get ( FilePath ) ; 3 )
  ; " " ; "%20" ) ;
 Substitute (
 Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle://" )
-& "Fat and Muscle Efﬁciency Research." & Right ( Get ( FilePath ) ; 3 )
+& "Heart Whisperer." & Right ( Get ( FilePath ) ; 3 )
  ; " " ; "%20" ) ) ]
 [ No dialog ]
 If [ Get (LastError) = 5 ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (
 Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle:/" )
-& "Fat and Muscle Efﬁciency Research.USR"
+& "Heart Whisperer.USR"
  ; " " ; "%20" ) ;
 Substitute (
 Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle://" )
-& "Fat and Muscle Efﬁciency Research.USR"
+& "Heart Whisperer.USR"
  ; " " ; "%20" ) ) ]
 [ No dialog ]
 End If
@@ -51,6 +51,7 @@ End If
 #
 #Close other apps window if open after selecting an app.
 If [ $$otherApps = 1 ]
-Close Window [ Name: "Other Apps"; Current ﬁle ]
+Set Variable [ $$otherApps ]
+Close Window [ Name: "Other Solutions"; Current ﬁle ]
 End If
-January 5, 平成26 14:23:18 ActionLog.fp7 - gotoDatabaseFMER -1-
+January 30, 平成26 22:19:12 ActionLog.fp7 - gotoDatabaseFMER -1-
