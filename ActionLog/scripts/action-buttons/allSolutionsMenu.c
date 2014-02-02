@@ -1,12 +1,12 @@
-action buttons: otherSolutionsMenu
-#PURPOSE go to other apps menu.
+action buttons: allSolutionsMenu
+#PURPOSE go to all solutions menu.
 #
 #
 #
 #1 go to the edit/create layout and show all users.
-Close Window [ Name: "Other Solutions"; Current ﬁle ]
-New Window [ Name: "Other Solutions" ]
-Go to Layout [ “users Copy3” (steward) ]
+Close Window [ Name: "All Solutions"; Current ﬁle ]
+New Window [ Name: "All Solutions" ]
+Go to Layout [ “allSolutionsMenu” (steward) ]
 Show All Records
 #
 #Size window to 100%
@@ -20,4 +20,4 @@ Adjust Window
 #when the user selectes a new database.
 Set Variable [ $$otherApps; Value:1 ]
 Pause/Resume Script [ Indeﬁnitely ]
-January 5, 平成26 19:55:08 ActionLog.fp7 - otherSolutionsMenu -1-
+February 1, 平成26 18:26:17 ActionLog.fp7 - allSolutionsMenu -1-
