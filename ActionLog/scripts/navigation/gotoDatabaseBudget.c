@@ -15,11 +15,11 @@ If [ Get (LastError) = 5 ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (
 Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle:/" )
-& "Budget Research.USR"
+& "Budget Research.HG2"
  ; " " ; "%20" ) ;
 Substitute (
 Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle://" )
-& "Budget Research.USR"
+& "Budget Research.HG2"
  ; " " ; "%20" ) ) ]
 [ No dialog ]
 End If
@@ -30,4 +30,4 @@ If [ $$otherApps = 1 ]
 Set Variable [ $$otherApps ]
 Close Window [ Name: "Other Solutions"; Current ﬁle ]
 End If
-January 30, 平成26 22:20:25 ActionLog.fp7 - gotoDatabaseBudget -1-
+February 4, 平成26 10:31:56 ActionLog.fp7 - gotoDatabaseBudget -1-

@@ -34,16 +34,15 @@ Substitute (
 Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle://" )
 & "Heart Whisperer." & Right ( Get ( FilePath ) ; 3 )
  ; " " ; "%20" ) ) ]
-[ No dialog ]
 If [ Get (LastError) = 5 ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (
 Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle:/" )
-& "Heart Whisperer.USR"
+& "Heart Whisperer.HG2"
  ; " " ; "%20" ) ;
 Substitute (
 Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle://" )
-& "Heart Whisperer.USR"
+& "Heart Whisperer.HG2"
  ; " " ; "%20" ) ) ]
 [ No dialog ]
 End If
@@ -54,4 +53,4 @@ If [ $$otherApps = 1 ]
 Set Variable [ $$otherApps ]
 Close Window [ Name: "Other Solutions"; Current ﬁle ]
 End If
-January 30, 平成26 22:19:12 ActionLog.fp7 - gotoDatabaseFMER -1-
+February 4, 平成26 10:33:03 ActionLog.fp7 - gotoDatabaseFMER -1-
