@@ -52,6 +52,6 @@ End If
 #Close other apps window if open after selecting an app.
 If [ $$otherApps = 1 ]
 Set Variable [ $$otherApps ]
-Close Window [ Name: "Other Solutions"; Current ﬁle ]
+Close Window [ Name: "All Solutions"; Current ﬁle ]
 End If
-February 4, 平成26 10:41:33 ActionLog.fp7 - gotoDatabaseHeartWhisperer -1-
+February 4, 平成26 12:21:06 ActionLog.fp7 - gotoDatabaseHeartWhisperer -1-
