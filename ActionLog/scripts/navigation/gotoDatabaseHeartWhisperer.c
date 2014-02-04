@@ -1,4 +1,4 @@
-navigation: gotoDatabaseFMER
+navigation: gotoDatabaseHeartWhisperer
 Select Window [ Name: "Icons" ]
 Select Window [ Name: "Workout Editor" ]
 Select Window [ Name: "Plan Week" ]
