@@ -1,7 +1,6 @@
 action buttons: clearPart1
 If [ day1::swActivityLength = "" ]
 Exit Script [ ]
-	TEST TEST TEST
 End If
 Set Variable [ $$warning; Value:brainstate::_lockBrainstateID ]
 Refresh Window
