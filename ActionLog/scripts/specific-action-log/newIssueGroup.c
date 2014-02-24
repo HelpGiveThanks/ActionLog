@@ -19,8 +19,8 @@ Go to Portal Row
 Loop
 Exit Loop If [ $group = category::_LockList ]
 Go to Portal Row
-[ Select; Next ]
+[ Select; Next; Exit after last ]
 End Loop
 #
 Go to Field [ category::text ]
-January 6, 平成26 11:15:58 ActionLog.fp7 - newIssueGroup -1-
+February 24, 平成26 15:13:03 ActionLog.fp7 - newIssueGroup -1-
