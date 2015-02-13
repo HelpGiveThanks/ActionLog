@@ -15,7 +15,7 @@ Set Variable [ $UpdateTimewindowName; Value:Get ( WindowName ) ]
 #to them.
 Go to Field [ ]
 #
-New Window [ Name: "temp"; Height: 1; Width: 1; Top: 1; Left: 1 ]
+New Window [ Name: "temp"; Height: 1; Width: 1; Top: -1000; Left: -1000 ]
 Go to Layout [ “IssuesLayoutForScripts” (issue) ]
 Enter Find Mode [ ]
 Set Field [ issue::timeSegmentKeyList; "*" & Replace ( Quote("1") ; 2 ; 1 ; $$updateDay ) ]
