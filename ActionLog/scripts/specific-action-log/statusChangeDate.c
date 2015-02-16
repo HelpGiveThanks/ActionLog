@@ -1,4 +1,4 @@
-speciﬁc action log: statusChangeDate
+specific action log: statusChangeDate
 Go to Field [ issue::dateDone ]
 Set Field [ issue::dateDone; Get ( CurrentTimeStamp ) ]
 Go to Field [ ]

@@ -1,8 +1,8 @@
-speciﬁc action log: newActPart2
+specific action log: newActPart2
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
 #
-#Make key to ﬁt this group's lock.
+#Make key to fit this group's lock.
 Set Variable [ $$group; Value:category::_LockList ]
 Set Variable [ $$pick ]
 Go to Field [ ]
@@ -10,8 +10,8 @@ Go to Field [ ]
 // Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
 Refresh Window
 #
-#Give key to current speciﬁc action.
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+#Give key to current specific action.
+Select Window [ Name: "Specific Action"; Current file ]
 Set Field [ issue::_keyCategory; $$group ]
 Set Field [ issue::oldCategorykey; $$group ]
 #

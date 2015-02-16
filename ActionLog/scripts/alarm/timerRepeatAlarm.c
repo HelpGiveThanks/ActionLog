@@ -14,5 +14,5 @@ Go to Layout [ “timerAlarm” (steward) ]
 Pause/Resume Script [ Duration (seconds): 11 ]
 Go to Layout [ “timerSetAlarm” (steward) ]
 End Loop
-// Close Window [ Name: "Predict Activity Time"; Current ﬁle ]
+// Close Window [ Name: "Predict Activity Time"; Current file ]
 January 6, 平成26 13:01:46 ActionLog.fp7 - TimerRepeatAlarm -1-

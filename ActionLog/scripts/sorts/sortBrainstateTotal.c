@@ -5,7 +5,7 @@ Sorts: sortBrainstateTotal
 #
 If [ steward::chosenSortTotal = "Brainstates A-Z" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: day1::_keyDay; ascending
+Sort Records [ Specified Sort Order: day1::_keyDay; ascending
 brainstate::description; descending ]
 [ Restore; No dialog ]
 Set Field [ steward::chosenSortTotal; "Brainstates Z-A" ]
@@ -22,7 +22,7 @@ Halt Script
 End If
 If [ steward::chosenSortTotal ≠ "Brainstates A-Z" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: day1::_keyDay; ascending
+Sort Records [ Specified Sort Order: day1::_keyDay; ascending
 brainstate::description; ascending ]
 [ Restore; No dialog ]
 Set Field [ steward::chosenSortTotal; "Brainstates A-Z" ]

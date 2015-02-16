@@ -9,7 +9,7 @@ total: action buttons: total
 #
 #NOTE: the three # symbols set apart chunks of script.
 #
-#NOTE: the ﬁnish and error script chunks are almost
+#NOTE: the finish and error script chunks are almost
 #identical (the error message differ in telling where
 #in the script they occur). For this reason, they are
 #not numbered as part of a particular chuck of the
@@ -25,7 +25,7 @@ Set Variable [ $userID; Value:reference::farmerID ]
 #
 #
 #
-#A) BEGIN ﬁnd selected merge records and create new total record and link all records together
+#A) BEGIN find selected merge records and create new total record and link all records together
 #
 #1 check if there are 1 or more records to merge and if not halt the script. (Can't merge if zero records are selected. 1 record can be merged
 which is really making a copy of that record for instances where the user has been tracking 2 things with one brainstate but now wants to
@@ -43,7 +43,7 @@ Perform Find [ ]
 #
 #
 #
-#BEGIN ﬁnd error 1
+#BEGIN find error 1
 If [ Get ( LastError ) ≠ 0 ]
 #tell user the error number.
 Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming merge script part A2."; Buttons: “OK” ]
@@ -52,19 +52,19 @@ Enter Find Mode [ ]
 Set Field [ brainstate::_keyUser; $userID ]
 Perform Find [ ]
 If [ steward::retiredStatus = "r" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
 [ Restore ]
 End If
 January 5, 平成26 14:08:10 ActionLog.fp7 - total -1-total: action buttons: total
 If [ steward::hideStatus = "" and steward::showORhide = "hide" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
 [ Restore ]
 Sort Records [ ]
 [ No dialog ]
 Halt Script
 End If
 If [ steward::showStatus ≠ "" and steward::showORhide = "show" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
 [ Restore ]
 Sort Records [ ]
 [ No dialog ]
@@ -77,7 +77,7 @@ Go to Record/Request/Page
 Go to Field [ ]
 Halt Script
 End If
-#END ﬁnd error 1
+#END find error 1
 #
 #
 #
@@ -87,7 +87,7 @@ New Record/Request
 Set Field [ brainstate::_keyUser; $userID ]
 Set Field [ brainstate::linkinfo; "total of: " ]
 Set Field [ brainstate::description; "NEW TOTAL RECORD the ID numbers of the records totaled by this record can be seen by either clicking or
-hovering over the i at the far right of this description ﬁeld." ]
+hovering over the i at the far right of this description field." ]
 Set Field [ brainstate::groupType; "merge" ]
 #
 #4 link all records
@@ -102,21 +102,21 @@ Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
 #
-#A) END ﬁnd selected merge records and create new total record and link all records together
+#A) END find selected merge records and create new total record and link all records together
 #
 #
 #
 Loop
 #B) BEGIN add a merge record's ID# to the description of the new total record.
 #
-#1 make sure there is a record to be merged (this step will be important when this loop is repeated after the ﬁrst record to be merged is
+#1 make sure there is a record to be merged (this step will be important when this loop is repeated after the first record to be merged is
 omitted).
 Go to Record/Request/Page
 [ First ]
 If [ brainstate::_lockBrainstateID ≠ brainstate::groupID ]
 #
 January 5, 平成26 14:08:10 ActionLog.fp7 - total -2-total: action buttons: total
-#2 capture merged ID number for total's linkinfo ﬁeld: total of: ID, ID, ID, etc.
+#2 capture merged ID number for total's linkinfo field: total of: ID, ID, ID, etc.
 Set Variable [ $CurrentBrainstateID; Value:brainstate::_lockBrainstateID ]
 Set Variable [ $CurrentBrainstateDisplayID; Value:brainstate::_Number ]
 Go to Record/Request/Page
@@ -129,21 +129,21 @@ Go to Record/Request/Page
 #
 #
 #
-#BEGIN ﬁnish
+#BEGIN finish
 Else If [ brainstate::_lockBrainstateID = brainstate::groupID ]
 #If all records are empty then the merge is complete and now the user needs to be shown the new total record and all the records that
 will feed into it until they are separated.
 Enter Find Mode [ ]
 Set Field [ brainstate::groupID; $brainstateID ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: brainstate::_lockBrainstateID; descending ]
+Sort Records [ Specified Sort Order: brainstate::_lockBrainstateID; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
 Go to Layout [ “TotalSort” (brainstate) ]
 Go to Field [ ]
 Halt Script
-#END ﬁnish
+#END finish
 #
 #
 #
@@ -153,19 +153,19 @@ End If
 #
 #
 #
-#C BEGIN ﬁnd merge record's related day records
+#C BEGIN find merge record's related day records
 #
-#1 make a list of the ﬁrst brainstate's day records in a new window
+#1 make a list of the first brainstate's day records in a new window
 Go to Layout [ “calcTotalSelectedList” (day1) ]
 Enter Find Mode [ ]
 Set Field [ day1::_keyBrainstate; $CurrentBrainstateID ]
 Perform Find [ ]
 #
-#C END ﬁnd merge record's related day records
+#C END find merge record's related day records
 #
 #
 #
-#D BEGIN no records found loop (this loop will either complete the merge process or ﬁnd a merge record with related day records)
+#D BEGIN no records found loop (this loop will either complete the merge process or find a merge record with related day records)
 #
 Loop
 #
@@ -173,7 +173,7 @@ Loop
 Exit Loop If [ Get ( LastError ) = 0 ]
 #
 January 5, 平成26 14:08:10 ActionLog.fp7 - total -3-total: action buttons: total
-#2 clear the merge ﬁeld (the big X in the box on the ToBeMerged layout) and omit this record
+#2 clear the merge field (the big X in the box on the ToBeMerged layout) and omit this record
 If [ Get ( LastError ) = 401 ]
 Go to Layout [ “01SortAndSchedule” (brainstate) ]
 Set Field [ brainstate::groupAddCheckbox; "" ]
@@ -181,14 +181,14 @@ Omit Record
 #
 #
 #
-#BEGIN ﬁnish
+#BEGIN finish
 If [ brainstate::_lockBrainstateID = brainstate::groupID ]
 #If all records are empty then the merge is complete and now the user needs to be shown the new total record and all the
 records that will feed into it until they are separated.
 Enter Find Mode [ ]
 Set Field [ brainstate::groupID; $brainstateID ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: brainstate::_lockBrainstateID; descending ]
+Sort Records [ Specified Sort Order: brainstate::_lockBrainstateID; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -196,11 +196,11 @@ Go to Layout [ “TotalSort” (brainstate) ]
 Go to Field [ ]
 Halt Script
 End If
-#END ﬁnish
+#END finish
 #
 #
 #
-#BEGIN ﬁnd error 2
+#BEGIN find error 2
 Else If [ Get ( LastError ) ≠ 0 ]
 #tell user the error number
 Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming merge script part D2.";
@@ -210,18 +210,18 @@ Enter Find Mode [ ]
 Set Field [ brainstate::_keyUser; $userID ]
 Perform Find [ ]
 If [ steward::retiredStatus = "r" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
 [ Restore ]
 End If
 If [ steward::hideStatus = "" and steward::showORhide = "hide" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
 [ Restore ]
 Sort Records [ ]
 [ No dialog ]
 Halt Script
 End If
 If [ steward::showStatus ≠ "" and steward::showORhide = "show" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
 [ Restore ]
 Sort Records [ ]
 [ No dialog ]
@@ -235,11 +235,11 @@ Go to Field [ ]
 January 5, 平成26 14:08:10 ActionLog.fp7 - total -4-total: action buttons: total
 Halt Script
 End If
-#END ﬁnd error 2
+#END find error 2
 #
 #
 #
-#3 capture next records ID number for total's linkinfo ﬁeld: total of: ID, ID, ID, etc.
+#3 capture next records ID number for total's linkinfo field: total of: ID, ID, ID, etc.
 Set Variable [ $CurrentBrainstateID; Value:brainstate::_lockBrainstateID ]
 Set Variable [ $CurrentBrainstateDisplayID; Value:brainstate::_Number ]
 Go to Record/Request/Page
@@ -264,7 +264,7 @@ End Loop
 #E BEGIN create new related day records and add selected record's time to them
 #
 Loop
-#1 ﬁnd any day records for the new brainstate that match the kfDay of the ﬁrst merge record. If this new record already has data in it,
+#1 find any day records for the new brainstate that match the kfDay of the first merge record. If this new record already has data in it,
 then we want to add new data to the old data; not replace the old data with new data.
 Set Variable [ $mergeDay; Value:day1::_keyDay ]
 Enter Find Mode [ ]
@@ -273,7 +273,7 @@ Set Field [ day2::_keyBrainstate; $brainstateID ]
 Set Field [ day2::_keyDay; $mergeDay ]
 Perform Find [ ]
 #
-#2 if no matches are found, create a new day record and put in the time of the ﬁrst the current day record
+#2 if no matches are found, create a new day record and put in the time of the first the current day record
 If [ Get ( LastError ) = 401 ]
 New Record/Request
 Set Field [ day2::_keyBrainstate; $brainstateID ]
@@ -296,7 +296,7 @@ day2::_keyDay & " " & $TotalActivity )
 #
 #
 #
-#BEGIN ﬁnd error 3
+#BEGIN find error 3
 Else If [ Get ( LastError ) ≠ 0 ]
 #tell user the error number
 Show Custom Dialog [ Title: "!"; Message: "Unexpected error" & Get ( LastError ) & "peforming merge script part E2."; Buttons:
@@ -306,18 +306,18 @@ Enter Find Mode [ ]
 Set Field [ brainstate::_keyUser; $userID ]
 Perform Find [ ]
 If [ steward::retiredStatus = "r" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
 [ Restore ]
 End If
 If [ steward::hideStatus = "" and steward::showORhide = "hide" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
 [ Restore ]
 Sort Records [ ]
 [ No dialog ]
 Halt Script
 End If
 If [ steward::showStatus ≠ "" and steward::showORhide = "show" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
 [ Restore ]
 Sort Records [ ]
 [ No dialog ]
@@ -329,7 +329,7 @@ Go to Record/Request/Page
 [ First ]
 Go to Field [ ]
 Halt Script
-#END ﬁnd error 3
+#END find error 3
 #
 #
 #
@@ -360,7 +360,7 @@ End Loop
 #F BEGIN go to next record with related day records to be added to the new total record.
 #
 Go to Layout [ “01SortAndSchedule” (brainstate) ]
-#Clear the merge ﬁeld (the big X in the box on the ToBeMerged layout).
+#Clear the merge field (the big X in the box on the ToBeMerged layout).
 Set Field [ brainstate::groupAddCheckbox; "" ]
 Omit Record
 #

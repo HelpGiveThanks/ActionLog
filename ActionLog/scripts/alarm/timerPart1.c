@@ -1,5 +1,5 @@
 Alarm: TimerPart1
-#basic administration tasks (required to prevent error message: record can't be modﬁed because it is open in another window)
+#basic administration tasks (required to prevent error message: record can't be modfied because it is open in another window)
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
 Set Variable [ $activity; Value:brainstate::description ]
@@ -13,5 +13,5 @@ Go to Layout [ “timerSetAlarm” (steward) ]
 Set Field [ reference::TimerDescription; $activity ]
 Set Field [ reference::TimerSet; "" ]
 Set Field [ reference::repeatAlarm; "" ]
-// Pause/Resume Script [ Indeﬁnitely ]
+// Pause/Resume Script [ Indefinitely ]
 January 6, 平成26 13:00:11 ActionLog.fp7 - TimerPart1 -1-

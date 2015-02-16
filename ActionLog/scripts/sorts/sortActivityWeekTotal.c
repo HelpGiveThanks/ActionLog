@@ -5,7 +5,7 @@ Sorts: sortActivityWeekTotal
 #
 If [ steward::chosenSortTotal = "act" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: brainstate::monthsum; descending
+Sort Records [ Specified Sort Order: brainstate::monthsum; descending
 brainstate::description; ascending ]
 [ Restore; No dialog ]
 Set Field [ steward::chosenSortTotal; "tca" ]
@@ -22,7 +22,7 @@ Halt Script
 End If
 If [ steward::chosenSortTotal ≠ "atc" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: brainstate::sortBlanksToBottom; descending
+Sort Records [ Specified Sort Order: brainstate::sortBlanksToBottom; descending
 brainstate::monthsum; ascending
 brainstate::description; ascending ]
 [ Restore; No dialog ]

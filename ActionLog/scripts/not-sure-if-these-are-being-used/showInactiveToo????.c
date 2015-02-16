@@ -6,7 +6,7 @@ Enter Find Mode [ ]
 Paste [ brainstate::_keyUser ]
 [ Select ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending ]
+Sort Records [ Specified Sort Order: brainstate::description; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]

@@ -1,8 +1,8 @@
-speciﬁc action log: newActPart2cancel
+specific action log: newActPart2cancel
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
 #
-#Stop script if user is NOT in the process of picking a speciﬁc action group.
+#Stop script if user is NOT in the process of picking a specific action group.
 If [ $$pick ≠ 1 ]
 Exit Script [ ]
 End If
@@ -15,8 +15,8 @@ Go to Field [ ]
 // Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
 Refresh Window
 #
-#Give key to current speciﬁc action.
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+#Give key to current specific action.
+Select Window [ Name: "Specific Action"; Current file ]
 Delete Record/Request
 [ No dialog ]
 #

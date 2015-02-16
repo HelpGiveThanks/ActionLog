@@ -1,14 +1,14 @@
 action buttons: UpdateTime
-#PURPOSE update the time paused ﬁelds and the total and grand total ﬁelds after a user leaves a time ﬁeld or clicks the veto button. They may
+#PURPOSE update the time paused fields and the total and grand total fields after a user leaves a time field or clicks the veto button. They may
 or may not have done anything, but in case they did this update is performed.
 #
-#If user just clicked into the time ﬁeld and the clicked
+#If user just clicked into the time field and the clicked
 #out without doing anything then stop this script as
 #there is not time change to update.
 #NEED TO STOP $$FIELDVALUE GETTING CREATED WHEN STOPWATCH BUTTON IS CLICKED, THEN THIS SCRIPT STEP SHOULD
 WORK.
 #SAME TIME INCLUDE VARIABLE TO STOP UPDATE OF ISSUE TIME!
-// If [ $$ﬁeldValue = Get (ActiveFieldContents) ]
+// If [ $$fieldValue = Get (ActiveFieldContents) ]
 // Exit Script [ ]
 // End If
 #
@@ -24,22 +24,22 @@ Set Variable [ $$stopRecordLoad; Value:1 ]
 #use the recordnumber variable to focus on record in
 #in use on this window. But when user goes from this
 #edit window to the main window we want the sort script
-#to ﬁnd the record to focus by looping through each record's
+#to find the record to focus by looping through each record's
 #ID number until the correct record is found.
 If [ $$sortstatus ≠ "" ]
 Set Variable [ $$recordnumber; Value:Get (RecordNumber) ]
 End If
 #
 #NOTE: the three # symbols set apart chunks of script.
-#NOTE: the ﬁnish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
+#NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
 they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them apart.
 #
 Freeze Window
-#If the user enters a time ﬁeld but makes no changes prevent the script from continuing if on the iphone. Do not do this for the PC as the user
+#If the user enters a time field but makes no changes prevent the script from continuing if on the iphone. Do not do this for the PC as the user
 could have dragged the time into another stopwatch, thus requring the script to udate this stopwatch's values.
-If [ Get ( SystemPlatform ) = 3 and Get ( ActiveFieldContents ) = $$ﬁeldValue and $$ﬁeldValue ≠ "" ]
+If [ Get ( SystemPlatform ) = 3 and Get ( ActiveFieldContents ) = $$fieldValue and $$fieldValue ≠ "" ]
 Go to Field [ ]
-Set Variable [ $$ﬁeldValue ]
+Set Variable [ $$fieldValue ]
 Set Variable [ $$recordnumber ]
 Set Variable [ $$stopRecordLoad ]
 Halt Script
@@ -72,7 +72,7 @@ January 5, 平成26 19:38:47 ActionLog.fp7 - UpdateTime -1-action buttons: Updat
 #A) BEGIN go to a new window and hide it to preserve focus in user's current window while peforming this script, and to hide the strobe effect of
 the window while performing the script.
 #
-#1 exit ﬁeld the user is in so that they are returned to a clean layout when done
+#1 exit field the user is in so that they are returned to a clean layout when done
 Go to Field [ ]
 #
 // #2 open a new window and hide it
@@ -80,7 +80,7 @@ Go to Field [ ]
 // Adjust Window
 [ Hide ]
 #
-#3 go to the ﬁrst record
+#3 go to the first record
 Go to Record/Request/Page
 [ First ]
 Loop
@@ -115,7 +115,7 @@ Set Field [ brainstate::groupUpdate; If ( brainstate::groupID ≠ "" ; "u" ; "" 
 Set Field [ brainstate::groupOfGroupUpdate; If ( brainstate::groupOfGroupID ≠ "" ; "u" ; "" ) ]
 #
 January 5, 平成26 19:38:47 ActionLog.fp7 - UpdateTime -2-action buttons: UpdateTime
-#3 ﬁnd the day record ad delete it
+#3 find the day record ad delete it
 Go to Layout [ “calcDayTable” (day1) ]
 Enter Find Mode [ ]
 Set Field [ day1::_lockDay; $DayID ]
@@ -136,13 +136,13 @@ they don't a blank day record will exist which causes conditional formatting iss
 #update time recorded, and if they are the same go
 #to the next record.
 #
-#The updatetime ﬁeld is populated by this script as a
+#The updatetime field is populated by this script as a
 #way of ﬂagging when a record has been updated by
 #this script.
 #
 #User may have used the drag feature to change
 #multiple records and the only way to know what has
-#been changed is to compare these time ﬁelds.
+#been changed is to compare these time fields.
 // If [ day1::updateTime ≠ day1::updateTimeCurrentTimeCalc and day1::swBugField = "note" ]
 If [ day1::swSymbols ≠ day1::updateTimeSymbol or day1::updateTime ≠ day1::updateTimeCurrentTimeCalc ]
 #
@@ -165,26 +165,26 @@ Set Field [ brainstate::groupUpdate; If ( brainstate::groupID ≠ "" ; "u" ; "" 
 #
 #
 #
-#E) BEGIN update the pause time ﬁelds
+#E) BEGIN update the pause time fields
 #
 #This script step has been removed. Initially, I thought since most records only have one time event to skip the update
 pause step for these records. However, in testing I found that when a timer is started for a second time event a pause
 time is calculated resulting in a gray bar in the bar chart. If the user then deletes this second start time, this now
-disabled script stops that bar from being removed because when this script gets to this step the ﬁeld is blank and so no
+disabled script stops that bar from being removed because when this script gets to this step the field is blank and so no
 calculation is done. I decided to leave this failure in just in case I forgot why this doesn't work, try it again, and fail to
 not perform the correct test, which I did until by accident noticed something wrong! January 5, 平成26 19:38:47 ActionLog.fp7 - UpdateTime -3-action buttons: UpdateTime
 #This script step has been removed. Initially, I thought since most records only have one time event to skip the update
 pause step for these records. However, in testing I found that when a timer is started for a second time event a pause
 time is calculated resulting in a gray bar in the bar chart. If the user then deletes this second start time, this now
-disabled script stops that bar from being removed because when this script gets to this step the ﬁeld is blank and so no
+disabled script stops that bar from being removed because when this script gets to this step the field is blank and so no
 calculation is done. I decided to leave this failure in just in case I forgot why this doesn't work, try it again, and fail to
 not perform the correct test, which I did until by accident noticed something wrong!
 // #1 if there is only one time, skip the following steps to recalculate the time paused between more than one time.
 // If [ day1::swActivityLength[2] ≠ "" ]
 #
-#1 clear all PauseTotal ﬁelds, which is necessary because a user may have reduced the number of activity times, thus
-reducing the number of pauses. NOTE: pause ﬁeld repetition 1 is never used as their is no pause between time
-zero and the ﬁrst time.
+#1 clear all PauseTotal fields, which is necessary because a user may have reduced the number of activity times, thus
+reducing the number of pauses. NOTE: pause field repetition 1 is never used as their is no pause between time
+zero and the first time.
 Set Variable [ $repetition; Value:2 ]
 Loop
 Set Field [ day1::swPauseLength[$repetition]; Get ( CurrentTime ) ]
@@ -205,7 +205,7 @@ Exit Loop If [ day1::swStart[$repetition] = "" ]
 Exit Loop If [ $repetition = 31 ]
 End Loop
 #
-#E) END update the pause time ﬁelds
+#E) END update the pause time fields
 #
 #
 #E2) UPDATE the time in any dependent issues.
@@ -237,9 +237,9 @@ January 5, 平成26 19:38:47 ActionLog.fp7 - UpdateTime -4-action buttons: Updat
 #
 Loop
 #
-#G) BEGIN ﬁnd all user total records that need to be udated
+#G) BEGIN find all user total records that need to be udated
 #
-#1 ﬁnd records
+#1 find records
 Enter Find Mode [ ]
 Set Field [ brainstate::_keyUser; $user ]
 Set Field [ brainstate::groupUpdate; "u" ]
@@ -265,7 +265,7 @@ End If
 #
 #
 #
-#G) END ﬁnd all user total records that need to be udated
+#G) END find all user total records that need to be udated
 #
 #
 #
@@ -288,8 +288,8 @@ End If
 End If
 Set Field [ day1::updateTimeSymbol; day1::swSymbols ]
 #
-#2 ﬁnd its linked records
-January 5, 平成26 19:38:47 ActionLog.fp7 - UpdateTime -5-action buttons: UpdateTime #2 ﬁnd its linked records
+#2 find its linked records
+January 5, 平成26 19:38:47 ActionLog.fp7 - UpdateTime -5-action buttons: UpdateTime #2 find its linked records
 Set Variable [ $mergeto; Value:brainstate::groupID ]
 Go to Layout [ “calcBrainstateTable” (brainstate) ]
 Enter Find Mode [ ]
@@ -297,7 +297,7 @@ Set Field [ brainstate::groupID; $mergeto ]
 // Set Field [ brainstate::sortRetired; "=" ]
 Perform Find [ ]
 Perform Script [ “FolderStopwatchCheck” ]
-#3 go to the ﬁrst record
+#3 go to the first record
 Loop
 If [ day1::swStart = "" and brainstate::_lockBrainstateID ≠ brainstate::groupID ]
 Omit Record
@@ -307,7 +307,7 @@ Go to Record/Request/Page
 End If
 End Loop
 #
-Sort Records [ Speciﬁed Sort Order: brainstate::groupType; based on value list: “MergeSort”
+Sort Records [ Specified Sort Order: brainstate::groupType; based on value list: “MergeSort”
 brainstate::description; ascending ]
 [ Restore; No dialog ]
 #
@@ -316,7 +316,7 @@ Go to Record/Request/Page
 [ First ]
 Set Field [ brainstate::groupOfGroupUpdate; If ( brainstate::groupOfGroupID ≠ "" ; "u" ; "" ) ]
 #
-#4 if linked records are found, ﬁrst reset the total record's time to zero in case the amount of time has decreased (essentially by
+#4 if linked records are found, first reset the total record's time to zero in case the amount of time has decreased (essentially by
 deleting its current day record and creating a new blank one).
 If [ day1::_keyDay = "" ]
 Set Variable [ $BrainstateID; Value:brainstate::_lockBrainstateID ]
@@ -354,7 +354,7 @@ End If
 #7 go the next part of the script once there are no more records to add
 Exit Loop If [ brainstate::_lockBrainstateID = brainstate::groupID ]
 #
-#8 if there is a record to add capture its total time, omit it, go the ﬁrst record and add this time to current total time.
+#8 if there is a record to add capture its total time, omit it, go the first record and add this time to current total time.
 Else If [ day1::_keyDay = "" ]
 Omit Record
 Else If [ day1::_keyDay ≠ "" ]
@@ -378,9 +378,9 @@ End Loop
 #
 Loop
 #
-#I) BEGIN ﬁnd all user GRAND total records that need to be udated
+#I) BEGIN find all user GRAND total records that need to be udated
 #
-#1 ﬁnd records
+#1 find records
 Enter Find Mode [ ]
 Set Field [ brainstate::_keyUser; $user ]
 Set Field [ brainstate::groupOfGroupUpdate; "u" ]
@@ -396,7 +396,7 @@ If [ Get ( LastError ) ≠ 0 ]
 #tell user the error number
 Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming CheckUpdateTime
 step i1."; Buttons: “OK” ]
-// Close Window [ Name: "UpateTime"; Current ﬁle ]
+// Close Window [ Name: "UpateTime"; Current file ]
 January 5, 平成26 19:38:47 ActionLog.fp7 - UpdateTime -7-action buttons: UpdateTime
 Go to Record/Request/Page [ $record ]
 [ No dialog ]
@@ -408,7 +408,7 @@ End If
 #
 #
 #
-#I) END ﬁnd all user total records that need to be udated
+#I) END find all user total records that need to be udated
 #
 #
 #
@@ -418,16 +418,16 @@ End If
 Clear [ brainstate::groupOfGroupUpdate ]
 [ Select ]
 #
-#2 ﬁnd its linked records
+#2 find its linked records
 Set Variable [ $mergeto; Value:brainstate::groupOfGroupID ]
 Go to Layout [ “calcBrainstateTable” (brainstate) ]
 Enter Find Mode [ ]
 Set Field [ brainstate::groupOfGroupID; $mergeto ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: brainstate::groupType; based on value list: “MergeSort” ]
+Sort Records [ Specified Sort Order: brainstate::groupType; based on value list: “MergeSort” ]
 [ Restore; No dialog ]
 #
-#3 if linked records are found, ﬁrst reset the total record's time to zero in case the amount of time has decreased (essentially
+#3 if linked records are found, first reset the total record's time to zero in case the amount of time has decreased (essentially
 by deleting its current day record and creating a new blank one).
 Go to Record/Request/Page
 [ First ]
@@ -467,7 +467,7 @@ End If
 #6 go the next part of the script once there are no more records to add
 Exit Loop If [ brainstate::_lockBrainstateID = brainstate::groupOfGroupID ]
 #
-#7 if there is a record to add capture its total time, omit it, go the ﬁrst record and add this time to current total time.
+#7 if there is a record to add capture its total time, omit it, go the first record and add this time to current total time.
 Else If [ day1::_keyDay = "" ]
 Omit Record
 Else If [ day1::_keyDay ≠ "" ]
@@ -516,7 +516,7 @@ Perform Script [ “DaySelectSortThenSort” ]
 Halt Script
 End If
 If [ steward::retiredStatus = "r" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
 [ Restore ]
 End If
 Perform Script [ “CHUNK_lastDayUsed” ]

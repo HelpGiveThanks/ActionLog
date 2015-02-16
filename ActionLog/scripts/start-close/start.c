@@ -4,15 +4,15 @@ start close: start
 #test
 #
 #1 save out graphic objects to external folder for reference in graphs
-Set Variable [ $path; Value:"ﬁle:" & Get(TemporaryPath) & "1.gif" ]
+Set Variable [ $path; Value:"file:" & Get(TemporaryPath) & "1.gif" ]
 Export Field Contents [ reference::gResources; “$path” ]
-Set Variable [ $path; Value:"ﬁle:" & Get(TemporaryPath) & "2.gif" ]
+Set Variable [ $path; Value:"file:" & Get(TemporaryPath) & "2.gif" ]
 Export Field Contents [ reference::gResources[3]; “$path” ]
 #
 #2 go to the user layout
 Go to Layout [ “users” (steward) ]
 Show All Records
-Sort Records [ Speciﬁed Sort Order: steward::FirstName; ascending
+Sort Records [ Specified Sort Order: steward::FirstName; ascending
 steward::LastName; ascending ]
 [ Restore; No dialog ]
 If [ steward::windowZoom = 150 ]

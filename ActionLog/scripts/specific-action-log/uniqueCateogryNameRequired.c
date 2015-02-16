@@ -1,4 +1,4 @@
-speciﬁc action log: uniqueCateogryNameRequired
+specific action log: uniqueCateogryNameRequired
 #
 #Capture text, remove spaces, and then recapture
 #the text to prevent user from creating a group
@@ -15,11 +15,11 @@ Set Variable [ $portalRow; Value:Get ( PortalRowNumber ) ]
 #to the correct portal row.
 Set Variable [ $key; Value:category::_LockList ]
 #
-#If the user left the ﬁeld blank...
+#If the user left the field blank...
 If [ category::text = "" ]
 Show Custom Dialog [ Message: "All group names must be unique, and must not be blank."; Buttons: “OK” ]
 #
-#Go to the blank ﬁeld and ﬁll it in with a unique
+#Go to the blank field and fill it in with a unique
 #number.
 Go to Object [ Object Name: "group" ]
 #
@@ -43,7 +43,7 @@ Loop
 If [ $name =category::text and category::_LockList ≠ $key ]
 Show Custom Dialog [ Message: "Each category in this list must have a unique name."; Buttons: “OK” ]
 #
-#Go to the blank ﬁeld and ﬁll it in with a unique
+#Go to the blank field and fill it in with a unique
 #number.
 Go to Object [ Object Name: "group" ]
 #
@@ -57,7 +57,7 @@ End Loop
 Set Field [ category::text; category::text & " " & $key ]
 Exit Script [ ]
 End If
-January 6, 平成26 11:17:01 ActionLog.fp7 - uniqueCateogryNameRequired -1-speciﬁc action log: uniqueCateogryNameRequired
+January 6, 平成26 11:17:01 ActionLog.fp7 - uniqueCateogryNameRequired -1-specific action log: uniqueCateogryNameRequired
 Go to Portal Row
 [ Select; Next; Exit after last ]
 End Loop

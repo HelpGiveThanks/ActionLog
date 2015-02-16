@@ -1,11 +1,11 @@
 Sorts: sortAlpha
-#PURPOSE of the 4 number and alpha ﬁelds, sort by the second one
+#PURPOSE of the 4 number and alpha fields, sort by the second one
 #
 #
 #
 If [ steward::chosenSort = "abc" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: brainstate::sortAlpha; descending
+Sort Records [ Specified Sort Order: brainstate::sortAlpha; descending
 brainstate::sortSubNumber; descending
 brainstate::sortCategory; descending
 brainstate::description; ascending ]
@@ -24,7 +24,7 @@ Halt Script
 End If
 If [ steward::chosenSort ≠ "abc" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: brainstate::sortAlpha; based on value list: “sortAlpha”
+Sort Records [ Specified Sort Order: brainstate::sortAlpha; based on value list: “sortAlpha”
 brainstate::sortSubNumber; based on value list: “__-99”
 brainstate::sortCategory; based on value list: “sortAlpha”
 brainstate::description; ascending ]

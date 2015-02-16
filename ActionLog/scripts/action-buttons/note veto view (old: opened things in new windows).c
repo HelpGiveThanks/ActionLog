@@ -3,7 +3,7 @@ action buttons: note veto view (old: opened things in new windows)
 merge records will be automatically added to the one total record.
 #
 #
-#BUG remove focus from any ﬁelds. This step seems to be neccessary as I periodically have been getting a -- this record is being modiﬁed in a
+#BUG remove focus from any fields. This step seems to be neccessary as I periodically have been getting a -- this record is being modified in a
 separate window -- message. I'm leaving this step in to see if I stop getting this message.
 Set Variable [ $recordNumber; Value:Get ( RecordNumber ) ]
 Go to Field [ ]
@@ -14,7 +14,7 @@ Go to Record/Request/Page [ $recordNumber ]
 #
 If [ brainstate::sortRetired ≠ "" ]
 Show Custom Dialog [ Title: "!"; Message: "This record is currently retired. To make it active again, click on the r to the immediate left of
-the record title (if the edit controls are hidden, then ﬁrst click the edit button (top left corner of this window)."; Buttons: “OK” ]
+the record title (if the edit controls are hidden, then first click the edit button (top left corner of this window)."; Buttons: “OK” ]
 Halt Script
 End If
 #
@@ -29,11 +29,11 @@ Perform Script [ “showLinkedRecords” ]
 Halt Script
 End If
 #
-#1 if the note button is showing ﬁrst determine if there is a day record to update
+#1 if the note button is showing first determine if there is a day record to update
 If [ day1::swSymbols = "" ]
 #
 #2 if not create a new one for this brainstate record and do it a new window so the user's focus is maintained (just going to the day layout
-and back resest the scroll bar unfortunately and I can't ﬁnd away around this, but I want too!)
+and back resest the scroll bar unfortunately and I can't find away around this, but I want too!)
 Set Variable [ $kpnBrainstateID; Value:brainstate::_lockBrainstateID ]
 Set Variable [ $userID; Value:reference::farmerID ]
 New Window [ Name: "!"; Height: 100; Width: 100 ]
@@ -45,15 +45,15 @@ Set Field [ day1::_keyBrainstate; $kpnBrainstateID ]
 Set Field [ day1::_keyUser; $userID ]
 Set Field [ day1::_keyDay; reference::day1 ]
 #
-#3 start the timer by inserting the current time in the start ﬁeld
+#3 start the timer by inserting the current time in the start field
 Set Field [ day1::swStart; Get ( CurrentTimeStamp ) ]
-Close Window [ Name: "!"; Current ﬁle ]
+Close Window [ Name: "!"; Current file ]
 Go to Layout [ original layout ]
 #
 #4 sort the records if the current sort is based on time which will make this record with zero current time shoot the top or bottom of the list
 depending on how the user is currently shorting time. The point is to keep the focus where the user expects it to be so the sort, which
 removes the focus from the current record is only done if the user wants the records sorted by time, in which case after the sort the
-focus is returned to the ﬁrst record.
+focus is returned to the first record.
 Perform Script [ “DaySelectSortThenSort” ]
 Halt Script
 End If
@@ -69,7 +69,7 @@ Perform Script [ “DaySelectSortThenSort” ]
 Halt Script
 End If
 #
-#6 if the note button is showing restart the timer by putting a new start time in next available start ﬁeld for this day record
+#6 if the note button is showing restart the timer by putting a new start time in next available start field for this day record
 Set Field [ day1::swStart[day1::swOccurances + 1]; Get ( CurrentTimeStamp ) ]
 If [ day1::swOccurances = 29 ]
 Set Field [ day1::swStart[29]; Get ( CurrentTimeStamp ) ]

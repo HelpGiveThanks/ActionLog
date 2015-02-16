@@ -14,13 +14,13 @@ Set Field [ brainstate::_keyUser; $userID ]
 Commit Records/Requests
 [ Skip data entry validation; No dialog ]
 #
-#4 records must be sorted by ID number, otherwise as soon as the brainstate name ﬁeld is exited the database sorts the brainstate list by
+#4 records must be sorted by ID number, otherwise as soon as the brainstate name field is exited the database sorts the brainstate list by
 whatever current sort is selected, and the user will see their newly created record disappear. Step 1 of sorting by ID is to clear the
-reference::sort ﬁeld which is used to conditionally formate the label of the currnt sort. 2 sort the records so the new record is the ﬁrst
-record, then 3 go to that ﬁrst records brainstate name ﬁeld.
+reference::sort field which is used to conditionally formate the label of the currnt sort. 2 sort the records so the new record is the first
+record, then 3 go to that first records brainstate name field.
 Clear [ reference::sort ]
 [ Select ]
-Sort Records [ Speciﬁed Sort Order: brainstate::_lockBrainstateID; descending ]
+Sort Records [ Specified Sort Order: brainstate::_lockBrainstateID; descending ]
 [ Restore; No dialog ]
 #
 #5 put cursor in title text box for the user to enter a title

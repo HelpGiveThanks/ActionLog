@@ -1,4 +1,4 @@
-speciﬁc action log: TsubtotalTimeByGroup
+specific action log: TsubtotalTimeByGroup
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
 #
@@ -9,23 +9,23 @@ Exit Script [ ]
 End If
 #
 If [ Get (WindowName) = "Tag" ]
-#Make key to ﬁt this group's lock.
+#Make key to fit this group's lock.
 Set Variable [ $$group; Value:category::_LockList ]
 Go to Field [ ]
 Refresh Window
 #
-#Give key to current speciﬁc action.
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+#Give key to current specific action.
+Select Window [ Name: "Specific Action"; Current file ]
 Set Field [ issue::_keyCategory; $$group ]
 #
-#This ﬁeld is for sorting the records by category
+#This field is for sorting the records by category
 #to get the subtotal of each categories time.
 # (The subtotal calculation depends on this "break"
-# ﬁeld to know which set of records should be
+# field to know which set of records should be
 # treated as a subset of the total records shown.)
-#This sort must be done on a ﬁeld in the table
+#This sort must be done on a field in the table
 #where the time is located: list table.
-#The system is using the text ﬁeld from the list
+#The system is using the text field from the list
 #table for the text of each issue. Another occurance
 #of the list table is used to supply the categories
 #which are located in a different list table record.
@@ -35,7 +35,7 @@ Set Field [ issue::_keyCategory; $$group ]
 #category a copy of the text must be made
 #part of each list record shown as an issue
 # (instead of being shown as a category or status)
-#This next ﬁeld holds the copy of the cateogry
+#This next field holds the copy of the cateogry
 #tag text for each list record holding issue data.
 Set Field [ issue::sortTime; issueCategory::text ]
 If [ $$stopSort ≠ "" ]
@@ -55,12 +55,12 @@ End If
 If [ issue::_keyCategory = issue::oldCategorykey and $$stopSubtotal = "" ]
 Go to Field [ ]
 Exit Script [ ]
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -1-speciﬁc action log: TsubtotalTimeByGroup
+January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -1-specific action log: TsubtotalTimeByGroup
 End If
 Set Variable [ $$stopSubtotal ]
 #
 #Set the old category key variable for use later
-#in this script ﬁnding all the issue records that
+#in this script finding all the issue records that
 #still belong to this record's former category.
 Set Variable [ $OLDcategoryKey; Value:issue::oldCategorykey ]
 #
@@ -73,14 +73,14 @@ Set Variable [ $$stopRecordLoad; Value:1 ]
 #
 Go to Field [ ]
 #
-#This ﬁeld is for sorting the records by category
+#This field is for sorting the records by category
 #to get the subtotal of each categories time.
 # (The subtotal calculation depends on this "break"
-# ﬁeld to know which set of records should be
+# field to know which set of records should be
 # treated as a subset of the total records shown.)
-#This sort must be done on a ﬁeld in the table
+#This sort must be done on a field in the table
 #where the time is located: list table.
-#The system is using the text ﬁeld from the list
+#The system is using the text field from the list
 #table for the text of each issue. Another occurance
 #of the list table is used to supply the categories
 #which are located in a different list table record.
@@ -90,11 +90,11 @@ Go to Field [ ]
 #category a copy of the text must be made
 #part of each list record shown as an issue
 # (instead of being shown as a category or status)
-#This next ﬁeld holds the copy of the cateogry
+#This next field holds the copy of the cateogry
 #tag text for each list record holding issue data.
 Set Field [ issue::sortTime; issueCategory::text ]
 #
-#In the focus in the text ﬁeld, remove it.
+#In the focus in the text field, remove it.
 Go to Field [ ]
 #
 #Open a new window so these next steps can
@@ -108,16 +108,16 @@ Go to Layout [ “IssuesLayoutForScripts” (issue) ]
 #
 #Add up total time for category the issue is now in.
 #
-#First ﬁnd all the issues in this category.
+#First find all the issues in this category.
 Set Variable [ $categoryKey; Value:issue::_keyCategory ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyCategory; $categoryKey ]
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -2-speciﬁc action log: TsubtotalTimeByGroup
+January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -2-specific action log: TsubtotalTimeByGroup
 Perform Find [ ]
 #
 #Sort them to trigger the calcuation of their
 #total time.
-Sort Records [ Speciﬁed Sort Order: issue::sortTime; ascending ]
+Sort Records [ Specified Sort Order: issue::sortTime; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -134,7 +134,7 @@ End Loop
 #
 #Add up total time for category it was in.
 #
-#First ﬁnd all the issues still part of the category
+#First find all the issues still part of the category
 #it was in, if any.
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
@@ -148,7 +148,7 @@ If [ Get (LastError) ≠ 401 ]
 #
 #Sort them to trigger the calcuation of their
 #total time.
-Sort Records [ Speciﬁed Sort Order: issue::sortTime; ascending ]
+Sort Records [ Specified Sort Order: issue::sortTime; ascending ]
 [ Restore; No dialog ]
 #
 #Go to each record including the newly recatorgized
@@ -165,24 +165,24 @@ End If
 #
 #
 #Disabled the next chunk after deciding it was
-#better to use ﬁlemaker's subtotal calc rather
-#doing it with this script chunk whose beneﬁt
+#better to use filemaker's subtotal calc rather
+#doing it with this script chunk whose benefit
 #was subtotaling items in a category even when
 #items where divided by status. Filemaker's
 #subtotal calc subtotals at the status and category
 #breaks (essentially all breaks caused by a sort)
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -3-speciﬁc action log: TsubtotalTimeByGroup
+January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -3-specific action log: TsubtotalTimeByGroup
 #but I decided to show issue the time by status
 #and category too, so that is why this script chunk
 #is now disabled. The other reason was that it
 #bogged down the system taking a long time to run.
-// #To reset all the category subtotal times, ﬁrst ﬁnd
+// #To reset all the category subtotal times, first find
 // #and sort all this issues records.
 // Set Variable [ $brainstateIssues; Value:issue::_keyBrainstate ]
 // Enter Find Mode [ ]
 // Set Field [ issue::_keyBrainstate; $brainstateIssues ]
 // Perform Find [ ]
-// Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+// Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; ascending
 issueStatus::text; ascending
 issueCategory::order; ascending
@@ -216,7 +216,7 @@ issue::text; ascending ]
 //issue::_keyCategory = $category and issue::_keyStatus ≠ $status ]
 // End Loop
 // #
-// #Return the ﬁrst record in this subset and give it
+// #Return the first record in this subset and give it
 // #the subset total, then give the subtotal to all
 // #records in this subset.
 // Go to Record/Request/Page [ $recordNumber ]
@@ -232,12 +232,12 @@ issue::text; ascending ]
 //issue::_keyCategory = $category and issue::_keyStatus ≠ $status ]
 // End Loop
 // #
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -4-speciﬁc action log: TsubtotalTimeByGroup
+January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -4-specific action log: TsubtotalTimeByGroup
 // Exit Loop If [ Get (LastError) = 101 ]
 // End Loop
 #
 #
-Close Window [ Name: "temp"; Current ﬁle ]
+Close Window [ Name: "temp"; Current file ]
 #
 #
 #Set make the old and current category keys
@@ -250,7 +250,7 @@ Set Field [ issue::oldCategorykey; issue::_keyCategory ]
 #In order to show the newly updapted time the
 #system must resort the records. This takes
 Set Variable [ $currentRecord; Value:issue::_LockList ]
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; ascending
 issueStatus::text; ascending
 issueCategory::order; ascending
@@ -280,7 +280,7 @@ Go to Record/Request/Page
 End Loop
 Scroll Window
 [ Home ]
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; based on value list: “__-99”
 issueStatus::text; ascending
 issueCategory::order; ascending
@@ -295,7 +295,7 @@ Scroll Window
 Set Variable [ $$stopRecordLoad ]
 #
 // #The halt script is neccessary in case the user
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -5-speciﬁc action log: TsubtotalTimeByGroup
+January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -5-specific action log: TsubtotalTimeByGroup
 // #clicks somewhere other than the in the pulldown
 // #menu. This halt script stops the pause script
 // #that is currently in play.

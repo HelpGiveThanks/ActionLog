@@ -1,10 +1,10 @@
-speciﬁc action log: deleteGroup
+specific action log: deleteGroup
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
 #
-#Stop script if user is process of picking a speciﬁc action group.
+#Stop script if user is process of picking a specific action group.
 If [ $$pick = 1 ]
-Show Custom Dialog [ Message: "Pick a speciﬁc-action group. After you do this you can delete group tags. "; Buttons: “OK” ]
+Show Custom Dialog [ Message: "Pick a specific-action group. After you do this you can delete group tags. "; Buttons: “OK” ]
 Exit Script [ ]
 End If
 #

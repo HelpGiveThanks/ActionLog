@@ -9,7 +9,7 @@ record
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
 #
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: logs::log: “=” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: logs::log: “=” ]
 [ Restore ]
 #1 capture layout name for the return trip
 If [ Get ( LastError ) = 401 ]

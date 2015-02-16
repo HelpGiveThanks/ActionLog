@@ -50,6 +50,6 @@ Go to Record/Request/Page
 End Loop
 #
 #7 go back to layout time 7, sort records (neccessary because the week and month view usually show more active records that need to be
-sorted to the top of list), and go to the ﬁrst record.
+sorted to the top of list), and go to the first record.
 Go to Layout [ original layout ]
 January 6, 平成26 12:57:25 ActionLog.fp7 - to 31 Copy -1-

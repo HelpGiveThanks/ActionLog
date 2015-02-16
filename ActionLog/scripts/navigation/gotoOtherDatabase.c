@@ -1,5 +1,5 @@
 navigation: gotoOtherDatabase
-Show Custom Dialog [ Message: "Open the Fat and Muscle Efﬁciency Research (FMER) application or the Budget Research application?";
+Show Custom Dialog [ Message: "Open the Fat and Muscle Efficiency Research (FMER) application or the Budget Research application?";
 Buttons: “cancel”, “Budget”, “FMER” ]
 If [ Get (LastMessageChoice) = 1 ]
 Else If [ Get (LastMessageChoice) = 2 ]
@@ -7,22 +7,22 @@ Select Window [ Name: "Budget Research" ]
 If [ Get (LastError) = 112 ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (
-Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle:/" )
+Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "file:/" ; "file:/" )
 & "Budget Research." & Right ( Get ( FilePath ) ; 3 )
  ; " " ; "%20" ) ;
 Substitute (
-Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle://" )
+Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "file:/" ; "file://" )
 & "Budget Research." & Right ( Get ( FilePath ) ; 3 )
  ; " " ; "%20" ) ) ]
 [ No dialog ]
 If [ Get (LastError) = 5 ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (
-Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle:/" )
+Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "file:/" ; "file:/" )
 & "Budget Research.USR"
  ; " " ; "%20" ) ;
 Substitute (
-Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle://" )
+Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "file:/" ; "file://" )
 & "Budget Research.USR"
  ; " " ; "%20" ) ) ]
 [ No dialog ]
@@ -57,34 +57,34 @@ Select Window [ Name: MemorySwitch::fatPath ]
 If [ Get (LastError) = 112 ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (
-Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle:/" )
-& "Fat and Muscle Efﬁciency Research." & Right ( Get ( FilePath ) ; 3 )
+Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "file:/" ; "file:/" )
+& "Fat and Muscle Efficiency Research." & Right ( Get ( FilePath ) ; 3 )
  ; " " ; "%20" ) ;
 Substitute (
-Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle://" )
-& "Fat and Muscle Efﬁciency Research." & Right ( Get ( FilePath ) ; 3 )
+Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "file:/" ; "file://" )
+& "Fat and Muscle Efficiency Research." & Right ( Get ( FilePath ) ; 3 )
  ; " " ; "%20" ) ) ]
 [ No dialog ]
 January 5, 平成26 14:22:35 ActionLog.fp7 - gotoOtherDatabase -1-navigation: gotoOtherDatabase
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (
-Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle:/" )
-& "Fat and Muscle Efﬁciency Research." & Right ( Get ( FilePath ) ; 3 )
+Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "file:/" ; "file:/" )
+& "Fat and Muscle Efficiency Research." & Right ( Get ( FilePath ) ; 3 )
  ; " " ; "%20" ) ;
 Substitute (
-Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle://" )
-& "Fat and Muscle Efﬁciency Research." & Right ( Get ( FilePath ) ; 3 )
+Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "file:/" ; "file://" )
+& "Fat and Muscle Efficiency Research." & Right ( Get ( FilePath ) ; 3 )
  ; " " ; "%20" ) ) ]
 [ No dialog ]
 If [ Get (LastError) = 5 ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (
-Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle:/" )
-& "Fat and Muscle Efﬁciency Research.USR"
+Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "file:/" ; "file:/" )
+& "Fat and Muscle Efficiency Research.USR"
  ; " " ; "%20" ) ;
 Substitute (
-Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "ﬁle:/" ; "ﬁle://" )
-& "Fat and Muscle Efﬁciency Research.USR"
+Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (FileName) ) + 4 ) ) ; "file:/" ; "file://" )
+& "Fat and Muscle Efficiency Research.USR"
  ; " " ; "%20" ) ) ]
 [ No dialog ]
 End If

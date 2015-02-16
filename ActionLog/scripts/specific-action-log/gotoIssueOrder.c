@@ -1,4 +1,4 @@
-speciﬁc action log: gotoIssueOrder
+specific action log: gotoIssueOrder
 #
 #If user clicked on the pulldown when the focus
 #of the system was on another record, stop this

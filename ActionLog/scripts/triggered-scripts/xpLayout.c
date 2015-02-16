@@ -1,5 +1,5 @@
 triggered scripts: xpLayout
-#PURPOSE set the layout status ﬁeld with the layout that triggers this script when it loads
+#PURPOSE set the layout status field with the layout that triggers this script when it loads
 #
 #
 If [ Get ( SystemPlatform ) = -2 ]

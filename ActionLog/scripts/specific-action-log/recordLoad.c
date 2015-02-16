@@ -1,4 +1,4 @@
-speciﬁc action log: recordLoad
+specific action log: recordLoad
 If [ $$stopRecordLoad = 1 or $$otherApps = 1 ]
 Exit Script [ ]
 End If

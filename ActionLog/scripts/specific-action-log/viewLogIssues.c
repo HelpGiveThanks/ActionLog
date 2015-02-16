@@ -1,4 +1,4 @@
-speciﬁc action log: viewLogIssues
+specific action log: viewLogIssues
 #
 #Prevent windows from ﬂashing and script from slowing
 #by stopping strobe effect caused by going back and
@@ -7,17 +7,17 @@ speciﬁc action log: viewLogIssues
 #at the end.
 Set Variable [ $$stopRecordLoad; Value:1 ]
 #
-#If ﬁnd mode is active clear it.
+#If find mode is active clear it.
 If [ $$found ≠ "" ]
-Select Window [ Name: "Tag"; Current ﬁle ]
+Select Window [ Name: "Tag"; Current file ]
 Set Variable [ $$found ]
 Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
 End If
 #
 #Find all issues linked to this day.
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 If [ Get (LastError) = 112 ]
-New Window [ Name: "Speciﬁc Action"; Height: Get (ScreenHeight); Width: 441; Top: 0; Left: 0 ]
+New Window [ Name: "Specific Action"; Height: Get (ScreenHeight); Width: 441; Top: 0; Left: 0 ]
 If [ Get ( WindowZoomLevel ) > 150 ]
 Move/Resize Window [ Current Window; Width: Get (ScreenWidth) / 2; Left: 0 ]
 End If
@@ -34,7 +34,7 @@ Set Field [ issue::_keyBrainstate; $$logBrainstate ]
 Set Field [ issue::lock; "issue" ]
 Perform Find [ ]
 End If
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; ascending
 issueStatus::text; ascending
 issueCategory::order; ascending

@@ -1,6 +1,6 @@
 action buttons: CHUNK_lastDayUsed
 #PURPOSE go the selected farmer's records from the createEditFarmer layout. (This is script is identical to the switchFarmer script except for
-step 1, which is required because the reference ﬁeld is not available on this layout, and so the user's ID must be taken from the user table,
+step 1, which is required because the reference field is not available on this layout, and so the user's ID must be taken from the user table,
 not the reference table.)
 #
 #
@@ -21,7 +21,7 @@ If [ Get ( LastError ) = 401 ]
 Go to Layout [ original layout ]
 Exit Script [ ]
 End If
-Sort Records [ Speciﬁed Sort Order: logs::_keyDay; descending ]
+Sort Records [ Specified Sort Order: logs::_keyDay; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -36,7 +36,7 @@ If [ Get ( LastError ) = 401 ]
 Go to Layout [ original layout ]
 Exit Script [ ]
 End If
-Sort Records [ Speciﬁed Sort Order: logs::_keyDay; descending ]
+Sort Records [ Specified Sort Order: logs::_keyDay; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]

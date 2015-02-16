@@ -12,7 +12,7 @@ Select Window [ Name: MemorySwitch::currentLibraryMainWIndow ]
 If [ Get (LastError) = 112 and MemorySwitch::currentLibraryPath ≠ "" ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (MemorySwitch::currentLibraryPath ; " " ; "%20" ) ;
-Substitute ( Substitute ( MemorySwitch::currentLibraryPath ; "ﬁle:/" ; "ﬁle://" ) ; " " ; "%20" ) ) ]
+Substitute ( Substitute ( MemorySwitch::currentLibraryPath ; "file:/" ; "file://" ) ; " " ; "%20" ) ) ]
 [ No dialog ]
 #
 #If the path stored for the selected library failed to open
@@ -27,7 +27,7 @@ End If
 #If their are no libraries in the system let the user
 #know how to add new ones.
 Else If [ Get (LastError) = 112 and MemorySwitch::currentLibraryPath = "" ]
-Show Custom Dialog [ Message: "There is no library ﬁle in memory. Click on a library ﬁle manually and it will be added to memory and
+Show Custom Dialog [ Message: "There is no library file in memory. Click on a library file manually and it will be added to memory and
 opened the next time you click the library button."; Buttons: “OK” ]
 End If
 #

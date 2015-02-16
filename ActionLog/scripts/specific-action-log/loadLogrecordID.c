@@ -1,4 +1,4 @@
-speciﬁc action log: LoadLogrecordID
+specific action log: LoadLogrecordID
 If [ $$stopRecordLoad = 1 ]
 Exit Script [ ]
 Else If [ $$stoprecordload ≠ 1 ]
@@ -12,11 +12,11 @@ End If
 Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
 Set Variable [ $$log; Value:logs::_lockDay ]
 Set Field [ reference::ActivityLogDay; logs::_keyDay ]
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 Go to Field [ ]
 Refresh Window
 Set Variable [ $$stopRecordLoad; Value:1 ]
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 If [ daylog::swActivityLength[11] ≠ "" ]
 Go to Layout [ “logs3rows” (logs) ]
 Else If [ daylog::swActivityLength[6] ≠ "" ]

@@ -4,7 +4,7 @@ action buttons: DeleteFarmer
 #
 #
 #NOTE: the three # symbols set apart chunks of script.
-#NOTE: the ﬁnish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
+#NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
 they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them apart.
 #
 #
@@ -17,17 +17,17 @@ Set Variable [ $brainstateID; Value:brainstate::_lockBrainstateID ]
 #
 #
 #
-#A) BEGIN check if user is in any ﬁelds (neccessary because if user is in a ﬁeld another script could be triggered causing this script to be
+#A) BEGIN check if user is in any fields (neccessary because if user is in a field another script could be triggered causing this script to be
 terminated).
 #
 #1 check if there are 2 or more records to merge and if not halt the script. (Can't merge if zero or 1 records are selected.
 If [ Get ( ActiveFieldName ) ≠ "" ]
-Show Custom Dialog [ Title: "!"; Message: "As long as record is in use it cannot be deleted. Please exit all ﬁelds and try again. "; Buttons:
+Show Custom Dialog [ Title: "!"; Message: "As long as record is in use it cannot be deleted. Please exit all fields and try again. "; Buttons:
 “OK” ]
 Halt Script
 End If
 #
-#A) END check if user is in any ﬁelds (neccessary because if user is in a ﬁeld another script could be triggered causing this script to be
+#A) END check if user is in any fields (neccessary because if user is in a field another script could be triggered causing this script to be
 terminated).
 #
 #
@@ -36,7 +36,7 @@ terminated).
 #
 #1 password check
 If [ WordCount ( steward::FirstName ) + WordCount ( steward::LastName ) = 0 ]
-Show Custom Dialog [ Title: "!"; Message: "You must have something (other than spaces) typed in at least the ﬁrst or last name text boxes
+Show Custom Dialog [ Title: "!"; Message: "You must have something (other than spaces) typed in at least the first or last name text boxes
 to use as a password to delete this record."; Buttons: “OK” ]
 Halt Script
 End If
@@ -45,9 +45,9 @@ End If
 #
 #
 #
-#C) BEGIN ask for delete conﬁrmation
+#C) BEGIN ask for delete confirmation
 #
-#1) clear the reference. This ﬁeld is the lock the user must insert the ﬁrst letter of the record's title to open and then delete the record. This step
+#1) clear the reference. This field is the lock the user must insert the first letter of the record's title to open and then delete the record. This step
 insures it is locked!
 Set Field [ reference::YorN; "" ]
 #
@@ -56,7 +56,7 @@ Show Custom Dialog [ Title: "DELETE steward::FirstPlusLast"; Message: "Type the 
 records for this person. ¶¶"
 & steward::FirstPlusLast; Buttons: “OK”, “Cancel”; Input #1: reference::YorN ]
 #
-#C) END ask for delete conﬁrmation
+#C) END ask for delete confirmation
 January 5, 平成26 19:53:52 ActionLog.fp7 - DeleteFarmer -1-action buttons: DeleteFarmer
 #
 #
@@ -67,7 +67,7 @@ January 5, 平成26 19:53:52 ActionLog.fp7 - DeleteFarmer -1-action buttons: Del
 If [ reference::YorN = "" ]
 Halt Script
 #
-#2) conﬁrm user typed correct name
+#2) confirm user typed correct name
 Else If [ reference::YorN = steward::FirstPlusLast or
 reference::YorN = steward::FirstName and steward::LastName = "" ]
 #

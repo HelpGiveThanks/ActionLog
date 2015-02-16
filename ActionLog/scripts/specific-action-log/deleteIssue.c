@@ -1,4 +1,4 @@
-speciﬁc action log: deleteIssue
+specific action log: deleteIssue
 Set Variable [ $delete; Value:issue::_LockList ]
 Set Variable [ $$stopCategoryRequest; Value:1 ]
 Set Variable [ $name; Value:issue::text ]
@@ -19,7 +19,7 @@ Set Variable [ $$stopRecordLoad; Value:1 ]
 #
 New Window [ Name: "temp" ]
 #
-#Exit issue ﬁeld so conditional formatting can be applied.
+#Exit issue field so conditional formatting can be applied.
 Go to Field [ ]
 #
 #Prepare to remove issue time for category.
@@ -42,7 +42,7 @@ Go to Layout [ “Issues” (issue) ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyCategory; $categoryKey ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: issue::sortTime; ascending ]
+Sort Records [ Specified Sort Order: issue::sortTime; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -56,7 +56,7 @@ End Loop
 Go to Layout [ “logs2rows” (logs) ]
 Enter Find Mode [ ]
 Set Field [ logs::_keyLogIssues; $$issue ]
-January 6, 平成26 1:13:26 ActionLog.fp7 - deleteIssue -1-speciﬁc action log: deleteIssue
+January 6, 平成26 1:13:26 ActionLog.fp7 - deleteIssue -1-specific action log: deleteIssue
 Perform Find [ ]
 Go to Record/Request/Page
 [ First ]
@@ -88,7 +88,7 @@ End Loop
 #
 Set Variable [ $$stopRecordLoad ]
 #
-Close Window [ Name: "temp"; Current ﬁle ]
+Close Window [ Name: "temp"; Current file ]
 End If
 #
 Delete Record/Request
@@ -97,7 +97,7 @@ End If
 #
 Set Variable [ $delete ]
 Set Variable [ $$stopCategoryRequest ]
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 Go to Field [ issue::text ]
 Go to Field [ ]
 Refresh Window

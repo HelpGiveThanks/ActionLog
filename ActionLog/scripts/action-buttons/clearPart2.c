@@ -1,7 +1,7 @@
 action buttons: clearPart2
 #PURPOSE just like on a stopwatch, this script activated by the clear button deletes the time recorded for a brainstate record's related day
 record. Rather than just return the time to zero, this scripts deletes the record in case the user made a mistake in starting a timer for a
-particular brainstate record and will not be using it at all, in which case if it is not deleted, this unused record will ﬁll up the database wasting
+particular brainstate record and will not be using it at all, in which case if it is not deleted, this unused record will fill up the database wasting
 space.
 #
 #1 check to insure that there is a record to clear and if not hast the script, then check to insure if there is a record that it is not a total or grand
@@ -16,7 +16,7 @@ End If
 #
 #preserve stopwatch symbol for use in updatetime script as it will be deleted by this script
 Set Variable [ $$onoff; Value:"note" ]
-#BUG remove focus from any ﬁelds. This step seems to be neccessary as I periodically have been getting a -- this record is being modiﬁed in a
+#BUG remove focus from any fields. This step seems to be neccessary as I periodically have been getting a -- this record is being modified in a
 separate window -- message. I'm leaving this step in to see if I stop getting this message.
 Set Variable [ $recordNumber; Value:Get ( RecordNumber ) ]
 Go to Field [ ]
@@ -34,7 +34,7 @@ will reset the scroll and confuse the user. When a new window is used the scroll
 // Adjust Window
 [ Hide ]
 #
-#3 ﬁnd and delete the day record
+#3 find and delete the day record
 Go to Layout [ “calcDayTable” (day1) ]
 Enter Find Mode [ ]
 Insert Calculated Result [ day1::_lockDay; $dayID ]
@@ -64,11 +64,11 @@ Set Variable [ $$clear ]
 #
 // #Reload log record in case current variables are
 // #set for log record that was just deleted/cleared.
-// Select Window [ Name: "Activity Log"; Current ﬁle ]
+// Select Window [ Name: "Activity Log"; Current file ]
 // If [ Get (LastError) ≠ 112 //window missing ]
 // Perform Script [ “LoadLogrecordID” ]
 // End If
-Select Window [ Name: "Timer"; Current ﬁle ]
+Select Window [ Name: "Timer"; Current file ]
 Set Variable [ $$stopCHUNK_updateIssueCategoryTime; Value:1 ]
 #
 #Update time for affected total record if any and for

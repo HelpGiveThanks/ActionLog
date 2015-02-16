@@ -2,9 +2,9 @@ log: resetRememberTags
 #PURPOSE resets remember tags.
 #
 #
-#Stop script if user is process of picking a speciﬁc action group.
+#Stop script if user is process of picking a specific action group.
 If [ $$pick = 1 ]
-Show Custom Dialog [ Message: "Pick a speciﬁc-action group. After you do this you can reset these tags to the default setting. ";
+Show Custom Dialog [ Message: "Pick a specific-action group. After you do this you can reset these tags to the default setting. ";
 Buttons: “OK” ]
 Exit Script [ ]
 End If
@@ -23,7 +23,7 @@ Exit Script [ ]
 End If
 #
 #Update remember names and review dates.
-Set Field [ status::status; "Remember existence" & ¶ & "of a speciﬁc action..." ]
+Set Field [ status::status; "Remember existence" & ¶ & "of a specific action..." ]
 Go to Object [ Object Name: "status" ]
 Go to Portal Row
 [ Select; First ]

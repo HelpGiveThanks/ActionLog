@@ -1,4 +1,4 @@
-speciﬁc action log: gotoFieldItemPart3a
+specific action log: gotoFieldItemPart3a
 #
 #If user clicked on the pulldown when the focus
 #of the system was on another record, stop this

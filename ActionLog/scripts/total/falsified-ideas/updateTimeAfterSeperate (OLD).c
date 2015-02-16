@@ -1,4 +1,4 @@
-total: falsiﬁed ideas: UpdateTimeAfterSeperate (OLD)
+total: falsified ideas: UpdateTimeAfterSeperate (OLD)
 #PURPOSE separate a record it total record only deleting only the time on the day separated, but keeping the time previously added. This
 turned out not to be a good idea. If the user re-adds this record to the total, its time doubled on those days its time was not deleted during
 the separate.
@@ -6,7 +6,7 @@ the separate.
 // #
 // #
 // #NOTE: the three # symbols set apart chunks of script.
-// #NOTE: the ﬁnish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this
+// #NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this
 reason, they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them apart.
 // #
 // #
@@ -36,7 +36,7 @@ the window while performing the script.
 record was summing up.
 // #
 // #1 ﬂag for grand total update
-// Sort Records [ Speciﬁed Sort Order: brainstate::groupType; based on value list: “MergeSort”
+// Sort Records [ Specified Sort Order: brainstate::groupType; based on value list: “MergeSort”
 brainstate::description; ascending ]
 [ Restore; No dialog ]
 // Go to Record/Request/Page
@@ -55,9 +55,9 @@ record to it to keep it as a total record.
 // Delete Record/Request
 [ No dialog ]
 // End If
-// Close Window [ Name: "UpateTime"; Current ﬁle ]
+// Close Window [ Name: "UpateTime"; Current file ]
 // Go to Layout [ “totalViewSeparated” (brainstate) ]
-January 5, 平成26 14:14:24 ActionLog.fp7 - UpdateTimeAfterSeperate (OLD) -1-total: falsiﬁed ideas: UpdateTimeAfterSeperate (OLD)
+January 5, 平成26 14:14:24 ActionLog.fp7 - UpdateTimeAfterSeperate (OLD) -1-total: falsified ideas: UpdateTimeAfterSeperate (OLD)
 // Show Custom Dialog [ Title: "!"; Message: "Option 1) To make this record a non-total record, change its name (opptional), and click the
 go back button.¶Option 2) To keep it as a total record, click the add button and select 1 or more records for it to total."; Buttons: “OK” ]
 // Go to Field [ brainstate::description ]
@@ -71,7 +71,7 @@ was summing up.
 // #
 // #C) BEGIN total record
 // #
-// #1 if linked records are found, ﬁrst reset the total record's time to zero in case the amount of time has decreased (essentially by deleting its
+// #1 if linked records are found, first reset the total record's time to zero in case the amount of time has decreased (essentially by deleting its
 current day record and creating a new blank one).
 // If [ day1::_keyDay = "" ]
 // Set Variable [ $BrainstateID; Value:brainstate::_lockBrainstateID ]
@@ -108,8 +108,8 @@ user deleting all the time in the linked records).
 // #4 go the next part of the script once there are no more records to add
 // Exit Loop If [ brainstate::_lockBrainstateID = brainstate::groupID ]
 // #
-// #5 if there is a record to add capture its total time, omit it, go the ﬁrst record and add this time to current total time.
-January 5, 平成26 14:14:24 ActionLog.fp7 - UpdateTimeAfterSeperate (OLD) -2-total: falsiﬁed ideas: UpdateTimeAfterSeperate (OLD)
+// #5 if there is a record to add capture its total time, omit it, go the first record and add this time to current total time.
+January 5, 平成26 14:14:24 ActionLog.fp7 - UpdateTimeAfterSeperate (OLD) -2-total: falsified ideas: UpdateTimeAfterSeperate (OLD)
 // Else If [ day1::_keyDay = "" ]
 // Omit Record
 // Else If [ day1::_keyDay ≠ "" ]
@@ -132,9 +132,9 @@ day1::_keyDay & " " & ($TotalActivity + day1::swTotalActivity) )
 // #
 // Loop
 // #
-// #D) BEGIN ﬁnd all user GRAND total records that need to be udated
+// #D) BEGIN find all user GRAND total records that need to be udated
 // #
-// #1 ﬁnd records
+// #1 find records
 // Enter Find Mode [ ]
 // Set Field [ brainstate::_keyUser; $user ]
 // Set Field [ brainstate::groupOfGroupUpdate; "u" ]
@@ -150,14 +150,14 @@ day1::_keyDay & " " & ($TotalActivity + day1::swTotalActivity) )
 // #tell user the error number
 // Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming CheckUpdateTime step i1.";
 Buttons: “OK” ]
-// Close Window [ Name: "UpateTime"; Current ﬁle ]
+// Close Window [ Name: "UpateTime"; Current file ]
 // Exit Script [ ]
 // End If
 // #END error 1
 // #
 // #
 // #
-// #D) END ﬁnd all user GRAND total records that need to be udated
+// #D) END find all user GRAND total records that need to be udated
 // #
 // #
 // #
@@ -166,19 +166,19 @@ Buttons: “OK” ]
 // #1 unﬂag this total record for grand total update
 // Clear [ brainstate::groupOfGroupUpdate ]
 [ Select ]
-January 5, 平成26 14:14:24 ActionLog.fp7 - UpdateTimeAfterSeperate (OLD) -3-total: falsiﬁed ideas: UpdateTimeAfterSeperate (OLD) // Clear [ brainstate::groupOfGroupUpdate ]
+January 5, 平成26 14:14:24 ActionLog.fp7 - UpdateTimeAfterSeperate (OLD) -3-total: falsified ideas: UpdateTimeAfterSeperate (OLD) // Clear [ brainstate::groupOfGroupUpdate ]
 [ Select ]
 // #
-// #2 ﬁnd its linked records
+// #2 find its linked records
 // Set Variable [ $mergeto; Value:brainstate::groupOfGroupID ]
 // Go to Layout [ “calcBrainstateTable” (brainstate) ]
 // Enter Find Mode [ ]
 // Set Field [ brainstate::groupOfGroupID; $mergeto ]
 // Perform Find [ ]
-// Sort Records [ Speciﬁed Sort Order: brainstate::groupType; based on value list: “MergeSort” ]
+// Sort Records [ Specified Sort Order: brainstate::groupType; based on value list: “MergeSort” ]
 [ Restore; No dialog ]
 // #
-// #3 if linked records are found, ﬁrst reset the total record's time to zero in case the amount of time has decreased (essentially by deleting
+// #3 if linked records are found, first reset the total record's time to zero in case the amount of time has decreased (essentially by deleting
 its current day record and creating a new blank one).
 // Go to Record/Request/Page
 [ First ]
@@ -217,9 +217,9 @@ the user deleting all the time in the linked records).
 // #6 go the next part of the script once there are no more records to add
 // Exit Loop If [ brainstate::_lockBrainstateID = brainstate::groupOfGroupID ]
 // #
-// #7 if there is a record to add capture its total time, omit it, go the ﬁrst record and add this time to current total time.
-January 5, 平成26 14:14:24 ActionLog.fp7 - UpdateTimeAfterSeperate (OLD) -4-total: falsiﬁed ideas: UpdateTimeAfterSeperate (OLD)
-// #7 if there is a record to add capture its total time, omit it, go the ﬁrst record and add this time to current total time.
+// #7 if there is a record to add capture its total time, omit it, go the first record and add this time to current total time.
+January 5, 平成26 14:14:24 ActionLog.fp7 - UpdateTimeAfterSeperate (OLD) -4-total: falsified ideas: UpdateTimeAfterSeperate (OLD)
+// #7 if there is a record to add capture its total time, omit it, go the first record and add this time to current total time.
 // Else If [ day1::_keyDay = "" ]
 // Omit Record
 // Else If [ day1::_keyDay ≠ "" ]
@@ -238,7 +238,7 @@ day1::_keyDay & " " & ($TotalActivity + day1::swTotalActivity) )
 // End Loop
 // #
 // #8) close window and sort records
-// Close Window [ Name: "UpateTime"; Current ﬁle ]
+// Close Window [ Name: "UpateTime"; Current file ]
 // Perform Script [ “sortRestoreAfterScript” ]
 // #
 // #E) END update found record

@@ -1,8 +1,8 @@
-speciﬁc action log: gotoIssues
+specific action log: gotoIssues
 Set Variable [ $brainstate; Value:brainstate::_lockBrainstateID ]
 New Window [ ]
 Go to Layout [ “Issues” (issue) ]
-Sort Records [ Speciﬁed Sort Order: issue::_keyBrainstate; ascending
+Sort Records [ Specified Sort Order: issue::_keyBrainstate; ascending
 issue::_keyStatus; ascending
 issueCategory::text; ascending
 issue::order; based on value list: “__-99”

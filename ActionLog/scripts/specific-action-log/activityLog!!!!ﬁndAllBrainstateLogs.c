@@ -1,9 +1,9 @@
-speciﬁc action log: ActivityLog!!!!ﬁndAllBrainstateLogs
+specific action log: ActivityLog!!!!findAllBrainstateLogs
 Set Variable [ $$stopRecordLoad; Value:1 ]
 Enter Find Mode [ ]
 Set Field [ logs::_keyBrainstate; $$LogBrainstate ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: logs::_keyBrainstate; descending
+Sort Records [ Specified Sort Order: logs::_keyBrainstate; descending
 logs::_keyDay; descending ]
 [ Restore; No dialog ]
 Set Variable [ $$stopRecordLoad ]
@@ -23,4 +23,4 @@ Refresh Window
 Scroll Window
 [ Home ]
 // Perform Script [ “viewAllLogIssues” ]
-January 6, 平成26 11:05:44 ActionLog.fp7 - ActivityLog!!!!ﬁndAllBrainstateLogs -1-
+January 6, 平成26 11:05:44 ActionLog.fp7 - ActivityLog!!!!findAllBrainstateLogs -1-

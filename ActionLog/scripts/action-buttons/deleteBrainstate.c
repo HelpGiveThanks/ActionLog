@@ -5,7 +5,7 @@ clear its linked records of their link.
 #
 #
 #NOTE: the three # symbols set apart chunks of script.
-#NOTE: the ﬁnish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
+#NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
 they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them apart.
 #
 #
@@ -32,29 +32,29 @@ Set Variable [ $$hide; Value:brainstate::hide ]
 #
 #
 #
-#A) BEGIN check if user is in any ﬁelds (neccessary because if user is in a ﬁeld another script could be triggered causing this script to be
+#A) BEGIN check if user is in any fields (neccessary because if user is in a field another script could be triggered causing this script to be
 terminated).
 #
-#1 check if user is in any ﬁelds and if so halt the script
+#1 check if user is in any fields and if so halt the script
 If [ Get ( ActiveFieldName ) ≠ "" ]
-Show Custom Dialog [ Title: "!"; Message: "As long as record is in use it cannot be deleted. Please exit all ﬁelds and try again. "; Buttons:
+Show Custom Dialog [ Title: "!"; Message: "As long as record is in use it cannot be deleted. Please exit all fields and try again. "; Buttons:
 “OK” ]
 Halt Script
 End If
 #
-#A) END check if user is in any ﬁelds (neccessary because if user is in a ﬁeld another script could be triggered causing this script to be
+#A) END check if user is in any fields (neccessary because if user is in a field another script could be triggered causing this script to be
 terminated).
 #
 #
 #
-#B) BEGIN ask for delete conﬁrmation
+#B) BEGIN ask for delete confirmation
 #
-#1) clear the reference. This ﬁeld is the lock the user must insert the ﬁrst letter of the record's title to open and then delete the record. This step
-insures it is locked! (If there is a value in the ﬁeld, the ﬁeld is unlocked and the user could accidently delete a record they really decide that
+#1) clear the reference. This field is the lock the user must insert the first letter of the record's title to open and then delete the record. This step
+insures it is locked! (If there is a value in the field, the field is unlocked and the user could accidently delete a record they really decide that
 they want to keep.)
 Set Field [ reference::YorN; "" ]
 #
-#2) open a text box and ask the user to type in the ﬁrst letter of the records title
+#2) open a text box and ask the user to type in the first letter of the records title
 Set Variable [ $$warning; Value:brainstate::_lockBrainstateID ]
 Refresh Window
 Show Custom Dialog [ Title: brainstate::description; Message: "Type the 1st character of the title below (or 1 space if blank) and click OK to
@@ -63,13 +63,13 @@ delete ¶¶"
 delete ¶¶"
 & brainstate::description; Buttons: “OK”, “Cancel”; Input #1: reference::YorN ]
 #
-#B) END ask for delete conﬁrmation
+#B) END ask for delete confirmation
 #
 Set Variable [ $$warning ]
 Refresh Window
 #
 #
-#C) BEGIN conﬁrm user wants to delete record or cancel delete
+#C) BEGIN confirm user wants to delete record or cancel delete
 #
 #1) halt delete if the user typed nothing and clicked OK or hit the cancel button
 If [ reference::YorN = "" ]
@@ -78,7 +78,7 @@ Refresh Window
 Halt Script
 End If
 #
-#2) conﬁrm user typed correct letter OR if record was blank and user typed in a blank (this test covers the possibility that ﬁrst letter of title may
+#2) confirm user typed correct letter OR if record was blank and user typed in a blank (this test covers the possibility that first letter of title may
 be a blank, and insures the user's desire to delete the record is taken care of in the case of blank or blank looking record).
 If [ reference::YorN = Left ( brainstate::description ; 1 ) or reference::YorN = " " and brainstate::description = "" ]
 #
@@ -87,7 +87,7 @@ Else If [ reference::YorN ≠ Left ( brainstate::description ; 1 ) or reference:
 Loop
 Set Field [ reference::YorN; "" ]
 Show Custom Dialog [ Title: brainstate::description; Message: "Type the 1st character of the title below (or click the space bar once
-to type a space in the ﬁeld below if title appears to be blank) and click OK to delete ¶"
+to type a space in the field below if title appears to be blank) and click OK to delete ¶"
 & brainstate::description; Buttons: “OK”, “Cancel”; Input #1: reference::YorN ]
 Exit Loop If [ reference::YorN = Left ( brainstate::description ; 1 )
 or
@@ -104,7 +104,7 @@ Refresh Window
 Halt Script
 End If
 #
-#C) END conﬁrm user wants to delete record or cancel delete
+#C) END confirm user wants to delete record or cancel delete
 #
 #
 #
@@ -156,13 +156,13 @@ Else If [ brainstate::_lockBrainstateID ≠ $deleteID ]
 Show Custom Dialog [ Title: "!"; Message: "Error peforming F2 of the DeleteBrainstate script."; Buttons: “OK” ]
 End If
 #
-#3) if user was on the viewTotal screen ﬁnd only those records that are part of the total being viewed prior to deleting and show the
+#3) if user was on the viewTotal screen find only those records that are part of the total being viewed prior to deleting and show the
 user those records on that layout.
 If [ Left ( $deletelayout ; 5 ) = "Total" ]
 Enter Find Mode [ ]
 Set Field [ brainstate::groupID; $brainstateID ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: brainstate::_lockBrainstateID; descending ]
+Sort Records [ Specified Sort Order: brainstate::_lockBrainstateID; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -201,13 +201,13 @@ Else If [ brainstate::_lockBrainstateID ≠ $deleteID ]
 Show Custom Dialog [ Title: "!"; Message: "Error peforming G1 of the DeleteBrainstate script."; Buttons: “OK” ]
 End If
 #
-#2) if user was on the viewTotal screen ﬁnd only those records that are part of the total being viewed prior to deleting and show the user those
+#2) if user was on the viewTotal screen find only those records that are part of the total being viewed prior to deleting and show the user those
 records on that layout.
 If [ Left ( $deletelayout ; 4 ) = "Tota" ]
 Enter Find Mode [ ]
 Set Field [ brainstate::groupID; $brainstateID ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: brainstate::_lockBrainstateID; descending ]
+Sort Records [ Specified Sort Order: brainstate::_lockBrainstateID; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]

@@ -1,4 +1,4 @@
-total: falsiﬁed ideas: CHUNK_deleteRecordsTimeFromGrandtotal
+total: falsified ideas: CHUNK_deleteRecordsTimeFromGrandtotal
 #DISABLE: I thought this was a good idea to delete total records that nothing to total for the user. But after thinking about it, I now think I should
 allow the user to do this. There is no harm in having a non-working total record. It can always be used again by adding records to it to
 total, or by turning it into a regular record.

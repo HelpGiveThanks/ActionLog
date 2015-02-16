@@ -1,9 +1,9 @@
 backup: backup
-#PURPOSE remove focus from ﬁeld (activited by a layout trigger)
+#PURPOSE remove focus from field (activited by a layout trigger)
 #
 #
 #
-#1 set the ﬂag for backups to "backup" then open the BFData ﬁle
+#1 set the ﬂag for backups to "backup" then open the BFData file
 Set Field [ backup::backup; "backup" ]
 Open File [ “MyData” ]
 [ Open hidden ]

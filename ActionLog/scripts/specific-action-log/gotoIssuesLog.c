@@ -1,7 +1,7 @@
-speciﬁc action log: gotoIssuesLog
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+specific action log: gotoIssuesLog
+Select Window [ Name: "Specific Action"; Current file ]
 If [ Get (LastError) = 112 ]
-New Window [ Name: "Speciﬁc Action" ]
+New Window [ Name: "Specific Action" ]
 If [ Get ( WindowZoomLevel ) > 150 ]
 Move/Resize Window [ Current Window; Width: Get (ScreenWidth) / 2; Left: 0 ]
 Else If [ Get ( WindowZoomLevel ) = 150 ]
@@ -14,7 +14,7 @@ Enter Find Mode [ ]
 Set Field [ issue::_keyBrainstate; $$logbrainstate ]
 Set Field [ issue::lock; "issue" ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; ascending
 issueStatus::text; ascending
 issueCategory::order; ascending

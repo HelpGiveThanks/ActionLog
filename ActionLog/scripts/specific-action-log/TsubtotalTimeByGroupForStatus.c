@@ -1,21 +1,21 @@
-speciﬁc action log: TsubtotalTimeByGroupForStatus
+specific action log: TsubtotalTimeByGroupForStatus
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
 #
-#Stop script if user is process of picking a speciﬁc action group.
+#Stop script if user is process of picking a specific action group.
 If [ $$pick = 1 ]
-Show Custom Dialog [ Message: "Pick a speciﬁc-action group. After you do this you can assign other tags. "; Buttons: “OK” ]
+Show Custom Dialog [ Message: "Pick a specific-action group. After you do this you can assign other tags. "; Buttons: “OK” ]
 Exit Script [ ]
 End If
 #
 If [ Get (WindowName) = "Tag" ]
-#Make key to ﬁt this group's lock.
+#Make key to fit this group's lock.
 Set Variable [ $$status; Value:status::_LockList ]
 Go to Field [ ]
 Refresh Window
 #
-#Give key to current speciﬁc action.
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+#Give key to current specific action.
+Select Window [ Name: "Specific Action"; Current file ]
 Set Field [ issue::_keyStatus; $$status ]
 End If
 #

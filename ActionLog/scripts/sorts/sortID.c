@@ -5,7 +5,7 @@ Sorts: sortID
 #
 If [ steward::chosenSort = "id" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: brainstate::_lockBrainstateID; descending ]
+Sort Records [ Specified Sort Order: brainstate::_lockBrainstateID; descending ]
 [ Restore; No dialog ]
 Set Field [ steward::chosenSort; "di" ]
 Go to Record/Request/Page
@@ -21,7 +21,7 @@ Halt Script
 End If
 If [ steward::chosenSort ≠ "id" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: brainstate::_lockBrainstateID; ascending ]
+Sort Records [ Specified Sort Order: brainstate::_lockBrainstateID; ascending ]
 [ Restore; No dialog ]
 Set Field [ steward::chosenSort; "id" ]
 Go to Record/Request/Page

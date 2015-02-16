@@ -1,8 +1,8 @@
 action buttons: DeleteBrainstate CHUNKS: CHUNK_deleteRecordsTimeFromTotal
-#PURPOSE ﬁnd the to-be-deleted record's total record, omit the to-be-deleted record and then start the process of updating the total records
+#PURPOSE find the to-be-deleted record's total record, omit the to-be-deleted record and then start the process of updating the total records
 day records (subtracting the to-be-deleted record's time from these records). By omitting the to-be-deleted at this stage if the computer
 crashes or loses power and is then re-booted the program will show that the to-be-deleted still in need of deleting and the process can be
-done again becuase the delete takes place as the ﬁnal part of the script.
+done again becuase the delete takes place as the final part of the script.
 #CHUNK USED BY DeleteBrainstate Script
 #
 #
@@ -19,17 +19,17 @@ Set Variable [ $$deleteID; Value:brainstate::_lockBrainstateID ]
 Set Variable [ $displayID; Value:brainstate::_Number ]
 Set Variable [ $totaldisplayID; Value:brainstate::groupDisplayID ]
 Set Variable [ $description; Value:brainstate::description ]
-Set Field [ brainstate::description; " delete interrupted! click here for info: This record is ﬁne, the bad news is the record that totaled its time
+Set Field [ brainstate::description; " delete interrupted! click here for info: This record is fine, the bad news is the record that totaled its time
 may have been corrupted. So this total record ID number -- " & $totaldisplayID & " -- should be deleted and rebuilt if you still want it. // "
 & $description ]
 Set Field [ brainstate::groupID; "" ]
 Set Field [ brainstate::groupDisplayID; "" ]
 #
-#2 ﬁnd all records linked to this total record
+#2 find all records linked to this total record
 Enter Find Mode [ ]
 Set Field [ brainstate::groupID; $brainstateID ]
 Perform Find [ ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::description: “" delete inter"” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::description: “" delete inter"” ]
 [ Restore ]
 #
 #DISABLED: I thought these next steps where a good idea: to delete total records with nothing to total. But after thinking about it, I now think I
@@ -61,8 +61,8 @@ it by clicking the total button."; Buttons: “OK” ]
 // Halt Script
 // End If
 #
-#4 capture total record's mergeID and remove the t from its merge ﬁeld
-Sort Records [ Speciﬁed Sort Order: brainstate::groupType; ascending ]
+#4 capture total record's mergeID and remove the t from its merge field
+Sort Records [ Specified Sort Order: brainstate::groupType; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ Last ]

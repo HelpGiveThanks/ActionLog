@@ -1,4 +1,4 @@
-speciﬁc action log: addTimeSegmentToIssue
+specific action log: addTimeSegmentToIssue
 #
 If [ Get ( ActiveFieldContents ) = "" ]
 Go to Field [ ]
@@ -15,7 +15,7 @@ Set Variable [ $$stopRecordLoad; Value:1 ]
 #
 #Get category key for adding up total category time
 #later in the script.
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 Set Variable [ $categoryKey; Value:issue::_keyCategory ]
 Go to Field [ ]
 #
@@ -25,7 +25,7 @@ Go to Field [ ]
 #in use by another user).
 Go to Record/Request/Page [ Get (RecordNumber) ]
 [ No dialog ]
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 #
 #Capture repetition number and _lockDay when
 #segment is clicked in log window.
@@ -56,7 +56,7 @@ Set Field [ issueTime::_keyIssue; $$issue ]
 Enter Find Mode [ ]
 Set Field [ issueTime::_keyIssue; $$issue ]
 Perform Find [ ]
-January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -1-speciﬁc action log: addTimeSegmentToIssue
+January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -1-specific action log: addTimeSegmentToIssue
 Perform Find [ ]
 Set Variable [ $totalTime; Value:issueTime::sum ]
 #
@@ -76,7 +76,7 @@ Set Field [ issue::issueTotalTime; $totalTime ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyCategory; $categoryKey ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: issue::sortTime; ascending ]
+Sort Records [ Specified Sort Order: issue::sortTime; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -92,11 +92,11 @@ Set Field [ daylog::swLogTimeAccounting[$repetition]; $$issue ]
 #
 #If issue is not linked to day whose time has just
 #been added to it, then link it.
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 If [ issue::_LockList & "¶" ≠ FilterValues ( $$logIssues ; issue::_LockList & "¶" ) ]
 Perform Script [ “IssueToLog” ]
 End If
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 Go to Field [ ]
 #
 #
@@ -108,14 +108,14 @@ Show Custom Dialog [ Message: "Subtract time from act currently credited with it
 credited with this time?"; Buttons: “GoToAct”, “Subtract” ]
 If [ Get ( LastMessageChoice ) = 1 ]
 Go to Field [ ]
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 Go to Record/Request/Page
 [ First ]
 Loop
 Exit Loop If [ FilterValues (issue::timeSegmentKeyList ; $timeSegment & "¶") = $timeSegment & "¶" ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
-January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -2-speciﬁc action log: addTimeSegmentToIssue
+January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -2-specific action log: addTimeSegmentToIssue
 End Loop
 If [ FilterValues (issue::timeSegmentKeyList ; $timeSegment & "¶") ≠ $timeSegment & "¶" ]
 Enter Find Mode [ ]
@@ -141,11 +141,11 @@ Set Field [ daylog::swLogTimeAccounting[$repetition]; "" ]
 #
 #If it is in use then subtract its time from the total
 #time of all time segements attributed to this issue.
-#BUT ﬁrst set a new issue ID variable as the user
+#BUT first set a new issue ID variable as the user
 #may be removing the time from an issue not currently
 #selected, meaning the time was part of a different
 #issue and when the user clicked on this time to assign
-#to a new issue, the time ﬁrst had to be deleted from
+#to a new issue, the time first had to be deleted from
 #the issue to which it is currently assigned.
 Go to Layout [ “issueTime” (issueTime) ]
 Set Variable [ $issueTimeDelete; Value:issueTime::_keyIssue ]
@@ -172,7 +172,7 @@ If ( ValueCount ( $$timeAll ) ≠ ValueCount ( Substitute ( $$timeAll ; $time & 
 Substitute ( $$timeAll ; $time & "¶" ; "" ) ;
 Substitute ( $$timeAll ; $time ; "" )
 ) ]
-January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -3-speciﬁc action log: addTimeSegmentToIssue
+January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -3-specific action log: addTimeSegmentToIssue
 Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
 Set Field [ issue::issueTotalTime; $totalTime ]
 #
@@ -181,7 +181,7 @@ Go to Layout [ “Issues” (issue) ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyCategory; $categoryKey ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: issue::sortTime; ascending ]
+Sort Records [ Specified Sort Order: issue::sortTime; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -195,7 +195,7 @@ Go to Layout [ original layout ]
 Go to Field [ ]
 End If
 Set Variable [ $$stopRecordLoad ]
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 Perform Script [ “LoadIssuerecordID” ]
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -4-

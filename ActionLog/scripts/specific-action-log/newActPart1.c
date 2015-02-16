@@ -1,4 +1,4 @@
-speciﬁc action log: newActPart1
+specific action log: newActPart1
 #
 Set Variable [ $$stopRecordLoad; Value:1 ]
 #
@@ -43,10 +43,10 @@ Go to Record/Request/Page [ $recordNumber ]
 Set Variable [ $newAct; Value:issue::_LockList ]
 Refresh Window
 #
-Select Window [ Name: "Tag"; Current ﬁle ]
+Select Window [ Name: "Tag"; Current file ]
 Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
 Set Variable [ $$pick; Value:1 ]
 Refresh Window
-Pause/Resume Script [ Indeﬁnitely ]
+Pause/Resume Script [ Indefinitely ]
 #
 January 6, 平成26 11:14:23 ActionLog.fp7 - newActPart1 -1-

@@ -1,8 +1,8 @@
-speciﬁc action log: PHASEDOUTgotoIssueResolution
+specific action log: PHASEDOUTgotoIssueResolution
 If [ issueStatus::order > 79 and $$stopgotoIssueResolution ≠ 1 ]
 Set Variable [ $resolutionDate; Value:GetAsDate ( issue::dateDone ) ]
 Set Variable [ $$stoploadrecord; Value:1 ]
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 Go to Record/Request/Page
 [ First ]
 Go to Field [ ]

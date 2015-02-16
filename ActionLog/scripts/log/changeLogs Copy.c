@@ -12,7 +12,7 @@ Set Variable [ $$stopSubtotal; Value:1 ]
 #I really need to decide on ONE means to store the
 #current brainstate key, isntead of making up a new
 #one for each module because I'm not sure how the
-#others are being used. A deﬁnition of each variable
+#others are being used. A definition of each variable
 #and how it is used would be great!
 Set Variable [ $$logBrainstate; Value:brainstate::_lockBrainstateID ]
 #
@@ -20,9 +20,9 @@ Set Variable [ $$logBrainstate; Value:brainstate::_lockBrainstateID ]
 Set Variable [ $$stopRecordLoad; Value:1 ]
 Set Window Title [ Current Window; New Title: "Timer" ]
 #
-Select Window [ Name: "Tag"; Current ﬁle ]
-Select Window [ Name: "Day"; Current ﬁle ]
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Tag"; Current file ]
+Select Window [ Name: "Day"; Current file ]
+Select Window [ Name: "Specific Action"; Current file ]
 // End If
 Go to Layout [ “Issues” (issue) ]
 Set Variable [ $$issueRecordID; Value:Get ( RecordID ) ]
@@ -33,8 +33,8 @@ Refresh Window
 #window can be opened in smaller monitor and then
 #move over to larger monitor but not adjust its height
 #unless this step is included.
-Move/Resize Window [ Name: "Day"; Current ﬁle; Height: Get (ScreenHeight) ]
-Select Window [ Name: "Day"; Current ﬁle ]
+Move/Resize Window [ Name: "Day"; Current file; Height: Get (ScreenHeight) ]
+Select Window [ Name: "Day"; Current file ]
 Set Variable [ $$stopRecordLoad ]
 Exit Script [ ]
 #
@@ -64,7 +64,7 @@ End If
 #
 #
 #If there are records for this brainstate then show them.
-Sort Records [ Speciﬁed Sort Order: logs::_keyBrainstate; descending
+Sort Records [ Specified Sort Order: logs::_keyBrainstate; descending
 logs::_keyDay; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
@@ -74,7 +74,7 @@ Scroll Window
 #
 #Show all status and category menu items for
 brainstate's log.
-Select Window [ Name: "Tag"; Current ﬁle ]
+Select Window [ Name: "Tag"; Current file ]
 If [ Get (LastError) = 112 ]
 New Window [ Name: "Tag" ]
 Move/Resize Window [ Current Window; Height: Get (ScreenHeight); Width: 441; Top: 0; Left: //If (Get (ScreenWidth) / 2 + 1100 ≤ Get
@@ -111,7 +111,7 @@ Set Field [ issueCategory::text; " " ]
 Set Variable [ $groupID; Value:issueCategory::_LockList ]
 End If
 #
-#Set the key for the ﬁrst blank record (actually
+#Set the key for the first blank record (actually
 #the record with 10 spaces in it, which looks
 #blank to the user and will scroll to the top, which
 #is what is essential.
@@ -125,7 +125,7 @@ Go to Layout [ “IssuesAndObservationsOrder” (brainstate) ]
 #
 #
 #Show all issues for this brainstate's log.
-New Window [ Name: "Speciﬁc Action"; Height: Get (ScreenHeight); Width: Get (ScreenWidth) / 2; Top: 0; Left: 0 ]
+New Window [ Name: "Specific Action"; Height: Get (ScreenHeight); Width: Get (ScreenWidth) / 2; Top: 0; Left: 0 ]
 Set Zoom Level
 [ 100% ]
 Go to Layout [ “IssuesLayoutForScripts” (issue) ]
@@ -150,7 +150,7 @@ Go to Field [ ]
 Go to Field [ issue::text ]
 End If
 Go to Layout [ “Issues” (issue) ]
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; based on value list: “__-99”
 issueStatus::text; ascending
 issueCategory::order; ascending
@@ -169,12 +169,12 @@ Scroll Window
 #window can be opened in smaller monitor and then
 #move over to larger monitor but not adjust its height
 #unless this step is included.
-// Move/Resize Window [ Name: "Activity Log"; Current ﬁle; Height: Get (ScreenHeight) ]
+// Move/Resize Window [ Name: "Activity Log"; Current file; Height: Get (ScreenHeight) ]
 #
 #Start load record scripts as needed for normal function.
 Set Variable [ $$stopRecordLoad ]
 Perform Script [ “LoadIssuerecordID” ]
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 January 5, 平成26 19:29:43 ActionLog.fp7 - changeLogs Copy -3-log: changeLogs Copy
 Perform Script [ “LoadLogrecordID” ]
 January 5, 平成26 19:29:43 ActionLog.fp7 - changeLogs Copy -4-

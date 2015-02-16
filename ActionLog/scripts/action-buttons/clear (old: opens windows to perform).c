@@ -1,11 +1,11 @@
 action buttons: Clear (old: opens windows to perform)
 #PURPOSE just like on a stopwatch, this script activated by the clear button deletes the time recorded for a brainstate record's related day
 record. Rather than just return the time to zero, this scripts deletes the record in case the user made a mistake in starting a timer for a
-particular brainstate record and will not be using it at all, in which case if it is not deleted, this unused record will ﬁll up the database wasting
+particular brainstate record and will not be using it at all, in which case if it is not deleted, this unused record will fill up the database wasting
 space.
 #
 #
-#BUG remove focus from any ﬁelds. This step seems to be neccessary as I periodically have been getting a -- this record is being modiﬁed in a
+#BUG remove focus from any fields. This step seems to be neccessary as I periodically have been getting a -- this record is being modified in a
 separate window -- message. I'm leaving this step in to see if I stop getting this message.
 Set Variable [ $recordNumber; Value:Get ( RecordNumber ) ]
 Go to Field [ ]
@@ -31,7 +31,7 @@ New Window [ Name: "Clear"; Height: 2; Width: 2 ]
 Adjust Window
 [ Hide ]
 #
-#3 ﬁnd and delete the day record then close the window
+#3 find and delete the day record then close the window
 Go to Layout [ “calcDayTable” (day1) ]
 Enter Find Mode [ ]
 Insert Calculated Result [ day1::_lockDay; $dayID ]
@@ -40,7 +40,7 @@ Perform Find [ ]
 Delete Record/Request
 [ No dialog ]
 Go to Layout [ original layout ]
-Close Window [ Name: "Clear"; Current ﬁle ]
+Close Window [ Name: "Clear"; Current file ]
 #
 #4 determine if the record whose time was just cleared is linked to a total and if so ﬂag it as changed and run the UpdateTime script to update its
 total record's time.

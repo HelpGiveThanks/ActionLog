@@ -1,4 +1,4 @@
-speciﬁc action log: uniqueStatusNameRequired
+specific action log: uniqueStatusNameRequired
 #
 #Capture text, remove spaces, and then recapture
 #the text to prevent user from creating a group
@@ -14,11 +14,11 @@ Set Variable [ $name; Value:status::text ]
 #to the correct portal row.
 Set Variable [ $key; Value:status::_LockList ]
 #
-#If the user left the ﬁeld blank...
+#If the user left the field blank...
 If [ status::text = "" ]
 Show Custom Dialog [ Message: "All status names must be unique, and must not be blank."; Buttons: “OK” ]
 #
-#Go to the blank ﬁeld and ﬁll it in with a unique
+#Go to the blank field and fill it in with a unique
 #number.
 Go to Object [ Object Name: "status" ]
 #
@@ -42,7 +42,7 @@ Loop
 If [ $name =status::text and status::_LockList ≠ $key ]
 Show Custom Dialog [ Message: "Each status in this list must have a unique name."; Buttons: “OK” ]
 #
-#Go to the blank ﬁeld and ﬁll it in with a unique
+#Go to the blank field and fill it in with a unique
 #number.
 Go to Object [ Object Name: "status" ]
 #
@@ -58,7 +58,7 @@ Exit Script [ ]
 End If
 Go to Portal Row
 [ Select; Next; Exit after last ]
-January 6, 平成26 11:19:17 ActionLog.fp7 - uniqueStatusNameRequired -1-speciﬁc action log: uniqueStatusNameRequired Go to Portal Row
+January 6, 平成26 11:19:17 ActionLog.fp7 - uniqueStatusNameRequired -1-specific action log: uniqueStatusNameRequired Go to Portal Row
 [ Select; Next; Exit after last ]
 End Loop
 #

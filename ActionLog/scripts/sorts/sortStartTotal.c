@@ -5,7 +5,7 @@ Sorts: sortStartTotal
 #
 If [ steward::chosenSortTotal = "allow" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: day1::_keyDay; ascending
+Sort Records [ Specified Sort Order: day1::_keyDay; ascending
 day1::swStart; descending
 brainstate::description; ascending ]
 [ Restore; No dialog ]
@@ -23,7 +23,7 @@ Halt Script
 End If
 If [ steward::chosenSortTotal ≠ "allow" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: day1::swStart; ascending
+Sort Records [ Specified Sort Order: day1::swStart; ascending
 brainstate::description; ascending ]
 [ Restore; No dialog ]
 Set Field [ steward::chosenSortTotal; "allow" ]

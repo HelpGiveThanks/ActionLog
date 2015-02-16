@@ -6,7 +6,7 @@ navigation: CHUNK_createRecordsForNewUsers
 #
 #
 #NOTE: the three # symbols set apart chunks of script.
-#NOTE: the ﬁnish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
+#NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
 they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them apart.
 #
 #
@@ -18,7 +18,7 @@ Set Variable [ $userID; Value:reference::farmerID ]
 #
 #
 #
-#1 ﬁnd this user's brainstate records
+#1 find this user's brainstate records
 Go to Layout [ “calcBrainstateTable” (brainstate) ]
 Enter Find Mode [ ]
 Set Field [ brainstate::_keyUser; $userID ]

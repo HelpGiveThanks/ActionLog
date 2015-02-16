@@ -6,7 +6,7 @@ being deleted).
 #
 #
 #NOTE: the three # symbols set apart chunks of script.
-#NOTE: the ﬁnish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
+#NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
 they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them apart.
 #
 #
@@ -18,7 +18,7 @@ Allow User Abort [ Off ]
 #
 #A BEGIN delete total record
 #
-#1 if total record ﬁnd all linked records so that they can be cleared of their link
+#1 if total record find all linked records so that they can be cleared of their link
 If [ brainstate::groupType = "merge" ]
 Set Variable [ $mergeID; Value:brainstate::groupID ]
 Enter Find Mode [ ]
@@ -27,7 +27,7 @@ Perform Find [ ]
 #
 #
 #
-#BEGIN ﬁnd error 1
+#BEGIN find error 1
 If [ Get ( LastError ) ≠ 0 ]
 #tell user the error number.
 Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming
@@ -35,7 +35,7 @@ CHUNK_deleteTotalOrGrandtotalRecord script part A1."; Buttons: “OK” ]
 #Find all records user had showing when they clicked the merge button
 Perform Script [ “goBackButton” ]
 End If
-#END ﬁnd error 1
+#END find error 1
 #
 #
 #
@@ -52,7 +52,7 @@ End Loop
 #3 sort the total record to the top and mark it for deletion. (Delete is the last step in the process so if the computer crashes or loses power
 the user can still complete the delete process. If the record was deleted before the links the where deleted and the computer crashed,
 those linked records would forever be linked to the now deleted total record unless the user could directly access the data table.)
-Sort Records [ Speciﬁed Sort Order: brainstate::groupType; based on value list: “MergeSort”
+Sort Records [ Specified Sort Order: brainstate::groupType; based on value list: “MergeSort”
 brainstate::description; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
@@ -75,7 +75,7 @@ Go to Layout [ “calcBrainstateTable” (brainstate) ]
 Enter Find Mode [ ]
 Set Field [ brainstate::_lockBrainstateID; $brainstateID ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: brainstate::groupAddCheckbox; descending
+Sort Records [ Specified Sort Order: brainstate::groupAddCheckbox; descending
 brainstate::groupType; based on value list: “MergeSort” ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
@@ -97,13 +97,13 @@ Show Custom Dialog [ Title: "!"; Message: "Error peforming A7 of the CHUNK_delet
 “OK” ]
 End If
 #
-#8 if user was on the viewGrandtotal layout ﬁnd only those records that are part of the grandtotal being viewed prior to deleting and
+#8 if user was on the viewGrandtotal layout find only those records that are part of the grandtotal being viewed prior to deleting and
 show the user those records on that layout.
 If [ Left ( $$deletelayout ; 5 ) = "viewG" ]
 Enter Find Mode [ ]
 Set Field [ brainstate::groupOfGroupID; $brainstateID ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: brainstate::_lockBrainstateID; descending ]
+Sort Records [ Specified Sort Order: brainstate::_lockBrainstateID; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -131,7 +131,7 @@ Halt Script
 #
 #B BEGIN delete grandtotal record
 #
-#1 if grand total record ﬁnd all linked records so that they can be cleared of their link
+#1 if grand total record find all linked records so that they can be cleared of their link
 Else If [ brainstate::groupType = "mergeGrand" ]
 Set Variable [ $mergeID; Value:brainstate::groupOfGroupID ]
 Enter Find Mode [ ]
@@ -140,7 +140,7 @@ Perform Find [ ]
 #
 #
 #
-#BEGIN ﬁnd error 2
+#BEGIN find error 2
 If [ Get ( LastError ) ≠ 0 ]
 #tell user the error number.
 Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming delete script part C8."; Buttons:
@@ -148,7 +148,7 @@ Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError 
 #Find all records user had showing when they clicked the merge button
 Perform Script [ “goBackButton” ]
 End If
-#END ﬁnd error 2
+#END find error 2
 #
 #
 #
@@ -163,7 +163,7 @@ Go to Record/Request/Page
 End Loop
 #
 #3 sort the grandtotal record to the top and delete it
-Sort Records [ Speciﬁed Sort Order: brainstate::groupType; based on value list: “MergeSort”
+Sort Records [ Specified Sort Order: brainstate::groupType; based on value list: “MergeSort”
 brainstate::description; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page

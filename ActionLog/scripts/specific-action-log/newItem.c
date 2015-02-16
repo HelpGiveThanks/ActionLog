@@ -1,4 +1,4 @@
-speciﬁc action log: newItem
+specific action log: newItem
 Go to Layout [ “IssuesAndObservations Copy” (issue) ]
 New Record/Request
 Set Field [ issue::lock; "status" ]

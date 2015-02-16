@@ -1,4 +1,4 @@
-speciﬁc action log: LoadIssuerecordID
+specific action log: LoadIssuerecordID
 If [ $$stopRecordLoad = 1 ]
 Exit Script [ ]
 End If
@@ -14,13 +14,13 @@ Go to Field [ ]
 #ﬂashing and going away. It needs to be reset
 #when the user navigates to the record other than
 #by click on the pulldown menus so the user
-#doesn't get bumped out of the menu ﬁeld
+#doesn't get bumped out of the menu field
 #if the database is focused on the record whose
 #menus the user is trying to access.
 Set Variable [ $$pulldownCheck; Value:Get (RecordID) ]
 #
-#disabled go to ﬁeld takes a user view out of a
-#a the text ﬁeld if they entered it to go to this
+#disabled go to field takes a user view out of a
+#a the text field if they entered it to go to this
 #record, which I don't like as a user, so it is off.
 // Go to Field [ ]
 Set Variable [ $$stopIssuePulldownMenus; Value:1 ]
@@ -33,7 +33,7 @@ Set Variable [ $$issue; Value:issue::_LockList ]
 Set Variable [ $$issueLogs; Value:issue::_keyLogs ]
 Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
 Set Variable [ $$stopGroup; Value:1 ]
-Select Window [ Name: "Tag"; Current ﬁle ]
+Select Window [ Name: "Tag"; Current file ]
 Go to Object [ Object Name: "group" ]
 Scroll Window
 [ Home ]
@@ -53,8 +53,8 @@ End If
 Go to Field [ ]
 Set Variable [ $$stopGroup ]
 Refresh Window
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 Refresh Window
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 Refresh Window
 January 6, 平成26 1:09:44 ActionLog.fp7 - LoadIssuerecordID -1-

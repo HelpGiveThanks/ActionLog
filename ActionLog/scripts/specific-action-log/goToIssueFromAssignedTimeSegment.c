@@ -1,7 +1,7 @@
-speciﬁc action log: goToIssueFromAssignedTimeSegment
+specific action log: goToIssueFromAssignedTimeSegment
 Set Variable [ $timeSegment; Value:Get ( ActiveRepetitionNumber ) & logs::_lockDay ]
 Go to Field [ ]
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 Go to Record/Request/Page
 [ First ]
 Loop

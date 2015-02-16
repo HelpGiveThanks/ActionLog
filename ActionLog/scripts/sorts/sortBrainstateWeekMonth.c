@@ -5,7 +5,7 @@ Sorts: sortBrainstateWeekMonth
 #
 If [ steward::chosenSort = "Brainstates A-Z" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: brainstate::sortBlanksToBottom; descending
+Sort Records [ Specified Sort Order: brainstate::sortBlanksToBottom; descending
 brainstate::description; descending ]
 [ Restore; No dialog ]
 Set Field [ steward::chosenSort; "Brainstates Z-A" ]
@@ -22,7 +22,7 @@ Halt Script
 End If
 If [ steward::chosenSort ≠ "Brainstates A-Z" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: brainstate::sortBlanksToBottom; descending
+Sort Records [ Specified Sort Order: brainstate::sortBlanksToBottom; descending
 brainstate::description; ascending ]
 [ Restore; No dialog ]
 Set Field [ steward::chosenSort; "Brainstates A-Z" ]

@@ -5,7 +5,7 @@ Sorts: sortMergeTo
 #
 If [ steward::chosenSort = "ms" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: brainstate::groupDisplayID; descending
+Sort Records [ Specified Sort Order: brainstate::groupDisplayID; descending
 brainstate::groupOfGroupDisplayID; descending
 brainstate::groupType; descending
 brainstate::sortNumber; descending
@@ -27,7 +27,7 @@ Halt Script
 End If
 If [ steward::chosenSort ≠ "ms" ]
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Sort Records [ Speciﬁed Sort Order: brainstate::sortMergeToBlanksToBottom; descending
+Sort Records [ Specified Sort Order: brainstate::sortMergeToBlanksToBottom; descending
 brainstate::groupDisplayID; ascending
 brainstate::groupOfGroupDisplayID; ascending
 brainstate::groupType; descending

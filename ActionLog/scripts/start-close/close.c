@@ -3,12 +3,12 @@ start close: close
 #
 #
 #
-// #2 ﬂag/unﬂag active stopwatch ﬁeld for conditional formatting on main screen if current screen is total layout
+// #2 ﬂag/unﬂag active stopwatch field for conditional formatting on main screen if current screen is total layout
 // If [ Left ( Get ( LayoutName ) ; 5 ) = "total" or Left ( Get ( LayoutName ) ; 5 ) = "grand" ]
 // Perform Script [ “FolderStopwatchCheck” ]
 // End If
 #
-#1 set the layout status ﬁeld
+#1 set the layout status field
 // If [ Get ( SystemPlatform ) ≠ 3 and steward::iPhoneLayout = "" ]
 // Set Field [ steward::windowSizeAndPlace; Get ( WindowHeight ) ]
 // Set Field [ steward::windowSizeAndPlace[2]; Get ( WindowWidth ) ]

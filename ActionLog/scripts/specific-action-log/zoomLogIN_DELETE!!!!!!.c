@@ -1,5 +1,5 @@
-speciﬁc action log: zoomLogIN_DELETE!!!!!!
-Select Window [ Name: "Tag"; Current ﬁle ]
+specific action log: zoomLogIN_DELETE!!!!!!
+Select Window [ Name: "Tag"; Current file ]
 If [ Get (LastError) = 112 ]
 New Window [ Name: "Tag"; Height: Get (ScreenHeight); Width: 441; Top: 0; Left: Get (ScreenWidth) - 441 ]
 Go to Layout [ “IssuesAndObservationsOrder” (brainstate) ]
@@ -23,9 +23,9 @@ Get (ScreenWidth) - 1100 ) ]
 Set Zoom Level
 [ 400% ]
 End If
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 If [ Get (LastError) = 112 ]
-New Window [ Name: "Speciﬁc Action"; Height: Get (ScreenHeight); Width: 441; Top: 0; Left: 0 ]
+New Window [ Name: "Specific Action"; Height: Get (ScreenHeight); Width: 441; Top: 0; Left: 0 ]
 Go to Layout [ “Issues” (issue) ]
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
@@ -33,7 +33,7 @@ Enter Find Mode [ ]
 Set Field [ issue::_keyBrainstate; $$logbrainstate ]
 Set Field [ issue::lock; "issue" ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; ascending
 issueStatus::text; ascending
 issueCategory::order; ascending
@@ -60,9 +60,9 @@ Else If [ Get ( WindowZoomLevel ) = 300 ]
 Move/Resize Window [ Current Window; Width: Get (ScreenWidth) / 2; Left: 0 ]
 Set Zoom Level
 [ 400% ]
-January 6, 平成26 11:08:59 ActionLog.fp7 - zoomLogIN_DELETE!!!!!! -1-speciﬁc action log: zoomLogIN_DELETE!!!!!!
+January 6, 平成26 11:08:59 ActionLog.fp7 - zoomLogIN_DELETE!!!!!! -1-specific action log: zoomLogIN_DELETE!!!!!!
 End If
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 If [ Get ( WindowZoomLevel ) = 150 ]
 Set Zoom Level
 [ 200% ]

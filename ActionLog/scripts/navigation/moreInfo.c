@@ -3,5 +3,5 @@ New Window [ Name: "More Info"; Left: Get ( WindowDesktopWidth ) - (Get ( Window
 Go to Layout [ “moreInfo” (steward) ]
 Adjust Window
 [ Resize to Fit ]
-Pause/Resume Script [ Indeﬁnitely ]
+Pause/Resume Script [ Indefinitely ]
 February 3, 平成26 18:21:07 ActionLog.fp7 - moreInfo -1-

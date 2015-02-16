@@ -9,12 +9,12 @@ Set Variable [ $path; Value:MemorySwitch::path ]
 #admin adds library manually with path), then delete
 #this library name from the list.
 If [ MemorySwitch::path = "" ]
-Show Custom Dialog [ Message: "This library ﬁle cannot be found under the name " & MemorySwitch::name & ". It will be removed from
+Show Custom Dialog [ Message: "This library file cannot be found under the name " & MemorySwitch::name & ". It will be removed from
 this list. You can add it back by double clicking on it in its current location."; Buttons: “OK” ]
 #
 #ISSUE: If you have a portal into a table that is more
 #than one relationship away, and if that related table
-#exists in an external ﬁle, then you cannot delete
+#exists in an external file, then you cannot delete
 #the portal row.
 // Go to Portal Row [ $row ]
 [ No dialog ]
@@ -78,7 +78,7 @@ Close Window [ Name: "Copy / Paste Evidence" ]
 Close Window [ Name: "Day" ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
 Substitute (MemorySwitch::path ; " " ; "%20" ) ;
-Substitute ( Substitute ( MemorySwitch::path ; "ﬁle:/" ; "ﬁle://" ) ; " " ; "%20" ) ) ]
+Substitute ( Substitute ( MemorySwitch::path ; "file:/" ; "file://" ) ; " " ; "%20" ) ) ]
 [ No dialog ]
 End If
 #
@@ -87,12 +87,12 @@ End If
 #name has been changed, so delete it from the
 #library list.
 If [ Get (LastError) = 5 ]
-Show Custom Dialog [ Message: "Selected library ﬁle cannot be found under the name " & MemorySwitch::name & ". It will be removed
+Show Custom Dialog [ Message: "Selected library file cannot be found under the name " & MemorySwitch::name & ". It will be removed
 from the library list. You can add it back by double clicking on it in its current location."; Buttons: “OK” ]
 #
 #ISSUE: If you have a portal into a table that is more
 #than one relationship away, and if that related table
-#exists in an external ﬁle, then you cannot delete
+#exists in an external file, then you cannot delete
 #the portal row.
 // Go to Portal Row [ $row ]
 [ No dialog ]
@@ -121,7 +121,7 @@ End If
 #
 #Close other solutions window if open after selecting a library.
 If [ $$otherApps = 1 ]
-Close Window [ Name: "Other Solutions"; Current ﬁle ]
+Close Window [ Name: "Other Solutions"; Current file ]
 Set Variable [ $$otherApps ]
 End If
 #

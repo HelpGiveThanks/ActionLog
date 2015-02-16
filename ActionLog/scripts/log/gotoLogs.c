@@ -7,7 +7,7 @@ log: gotoLogs
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
 #
-#If user remains in time edit ﬁeld, conditional formatting
+#If user remains in time edit field, conditional formatting
 #fails to work in day window when time is assigned.
 Go to Field [ ]
 #
@@ -18,11 +18,11 @@ Set Variable [ $$stopSubtotal; Value:1 ]
 #I really need to decide on ONE means to store the
 #current brainstate key, isntead of making up a new
 #one for each module because I'm not sure how the
-#others are being used. A deﬁnition of each variable
+#others are being used. A definition of each variable
 #and how it is used would be great!
 Set Variable [ $$logBrainstate; Value:brainstate::_lockBrainstateID ]
 Set Variable [ $day1; Value:reference::day1 ]
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 If [ logs::_keyBrainstate = $$logBrainstate and logs::_keyDay = $day1 ]
 #
 #Display all rows of time for this timer.
@@ -34,8 +34,8 @@ Else If [ daylog::swActivityLength[6] = "" ]
 Go to Layout [ “logs1row” (logs) ]
 End If
 #
-Select Window [ Name: "Tag"; Current ﬁle ]
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Tag"; Current file ]
+Select Window [ Name: "Specific Action"; Current file ]
 #
 #Start load record scripts as needed for normal function.
 Set Variable [ $$stopRecordLoad ]
@@ -43,8 +43,8 @@ Set Variable [ $$stopSubtotal ]
 Exit Script [ ]
 End If
 #
-#Find ﬁrst issue record if there is one and set variable
-#to conditionally format times for the ﬁrst day record.
+#Find first issue record if there is one and set variable
+#to conditionally format times for the first day record.
 Go to Layout [ “Issues” (issue) ]
 #
 Enter Find Mode [ ]
@@ -59,7 +59,7 @@ January 5, 平成26 19:29:05 ActionLog.fp7 - gotoLogs -1-log: gotoLogs
 // Set Field [ issue::_keyCategory; $groupID ]
 // Set Field [ issue::date; Get ( CurrentTimeStamp ) ]
 // Set Field [ issue::lock; "issue" ]
-// Set Field [ issue::text; "speciﬁc action" ]
+// Set Field [ issue::text; "specific action" ]
 // #
 // #makes all new issues stay at the top of the window
 // #until a non-blank status is assigned to them.
@@ -67,7 +67,7 @@ January 5, 平成26 19:29:05 ActionLog.fp7 - gotoLogs -1-log: gotoLogs
 // Go to Field [ ]
 // Go to Field [ issue::text ]
 Else
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; based on value list: “__-99”
 issueStatus::text; ascending
 issueCategory::order; ascending
@@ -89,14 +89,14 @@ Set Variable [ $$group; Value:issue::_keyCategory ]
 Set Variable [ $$issueRecordID; Value:Get ( RecordID ) ]
 Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
 #
-#Now ﬁnd log records for this timer.
+#Now find log records for this timer.
 Go to Layout [ “logs2rows” (logs) ]
 Enter Find Mode [ ]
 Set Field [ logs::_keyBrainstate; $$logBrainstate ]
 Perform Find [ ]
 #
-#Sort and go to ﬁrst record.
-Sort Records [ Speciﬁed Sort Order: logs::_keyBrainstate; descending
+#Sort and go to first record.
+Sort Records [ Specified Sort Order: logs::_keyBrainstate; descending
 logs::_keyDay; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
@@ -127,7 +127,7 @@ Refresh Window
 #
 #Show all status and category menu items for
 brainstate's log.
-Select Window [ Name: "Tag"; Current ﬁle ]
+Select Window [ Name: "Tag"; Current file ]
 Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
 Enter Find Mode [ ]
 Set Field [ brainstate::_lockBrainstateID; $$logBrainstate ]
@@ -182,7 +182,7 @@ Month ( Get ( CurrentDate ) ) + 1 & "/" & "1" ;
 Month ( Get ( CurrentDate ) ) & "/" & "1" ) ]
 Set Variable [ $number; Value:1 ]
 If [ status::text = "" ]
-Set Field [ status::status; "Remember existence" & ¶ & "of a speciﬁc action..." ]
+Set Field [ status::status; "Remember existence" & ¶ & "of a specific action..." ]
 Loop
 Set Field [ status::text; GetValue ( $reviewNames ; $number ) ]
 January 5, 平成26 19:29:05 ActionLog.fp7 - gotoLogs -3-log: gotoLogs
@@ -214,7 +214,7 @@ Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
 #
 #
 #Show all issues for this brainstate's log.
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 Go to Layout [ “IssuesLayoutForScripts” (issue) ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyBrainstate; $$logBrainstate ]
@@ -227,14 +227,14 @@ New Record/Request
 Set Field [ issue::_keyBrainstate; $$logBrainstate ]
 Set Field [ issue::date; Get ( CurrentTimeStamp ) ]
 Set Field [ issue::lock; "issue" ]
-Set Field [ issue::text; "review these speciﬁc action items and update their status, priority, and grouping as necessary." ]
+Set Field [ issue::text; "review these specific action items and update their status, priority, and grouping as necessary." ]
 Set Field [ brainstate::pulldownBrainstate; issue::_keyBrainstate ]
 Set Field [ issue::_keyStatus; 7152011154818554 ]
 Set Field [ issue::_keyCategory; $groupKey ]
 End If
 #
 Go to Layout [ “Issues” (issue) ]
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; based on value list: “__-99”
 issueStatus::text; ascending
 issueCategory::order; ascending

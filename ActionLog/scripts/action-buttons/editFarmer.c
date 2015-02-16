@@ -6,9 +6,9 @@ action buttons: editFarmer
 #1 go to the edit/create layout and show all users.
 Go to Layout [ “users” (steward) ]
 Show All Records
-Close Window [ Name: "Day"; Current ﬁle ]
-Close Window [ Name: "Speciﬁc Action"; Current ﬁle ]
-Close Window [ Name: "Tag"; Current ﬁle ]
+Close Window [ Name: "Day"; Current file ]
+Close Window [ Name: "Specific Action"; Current file ]
+Close Window [ Name: "Tag"; Current file ]
 #
 #Set window title.
 Set Window Title [ Current Window; New Title: "HelpGiveThanks Solutions" ]

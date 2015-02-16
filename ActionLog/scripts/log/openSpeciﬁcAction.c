@@ -1,4 +1,4 @@
-log: openSpeciﬁcAction
+log: openSpecificAction
 #PURPOSE open log window and select log entry for
 #current record.
 #
@@ -14,7 +14,7 @@ Set Variable [ $$stopSubtotal; Value:1 ]
 #I really need to decide on ONE means to store the
 #current brainstate key, isntead of making up a new
 #one for each module because I'm not sure how the
-#others are being used. A deﬁnition of each variable
+#others are being used. A definition of each variable
 #and how it is used would be great!
 Set Variable [ $$logBrainstate; Value:brainstate::_lockBrainstateID ]
 #
@@ -27,8 +27,8 @@ New Window [ Name: "Day"; Height: Get (ScreenHeight); Width: 344; Top: 0; Left: 
 Set Zoom Level
 [ 100% ]
 #
-#Find ﬁrst issue record if there is one and set variable
-#to conditionally format times for the ﬁrst day record.
+#Find first issue record if there is one and set variable
+#to conditionally format times for the first day record.
 Go to Layout [ “Issues” (issue) ]
 #
 Enter Find Mode [ ]
@@ -42,7 +42,7 @@ If [ Get ( LastError ) = 401 ]
 // Set Field [ issue::_keyCategory; $groupID ]
 // Set Field [ issue::date; Get ( CurrentTimeStamp ) ]
 // Set Field [ issue::lock; "issue" ]
-// Set Field [ issue::text; "speciﬁc action" ]
+// Set Field [ issue::text; "specific action" ]
 // #
 // #makes all new issues stay at the top of the window
 // #until a non-blank status is assigned to them.
@@ -50,7 +50,7 @@ If [ Get ( LastError ) = 401 ]
 // Go to Field [ ]
 // Go to Field [ issue::text ]
 Else
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; based on value list: “__-99”
 issueStatus::text; ascending
 issueCategory::order; ascending
@@ -58,7 +58,7 @@ issue::sortTime; ascending
 issue::order; based on value list: “__-99”
 issue::text; ascending ]
 [ Restore; No dialog ]
-January 5, 平成26 19:28:29 ActionLog.fp7 - openSpeciﬁcAction -1-log: openSpeciﬁcAction
+January 5, 平成26 19:28:29 ActionLog.fp7 - openSpecificAction -1-log: openSpecificAction
 Go to Record/Request/Page
 [ First ]
 #
@@ -73,7 +73,7 @@ Set Variable [ $$group; Value:issue::_keyCategory ]
 Set Variable [ $$issueRecordID; Value:Get ( RecordID ) ]
 Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
 #
-#Now ﬁnd log records for this timer.
+#Now find log records for this timer.
 Go to Layout [ “logs2rows” (logs) ]
 Enter Find Mode [ ]
 Set Field [ logs::_keyBrainstate; $$logBrainstate ]
@@ -88,8 +88,8 @@ Else If [ daylog::swActivityLength[6] = "" ]
 Go to Layout [ “logs1row” (logs) ]
 End If
 #
-#Sort and go to ﬁrst record.
-Sort Records [ Speciﬁed Sort Order: logs::_keyBrainstate; descending
+#Sort and go to first record.
+Sort Records [ Specified Sort Order: logs::_keyBrainstate; descending
 logs::_keyDay; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
@@ -117,7 +117,7 @@ Perform Find [ ]
 #
 #Update review dates.
 Go to Object [ Object Name: "status" ]
-January 5, 平成26 19:28:29 ActionLog.fp7 - openSpeciﬁcAction -2-log: openSpeciﬁcAction
+January 5, 平成26 19:28:29 ActionLog.fp7 - openSpecificAction -2-log: openSpecificAction
 Go to Portal Row
 [ Select; First ]
 Set Variable [ $reviewNames; Value:"daily" & ¶ &
@@ -165,7 +165,7 @@ Month ( Get ( CurrentDate ) ) + 1 & "/" & "1" ;
 Month ( Get ( CurrentDate ) ) & "/" & "1" ) ]
 Set Variable [ $number; Value:1 ]
 If [ status::text = "" ]
-Set Field [ status::status; "Remember existence" & ¶ & "of a speciﬁc action..." ]
+Set Field [ status::status; "Remember existence" & ¶ & "of a specific action..." ]
 Loop
 Set Field [ status::text; GetValue ( $reviewNames ; $number ) ]
 Set Field [ status::reviewDate; GetValue ( $reviewDates ; $number ) ]
@@ -186,7 +186,7 @@ Perform Find [ ]
 If [ Get ( LastError ) = 401 ]
 New Record/Request
 Set Field [ issueCategory::lock; "location" ]
-January 5, 平成26 19:28:29 ActionLog.fp7 - openSpeciﬁcAction -3-log: openSpeciﬁcAction
+January 5, 平成26 19:28:29 ActionLog.fp7 - openSpecificAction -3-log: openSpecificAction
 Set Field [ issueCategory::_keyBrainstate; $$logBrainstate ]
 Set Field [ issueCategory::text; "administration" ]
 Set Variable [ $groupKey; Value:issueCategory::_LockList ]
@@ -196,7 +196,7 @@ Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
 #
 #
 #Show all issues for this brainstate's log.
-New Window [ Name: "Speciﬁc Action"; Height: Get (ScreenHeight); Width: Get (ScreenWidth) - 688; Top: 0; Left: 0 ]
+New Window [ Name: "Specific Action"; Height: Get (ScreenHeight); Width: Get (ScreenWidth) - 688; Top: 0; Left: 0 ]
 Go to Layout [ “IssuesLayoutForScripts” (issue) ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyBrainstate; $$logBrainstate ]
@@ -209,14 +209,14 @@ New Record/Request
 Set Field [ issue::_keyBrainstate; $$logBrainstate ]
 Set Field [ issue::date; Get ( CurrentTimeStamp ) ]
 Set Field [ issue::lock; "issue" ]
-Set Field [ issue::text; "review these speciﬁc action items and update their status, priority, and grouping as necessary." ]
+Set Field [ issue::text; "review these specific action items and update their status, priority, and grouping as necessary." ]
 Set Field [ brainstate::pulldownBrainstate; issue::_keyBrainstate ]
 Set Field [ issue::_keyStatus; 7152011154818554 ]
 Set Field [ issue::_keyCategory; $groupKey ]
 End If
 #
 Go to Layout [ “Issues” (issue) ]
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; based on value list: “__-99”
 issueStatus::text; ascending
 issueCategory::order; ascending
@@ -232,4 +232,4 @@ Scroll Window
 #
 #Start load record scripts as needed for normal function.
 Set Variable [ $$stopRecordLoad ]
-January 5, 平成26 19:28:29 ActionLog.fp7 - openSpeciﬁcAction -4-
+January 5, 平成26 19:28:29 ActionLog.fp7 - openSpecificAction -4-

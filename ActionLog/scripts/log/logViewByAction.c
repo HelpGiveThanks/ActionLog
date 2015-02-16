@@ -4,7 +4,7 @@ Go to Layout [ “logs2rows” (logs) ]
 If [ Get ( SystemPlatform ) = 3 or steward::iPhoneLayout ≠ "" ]
 Go to Layout [ “logByActioniPhone” (logs) ]
 End If
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 logs::_keyBrainstate; descending
 logs::swStart; descending ]
 [ Restore; No dialog ]

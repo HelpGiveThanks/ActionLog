@@ -1,5 +1,5 @@
-speciﬁc action log: gotoTagMenus
-Select Window [ Name: "Tag"; Current ﬁle ]
+specific action log: gotoTagMenus
+Select Window [ Name: "Tag"; Current file ]
 If [ Get (LastError) = 112 ]
 New Window [ Name: "Tag" ]
 If [ Get ( WindowZoomLevel ) = 200 ]
@@ -19,6 +19,6 @@ Go to Layout [ “IssuesAndObservationsOrder” (brainstate) ]
 Enter Find Mode [ ]
 Set Field [ brainstate::_lockBrainstateID; $$logBrainstate ]
 Perform Find [ ]
-Select Window [ Name: "Tag"; Current ﬁle ]
+Select Window [ Name: "Tag"; Current file ]
 End If
 January 6, 平成26 11:08:13 ActionLog.fp7 - gotoTagMenus -1-

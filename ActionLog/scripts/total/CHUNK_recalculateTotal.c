@@ -5,7 +5,7 @@ total: CHUNK_recalculateTotal
 #
 #
 #NOTE: the three # symbols set apart chunks of script.
-#NOTE: the ﬁnish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
+#NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
 they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them apart.
 #
 #
@@ -28,10 +28,10 @@ Set Field [ day2::_keyBrainstate; $brainstateID ]
 Perform Find [ ]
 #
 #2 double check to insure records to be deleted are the right records. (During testing all 900+ records where deleted from my database. I think
-what happened is the ﬁnd came up with zero records and then displayed all the records in the database and the next step deleted them.
+what happened is the find came up with zero records and then displayed all the records in the database and the next step deleted them.
 This If check will prevent that from happening again if that is what happened. I have been unable to duplicate this massive error, so this
 might not be reason why all the records where deleted, but this is the only time when the database is told to delete all found records, rather
-than just one record, so I ﬁgure it must have been caused here.)
+than just one record, so I figure it must have been caused here.)
 If [ day2::_keyBrainstate = $brainstateID ]
 Delete All Records
 [ No dialog ]
@@ -44,7 +44,7 @@ End If
 Loop
 #B) BEGIN check if there are records to be totaled
 #
-#1 make sure there is a record to be totaled (this step will be important when this loop is repeated after the ﬁrst record to be totaled is
+#1 make sure there is a record to be totaled (this step will be important when this loop is repeated after the first record to be totaled is
 omitted).
 Go to Layout [ “calcBrainstateTable” (brainstate) ]
 Go to Record/Request/Page
@@ -61,20 +61,20 @@ End If
 January 5, 平成26 13:24:44 ActionLog.fp7 - CHUNK_recalculateTotal -1-total: CHUNK_recalculateTotal
 #
 #
-#C BEGIN ﬁnd total record's related day records
+#C BEGIN find total record's related day records
 #
-#1 make a list of the ﬁrst brainstate's day records in a new window
+#1 make a list of the first brainstate's day records in a new window
 Set Variable [ $CurrentBrainstateID; Value:brainstate::_lockBrainstateID ]
 Go to Layout [ “calcTotalSelectedList” (day1) ]
 Enter Find Mode [ ]
 Set Field [ day1::_keyBrainstate; $CurrentBrainstateID ]
 Perform Find [ ]
 #
-#C END ﬁnd total record's related day records
+#C END find total record's related day records
 #
 #
 #
-#D BEGIN no records found loop (this loop will either complete the total process or ﬁnd a record with related day records to be added to the
+#D BEGIN no records found loop (this loop will either complete the total process or find a record with related day records to be added to the
 total record)
 #
 Loop
@@ -82,7 +82,7 @@ Loop
 #1 if records are found exit loop
 Exit Loop If [ Get ( LastError ) = 0 ]
 #
-#2 clear the merge ﬁeld (the big X in the box on the ToBeMerged layout) and omit this record
+#2 clear the merge field (the big X in the box on the ToBeMerged layout) and omit this record
 If [ Get ( LastError ) = 401 ]
 Go to Layout [ “calcBrainstateTable” (brainstate) ]
 Set Field [ brainstate::groupAddCheckbox; "" ]
@@ -98,7 +98,7 @@ Exit Script [ ]
 End If
 #
 #
-#BEGIN ﬁnd error 2
+#BEGIN find error 2
 Else If [ Get ( LastError ) ≠ 0 ]
 #tell user the error number
 Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming merge script part D2.";
@@ -108,11 +108,11 @@ Enter Find Mode [ ]
 Set Field [ brainstate::_keyUser; $userID ]
 Perform Find [ ]
 If [ steward::retiredStatus = "r" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
 [ Restore ]
 End If
 If [ steward::hideStatus = "" and steward::showORhide = "hide" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
 [ Restore ]
 Sort Records [ ]
 [ No dialog ]
@@ -120,7 +120,7 @@ January 5, 平成26 13:24:44 ActionLog.fp7 - CHUNK_recalculateTotal -2-total: CH
 Halt Script
 End If
 If [ steward::showStatus ≠ "" and steward::showORhide = "show" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
 [ Restore ]
 Sort Records [ ]
 [ No dialog ]
@@ -133,7 +133,7 @@ Go to Record/Request/Page
 Go to Field [ ]
 Halt Script
 End If
-#END ﬁnd error 2
+#END find error 2
 #
 #
 #
@@ -144,7 +144,7 @@ Set Field [ day1::_keyBrainstate; $CurrentBrainstateID ]
 Perform Find [ ]
 End Loop
 #
-#D END no records found loop (this loop will either complete the total process or ﬁnd a record with related day records to be added to the
+#D END no records found loop (this loop will either complete the total process or find a record with related day records to be added to the
 total record)
 #
 #
@@ -152,7 +152,7 @@ total record)
 #E BEGIN create new related day records and add selected record's time to them
 #
 Loop
-#1 ﬁnd any day records for the new brainstate that match the kfDay of the ﬁrst merge record. If this new record already has data in it,
+#1 find any day records for the new brainstate that match the kfDay of the first merge record. If this new record already has data in it,
 then we want to add new data to the old data; not replace the old data with new data.
 Set Variable [ $mergeDay; Value:day1::_keyDay ]
 Enter Find Mode [ ]
@@ -161,7 +161,7 @@ Set Field [ day2::_keyBrainstate; $brainstateID ]
 Set Field [ day2::_keyDay; $mergeDay ]
 Perform Find [ ]
 #
-#2 if no matches are found, create a new day record and put in the time of the ﬁrst the current day record
+#2 if no matches are found, create a new day record and put in the time of the first the current day record
 If [ Get ( LastError ) = 401 ]
 New Record/Request
 Set Field [ day2::_keyBrainstate; $brainstateID ]
@@ -184,7 +184,7 @@ day2::_keyDay & " " & $TotalActivity )
 #
 #
 #
-#BEGIN ﬁnd error 3
+#BEGIN find error 3
 Else If [ Get ( LastError ) ≠ 0 ]
 #tell user the error number
 Show Custom Dialog [ Title: "!"; Message: "Unexpected error" & Get ( LastError ) & "peforming merge script part E2."; Buttons:
@@ -194,18 +194,18 @@ Enter Find Mode [ ]
 Set Field [ brainstate::_keyUser; $userID ]
 Perform Find [ ]
 If [ steward::retiredStatus = "r" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
 [ Restore ]
 End If
 If [ steward::hideStatus = "" and steward::showORhide = "hide" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
 [ Restore ]
 Sort Records [ ]
 [ No dialog ]
 Halt Script
 End If
 If [ steward::showStatus ≠ "" and steward::showORhide = "show" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
 [ Restore ]
 Sort Records [ ]
 [ No dialog ]
@@ -217,7 +217,7 @@ Go to Record/Request/Page
 [ First ]
 Go to Field [ ]
 Halt Script
-#END ﬁnd error 3
+#END find error 3
 #
 #
 #
@@ -247,7 +247,7 @@ End Loop
 #F BEGIN go to next record with related day records to be added to the new total record.
 #
 Go to Layout [ “calcBrainstateTable” (brainstate) ]
-#Clear the merge ﬁeld (the big X in the box on the ToBeMerged layout).
+#Clear the merge field (the big X in the box on the ToBeMerged layout).
 Set Field [ brainstate::groupAddCheckbox; "" ]
 Omit Record
 #

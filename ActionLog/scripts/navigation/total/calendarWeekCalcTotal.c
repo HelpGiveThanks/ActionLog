@@ -5,22 +5,22 @@ navigation: total: CalendarWeekCalcTotal
 #
 #1 add 7 days to the users selection of the day desired to start the week. (Day 1 is the day the user is currently looking at on the day view
 layouts. In order to give the user on the week and month view layouts a calendar going from 1 to 7 or 31 it is neccessary to put the Day 1
-ﬁeld at the far right, or furtherest from the titles of the records. The user expects to to select the day they want to see by clicking on the day
-ﬁeld closest to do the titles, which is day 7 on the week and day 31 on month view. So this script setp captures this left most choice and
-adds the 6 or 30 to it and applies it to the day 1 ﬁeld.)
+field at the far right, or furtherest from the titles of the records. The user expects to to select the day they want to see by clicking on the day
+field closest to do the titles, which is day 7 on the week and day 31 on month view. So this script setp captures this left most choice and
+adds the 6 or 30 to it and applies it to the day 1 field.)
 Set Field [ reference::day1; reference::day7Calc + 6 ]
 #
 #2 capture user's current date perference for starting the week AND capture layout name for bounceback script
 Set Field [ steward::chosenWeekTotal; reference::day1 ]
 Set Variable [ $$layoutTotal; Value:Get ( LayoutName ) ]
 #
-#3 refresh the layout so that the key ﬁelds for each record will be recalculated based on the new day selected. The date and times shown for
-each record are in a table related to each brainstate record by their dates. The key date ﬁelds for all brainstate records are calculations
-where the value equals the reference ﬁeld date shown at the top of the screen in the green, red, or yellow box. So when the user changes
-the date in the reference ﬁeld (top colored box) and then this script refreshes the database, all the brainstate records including the ones not
-shown recalculate their key ﬁelds, the result being they all take in the new date. This means that the related day records now change too to
-show the user the day records that match the updated brainstate record keys. (These day ﬁelds are locked to their related brainstate
-records by the brainstate records ID number. Using these to keys, the database is able to return the desired day ﬁelds for brainstate record
+#3 refresh the layout so that the key fields for each record will be recalculated based on the new day selected. The date and times shown for
+each record are in a table related to each brainstate record by their dates. The key date fields for all brainstate records are calculations
+where the value equals the reference field date shown at the top of the screen in the green, red, or yellow box. So when the user changes
+the date in the reference field (top colored box) and then this script refreshes the database, all the brainstate records including the ones not
+shown recalculate their key fields, the result being they all take in the new date. This means that the related day records now change too to
+show the user the day records that match the updated brainstate record keys. (These day fields are locked to their related brainstate
+records by the brainstate records ID number. Using these to keys, the database is able to return the desired day fields for brainstate record
 the user elects to view at any one time.)
 Refresh Window
 [ Flush cached join results ]
@@ -88,7 +88,7 @@ Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
 #
-#7 ﬁnish by going back to the orginal layout and ﬁrst record
+#7 finish by going back to the orginal layout and first record
 Go to Layout [ original layout ]
 Go to Record/Request/Page
 [ First ]

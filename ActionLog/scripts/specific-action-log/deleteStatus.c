@@ -1,4 +1,4 @@
-speciﬁc action log: deleteStatus
+specific action log: deleteStatus
 Set Variable [ $row; Value:Get ( PortalRowNumber ) ]
 If [ status::_LockList = "" ]
 Go to Field [ ]

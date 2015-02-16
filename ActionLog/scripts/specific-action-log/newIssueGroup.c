@@ -1,4 +1,4 @@
-speciﬁc action log: newIssueGroup
+specific action log: newIssueGroup
 #
 Set Variable [ $brainstate; Value:brainstate::_lockBrainstateID ]
 #

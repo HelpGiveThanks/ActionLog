@@ -1,4 +1,4 @@
-speciﬁc action log: deleteObservation
+specific action log: deleteObservation
 Set Variable [ $row; Value:Get ( PortalRowNumber ) ]
 Go to Field [ ]
 Go to Portal Row [ $row ]

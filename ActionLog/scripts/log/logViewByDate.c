@@ -4,7 +4,7 @@ Go to Layout [ “logByDate” (logs) ]
 If [ Get ( SystemPlatform ) = 3 or steward::iPhoneLayout ≠ "" ]
 Go to Layout [ “logByDateiPhone” (logs) ]
 End If
-Sort Records [ Speciﬁed Sort Order: logs::_keyDay; descending
+Sort Records [ Specified Sort Order: logs::_keyDay; descending
 logs::swStart; ascending
 brainstate::description; ascending ]
 [ Restore; No dialog ]

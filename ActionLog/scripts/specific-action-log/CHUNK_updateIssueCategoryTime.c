@@ -1,4 +1,4 @@
-speciﬁc action log: CHUNK_updateIssueCategoryTime
+specific action log: CHUNK_updateIssueCategoryTime
 #
 #This script is used by the updateTime script
 #and the clear script.
@@ -6,7 +6,7 @@ speciﬁc action log: CHUNK_updateIssueCategoryTime
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
 #FIRST capture current window so system can go
-#to it after ﬁnished, otherwise
+#to it after finished, otherwise
 #UpdateTime script tries to continue in the wrong
 #window, which is showing the wrong layout!
 Set Variable [ $UpdateTimewindowName; Value:Get ( WindowName ) ]
@@ -21,19 +21,19 @@ Enter Find Mode [ ]
 Set Field [ issue::timeSegmentKeyList; "*" & Replace ( Quote("1") ; 2 ; 1 ; $$updateDay ) ]
 Perform Find [ ]
 If [ Get (LastError) = 401 ]
-Close Window [ Name: "temp"; Current ﬁle ]
+Close Window [ Name: "temp"; Current file ]
 Exit Script [ ]
 End If
 #
-#Make sure user is not in any ﬁelds before updating
+#Make sure user is not in any fields before updating
 #as this prevents update of time for the record
 #the user is in (have not test how yet).
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 If [ Get (LastError) ≠ 112 ]
 Go to Field [ ]
 End If
 #
-Select Window [ Name: "temp"; Current ﬁle ]
+Select Window [ Name: "temp"; Current file ]
 #
 #Make a list of them.
 Go to Record/Request/Page
@@ -50,12 +50,12 @@ Substitute ( issue::_keyLogs ; $$updateDay & "¶" ; "" ) ;
 Substitute ( issue::_keyLogs ; $$updateDay ; "" ) ) ]
 #
 #Remove time segment key from list.
-#(the teen numbers must come ﬁrst otherwise
+#(the teen numbers must come first otherwise
 #the singly digits will delete 3 in 13 and leave
 #behind an orphaned 1 for example)
 Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 11 & $$updateday & "¶" ; "" ) ]
 Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 12 & $$updateday & "¶" ; "" ) ]
-January 6, 平成26 11:06:57 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -1-speciﬁc action log: CHUNK_updateIssueCategoryTime
+January 6, 平成26 11:06:57 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -1-specific action log: CHUNK_updateIssueCategoryTime
 Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 13 & $$updateday & "¶" ; "" ) ]
 Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 14 & $$updateday & "¶" ; "" ) ]
 Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 15 & $$updateday & "¶" ; "" ) ]
@@ -106,7 +106,7 @@ Set Variable [ $categoryKey; Value:issue::_keyCategory ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyCategory; $categoryKey ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: issue::sortTime; ascending ]
+Sort Records [ Specified Sort Order: issue::sortTime; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -114,14 +114,14 @@ Loop
 Set Field [ issue::timeTotalSumByCat; issue::timeTotalSummaryByCategory ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
-January 6, 平成26 11:06:57 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -2-speciﬁc action log: CHUNK_updateIssueCategoryTime Go to Record/Request/Page
+January 6, 平成26 11:06:57 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -2-specific action log: CHUNK_updateIssueCategoryTime Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
 #
 #
 #Disabled the next chunk after deciding it was
-#better to use ﬁlemaker's subtotal calc rather
-#doing it with this script chunk whose beneﬁt
+#better to use filemaker's subtotal calc rather
+#doing it with this script chunk whose benefit
 #was subtotaling items in a category even when
 #items where divided by status. Filemaker's
 #subtotal calc subtotals at the status and category
@@ -130,13 +130,13 @@ End Loop
 #and category too, so that is why this script chunk
 #is now disabled. The other reason was that it
 #bogged down the system taking a long time to run.
-// #To reset all the category subtotal times, ﬁrst ﬁnd
+// #To reset all the category subtotal times, first find
 // #and sort all this issues records.
 // Set Variable [ $brainstateIssues; Value:issue::_keyBrainstate ]
 // Enter Find Mode [ ]
 // Set Field [ issue::_keyBrainstate; $brainstateIssues ]
 // Perform Find [ ]
-// Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+// Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; ascending
 issueStatus::text; ascending
 issueCategory::order; ascending
@@ -170,12 +170,12 @@ issue::text; ascending ]
 //issue::_keyCategory = $category and issue::_keyStatus ≠ $status ]
 // End Loop
 // #
-// #Return the ﬁrst record in this subset and give it
+// #Return the first record in this subset and give it
 // #the subset total, then give the subtotal to all
 // #records in this subset.
 // Go to Record/Request/Page [ $recordNumber ]
 [ No dialog ]
-January 6, 平成26 11:06:57 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -3-speciﬁc action log: CHUNK_updateIssueCategoryTime
+January 6, 平成26 11:06:57 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -3-specific action log: CHUNK_updateIssueCategoryTime
 // Go to Record/Request/Page [ $recordNumber ]
 [ No dialog ]
 // #
@@ -194,15 +194,15 @@ End Loop
 #
 #
 #
-Close Window [ Name: "temp"; Current ﬁle ]
+Close Window [ Name: "temp"; Current file ]
 #
 // #If user cleared record then need to check if there
 // #are log records to show user, and if not close the
 // #log windows if they are open.
 // #
-// Select Window [ Name: "Day"; Current ﬁle ]
+// Select Window [ Name: "Day"; Current file ]
 // If [ Get (LastError) = 112 ]
-// Select Window [ Name: $UpdateTimewindowName; Current ﬁle ]
+// Select Window [ Name: $UpdateTimewindowName; Current file ]
 // Exit Script [ ]
 // End If
 // #
@@ -214,6 +214,6 @@ Close Window [ Name: "temp"; Current ﬁle ]
 // Go to Layout [ “logs1row” (logs) ]
 // End If
 // Refresh Window
-Select Window [ Name: $UpdateTimewindowName; Current ﬁle ]
+Select Window [ Name: $UpdateTimewindowName; Current file ]
 Exit Script [ ]
 January 6, 平成26 11:06:57 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -4-

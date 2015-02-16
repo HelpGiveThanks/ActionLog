@@ -1,4 +1,4 @@
-speciﬁc action log: IssueToLog
+specific action log: IssueToLog
 #
 #Prevent windows from ﬂashing and script from slowing
 #by stopping strobe effect caused by going back and
@@ -7,14 +7,14 @@ speciﬁc action log: IssueToLog
 #at the end.
 Set Variable [ $$stopRecordLoad; Value:1 ]
 #
-#Exit issue ﬁeld so conditional formatting can be applied.
+#Exit issue field so conditional formatting can be applied.
 Go to Field [ ]
 #
 #If tag has not yet been selected, then add it.
 If [ issue::_LockList & "¶" ≠ FilterValues ( $$logIssues ; issue::_LockList & "¶" ) ]
 #
 Set Variable [ $newIssue; Value:issue::_LockList ]
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 If [ Get (LastError) = 112 ]
 Exit Script [ ]
 New Window [ Name: "Day"; Height: Get (ScreenHeight); Width: 608; Top: 0; Left: 441 ]
@@ -29,14 +29,14 @@ Set Field [ logs::_keyLogIssues; $newIssue & "¶" & $$logIssues ]
 Set Variable [ $$logIssues; Value:logs::_keyLogIssues ]
 Go to Field [ ]
 Refresh Window
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 #
 #Add log ID to issueLogs.
 Set Field [ issue::_keyLogs; $newlog & "¶" & $$IssueLogs ]
 Set Variable [ $$IssueLogs; Value:issue::_keyLogs ]
 #
 #For some reason if system does not re-go to this
-#same record, other scripts trying to set ﬁelds for this
+#same record, other scripts trying to set fields for this
 #record in a different window (so same layout
 #different window will get an error 301 (record in use
 #by another user). So it is neccessary.
@@ -96,7 +96,7 @@ $$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecord
  or
 $$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
  and 15 & $$log & "¶" = FilterValues ( $$timeAll ; 15 & $$log & "¶" ) ]
-January 6, 平成26 1:16:39 ActionLog.fp7 - IssueToLog -1-speciﬁc action log: IssueToLog
+January 6, 平成26 1:16:39 ActionLog.fp7 - IssueToLog -1-specific action log: IssueToLog
 If [ $$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
  and 1 & $$log & "¶" = FilterValues ( $$timeAll ; 1 & $$log & "¶" )
  or
@@ -158,9 +158,9 @@ If [ issue::timeSegmentKeyList ≠ "" ]
 #
 New Window [ Name: "temp" ]
 #
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 Set Variable [ $day; Value:daylog::_lockDay ]
-Select Window [ Name: "temp"; Current ﬁle ]
+Select Window [ Name: "temp"; Current file ]
 If [ 1 & $day & "¶" = FilterValues ( $$timeAll ; 1 & $day & "¶" ) or
 2 & $day & "¶" = FilterValues ( $$timeAll ; 2 & $day & "¶" ) or
 3 & $day & "¶" = FilterValues ( $$timeAll ; 3 & $day & "¶" ) or
@@ -176,7 +176,7 @@ If [ 1 & $day & "¶" = FilterValues ( $$timeAll ; 1 & $day & "¶" ) or
 13 & $day & "¶" = FilterValues ( $$timeAll ; 10 & $day & "¶" ) or
 14 & $day & "¶" = FilterValues ( $$timeAll ; 10 & $day & "¶" ) or
 15 & $day & "¶" = FilterValues ( $$timeAll ; 10 & $day & "¶" ) ]
-January 6, 平成26 1:16:39 ActionLog.fp7 - IssueToLog -2-speciﬁc action log: IssueToLog
+January 6, 平成26 1:16:39 ActionLog.fp7 - IssueToLog -2-specific action log: IssueToLog
 If [ 1 & $day & "¶" = FilterValues ( $$timeAll ; 1 & $day & "¶" ) or
 2 & $day & "¶" = FilterValues ( $$timeAll ; 2 & $day & "¶" ) or
 3 & $day & "¶" = FilterValues ( $$timeAll ; 3 & $day & "¶" ) or
@@ -243,11 +243,11 @@ Set Variable [ $categoryKey; Value:issue::_keyCategory ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyCategory; $categoryKey ]
 Perform Find [ ]
-Sort Records [ Speciﬁed Sort Order: issue::sortTime; ascending ]
+Sort Records [ Specified Sort Order: issue::sortTime; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
-January 6, 平成26 1:16:39 ActionLog.fp7 - IssueToLog -3-speciﬁc action log: IssueToLog
+January 6, 平成26 1:16:39 ActionLog.fp7 - IssueToLog -3-specific action log: IssueToLog
 Loop
 Set Field [ issue::timeTotalSumByCat; issue::timeTotalSummaryByCategory ]
 Go to Record/Request/Page
@@ -255,14 +255,14 @@ Go to Record/Request/Page
 End Loop
 End If
 #
-Close Window [ Name: "temp"; Current ﬁle ]
+Close Window [ Name: "temp"; Current file ]
 #
 End If
 #
 #
 #prepare to remove log ID from issueLogs so that the issue
 #will have a record of all days logged to deal with it.
-Select Window [ Name: "Day"; Current ﬁle ]
+Select Window [ Name: "Day"; Current file ]
 Set Variable [ $$logIssues; Value:logs::_keyLogIssues ]
 Set Variable [ $removelog; Value:logs::_lockDay ]
 #
@@ -275,7 +275,7 @@ Substitute ( $$logIssues ; $removeIssue ; "" )
 Set Variable [ $$logIssues; Value:logs::_keyLogIssues ]
 Go to Field [ ]
 Refresh Window
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 #
 #Remove log ID from issueLogs.
 Set Field [ issue::_keyLogs; //last item in list has no paragraph mark, so a valuecount test needs to be done and if item is not removed, then the
@@ -287,7 +287,7 @@ Substitute ( $$IssueLogs ; $removeLog ; "" )
 Set Variable [ $$IssueLogs; Value:issue::_keyLogs ]
 #
 #For some reason if system does not re-go to this
-#same record, other scripts trying to set ﬁelds for this
+#same record, other scripts trying to set fields for this
 #record in a different window (so same layout
 #different window will get an error 301 (record in use
 #by another user). So it is neccessary.

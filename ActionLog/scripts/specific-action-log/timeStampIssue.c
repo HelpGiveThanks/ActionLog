@@ -1,7 +1,7 @@
-speciﬁc action log: timeStampIssue
+specific action log: timeStampIssue
 Set Variable [ $time; Value:daylog::_lockDay ]
 Go to Field [ ]
-Select Window [ Name: "Speciﬁc Action"; Current ﬁle ]
+Select Window [ Name: "Specific Action"; Current file ]
 Set Variable [ $timeAll; Value:issue::timeSegmentKeyList ]
 If [ $time & "¶" ≠ FilterValues ( $timeAll ; $time & "¶" ) ]
 Set Field [ issue::timeSegmentKeyList; $time & ¶ & $timeAll ]

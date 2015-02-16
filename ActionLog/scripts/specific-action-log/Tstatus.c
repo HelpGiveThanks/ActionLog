@@ -1,4 +1,4 @@
-speciﬁc action log: Tstatus
+specific action log: Tstatus
 If [ issueStatus::order > 79 ]
 Set Variable [ $$stopgotoIssueResolution; Value:1 ]
 Set Field [ issue::order; "" ]
@@ -15,7 +15,7 @@ Set Variable [ $$stopgotoIssueResolution ]
 If [ issueStatus::order > 79 or $$stopSort ≠ "" ]
 Halt Script
 End If
-Sort Records [ Speciﬁed Sort Order: brainstate::description; ascending
+Sort Records [ Specified Sort Order: brainstate::description; ascending
 issueStatus::order; based on value list: “__-99”
 issueStatus::text; ascending
 issueCategory::order; ascending

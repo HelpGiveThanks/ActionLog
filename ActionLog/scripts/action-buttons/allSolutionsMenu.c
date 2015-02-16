@@ -4,7 +4,7 @@ action buttons: allSolutionsMenu
 #
 #
 #1 go to the edit/create layout and show all users.
-Close Window [ Name: "All Solutions"; Current ﬁle ]
+Close Window [ Name: "All Solutions"; Current file ]
 New Window [ Name: "All Solutions" ]
 Go to Layout [ “allSolutionsMenu” (steward) ]
 Show All Records
@@ -19,5 +19,5 @@ Adjust Window
 #Set variable that will close this other apps menu
 #when the user selectes a new database.
 Set Variable [ $$otherApps; Value:1 ]
-Pause/Resume Script [ Indeﬁnitely ]
+Pause/Resume Script [ Indefinitely ]
 February 1, 平成26 18:26:17 ActionLog.fp7 - allSolutionsMenu -1-

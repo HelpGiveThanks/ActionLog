@@ -1,5 +1,5 @@
 action buttons: switchFarmer
-#PURPOSE switch from one user's records to anothers via the reference ﬁeld farmer which is a global ﬁeld holding the current ID number of the
+#PURPOSE switch from one user's records to anothers via the reference field farmer which is a global field holding the current ID number of the
 current user.
 #
 #
@@ -13,7 +13,7 @@ Allow User Abort [ Off ]
 #1 capture selected userID chosen
 Set Variable [ $userID; Value:reference::farmerID ]
 #
-#2 ﬁnd this user's records
+#2 find this user's records
 Enter Find Mode [ ]
 Set Field [ brainstate::_keyUser; $userID ]
 Perform Find [ ]
@@ -37,14 +37,14 @@ Set Field [ reference::farmerName; steward::FirstPlusLast ]
 #
 #5 show/hide all records according the user's last settings
 If [ steward::retiredStatus = "r" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
 [ Restore ]
 End If
 If [ steward::hideStatus = "" and steward::showORhide = "hide" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::hide: “t” ]
 [ Restore ]
 Else If [ steward::showStatus ≠ "" and steward::showORhide = "show" ]
-Constrain Found Set [ Speciﬁed Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::Show: “=” ]
 [ Restore ]
 End If
 #

@@ -1,5 +1,5 @@
 action buttons: UpdatePauseTotals
-#PURPOSE update the time paused ﬁelds and the total and grand total ﬁelds after a user leaves a time ﬁeld or clicks the veto button. They may
+#PURPOSE update the time paused fields and the total and grand total fields after a user leaves a time field or clicks the veto button. They may
 or may not have done anything, but in case they did this update is performed.
 #
 #
