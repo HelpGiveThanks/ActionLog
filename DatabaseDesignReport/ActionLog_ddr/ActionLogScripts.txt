@@ -1,35 +1,104 @@
 
+    #PURPOSE go the selected farmer's records from the createEditFarmer layout. (This is script is identical to the switchFarmer script except for step 1, which is required because the reference field is not available on this layout, and so the user's ID must be taken from the user table, not the reference table.)
     #
     #
-    #Stop script if user is process of picking a specific action group.
-    If [ $$pick = 1 ]
-    Show Custom Dialog [ Message: "Pick a specific-action tag or click the cancel button in the Tag window. After you do this you can go to the library. "; Buttons: “OK” ]
-    Exit Script [ ]
+    #
+    #basic administration tasks
+    Set Error Capture [ On ]
+    Allow User Abort [ Off ]
+    #
+    #
+    #Loop to correct record. Portal shows up in on each
+    #records layout, so first before the script continues
+    #we need to make sure we are on the record that the user selected.
+    Set Variable [ $userID; Value:steward 2::_lockUser ]
+    Go to Record/Request/Page [ First ]
+    Loop
+    Exit Loop If [ $userID = steward::_lockUser ]
+    Go to Record/Request/Page [ Next ]
+    End Loop
+    #
+    #
+    Freeze Window
+    If [ Get ( SystemPlatform ) ≠ 3 and steward::iPhoneLayout = "" ]
+    // Move/Resize Window [ Current Window; Height: steward::windowSizeAndPlace [1]; Width: steward::windowSizeAndPlace [2]; Top: steward::windowSizeAndPlace [3]; Left: steward::windowSizeAndPlace [4] ]
+    Move/Resize Window [ Current Window; Height: Get (ScreenHeight) - 2 * ( Get (ScreenHeight) * .05 ); Width: Get (ScreenWidth) * .8; Top: Get (ScreenHeight) * .05; Left: Get (ScreenWidth) * .1 ]
+    Else If [ steward::iPhoneLayout ≠ "" ]
+    Move/Resize Window [ Current Window; Height: steward::windowSizeAndPlace [5]; Width: steward::windowSizeAndPlace [6]; Top: steward::windowSizeAndPlace [7]; Left: steward::windowSizeAndPlace [8] ]
     End If
     #
-    #Select the current library windows if open and selected.
-    Select Window [ Name: "Tag Menus" ]
-    Select Window [ Name: "Learn" ]
-    Select Window [ Name: "Setup" ]
-    Select Window [ Name: "Report" ]
-    Select Window [ Name: "References" ]
-    Select Window [ Name: MemorySwitch::currentLibraryMainWIndow ]
+    #1 capture selected userID, insert it into the referenceID field, then go to layout showing brainstate records.
+    Set Variable [ $userID; Value:steward::_lockUser ]
+    Set Field [ reference::farmerID; $userID ]
     #
-    #If no library is open, then open the last library used.
-    If [ Get (LastError) = 112 and MemorySwitch::currentLibraryPath ≠ "" ]
-    Open URL [ Case ( Get ( SystemPlatform ) = - 2 ; Substitute (MemorySwitch::currentLibraryPath ; " " ; "%20" ) ; Substitute ( Substitute ( MemorySwitch::currentLibraryPath ; "file:/" ; "file://" ) ; " " ; "%20" ) ) ] [ No dialog ]
+    #2 find this user's records
+    Perform Script [ “CHUNK_createRecordsForNewUsers” ]
     #
-    #If the path stored for the selected library failed to open
-    #the library, then that library is no longer there or its
-    #name has been changed, so inform the user of their
-    #options.
-    If [ Get (LastError) = 5 ]
-    Show Custom Dialog [ Message: "Last library used cannot be found as it must have been renamed, moved, or deleted. Find and open it manually or click the allsolutions button to select another library."; Buttons: “OK” ]
+    #4 show the user's name
+    Set Field [ reference::farmerName; steward::FirstPlusLast ]
+    #
+    #5 show/hide all records according the user's last settings
+    If [ steward::hideStatus = "" and steward::showORhide = "show" ]
+    Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::hide: “=” ] [ Restore ]
+    Else If [ steward::showStatus ≠ "" and steward::showORhide = "hide" ]
+    Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::groupType: “=” ] [ Restore ]
+    End If
+    #8 it the user wants retired records hidden then hide these records if any
+    Perform Script [ “CHUNK_retire” ]
+    #
+    // #6 go to user's chosen day, sort records, and choose last used layout
+    // If [ Left ( steward::chosenLayout ; 2 ) = "01" ]
+    // Perform Script [ “to 1” ]
+    // Else If [ Left ( steward::chosenLayout ; 2 ) = "07" ]
+    // Perform Script [ “to 7” ]
+    // Else If [ Left ( steward::chosenLayout ; 2 ) = "31" ]
+    // Perform Script [ “to 31” ]
+    // End If
+    #
+    #Set window title.
+    Set Window Title [ Current Window; New Title: "Timer" ]
+    #
+    #Size window to 150.
+    Set Zoom Level [ 150% ]
+    #
+    #1 go to user's last layout
+    If [ steward::chosenLayout = "users" ]
+    Go to Layout [ “01Main” (brainstate) ]
+    #NOT TESTED
+    If [ Get ( SystemPlatform ) = 3 or steward::iPhoneLayout ≠ "" ]
+    Go to Layout [ “MainiPhone” (brainstate) ]
+    End If
+    #END NOT TESTED
+    Else If [ steward::chosenLayout ≠ "users" ]
+    Go to Layout [ “01Main” (brainstate) ]
+    #NOT TESTED
+    If [ Get ( SystemPlatform ) = 3 or steward::iPhoneLayout ≠ "" ]
+    Go to Layout [ “MainiPhone” (brainstate) ]
+    End If
+    #END NOT TESTED
     End If
     #
-    #If their are no libraries in the system let the user
-    #know how to add new ones.
-    Else If [ Get (LastError) = 112 and MemorySwitch::currentLibraryPath = "" ]
-    Show Custom Dialog [ Message: "There is no library file in memory. Click on a library file manually and it will be added to memory and opened the next time you click the library button."; Buttons: “OK” ]
-    End If
+    #2 go to user's chosen day
+    Set Field [ steward::chosenDay; Get ( CurrentDate ) ]
+    Set Field [ reference::day1; steward::chosenDay ]
     #
+    #3 refresh the layout so that the key fields for each record will be recalculated based on the new day selected. The date and times shown for each record are in a table related to each brainstate record by their dates. The key date fields for all brainstate records are calculations where the value equals the reference field date shown at the top of the screen in the green, red, or yellow box. So when the user changes the date in the reference field (top colored box) and then this script refreshes the database, all the brainstate records including the ones not shown recalculate their key fields, the result being they all take in the new date. This means that the related day records now change too to show the user the day records that match the updated brainstate record keys. (These day fields are locked to their related brainstate records by the brainstate records ID number. Using these to keys, the database is able to return the desired day fields for brainstate record the user elects to view at any one time.)
+    Refresh Window [ Flush cached join results ]
+    #
+    #4 sort records (neccessary because the week and month view usually show more active records than the day view that need to be sorted out of top of list), and go to the first record.
+    Set Variable [ $$stopRecordLoad; Value:1 ]
+    Set Field [ steward::chosenLayout; steward::chosenLayoutMain ]
+    Perform Script [ “sortNumbers” ]
+    #7 go to active brainstate or first brainstate.
+    Go to Record/Request/Page [ First ]
+    Loop
+    Exit Loop If [ day1::swBugField = "veto" ]
+    Go to Record/Request/Page [ Next; Exit after last ]
+    End Loop
+    If [ day1::swBugField ≠ "veto" ]
+    Go to Record/Request/Page [ First ]
+    End If
+    Perform Script [ “openSpecificAction” ]
+    Select Window [ Name: "Timer"; Current file ]
+    Set Variable [ $$stopRecordLoad ]
+    Perform Script [ “recordLoad” ]
