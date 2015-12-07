@@ -1,4 +1,4 @@
-specific action log: LoadIssuerecordID
+specific action log: loadIssuerecordID
 If [ $$stopRecordLoad = 1 ]
 Exit Script [ ]
 End If
@@ -11,7 +11,7 @@ Go to Field [ ]
 #If user clicked on the pulldown when the focus
 #of the system was on another record, this
 #variable prevents the pulldown menu from
-#ﬂashing and going away. It needs to be reset
+#flashing and going away. It needs to be reset
 #when the user navigates to the record other than
 #by click on the pulldown menus so the user
 #doesn't get bumped out of the menu field
@@ -34,15 +34,19 @@ Set Variable [ $$issueLogs; Value:issue::_keyLogs ]
 Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
 Set Variable [ $$stopGroup; Value:1 ]
 Select Window [ Name: "Tag"; Current file ]
-Go to Object [ Object Name: "group" ]
+// Go to Object [ Object Name: "group" ]
 Scroll Window
 [ Home ]
-Go to Portal Row
+// Go to Portal Row
 [ Last ]
+Go to Record/Request/Page
+[ First ]
 Loop
 Exit Loop If [ category::_LockList = $$group ]
-Go to Portal Row
+// Go to Portal Row
 [ Previous; Exit after last ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
 End Loop
 If [ category::_LockList ≠ $$group ]
 Scroll Window
@@ -57,4 +61,4 @@ Select Window [ Name: "Day"; Current file ]
 Refresh Window
 Select Window [ Name: "Specific Action"; Current file ]
 Refresh Window
-January 6, 平成26 1:09:44 ActionLog.fp7 - LoadIssuerecordID -1-
+December 6, ଘ౮27 21:06:37 ActionLog.fp7 - loadIssuerecordID -1-

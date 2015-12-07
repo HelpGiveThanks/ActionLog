@@ -16,50 +16,55 @@ Set Variable [ $key; Value:status::_LockList ]
 #
 #If the user left the field blank...
 If [ status::text = "" ]
-Show Custom Dialog [ Message: "All status names must be unique, and must not be blank."; Buttons: “OK” ]
+Show Custom Dialog [ Message: "All status names must be unique. Blanks are not allowed."; Buttons: “OK” ]
 #
 #Go to the blank field and fill it in with a unique
-#number.
-Go to Object [ Object Name: "status" ]
-#
-Go to Portal Row
-[ Select; First ]
+#name.
+Go to Record/Request/Page
+[ First ]
 Loop
 Exit Loop If [ $key = status::_LockList ]
-Go to Portal Row
-[ Select; Next ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
 End Loop
-Set Field [ status::text; $key & Random ]
+Set Field [ status::text; "status" & status::_LockList ]
 Exit Script [ ]
 End If
 #
 #Determine if user used a spelling already in use.
-Go to Portal Row
-[ Select; First ]
+Go to Record/Request/Page
+[ First ]
 #
 Loop
 #If the user used a spelling alread in use ...
 If [ $name =status::text and status::_LockList ≠ $key ]
 Show Custom Dialog [ Message: "Each status in this list must have a unique name."; Buttons: “OK” ]
 #
-#Go to the blank field and fill it in with a unique
-#number.
-Go to Object [ Object Name: "status" ]
-#
-Go to Portal Row
-[ Select; First ]
+#Make name unique.
+Go to Record/Request/Page
+[ First ]
 Loop
 Exit Loop If [ $key = status::_LockList ]
-Go to Portal Row
-[ Select; Next ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
 End Loop
-Set Field [ status::text; $key & Random ]
+Set Field [ status::text; $name & status::_LockList ]
 Exit Script [ ]
 End If
-Go to Portal Row
-[ Select; Next; Exit after last ]
-January 6, 平成26 11:19:17 ActionLog.fp7 - uniqueStatusNameRequired -1-specific action log: uniqueStatusNameRequired Go to Portal Row
-[ Select; Next; Exit after last ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
 End Loop
 #
-January 6, 平成26 11:19:17 ActionLog.fp7 - uniqueStatusNameRequired -2-
+#
+Scroll Window
+[ Home ]
+#Go to current record.
+Go to Record/Request/Page
+[ First ]
+Loop
+#
+Exit Loop If [ $key = category::_LockList ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
+End Loop
+December 6, ଘ౮27 21:29:33 ActionLog.fp7 - uniqueStatusNameRequired -1-

@@ -22,6 +22,10 @@ Set Variable [ $$stopSubtotal; Value:1 ]
 #and how it is used would be great!
 Set Variable [ $$logBrainstate; Value:brainstate::_lockBrainstateID ]
 Set Variable [ $day1; Value:reference::day1 ]
+#
+#If the user is already viewing the Specific Action
+#and current day record for this timer then just
+#show them these windows.
 Select Window [ Name: "Day"; Current file ]
 If [ logs::_keyBrainstate = $$logBrainstate and logs::_keyDay = $day1 ]
 #
@@ -41,6 +45,54 @@ Select Window [ Name: "Specific Action"; Current file ]
 Set Variable [ $$stopRecordLoad ]
 Set Variable [ $$stopSubtotal ]
 Exit Script [ ]
+#
+#If only a new day has been added, then just update
+#the Day window and show user the rest of the
+#Specific Action windows without changing them.
+Else If [ logs::_keyBrainstate = $$logBrainstate and logs::_keyDay ≠ $day1 ]
+#
+#Find new day record for this timer.
+Go to Layout [ “logs2rows” (logs) ]
+Enter Find Mode [ ]
+Set Field [ logs::_keyBrainstate; $$logBrainstate ]
+Perform Find [ ]
+#
+#Sort and go to first record.
+Sort Records [ Specified Sort Order: logs::_keyBrainstate; descending
+logs::_keyDay; descending ]
+[ Restore; No dialog ]
+Go to Record/Request/Page
+[ First ]
+Scroll Window
+[ Home ]
+#
+#Display all rows of time for this timer.
+If [ daylog::swActivityLength[11] ≠ "" ]
+Go to Layout [ “logs3rows” (logs) ]
+Else If [ daylog::swActivityLength[6] ≠ "" ]
+Go to Layout [ “logs2rows” (logs) ]
+Else If [ daylog::swActivityLength[6] = "" ]
+Go to Layout [ “logs1row” (logs) ]
+End If
+#
+#For attaching issue record IDs to log records, and
+#for conditionally formatting log records related to an issue,
+#system needs to know what IDs are associated with a log record.
+Set Variable [ $$log; Value:logs::_lockDay ]
+Set Variable [ $$logrecordID; Value:Get ( RecordID ) ]
+Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
+#
+#Start load record scripts as needed for normal function.
+Set Variable [ $$stopRecordLoad ]
+Set Variable [ $$stopSubtotal ]
+#
+Perform Script [ “loadLogrecordID” ]
+#
+Select Window [ Name: "Tag"; Current file ]
+Select Window [ Name: "Specific Action"; Current file ]
+#
+Exit Script [ ]
+#
 End If
 #
 #Find first issue record if there is one and set variable
@@ -55,7 +107,6 @@ Perform Find [ ]
 If [ Get ( LastError ) = 401 ]
 // New Record/Request
 // Set Field [ issue::_keyBrainstate; $$logBrainstate ]
-January 5, 平成26 19:29:05 ActionLog.fp7 - gotoLogs -1-log: gotoLogs
 // Set Field [ issue::_keyCategory; $groupID ]
 // Set Field [ issue::date; Get ( CurrentTimeStamp ) ]
 // Set Field [ issue::lock; "issue" ]
@@ -79,7 +130,7 @@ Go to Record/Request/Page
 [ First ]
 #
 Set Variable [ $$stopSubtotal ]
-Perform Script [ “TsubtotalTimeByGroup” ]
+Perform Script [ “TsubtotalTimeByGroup (UPDATED)” ]
 End If
 #
 Set Variable [ $$issue; Value:issue::_LockList ]
@@ -116,7 +167,6 @@ End If
 #For attaching issue record IDs to log records, and
 #for conditionally formatting log records related to an issue,
 #system needs to know what IDs are associated with a log record.
-January 5, 平成26 19:29:05 ActionLog.fp7 - gotoLogs -2-log: gotoLogs
 Set Variable [ $$log; Value:logs::_lockDay ]
 Set Variable [ $$logrecordID; Value:Get ( RecordID ) ]
 Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
@@ -128,10 +178,26 @@ Refresh Window
 #Show all status and category menu items for
 brainstate's log.
 Select Window [ Name: "Tag"; Current file ]
-Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
+Go to Layout [ “IssuesAndObservationsTag” (category) ]
 Enter Find Mode [ ]
 Set Field [ brainstate::_lockBrainstateID; $$logBrainstate ]
 Perform Find [ ]
+Sort Records [ Specified Sort Order: group::text; ascending
+category::sortTime; ascending
+category::text; ascending ]
+[ Restore; No dialog ]
+#
+#Update timer's total time. This is only done
+#when switching specific action timers rather than
+#each time a timer's total is changed due to the
+#amount of time it takes to calculate this total.
+Perform Script [ “updateTimerTotalTimeInTagWindow (NEW)” ]
+#
+#FIX FIX FIX FIX
+#FIX FIX FIX FIX
+#FIX FIX FIX FIX
+#FIX FIX FIX FIX
+#FIX FIX FIX FIX
 #
 #Update review dates.
 Go to Object [ Object Name: "status" ]
@@ -185,11 +251,10 @@ If [ status::text = "" ]
 Set Field [ status::status; "Remember existence" & ¶ & "of a specific action..." ]
 Loop
 Set Field [ status::text; GetValue ( $reviewNames ; $number ) ]
-January 5, 平成26 19:29:05 ActionLog.fp7 - gotoLogs -3-log: gotoLogs
 Set Field [ status::reviewDate; GetValue ( $reviewDates ; $number ) ]
 Set Variable [ $number; Value:$number + 1 ]
-Go to Portal Row
-[ Select; Next; Exit after last ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
 End Loop
 End If
 #
@@ -209,7 +274,7 @@ Set Field [ issueCategory::text; "administration" ]
 Set Variable [ $groupKey; Value:issueCategory::_LockList ]
 End If
 #
-Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
+Go to Layout [ “IssuesAndObservationsTag” (category) ]
 #
 #
 #
@@ -245,11 +310,10 @@ issue::text; ascending ]
 Set Variable [ $$issueSort; Value:"status" ]
 Go to Record/Request/Page
 [ First ]
-January 5, 平成26 19:29:05 ActionLog.fp7 - gotoLogs -4-log: gotoLogs
 Scroll Window
 [ Home ]
 #
 #Start load record scripts as needed for normal function.
 Set Variable [ $$stopRecordLoad ]
-Perform Script [ “LoadIssuerecordID” ]
-January 5, 平成26 19:29:05 ActionLog.fp7 - gotoLogs -5-
+Perform Script [ “loadIssuerecordID (UPDATED)” ]
+December 6, ଘ౮27 20:47:52 ActionLog.fp7 - gotoLogs -1-

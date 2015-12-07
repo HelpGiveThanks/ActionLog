@@ -1,4 +1,16 @@
 specific action log: TsubtotalTimeByGroup
+#
+#
+#
+#
+#Decided for now that this information is too much
+#clutter, especially now the user can see total time
+#per category tag in the tag window.
+Exit Script [ ]
+#
+#
+#
+#
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
 #
@@ -16,6 +28,13 @@ Refresh Window
 #
 #Give key to current specific action.
 Select Window [ Name: "Specific Action"; Current file ]
+#
+If [ Get (FoundCount) = 0 ]
+Select Window [ Name: "Tag"; Current file ]
+Set Variable [ $$group ]
+Refresh Window
+Exit Script [ ]
+End If
 Set Field [ issue::_keyCategory; $$group ]
 #
 #This field is for sorting the records by category
@@ -55,7 +74,6 @@ End If
 If [ issue::_keyCategory = issue::oldCategorykey and $$stopSubtotal = "" ]
 Go to Field [ ]
 Exit Script [ ]
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -1-specific action log: TsubtotalTimeByGroup
 End If
 Set Variable [ $$stopSubtotal ]
 #
@@ -64,7 +82,7 @@ Set Variable [ $$stopSubtotal ]
 #still belong to this record's former category.
 Set Variable [ $OLDcategoryKey; Value:issue::oldCategorykey ]
 #
-#Prevent windows from ﬂashing and script from slowing
+#Prevent windows from flashing and script from slowing
 #by stopping strobe effect caused by going back and
 #forth from each window upon loading each records
 #information throughout the script, rather than just
@@ -94,7 +112,7 @@ Go to Field [ ]
 #tag text for each list record holding issue data.
 Set Field [ issue::sortTime; issueCategory::text ]
 #
-#In the focus in the text field, remove it.
+#If the focus is in the text field, remove it.
 Go to Field [ ]
 #
 #Open a new window so these next steps can
@@ -112,7 +130,6 @@ Go to Layout [ “IssuesLayoutForScripts” (issue) ]
 Set Variable [ $categoryKey; Value:issue::_keyCategory ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyCategory; $categoryKey ]
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -2-specific action log: TsubtotalTimeByGroup
 Perform Find [ ]
 #
 #Sort them to trigger the calcuation of their
@@ -171,7 +188,6 @@ End If
 #items where divided by status. Filemaker's
 #subtotal calc subtotals at the status and category
 #breaks (essentially all breaks caused by a sort)
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -3-specific action log: TsubtotalTimeByGroup
 #but I decided to show issue the time by status
 #and category too, so that is why this script chunk
 #is now disabled. The other reason was that it
@@ -232,7 +248,6 @@ issue::text; ascending ]
 //issue::_keyCategory = $category and issue::_keyStatus ≠ $status ]
 // End Loop
 // #
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -4-specific action log: TsubtotalTimeByGroup
 // Exit Loop If [ Get (LastError) = 101 ]
 // End Loop
 #
@@ -295,9 +310,8 @@ Scroll Window
 Set Variable [ $$stopRecordLoad ]
 #
 // #The halt script is neccessary in case the user
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -5-specific action log: TsubtotalTimeByGroup
 // #clicks somewhere other than the in the pulldown
 // #menu. This halt script stops the pause script
 // #that is currently in play.
 // Halt Script
-January 6, 平成26 11:19:49 ActionLog.fp7 - TsubtotalTimeByGroup -6-
+December 6, ଘ౮27 21:30:49 ActionLog.fp7 - TsubtotalTimeByGroup -1-

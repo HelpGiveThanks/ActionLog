@@ -58,12 +58,11 @@ issue::sortTime; ascending
 issue::order; based on value list: “__-99”
 issue::text; ascending ]
 [ Restore; No dialog ]
-January 5, 平成26 19:28:29 ActionLog.fp7 - openSpecificAction -1-log: openSpecificAction
 Go to Record/Request/Page
 [ First ]
 #
 Set Variable [ $$stopSubtotal ]
-Perform Script [ “TsubtotalTimeByGroup” ]
+Perform Script [ “TsubtotalTimeByGroup (UPDATED)” ]
 End If
 #
 Set Variable [ $$issue; Value:issue::_LockList ]
@@ -106,94 +105,68 @@ Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
 #
 Refresh Window
 #
-#Show all status and category menu items for
-brainstate's log.
+#Find all category tags for this timer.
 New Window [ Name: "Tag" ]
 Move/Resize Window [ Current Window; Height: Get (ScreenHeight); Top: 0; Left: Get (ScreenWidth) - 344 ]
-Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
+Go to Layout [ “IssuesAndObservationsTag” (category) ]
 Enter Find Mode [ ]
 Set Field [ brainstate::_lockBrainstateID; $$logBrainstate ]
 Perform Find [ ]
 #
-#Update review dates.
-Go to Object [ Object Name: "status" ]
-January 5, 平成26 19:28:29 ActionLog.fp7 - openSpecificAction -2-log: openSpecificAction
-Go to Portal Row
-[ Select; First ]
-Set Variable [ $reviewNames; Value:"daily" & ¶ &
-"weekly" & ¶ &
-"monthly" & ¶ &
-"1/2 yearly" & ¶ &
-"yearly" & ¶ &
-"complete" & ¶ &
-"discard" ]
-Set Variable [ $reviewDates; Value://daily review
-"" & ¶ &
-//weekly review
-Case (
-Day ( Get ( CurrentDate ) ) < 8 ;
-Month ( Get ( CurrentDate ) ) - 1 & "/" ;
-Month ( Get ( CurrentDate ) ) & "/" ) &
-Case (
-DayOfWeek ( Get ( CurrentDate ) ) = 1 ; Day ( Get ( CurrentDate ) ) ;
-DayOfWeek ( Get ( CurrentDate ) - 1 ) = 1 ; Day ( Get ( CurrentDate ) - 1 ) ;
-DayOfWeek ( Get ( CurrentDate ) - 2 ) = 1 ; Day ( Get ( CurrentDate ) - 2 ) ;
-DayOfWeek ( Get ( CurrentDate ) - 3 ) = 1 ; Day ( Get ( CurrentDate ) - 3 ) ;
-DayOfWeek ( Get ( CurrentDate ) - 4 ) = 1 ; Day ( Get ( CurrentDate ) - 4 ) ;
-DayOfWeek ( Get ( CurrentDate ) - 5 ) = 1 ; Day ( Get ( CurrentDate ) - 5 ) ;
-DayOfWeek ( Get ( CurrentDate ) - 6 ) = 1 ; Day ( Get ( CurrentDate ) - 6 ) )
-//& " - "
-&
-//Month ( Get ( CurrentDate ) ) & "/" &
-//Case (
-//DayOfWeek ( Get ( CurrentDate ) ) = 7 ; Day ( Get ( CurrentDate ) ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 1 ) = 7 ; Day ( Get ( CurrentDate ) + 1 ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 2 ) = 7 ; Day ( Get ( CurrentDate ) + 2 ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 3 ) = 7 ; Day ( Get ( CurrentDate ) + 3 ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 4 ) = 7 ; Day ( Get ( CurrentDate ) + 4 ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 5 ) = 7 ; Day ( Get ( CurrentDate ) + 5 ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 6 ) = 7 ; Day ( Get ( CurrentDate ) + 6 ) )
-¶ &
-//monthly review
-" " &
-Case (
-Day ( Get ( CurrentDate ) ) > 7 ;
-//MonthName ( Month ( Get ( CurrentDate ) ) + 1 & "/" & 1 & "/" & 2012) ;
-//MonthName ( Month ( Get ( CurrentDate ) ) & "/" & 1 & "/" & 2012) )
-//& ")"
-Month ( Get ( CurrentDate ) ) + 1 & "/" & "1" ;
-Month ( Get ( CurrentDate ) ) & "/" & "1" ) ]
-Set Variable [ $number; Value:1 ]
-If [ status::text = "" ]
-Set Field [ status::status; "Remember existence" & ¶ & "of a specific action..." ]
-Loop
-Set Field [ status::text; GetValue ( $reviewNames ; $number ) ]
-Set Field [ status::reviewDate; GetValue ( $reviewDates ; $number ) ]
-Set Variable [ $number; Value:$number + 1 ]
-Go to Portal Row
-[ Select; Next; Exit after last ]
-End Loop
-End If
-#
-#Find all groups for this action.
-Go to Layout [ “menuGroups” (issueCategory) ]
-Enter Find Mode [ ]
-Set Field [ issueCategory::_keyBrainstate; $$logBrainstate ]
-Set Field [ issueCategory::lock; "location" ]
-Perform Find [ ]
-#
 #If none are found then create one.
 If [ Get ( LastError ) = 401 ]
-New Record/Request
-Set Field [ issueCategory::lock; "location" ]
-January 5, 平成26 19:28:29 ActionLog.fp7 - openSpecificAction -3-log: openSpecificAction
-Set Field [ issueCategory::_keyBrainstate; $$logBrainstate ]
-Set Field [ issueCategory::text; "administration" ]
-Set Variable [ $groupKey; Value:issueCategory::_LockList ]
+Perform Script [ “newTagGroup (NEW SCRIPT)” ]
 End If
+Sort Records [ Specified Sort Order: group::text; ascending
+category::sortTime; ascending
+category::text; ascending ]
+[ Restore; No dialog ]
+Go to Record/Request/Page
+[ First ]
+Set Variable [ $newtag; Value:category::_LockList ]
 #
-Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
+#Update timer's total time. This is only done now
+#when selecting a specific action timer rather than
+#each time a timer's total is changed due to the
+#amount of time it takes to calculate this total.
+Perform Script [ “updateTimerTotalTimeInTagWindow (NEW)” ]
 #
+#Find all status tags.
+Set Variable [ $brainstateName; Value:brainstate::description ]
+Go to Layout [ “IssuesAndObservationsStatus” (status) ]
+Enter Find Mode [ ]
+Set Field [ status::lock; "status" ]
+Perform Find [ ]
+Set Field [ status::status; $brainstateName ]
+Sort Records [ Specified Sort Order: status::order; ascending
+status::text; ascending ]
+[ Restore; No dialog ]
+#
+#Create status tags if none exist.
+Go to Layout [ “IssuesAndObservationsStatus” (status) ]
+Set Variable [ $reviewNames; Value:"priority" & ¶ &
+"active" & ¶ &
+"pending" & ¶ &
+"on hold" & ¶ &
+"backlog" & ¶ &
+"complete" & ¶ &
+"discard" ]
+Set Variable [ $number; Value:1 ]
+If [ Get (FoundCount) = 0 ]
+Loop
+New Record/Request
+Set Field [ status::text; GetValue ( $reviewNames ; $number ) ]
+Set Variable [ $number; Value:$number + 1 ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
+End Loop
+End If
+Go to Record/Request/Page
+[ First ]
+Set Variable [ $newStatus; Value:status::_LockList ]
+#
+#Show all category tags for this timer.
+Go to Layout [ “IssuesAndObservationsTag” (category) ]
 #
 #Show all issues for this brainstate's log.
 New Window [ Name: "Specific Action"; Height: Get (ScreenHeight); Width: Get (ScreenWidth) - 688; Top: 0; Left: 0 ]
@@ -211,8 +184,8 @@ Set Field [ issue::date; Get ( CurrentTimeStamp ) ]
 Set Field [ issue::lock; "issue" ]
 Set Field [ issue::text; "review these specific action items and update their status, priority, and grouping as necessary." ]
 Set Field [ brainstate::pulldownBrainstate; issue::_keyBrainstate ]
-Set Field [ issue::_keyStatus; 7152011154818554 ]
-Set Field [ issue::_keyCategory; $groupKey ]
+Set Field [ issue::_keyStatus; $newStatus ]
+Set Field [ issue::_keyCategory; $newTag ]
 End If
 #
 Go to Layout [ “Issues” (issue) ]
@@ -230,6 +203,10 @@ Go to Record/Request/Page
 Scroll Window
 [ Home ]
 #
+If [ issue::_keyStatus = "" ]
+Set Field [ issue::_keyStatus; $newStatus ]
+End If
+#
 #Start load record scripts as needed for normal function.
 Set Variable [ $$stopRecordLoad ]
-January 5, 平成26 19:28:29 ActionLog.fp7 - openSpecificAction -4-
+December 6, ଘ౮27 20:45:51 ActionLog.fp7 - openSpecificAction -1-

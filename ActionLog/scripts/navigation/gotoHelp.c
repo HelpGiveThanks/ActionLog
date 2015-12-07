@@ -1,11 +1,19 @@
 navigation: gotoHelp
 #
 #
+#Stop script if user is process of picking a specific action group.
+If [ $$pick = 1 ]
+Show Custom Dialog [ Message: "Pick a specific-action tag or click the cancel button in the Tag window. After you do this you
+can open Help to learn about creating new specific-actions. "; Buttons: “OK” ]
+Exit Script [ ]
+End If
+#
+#
 #If triggered on the Other Solutions window then
 #show a comment instead of opening the Help solultion.
 If [ Get ( WindowName ) = "Other Solutions" ]
-Show Custom Dialog [ Message: "This window is just buttons that open other solutions or the website. Click a button and your solution
-will open."; Buttons: “OK” ]
+Show Custom Dialog [ Message: "This window is just buttons that open other solutions or the website. Click a button and your
+solution will open."; Buttons: “OK” ]
 Exit Script [ ]
 End If
 #
@@ -47,19 +55,19 @@ End If
 #
 #Open the help solution and set the help screen to look at.
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
-Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" & Right ( Get (FilePath) ; 4 ) ) ; " " ; "%20" ) ;
-Substitute ( Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" & Right ( Get (FilePath) ; 4 ) ) ;
-"file:/" ; "file://" ) ; " " ; "%20" ) ) ]
+Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" & Right ( Get (FilePath) ; 4 ) ) ; " " ;
+"%20" ) ;
+Substitute ( Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" & Right ( Get (FilePath) ;
+4 ) ) ; "file:/" ; "file://" ) ; " " ; "%20" ) ) ]
 [ No dialog ]
-Open URL [ Substitute ( Substitute ( Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" & Right ( Get
-(FilePath) ; 4 ) ) ; "file:/" ; "file://" ) ; " " ; "%20" ) ; "file://" ; "file:///Volumes/" ) ]
+Open URL [ Substitute ( Substitute ( Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" &
+Right ( Get (FilePath) ; 4 ) ) ; "file:/" ; "file://" ) ; " " ; "%20" ) ; "file://" ; "file:///Volumes/" ) ]
 [ No dialog ]
 #
 #If it is already open, then just go the currently open
-January 30, 平成26 22:17:25 ActionLog.fp7 - gotoHelp -1-navigation: gotoHelp
 #windows of the Help solution.
 Select Window [ Name: "Help" ]
 Select Window [ Name: "Tutorial" ]
 #
 #
-January 30, 平成26 22:17:25 ActionLog.fp7 - gotoHelp -2-
+December 6, ଘ౮27 20:27:41 ActionLog.fp7 - gotoHelp -1-

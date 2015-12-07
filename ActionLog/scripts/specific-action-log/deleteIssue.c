@@ -4,13 +4,16 @@ Set Variable [ $$stopCategoryRequest; Value:1 ]
 Set Variable [ $name; Value:issue::text ]
 Go to Object [ Object Name: 5 ]
 Refresh Window
-Show Custom Dialog [ Title: "!"; Message: "Delete " & $name & "?"; Buttons: “Cancel”, “Delete” ]
+Show Custom Dialog [ Title: "!"; Message: "Delete, " & Case ( Length ($name) < 26 ; $name ; Left ($name ; 30) ) & " ... ?"; Buttons:
+“Cancel”, “Delete” ]
+Show Custom Dialog [ Title: "!"; Message: "Delete, " & Case ( Length ($name) < 26 ; $name ; Left ($name ; 30) ) & " ... ?"; Buttons:
+“Cancel”, “Delete” ]
 #
 If [ Get ( LastMessageChoice ) = 2 ]
 #
 If [ issue::issueTotalTime ≠ "" ]
 #
-#Prevent windows from ﬂashing and script from slowing
+#Prevent windows from flashing and script from slowing
 #by stopping strobe effect caused by going back and
 #forth from each window upon loading each records
 #information throughout the script, rather than just
@@ -56,7 +59,6 @@ End Loop
 Go to Layout [ “logs2rows” (logs) ]
 Enter Find Mode [ ]
 Set Field [ logs::_keyLogIssues; $$issue ]
-January 6, 平成26 1:13:26 ActionLog.fp7 - deleteIssue -1-specific action log: deleteIssue
 Perform Find [ ]
 Go to Record/Request/Page
 [ First ]
@@ -64,8 +66,8 @@ Loop
 #
 #Remove issue key from an activity log (day) records.
 Set Variable [ $logIssues; Value:logs::_keyLogIssues ]
-Set Field [ logs::_keyLogIssues; //last item in list has no paragraph mark, so a valuecount test needs to be done and if item is not
-removed, then the removal calc without the paragraph mark is used.
+Set Field [ logs::_keyLogIssues; //last item in list has no paragraph mark, so a valuecount test needs to be done and if
+item is not removed, then the removal calc without the paragraph mark is used.
 If ( ValueCount ( $logIssues ) ≠ ValueCount ( Substitute ( $logIssues ; $$issue & "¶" ; "" ) ) ;
 Substitute ( $logIssues ; $$issue & "¶" ; "" ) ;
 Substitute ( $logIssues ; $$issue ; "" )
@@ -102,4 +104,4 @@ Go to Field [ issue::text ]
 Go to Field [ ]
 Refresh Window
 #
-January 6, 平成26 1:13:26 ActionLog.fp7 - deleteIssue -2-
+December 6, ଘ౮27 21:08:46 ActionLog.fp7 - deleteIssue -1-

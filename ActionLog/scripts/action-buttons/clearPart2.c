@@ -4,6 +4,10 @@ record. Rather than just return the time to zero, this scripts deletes the recor
 particular brainstate record and will not be using it at all, in which case if it is not deleted, this unused record will fill up the database wasting
 space.
 #
+#
+Allow User Abort [ Off ]
+#
+#
 #1 check to insure that there is a record to clear and if not hast the script, then check to insure if there is a record that it is not a total or grand
 total record. These total records are sums of other records and so their times are not created by the stopwatch script and should not be
 cleared by this script. They will be cleared if there linked records' times are cleared by the UpdateTime script.
@@ -52,21 +56,42 @@ Set Variable [ $$stopRecordLoad ]
 Go to Layout [ original layout ]
 Perform Script [ “CHUNK_lastDayUsed” ]
 #
-#4 determine if the record whose time was just cleared is linked to a total and if so ﬂag it as changed and run the UpdateTime script to update its
+#
+#
+December 6, ଘ౮27 20:56:25 ActionLog.fp7 - clearPart2 -1-
+action buttons: clearPart2
+#4 determine if the record whose time was just cleared is linked to a total and if so flag it as changed and run the UpdateTime script to update its
 total record's time.
 Set Field [ brainstate::groupUpdate; If ( brainstate::groupID ≠ "" ; "u" ; "" ) ]
 If [ brainstate::groupID ≠ "" ]
 #
 #Update time in issue records if neccessary.
-January 5, 平成26 19:42:30 ActionLog.fp7 - clearPart2 -1-action buttons: clearPart2
-Perform Script [ “CHUNK_updateIssueCategoryTime” ]
+Perform Script [ “CHUNK_updateIssueCategoryTime (Updated)” ]
+#
+#Load updated variables in both Day and
+#Specific Action windows and refresh them to
+#trigger current conditional formatting for
+#selected records.
+Set Variable [ $refreshDayCurrentWindow; Value:Get ( WindowName ) ]
+Select Window [ Name: "Day"; Current file ]
+Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
+Set Variable [ $$log; Value:logs::_lockDay ]
+Set Variable [ $$day1BugField; Value:logs::swBugField ]
+Refresh Window
+Select Window [ Name: "Specific Action"; Current file ]
+Set Variable [ $$issueLogs; Value:issue::_keyLogs ]
+Refresh Window
+Select Window [ Name: $refreshDayCurrentWindow; Current file ]
+#
+#Script will halt after performing sort step below
+#so clear the $$clear variable.
 Set Variable [ $$clear ]
 #
 // #Reload log record in case current variables are
 // #set for log record that was just deleted/cleared.
 // Select Window [ Name: "Activity Log"; Current file ]
 // If [ Get (LastError) ≠ 112 //window missing ]
-// Perform Script [ “LoadLogrecordID” ]
+// Perform Script [ “loadLogrecordID” ]
 // End If
 Select Window [ Name: "Timer"; Current file ]
 Set Variable [ $$stopCHUNK_updateIssueCategoryTime; Value:1 ]
@@ -75,11 +100,13 @@ Set Variable [ $$stopCHUNK_updateIssueCategoryTime; Value:1 ]
 #other brainstate records as user may have dragged
 #time to other records before clearing this one, and
 #so system needs to update the time in those records.
-Perform Script [ “UpdateTime” ]
+Perform Script [ “updateTime” ]
 End If
+#
+#
 #
 #5 determine if the user is currently sorting by time and if so sort re-sort the records to remove this record from its current position in the time
 sort. (It should be listed in alphabetical order under the list of records sorted by their times as this record no longer has any time associated
 with it.)
 Go to Field [ ]
-January 5, 平成26 19:42:30 ActionLog.fp7 - clearPart2 -2-
+December 6, ଘ౮27 20:56:25 ActionLog.fp7 - clearPart2 -2-

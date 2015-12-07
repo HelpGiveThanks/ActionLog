@@ -1,5 +1,13 @@
 navigation: gotoLibraryDatabase
 #
+#
+#Stop script if user is process of picking a specific action group.
+If [ $$pick = 1 ]
+Show Custom Dialog [ Message: "Pick a specific-action tag or click the cancel button in the Tag window. After you do this you can go to
+the library. "; Buttons: “OK” ]
+Exit Script [ ]
+End If
+#
 #Select the current library windows if open and selected.
 Select Window [ Name: "Tag Menus" ]
 Select Window [ Name: "Learn" ]
@@ -31,4 +39,4 @@ Show Custom Dialog [ Message: "There is no library file in memory. Click on a li
 opened the next time you click the library button."; Buttons: “OK” ]
 End If
 #
-February 2, 平成26 14:09:29 ActionLog.fp7 - gotoLibraryDatabase -1-
+December 6, ଘ౮27 20:21:53 ActionLog.fp7 - gotoLibraryDatabase -1-

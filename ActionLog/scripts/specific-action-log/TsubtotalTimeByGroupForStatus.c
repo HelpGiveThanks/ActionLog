@@ -21,5 +21,6 @@ End If
 #
 // Perform Script [ “issueSortStatus” ]
 Perform Script [ “Tstatus” ]
-Perform Script [ “TsubtotalTimeByGroup” ]
-January 6, 平成26 11:20:23 ActionLog.fp7 - TsubtotalTimeByGroupForStatus -1-
+// Perform Script [ “TsubtotalTimeByGroup” ]
+Select Window [ Name: "Tag"; Current file ]
+December 6, ଘ౮27 21:31:55 ActionLog.fp7 - TsubtotalTimeByGroupForStatus -1-

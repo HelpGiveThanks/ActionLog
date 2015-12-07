@@ -1,10 +1,11 @@
-navigation: gotoSpeciﬁcAction
+navigation: gotoSpecificAction
 #
-#Stop script if user is process of picking a speciﬁc action group.
+#Stop script if user is process of picking a specific action group.
 If [ $$pick = 1 ]
-Show Custom Dialog [ Message: "Pick a speciﬁc-action group. After you do this you can select to go to other windows. "; Buttons: “OK” ]
+Show Custom Dialog [ Message: "Pick a specific-action tag or click the cancel button in the Tag window. After you do this you can go to
+the Specific Action window. "; Buttons: “OK” ]
 Exit Script [ ]
 End If
 #
-Select Window [ Name: "Speciﬁc Action" ]
-January 5, 平成26 14:27:58 ActionLog.fp7 - gotoSpeciﬁcAction -1-
+Select Window [ Name: "Specific Action" ]
+December 6, ଘ౮27 20:39:26 ActionLog.fp7 - gotoSpecificAction -1-

@@ -1,26 +1,45 @@
-specific action log: newIssueGroup
+specific action log: newTag (NAME CHANGE)
 #
-Set Variable [ $brainstate; Value:brainstate::_lockBrainstateID ]
+#When a new record is created the text field is blank.
+#If the user clicks the new button before giving
+#their current new record a name these steps will
+#name it for them.
+If [ category::text = "" and Get ( LayoutTableName ) ≠ "Status" ]
+Set Field [ category::text; "tag" & category::_LockList ]
+Else If [ status::text = "" and Get ( LayoutTableName ) = "Status" ]
+Set Field [ status::text; "status" & status::_LockList ]
+End If
 #
-Go to Layout [ “IssuesAndObservations Copy” (issue) ]
+#Create a new tag record and assign it the group
+#the user is in right now.
+Set Variable [ $group; Value:category::_keyCategory ]
+#
+Set Variable [ $$TagNameRequired; Value:1 ]
 #
 New Record/Request
-Set Field [ issue::lock; "location" ]
-Set Field [ issue::_keyBrainstate; $brainstate ]
+If [ Get ( LayoutTableName ) ≠ "Status" ]
+Set Field [ category::lock; "location" ]
+Set Field [ category::_keyBrainstate; $$logBrainstate ]
+Set Field [ category::_keyCategory; $group ]
+Else If [ Get ( LayoutTableName ) = "Status" ]
+Set Field [ status::lock; "status" ]
+End If
 #
-Set Variable [ $group; Value:issue::_LockList ]
+#Sort only if you want to bring new tag to the top
+#of the group list of tags. I found it to be less
+#disruptive if the tags don't sort.
+// Sort Records [ Specified Sort Order: group::text; ascending
+category::text; ascending ]
+[ Restore; No dialog ]
 #
-Go to Layout [ original layout ]
-#
-Go to Object [ Object Name: "group" ]
-#
-Go to Portal Row
-[ First ]
-Loop
-Exit Loop If [ $group = category::_LockList ]
-Go to Portal Row
-[ Select; Next; Exit after last ]
-End Loop
-#
+#Make it easy for user to type new name for tag.
+If [ category::text = "" and Get ( LayoutTableName ) ≠ "Status" ]
 Go to Field [ category::text ]
-February 24, 平成26 15:13:03 ActionLog.fp7 - newIssueGroup -1-
+Else
+Go to Field [ status::text ]
+End If
+#
+#Turn off variable set at start of script.
+Set Variable [ $$TagNameRequired ]
+#
+December 6, ଘ౮27 21:39:36 ActionLog.fp7 - newTag (NAME CHANGE) -1-

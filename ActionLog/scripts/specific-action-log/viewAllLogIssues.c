@@ -2,12 +2,12 @@ specific action log: viewAllLogIssues
 #
 Set Variable [ $$stopRecordLoad; Value:1 ]
 #
-#If find mode is active clear it.
-If [ $$found ≠ "" ]
+#
+#Clear tag find variables and go to category layout.
 Select Window [ Name: "Tag"; Current file ]
 Set Variable [ $$found ]
-Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
-End If
+Set Variable [ $$foundStatus ]
+Go to Layout [ “IssuesAndObservationsTag” (category) ]
 #
 #neccessary step when two monitors are used as this
 #window can be opened in smaller monitor and then
@@ -55,5 +55,5 @@ Scroll Window
 [ Home ]
 End If
 Set Variable [ $$stopRecordLoad ]
-Perform Script [ “LoadIssuerecordID” ]
-January 6, 平成26 1:17:43 ActionLog.fp7 - viewAllLogIssues -1-
+Perform Script [ “loadIssuerecordID” ]
+December 6, ଘ౮27 21:21:53 ActionLog.fp7 - viewAllLogIssues -1-

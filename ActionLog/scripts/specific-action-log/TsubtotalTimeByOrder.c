@@ -1,5 +1,16 @@
 specific action log: TsubtotalTimeByOrder
 #
+#
+#
+#
+#Decided for now that this information is too much
+#clutter, especially now the user can see total time
+#per category tag in the tag window.
+Exit Script [ ]
+#
+#
+#
+#
 #If user selected the same category that was already
 #selected then stop this script.
 If [ issue::_keyCategory = issue::oldCategorykey and $$stopSubtotal = "" ]
@@ -13,7 +24,7 @@ Set Variable [ $$stopSubtotal ]
 #still belong to this record's former category.
 Set Variable [ $OLDcategoryKey; Value:issue::oldCategorykey ]
 #
-#Prevent windows from ﬂashing and script from slowing
+#Prevent windows from flashing and script from slowing
 #by stopping strobe effect caused by going back and
 #forth from each window upon loading each records
 #information throughout the script, rather than just
@@ -55,7 +66,6 @@ New Window [ Name: "temp" ]
 #formatting and so speeds up the script steps.
 Go to Layout [ “IssuesLayoutForScripts” (issue) ]
 #
-January 6, 平成26 11:20:54 ActionLog.fp7 - TsubtotalTimeByOrder -1-specific action log: TsubtotalTimeByOrder
 #Add up total time for category the issue is now in.
 #
 #First find all the issues in this category.
@@ -114,7 +124,6 @@ End If
 #
 #
 #Disabled the next chunk after deciding it was
-January 6, 平成26 11:20:54 ActionLog.fp7 - TsubtotalTimeByOrder -2-specific action log: TsubtotalTimeByOrder
 #better to use filemaker's subtotal calc rather
 #doing it with this script chunk whose benefit
 #was subtotaling items in a category even when
@@ -175,7 +184,6 @@ issue::text; ascending ]
 // Set Field [ issue::timeTotalSumByCatSortedByStatus; $subsetTotal ]
 // Go to Record/Request/Page
 [ Next; Exit after last ]
-January 6, 平成26 11:20:54 ActionLog.fp7 - TsubtotalTimeByOrder -3-specific action log: TsubtotalTimeByOrder
 // Exit Loop If [ issue::_keyCategory ≠ $category
 //This next step I thought could happen, but then realized it can nevery happen
 //or
@@ -239,15 +247,6 @@ issueCategory::order; ascending
 issue::sortTime; ascending
 issue::text; ascending ]
 [ Restore; No dialog ]
-January 6, 平成26 11:20:54 ActionLog.fp7 - TsubtotalTimeByOrder -4-specific action log: TsubtotalTimeByOrder
-Sort Records [ Specified Sort Order: brainstate::description; ascending
-issue::order; based on value list: “1-99”
-issueStatus::order; based on value list: “__-99”
-issueStatus::text; ascending
-issueCategory::order; ascending
-issue::sortTime; ascending
-issue::text; ascending ]
-[ Restore; No dialog ]
 // Sort Records [ ]
 [ No dialog ]
 Scroll Window
@@ -260,4 +259,4 @@ Set Variable [ $$stopRecordLoad ]
 // #menu. This halt script stops the pause script
 // #that is currently in play.
 // Halt Script
-January 6, 平成26 11:20:54 ActionLog.fp7 - TsubtotalTimeByOrder -5-
+December 6, ଘ౮27 21:33:45 ActionLog.fp7 - TsubtotalTimeByOrder -1-

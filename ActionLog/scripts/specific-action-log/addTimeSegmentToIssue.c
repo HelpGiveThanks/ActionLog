@@ -6,12 +6,21 @@ Exit Script [ ]
 End If
 Set Variable [ $timeSegment; Value:Get ( ActiveRepetitionNumber ) & logs::_lockDay ]
 #
-#Prevent windows from ﬂashing and script from slowing
+#Prevent windows from flashing and script from slowing
 #by stopping strobe effect caused by going back and
 #forth from each window upon loading each records
 #information throughout the script, rather than just
 #at the end.
 Set Variable [ $$stopRecordLoad; Value:1 ]
+#
+#If the user activated Specific Action timer by
+#dragging time from another timer then the
+#update the $$day1BugField to reflect it's
+#active. The dragging method of activiation
+#fails to update variables.
+If [ logs::swBugField = "veto" ]
+Set Variable [ $$day1BugField; Value:"veto" ]
+End If
 #
 #Get category key for adding up total category time
 #later in the script.
@@ -56,46 +65,64 @@ Set Field [ issueTime::_keyIssue; $$issue ]
 Enter Find Mode [ ]
 Set Field [ issueTime::_keyIssue; $$issue ]
 Perform Find [ ]
-January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -1-specific action log: addTimeSegmentToIssue
-Perform Find [ ]
 Set Variable [ $totalTime; Value:issueTime::sum ]
 #
-#Add day and repetition keys to the list of all day
-#and repetition keys for this issue.
+#Set new total time for this issue.
 Go to Layout [ “IssuesLayoutForScripts” (issue) ]
 Enter Find Mode [ ]
 Set Field [ issue::_LockList; $$issue ]
 Perform Find [ ]
+Set Field [ issue::issueTotalTime; $totalTime ]
+#
+#Add day and repetition keys to the list of all day
+#and repetition keys for this issue.
 Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
 Set Variable [ $time; Value:$repetition & $day ]
 Set Field [ issue::timeSegmentKeyList; $time & ¶ & $$timeAll ]
 Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
-Set Field [ issue::issueTotalTime; $totalTime ]
 #
 #Add up total time for category it is in.
 Enter Find Mode [ ]
 Set Field [ issue::_keyCategory; $categoryKey ]
 Perform Find [ ]
-Sort Records [ Specified Sort Order: issue::sortTime; ascending ]
+Sort Records [ Specified Sort Order: issue::_keyCategory; ascending ]
 [ Restore; No dialog ]
-Go to Record/Request/Page
+#
+#Stop doing this modification of all records tagged
+#with the same catetory so the MODIFY DATE
+#only gets changed when something unique in
+#an issue record is changed. And besides,
+#category tag's total time is now displayed in the
+#tag window rather than the Specific Action window.
+// Go to Record/Request/Page
 [ First ]
-Loop
-Set Field [ issue::timeTotalSumByCat; issue::timeTotalSummaryByCategory ]
-Go to Record/Request/Page
+// Loop
+// Set Field [ issue::timeTotalSumByCat; issue::timeTotalSummaryByCategory ]
+// Go to Record/Request/Page
 [ Next; Exit after last ]
-End Loop
+// End Loop
+#
+#Set new total time for category tag.
+// Set Field [ issueCategory::issueTotalTime; issue::timeTotalSummaryByCategory ]
+Set Field [ issueCategory::issueTotalTime; GetSummary ( issue::timeSummary ; issue::_keyCategory ) ]
+#
 Go to Layout [ original layout ]
 #
 #Conditionally format segment to show that it is assigned.
 Set Field [ daylog::swLogTimeAccounting[$repetition]; $$issue ]
 #
+#Capture Day window time segment timer that is on.
+Set Variable [ $$ActiveTimeSegment; Value:logs::swOccurances & logs::_lockDay ]
+#
 #If issue is not linked to day whose time has just
 #been added to it, then link it.
 Select Window [ Name: "Specific Action"; Current file ]
 If [ issue::_LockList & "¶" ≠ FilterValues ( $$logIssues ; issue::_LockList & "¶" ) ]
-Perform Script [ “IssueToLog” ]
+Perform Script [ “linkActionToDay (Name Change)” ]
 End If
+#
+#Inform user the timer is running for this specific
+#action record with conditional formatting.
 Select Window [ Name: "Day"; Current file ]
 Go to Field [ ]
 #
@@ -104,10 +131,14 @@ Go to Field [ ]
 #
 Else If [ Get (LastError) ≠ 401 ]
 Go to Layout [ original layout ]
-Show Custom Dialog [ Message: "Subtract time from act currently credited with it, so that it can be credited to a different act?¶¶Go to act
-credited with this time?"; Buttons: “GoToAct”, “Subtract” ]
-If [ Get ( LastMessageChoice ) = 1 ]
+If [ $$specificActionTimer = "" ]
+Show Custom Dialog [ Message: "Subtract time from act currently credited with it, so that it can be credited to a different
+act?¶¶Go to act credited with this time?"; Buttons: “GoToAct”, “Subtract” ]
+End If
+If [ Get ( LastMessageChoice ) = 1 and $$specificActionTimer = "" ]
 Go to Field [ ]
+#
+#Go to record time to which time will be added.
 Select Window [ Name: "Specific Action"; Current file ]
 Go to Record/Request/Page
 [ First ]
@@ -115,8 +146,10 @@ Loop
 Exit Loop If [ FilterValues (issue::timeSegmentKeyList ; $timeSegment & "¶") = $timeSegment & "¶" ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
-January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -2-specific action log: addTimeSegmentToIssue
 End Loop
+#
+#If record is not showing then find and add it to
+#list of records being shown.
 If [ FilterValues (issue::timeSegmentKeyList ; $timeSegment & "¶") ≠ $timeSegment & "¶" ]
 Enter Find Mode [ ]
 Set Field [ issue::timeSegmentKeyList; $timeSegment & "¶" ]
@@ -132,7 +165,7 @@ Go to Record/Request/Page
 End Loop
 End If
 Set Variable [ $$stopRecordLoad ]
-Perform Script [ “LoadIssuerecordID” ]
+Perform Script [ “loadIssuerecordID” ]
 Exit Script [ ]
 End If
 #
@@ -166,13 +199,12 @@ Enter Find Mode [ ]
 Set Field [ issue::timeSegmentKeyList; $time ]
 Perform Find [ ]
 Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
-Set Field [ issue::timeSegmentKeyList; //last item in list has no paragraph mark, so a valuecount test needs to be done and if item is not
-removed, then the removal calc without the paragraph mark is used
+Set Field [ issue::timeSegmentKeyList; //last item in list has no paragraph mark, so a valuecount test needs to be done and if item
+is not removed, then the removal calc without the paragraph mark is used
 If ( ValueCount ( $$timeAll ) ≠ ValueCount ( Substitute ( $$timeAll ; $time & "¶" ; "" ) ) ;
 Substitute ( $$timeAll ; $time & "¶" ; "" ) ;
 Substitute ( $$timeAll ; $time ; "" )
 ) ]
-January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -3-specific action log: addTimeSegmentToIssue
 Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
 Set Field [ issue::issueTotalTime; $totalTime ]
 #
@@ -181,21 +213,38 @@ Go to Layout [ “Issues” (issue) ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyCategory; $categoryKey ]
 Perform Find [ ]
-Sort Records [ Specified Sort Order: issue::sortTime; ascending ]
+Sort Records [ Specified Sort Order: issue::_keyCategory; ascending ]
 [ Restore; No dialog ]
-Go to Record/Request/Page
+#
+#Stop doing this modification of all records tagged
+#with the same catetory so the MODIFY DATE
+#only gets changed when something unique in
+#an issue record is changed. And besides,
+#category tag's total time is now displayed in the
+#tag window rather than the Specific Action window.
+// Go to Record/Request/Page
 [ First ]
-Loop
-Set Field [ issue::timeTotalSumByCat; issue::timeTotalSummaryByCategory ]
-Go to Record/Request/Page
+// Loop
+// Set Field [ issue::timeTotalSumByCat; issue::timeTotalSummaryByCategory ]
+// Go to Record/Request/Page
 [ Next; Exit after last ]
-End Loop
+// End Loop
+#
+#Set new total time for category tag.
+// Set Field [ issueCategory::issueTotalTime; issue::timeTotalSummaryByCategory ]
+Set Field [ issueCategory::issueTotalTime; GetSummary ( issue::timeSummary ; issue::_keyCategory ) ]
+#
 Go to Layout [ original layout ]
 Go to Layout [ original layout ]
 Go to Field [ ]
+Select Window [ Name: "Specific Action"; Current file ]
+#
+#Inform user timer stopped running for this specific
+#action record with conditional formatting.
+Set Variable [ $$TimeAssignedToSpecificAction ]
 End If
 Set Variable [ $$stopRecordLoad ]
 Select Window [ Name: "Specific Action"; Current file ]
-Perform Script [ “LoadIssuerecordID” ]
+Perform Script [ “loadIssuerecordID” ]
 Select Window [ Name: "Day"; Current file ]
-January 6, 平成26 1:19:15 ActionLog.fp7 - addTimeSegmentToIssue -4-
+December 6, ଘ౮27 21:22:56 ActionLog.fp7 - addTimeSegmentToIssue -1-
