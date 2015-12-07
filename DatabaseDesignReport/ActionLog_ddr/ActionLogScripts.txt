@@ -1,47 +1,35 @@
 
-    #PURPOSE on the normal record view layouts the user is shown a total linkID number underlined to indicated that it is a button and a view button for all total and grand total records. These two buttons -- linkID number and view -- activate this script whose purpose is to 1) navigate from the current layout to the totalview layout, and 2) find and display the linked records. For example, the user may have several leg exercises they do each tracked by separate record and all of them totaled in one leg exercise total record. Clicking on the view button for the total record or the linkID number of this total record displayed next all the leg exercise records will activitate this script with result being the display of just these leg exercise records and the leg exercise total record. The user could take advantage of this feature to hide the leg exercise records displaying only the total record and when they wish to record leg exercise time, the user could click the view button see all the associated records, update them and then return to the main screen in which once again only the total record (now updated with new time) would be shown (along with all the other records the user wants to see.
     #
     #
-    #
-    #1 check to insure the record is linked and if not stop the script. (This is neccessary because filemaker allows the link button that activitates this script to be hidden but not deactivited, and it should not run if there are no records for it to find and display.)
-    If [ brainstate::groupID = "" and brainstate::groupOfGroupID = "" ]
-    Halt Script
-    #
-    #2 if the record is part of total (or is the total record) find and display all linked records and set the users choosen day field.
-    Else If [ brainstate::groupID ≠ "" ]
-    Set Variable [ $mergeID; Value:brainstate::groupID ]
-    Set Field [ steward::chosenDayTotal; brainstate::day1 ]
-    Enter Find Mode [ ]
-    Set Field [ brainstate::groupID; $mergeID ]
-    Set Field [ brainstate::sortRetired; "=" ]
-    Perform Find [ ]
-    #NOT TESTED
-    If [ Get ( SystemPlatform ) = 3 or steward::iPhoneLayout ≠ "" ]
-    Go to Layout [ “TotalMainiPhone” (brainstate) ]
-    Else If [ Get ( SystemPlatform ) ≠ 3 or steward::iPhoneLayout = "" ]
-    Go to Layout [ “TotalMain” (brainstate) ]
+    #Stop script if user is process of picking a specific action group.
+    If [ $$pick = 1 ]
+    Show Custom Dialog [ Message: "Pick a specific-action tag or click the cancel button in the Tag window. After you do this you can go to the library. "; Buttons: “OK” ]
+    Exit Script [ ]
     End If
-    #END NOT TESTED
-    #set the retired status to r (assume the user always only wants to show current set of records minus the ones they have retired)
-    Set Field [ steward::retiredStatus; "r" ]
-    #future developement: omit retired records if the retired button is on
-    // Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ] [ Restore ]
-    // Sort Records [ Specified Sort Order: brainstate::groupType; based on value list: “MergeSort” brainstate::_lockBrainstateID; descending ] [ Restore; No dialog ]
-    #save the recordnumber which will now be erased by the next script
-    Set Variable [ $$recordnumber2; Value:$$recordnumber ]
-    Perform Script [ “DaySelectSortThenSort” ]
-    Halt Script
     #
-    #3 if the record is part of a grand total (or is the grand total record) find and display all linked records.
-    Else If [ brainstate::groupOfGroupID ≠ "" ]
-    Set Variable [ $mergeGrandID; Value:brainstate::groupOfGroupID ]
-    Enter Find Mode [ ]
-    Set Field [ brainstate::groupOfGroupID; $mergeGrandID ]
-    Perform Find [ ]
-    #future developement: omit retired records if the retired button is on
-    // Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ] [ Restore ]
-    Go to Layout [ “GrandTotal” (brainstate) ]
-    // Sort Records [ Specified Sort Order: brainstate::groupType; based on value list: “MergeSort” brainstate::_lockBrainstateID; descending ] [ Restore; No dialog ]
-    Perform Script [ “DaySelectSortThenSort” ]
-    Halt Script
+    #Select the current library windows if open and selected.
+    Select Window [ Name: "Tag Menus" ]
+    Select Window [ Name: "Learn" ]
+    Select Window [ Name: "Setup" ]
+    Select Window [ Name: "Report" ]
+    Select Window [ Name: "References" ]
+    Select Window [ Name: MemorySwitch::currentLibraryMainWIndow ]
+    #
+    #If no library is open, then open the last library used.
+    If [ Get (LastError) = 112 and MemorySwitch::currentLibraryPath ≠ "" ]
+    Open URL [ Case ( Get ( SystemPlatform ) = - 2 ; Substitute (MemorySwitch::currentLibraryPath ; " " ; "%20" ) ; Substitute ( Substitute ( MemorySwitch::currentLibraryPath ; "file:/" ; "file://" ) ; " " ; "%20" ) ) ] [ No dialog ]
+    #
+    #If the path stored for the selected library failed to open
+    #the library, then that library is no longer there or its
+    #name has been changed, so inform the user of their
+    #options.
+    If [ Get (LastError) = 5 ]
+    Show Custom Dialog [ Message: "Last library used cannot be found as it must have been renamed, moved, or deleted. Find and open it manually or click the allsolutions button to select another library."; Buttons: “OK” ]
     End If
+    #
+    #If their are no libraries in the system let the user
+    #know how to add new ones.
+    Else If [ Get (LastError) = 112 and MemorySwitch::currentLibraryPath = "" ]
+    Show Custom Dialog [ Message: "There is no library file in memory. Click on a library file manually and it will be added to memory and opened the next time you click the library button."; Buttons: “OK” ]
+    End If
+    #
