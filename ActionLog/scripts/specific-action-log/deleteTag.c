@@ -1,4 +1,4 @@
-specific action log: deleteTag (NAME CHANGE)
+specific action log: deleteTag
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
 #
@@ -55,8 +55,8 @@ button above and then this tag's button." ); Buttons: “OK” ]
 Exit Script [ ]
 End If
 #
-December 6, ଘ౮27 21:17:11 ActionLog.fp7 - deleteTag (NAME CHANGE) -1-
-specific action log: deleteTag (NAME CHANGE)
+December 6, ଘ౮27 21:17:11 ActionLog.fp7 - deleteTag -1-
+specific action log: deleteTag
 #If none are found then ask user if they really want
 #to delete this tag.
 Refresh Window
@@ -111,4 +111,4 @@ End If
 Set Variable [ $delete ]
 Go to Field [ ]
 Refresh Window
-December 6, ଘ౮27 21:17:11 ActionLog.fp7 - deleteTag (NAME CHANGE) -2-
+December 6, ଘ౮27 21:17:11 ActionLog.fp7 - deleteTag -2-

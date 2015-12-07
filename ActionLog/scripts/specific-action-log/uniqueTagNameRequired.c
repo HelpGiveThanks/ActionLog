@@ -1,4 +1,4 @@
-specific action log: uniqueTagNameRequired (NAME CHANGE)
+specific action log: uniqueTagNameRequired
 #
 #Capture text, remove spaces, and then recapture
 #the text to prevent user from creating a group
@@ -67,4 +67,4 @@ Exit Loop If [ $key = category::_LockList ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
-December 6, ଘ౮27 21:27:32 ActionLog.fp7 - uniqueTagNameRequired (NAME CHANGE) -1-
+December 6, ଘ౮27 21:27:32 ActionLog.fp7 - uniqueTagNameRequired -1-

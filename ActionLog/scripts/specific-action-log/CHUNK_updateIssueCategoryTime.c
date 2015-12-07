@@ -1,4 +1,4 @@
-specific action log: CHUNK_updateIssueCategoryTime
+ specific action log: CHUNK_updateIssueCategoryTime
 #
 #This script is used by the updateTime script
 #and the clear script and the script

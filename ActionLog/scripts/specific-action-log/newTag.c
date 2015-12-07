@@ -1,4 +1,4 @@
-specific action log: newTag (NAME CHANGE)
+specific action log: newTag
 #
 #When a new record is created the text field is blank.
 #If the user clicks the new button before giving
@@ -42,4 +42,4 @@ End If
 #Turn off variable set at start of script.
 Set Variable [ $$TagNameRequired ]
 #
-December 6, ଘ౮27 21:39:36 ActionLog.fp7 - newTag (NAME CHANGE) -1-
+December 6, ଘ౮27 21:39:36 ActionLog.fp7 - newTag -1-

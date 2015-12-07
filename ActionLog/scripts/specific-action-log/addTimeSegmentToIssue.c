@@ -118,7 +118,7 @@ Set Variable [ $$ActiveTimeSegment; Value:logs::swOccurances & logs::_lockDay ]
 #been added to it, then link it.
 Select Window [ Name: "Specific Action"; Current file ]
 If [ issue::_LockList & "¶" ≠ FilterValues ( $$logIssues ; issue::_LockList & "¶" ) ]
-Perform Script [ “linkActionToDay (Name Change)” ]
+Perform Script [ “linkActionToDay” ]
 End If
 #
 #Inform user the timer is running for this specific

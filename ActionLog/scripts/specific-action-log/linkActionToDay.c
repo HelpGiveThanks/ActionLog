@@ -1,6 +1,6 @@
-specific action log: IssueToLog
+specific action log: linkActionToDay
 #
-#Prevent windows from ﬂashing and script from slowing
+#Prevent windows from flashing and script from slowing
 #by stopping strobe effect caused by going back and
 #forth from each window upon loading each records
 #information throughout the script, rather than just
@@ -96,56 +96,9 @@ $$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecord
  or
 $$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
  and 15 & $$log & "¶" = FilterValues ( $$timeAll ; 15 & $$log & "¶" ) ]
-January 6, 平成26 1:16:39 ActionLog.fp7 - IssueToLog -1-specific action log: IssueToLog
-If [ $$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 1 & $$log & "¶" = FilterValues ( $$timeAll ; 1 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 2 & $$log & "¶" = FilterValues ( $$timeAll ; 2 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 3 & $$log & "¶" = FilterValues ( $$timeAll ; 3 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 4 & $$log & "¶" = FilterValues ( $$timeAll ; 4 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 5 & $$log & "¶" = FilterValues ( $$timeAll ; 5 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 6 & $$log & "¶" = FilterValues ( $$timeAll ; 6 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 7 & $$log & "¶" = FilterValues ( $$timeAll ; 7 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 8 & $$log & "¶" = FilterValues ( $$timeAll ; 8 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 9 & $$log & "¶" = FilterValues ( $$timeAll ; 9 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 10 & $$log & "¶" = FilterValues ( $$timeAll ; 10 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 11 & $$log & "¶" = FilterValues ( $$timeAll ; 11 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 12 & $$log & "¶" = FilterValues ( $$timeAll ; 12 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 13 & $$log & "¶" = FilterValues ( $$timeAll ; 13 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 14 & $$log & "¶" = FilterValues ( $$timeAll ; 14 & $$log & "¶" )
- or
-$$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
- and 15 & $$log & "¶" = FilterValues ( $$timeAll ; 15 & $$log & "¶" ) ]
-Show Custom Dialog [ Message: "This act has time from the selected day record assigned to it. Do you really want to do unlink it?";
-Buttons: “cancel”, “unlink” ]
-If [ Get ( LastMessageChoice ) = 1 ]
+Show Custom Dialog [ Message: "This action has time from the selected day record assigned to it. Before you can unlink it, click
+on all green time segments in the Day window and remove them from this action."; Buttons: “OK” ]
 Exit Script [ ]
-End If
 End If
 #
 #
@@ -161,22 +114,6 @@ New Window [ Name: "temp" ]
 Select Window [ Name: "Day"; Current file ]
 Set Variable [ $day; Value:daylog::_lockDay ]
 Select Window [ Name: "temp"; Current file ]
-If [ 1 & $day & "¶" = FilterValues ( $$timeAll ; 1 & $day & "¶" ) or
-2 & $day & "¶" = FilterValues ( $$timeAll ; 2 & $day & "¶" ) or
-3 & $day & "¶" = FilterValues ( $$timeAll ; 3 & $day & "¶" ) or
-4 & $day & "¶" = FilterValues ( $$timeAll ; 4 & $day & "¶" ) or
-5 & $day & "¶" = FilterValues ( $$timeAll ; 5 & $day & "¶" ) or
-6 & $day & "¶" = FilterValues ( $$timeAll ; 6 & $day & "¶" ) or
-7 & $day & "¶" = FilterValues ( $$timeAll ; 7 & $day & "¶" ) or
-8 & $day & "¶" = FilterValues ( $$timeAll ; 8 & $day & "¶" ) or
-9 & $day & "¶" = FilterValues ( $$timeAll ; 9 & $day & "¶" ) or
-10 & $day & "¶" = FilterValues ( $$timeAll ; 10 & $day & "¶" ) or
-11 & $day & "¶" = FilterValues ( $$timeAll ; 10 & $day & "¶" ) or
-12 & $day & "¶" = FilterValues ( $$timeAll ; 10 & $day & "¶" ) or
-13 & $day & "¶" = FilterValues ( $$timeAll ; 10 & $day & "¶" ) or
-14 & $day & "¶" = FilterValues ( $$timeAll ; 10 & $day & "¶" ) or
-15 & $day & "¶" = FilterValues ( $$timeAll ; 10 & $day & "¶" ) ]
-January 6, 平成26 1:16:39 ActionLog.fp7 - IssueToLog -2-specific action log: IssueToLog
 If [ 1 & $day & "¶" = FilterValues ( $$timeAll ; 1 & $day & "¶" ) or
 2 & $day & "¶" = FilterValues ( $$timeAll ; 2 & $day & "¶" ) or
 3 & $day & "¶" = FilterValues ( $$timeAll ; 3 & $day & "¶" ) or
@@ -247,7 +184,6 @@ Sort Records [ Specified Sort Order: issue::sortTime; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
-January 6, 平成26 1:16:39 ActionLog.fp7 - IssueToLog -3-specific action log: IssueToLog
 Loop
 Set Field [ issue::timeTotalSumByCat; issue::timeTotalSummaryByCategory ]
 Go to Record/Request/Page
@@ -266,8 +202,8 @@ Select Window [ Name: "Day"; Current file ]
 Set Variable [ $$logIssues; Value:logs::_keyLogIssues ]
 Set Variable [ $removelog; Value:logs::_lockDay ]
 #
-Set Field [ logs::_keyLogIssues; //last item in list has no paragraph mark, so a valuecount test needs to be done and if item is not removed, then
-the removal calc without the paragraph mark is used
+Set Field [ logs::_keyLogIssues; //last item in list has no paragraph mark, so a valuecount test needs to be done and if item is not
+removed, then the removal calc without the paragraph mark is used
 If ( ValueCount ( $$logIssues ) ≠ ValueCount ( Substitute ( $$logIssues ; $removeIssue & "¶" ; "" ) ) ;
 Substitute ( $$logIssues ; $removeIssue & "¶" ; "" ) ;
 Substitute ( $$logIssues ; $removeIssue ; "" )
@@ -278,8 +214,8 @@ Refresh Window
 Select Window [ Name: "Specific Action"; Current file ]
 #
 #Remove log ID from issueLogs.
-Set Field [ issue::_keyLogs; //last item in list has no paragraph mark, so a valuecount test needs to be done and if item is not removed, then the
-removal calc without the paragraph mark is used
+Set Field [ issue::_keyLogs; //last item in list has no paragraph mark, so a valuecount test needs to be done and if item is not removed,
+then the removal calc without the paragraph mark is used
 If ( ValueCount ( $$IssueLogs ) ≠ ValueCount ( Substitute ( $$IssueLogs ; $removeLog & "¶" ; "" ) ) ;
 Substitute ( $$IssueLogs ; $removeLog & "¶" ; "" ) ;
 Substitute ( $$IssueLogs ; $removeLog ; "" )
@@ -296,4 +232,4 @@ Set Variable [ $$IssueLogs; Value:issue::_keyLogs ]
 Go to Record/Request/Page [ Get (RecordNumber) ]
 [ No dialog ]
 Set Variable [ $$stopRecordLoad ]
-January 6, 平成26 1:16:39 ActionLog.fp7 - IssueToLog -4-
+December 6, ଘ౮27 22:31:09 ActionLog.fp7 - linkActionToDay -1-
