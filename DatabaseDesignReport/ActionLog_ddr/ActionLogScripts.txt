@@ -1,23 +1,41 @@
 
-    Select Window [ Name: "Specific Action"; Current file ]
-    If [ Get (LastError) = 112 ]
-    New Window [ Name: "Specific Action" ]
-    If [ Get ( WindowZoomLevel ) > 150 ]
-    Move/Resize Window [ Current Window; Width: Get (ScreenWidth) / 2; Left: 0 ]
-    Else If [ Get ( WindowZoomLevel ) = 150 ]
-    Move/Resize Window [ Current Window; Height: Get (ScreenHeight); Width: 441; Left: 0 ]
-    End If
-    Go to Layout [ “Issues” (issue) ]
-    Allow User Abort [ Off ]
-    Set Error Capture [ On ]
-    Enter Find Mode [ ]
-    Set Field [ issue::_keyBrainstate; $$logbrainstate ]
+    #
+    Set Variable [ $$stopRecordLoad; Value:1 ]
+    #
+    New Record/Request
+    Set Field [ issue::_keyBrainstate; $$logBrainstate ]
+    Set Field [ issue::date; Get ( CurrentTimeStamp ) ]
     Set Field [ issue::lock; "issue" ]
-    Perform Find [ ]
-    Sort Records [ Specified Sort Order: brainstate::description; ascending issueStatus::order; ascending issueStatus::text; ascending issueCategory::order; ascending issueCategory::text; ascending issue::order; based on value list: “__-99” issue::text; ascending ] [ Restore; No dialog ]
-    Go to Record/Request/Page [ First ]
+    Set Field [ issue::_keyStatus; 7152011154818554 ]
     Set Variable [ $$issueRecordID; Value:Get ( RecordID ) ]
-    Set Variable [ $$issue; Value:issue::_LockList ]
-    Set Variable [ $$issueLogs; Value:issue::_keyLogs ]
+    Set Field [ brainstate::pulldownBrainstate; issue::_keyBrainstate ]
+    #
+    #Set variable to remove background color and allow
+    #message explaining assigning group to show.
+    Set Variable [ $newAct; Value:issue::_LockList ]
     Refresh Window
-    End If
+    #
+    Set Variable [ $recordNumber; Value:Get ( RecordNumber ) ]
+    Go to Record/Request/Page [ Next ]
+    Go to Record/Request/Page [ Next ]
+    Go to Record/Request/Page [ Next ]
+    Go to Record/Request/Page [ Next ]
+    Go to Record/Request/Page [ Next ]
+    Go to Record/Request/Page [ Next ]
+    Go to Record/Request/Page [ Next ]
+    Go to Record/Request/Page [ Next ]
+    Go to Record/Request/Page [ Next ]
+    Set Variable [ $$stopRecordLoad ]
+    Go to Record/Request/Page [ $recordNumber ] [ No dialog ]
+    #
+    #Set variable to remove background color and allow
+    #message explaining assigning group to show.
+    Set Variable [ $newAct; Value:issue::_LockList ]
+    Refresh Window
+    #
+    Select Window [ Name: "Tag"; Current file ]
+    Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
+    Set Variable [ $$pick; Value:1 ]
+    Refresh Window
+    Pause/Resume Script [ Indefinitely ]
+    #
