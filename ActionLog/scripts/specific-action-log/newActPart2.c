@@ -7,7 +7,7 @@ Set Variable [ $$group; Value:category::_LockList ]
 Set Variable [ $$pick ]
 Go to Field [ ]
 // Move/Resize Window [ Current Window; Height: Get (ScreenHeight); Top: 0; Left: Get (ScreenWidth) - 344 ]
-// Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
+// Go to Layout [ “IssuesAndObservationsTag” (category) ]
 Refresh Window
 #
 #Give key to current specific action.

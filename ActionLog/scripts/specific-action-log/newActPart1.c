@@ -44,7 +44,7 @@ Set Variable [ $newAct; Value:issue::_LockList ]
 Refresh Window
 #
 Select Window [ Name: "Tag"; Current file ]
-Go to Layout [ “IssuesAndObservationsTag” (brainstate) ]
+Go to Layout [ “IssuesAndObservationsTag” (category) ]
 Set Variable [ $$pick; Value:1 ]
 Refresh Window
 Pause/Resume Script [ Indefinitely ]
