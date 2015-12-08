@@ -1,7 +1,7 @@
 navigation: goToFarmer
-#PURPOSE go the selected farmer's records from the createEditFarmer layout. (This is script is identical to the switchFarmer script except for
-step 1, which is required because the reference field is not available on this layout, and so the user's ID must be taken from the user table,
-not the reference table.)
+#PURPOSE go the selected farmer's records from the createEditFarmer layout. (This is script is identical to the switchFarmer script
+except for step 1, which is required because the reference field is not available on this layout, and so the user's ID must be taken
+from the user table, not the reference table.)
 #
 #
 #
@@ -25,11 +25,13 @@ End Loop
 #
 Freeze Window
 If [ Get ( SystemPlatform ) ≠ 3 and steward::iPhoneLayout = "" ]
-// Move/Resize Window [ Current Window; Height: steward::windowSizeAndPlace [1]; Width: steward::windowSizeAndPlace [2]; Top:
-steward::windowSizeAndPlace [3]; Left: steward::windowSizeAndPlace [4] ]
+// Move/Resize Window [ Current Window; Height: steward::windowSizeAndPlace [1]; Width: steward::windowSizeAndPlace [2];
+Top: steward::windowSizeAndPlace [3]; Left: steward::windowSizeAndPlace [4] ]
+Move/Resize Window [ Current Window; Height: Get (ScreenHeight) - 2 * ( Get (ScreenHeight) * .05 ); Width: Get
+(ScreenWidth) * .8; Top: Get (ScreenHeight) * .05; Left: Get (ScreenWidth) * .1 ]
 Else If [ steward::iPhoneLayout ≠ "" ]
-Move/Resize Window [ Current Window; Height: steward::windowSizeAndPlace [5]; Width: steward::windowSizeAndPlace [6]; Top:
-steward::windowSizeAndPlace [7]; Left: steward::windowSizeAndPlace [8] ]
+Move/Resize Window [ Current Window; Height: steward::windowSizeAndPlace [5]; Width: steward::windowSizeAndPlace [6];
+Top: steward::windowSizeAndPlace [7]; Left: steward::windowSizeAndPlace [8] ]
 End If
 #
 #1 capture selected userID, insert it into the referenceID field, then go to layout showing brainstate records.
@@ -58,7 +60,6 @@ Perform Script [ “CHUNK_retire” ]
 // Perform Script [ “to 1” ]
 // Else If [ Left ( steward::chosenLayout ; 2 ) = "07" ]
 // Perform Script [ “to 7” ]
-January 5, 平成26 14:38:23 ActionLog.fp7 - goToFarmer -1-navigation: goToFarmer
 // Else If [ Left ( steward::chosenLayout ; 2 ) = "31" ]
 // Perform Script [ “to 31” ]
 // End If
@@ -91,19 +92,19 @@ End If
 Set Field [ steward::chosenDay; Get ( CurrentDate ) ]
 Set Field [ reference::day1; steward::chosenDay ]
 #
-#3 refresh the layout so that the key fields for each record will be recalculated based on the new day selected. The date and times shown for
-each record are in a table related to each brainstate record by their dates. The key date fields for all brainstate records are calculations
-where the value equals the reference field date shown at the top of the screen in the green, red, or yellow box. So when the user changes
-the date in the reference field (top colored box) and then this script refreshes the database, all the brainstate records including the ones not
-shown recalculate their key fields, the result being they all take in the new date. This means that the related day records now change too to
-show the user the day records that match the updated brainstate record keys. (These day fields are locked to their related brainstate
-records by the brainstate records ID number. Using these to keys, the database is able to return the desired day fields for brainstate record
-the user elects to view at any one time.)
+#3 refresh the layout so that the key fields for each record will be recalculated based on the new day selected. The date and times
+shown for each record are in a table related to each brainstate record by their dates. The key date fields for all brainstate records
+are calculations where the value equals the reference field date shown at the top of the screen in the green, red, or yellow box.
+So when the user changes the date in the reference field (top colored box) and then this script refreshes the database, all the
+brainstate records including the ones not shown recalculate their key fields, the result being they all take in the new date. This
+means that the related day records now change too to show the user the day records that match the updated brainstate record
+keys. (These day fields are locked to their related brainstate records by the brainstate records ID number. Using these to keys,
+the database is able to return the desired day fields for brainstate record the user elects to view at any one time.)
 Refresh Window
 [ Flush cached join results ]
 #
-#4 sort records (neccessary because the week and month view usually show more active records than the day view that need to be sorted out of
-top of list), and go to the first record.
+#4 sort records (neccessary because the week and month view usually show more active records than the day view that need to be
+sorted out of top of list), and go to the first record.
 Set Variable [ $$stopRecordLoad; Value:1 ]
 Set Field [ steward::chosenLayout; steward::chosenLayoutMain ]
 Perform Script [ “sortNumbers” ]
@@ -119,9 +120,8 @@ If [ day1::swBugField ≠ "veto" ]
 Go to Record/Request/Page
 [ First ]
 End If
-January 5, 平成26 14:38:23 ActionLog.fp7 - goToFarmer -2-navigation: goToFarmer
 Perform Script [ “openSpecificAction” ]
 Select Window [ Name: "Timer"; Current file ]
 Set Variable [ $$stopRecordLoad ]
 Perform Script [ “recordLoad” ]
-January 5, 平成26 14:38:23 ActionLog.fp7 - goToFarmer -3-
+December 7, ଘ౮27 16:01:26 ActionLog.fp7 - goToFarmer -1-
