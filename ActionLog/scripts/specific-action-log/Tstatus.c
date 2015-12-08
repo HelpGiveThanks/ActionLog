@@ -5,8 +5,8 @@ Set Field [ issue::order; "" ]
 End If
 Go to Field [ ]
 If [ issue::_keyCategory ≠ "" ]
-Go to Field [ issue::dateDone ]
-Set Field [ issue::dateDone; Get ( CurrentTimeStamp ) ]
+Go to Field [ issue::dateModified ]
+Set Field [ issue::dateModified; Get ( CurrentTimeStamp ) ]
 Go to Field [ ]
 End If
 Set Variable [ $$stopgotoIssueResolution ]
@@ -25,4 +25,4 @@ issue::text; ascending ]
 [ Restore; No dialog ]
 Scroll Window
 [ To Selection ]
-January 6, 平成26 11:21:29 ActionLog.fp7 - Tstatus -1-
+December 7 2015 11:21:29 ActionLog.fp7 - Tstatus -1-
