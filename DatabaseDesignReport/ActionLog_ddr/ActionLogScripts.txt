@@ -1,104 +1,119 @@
 
-    #PURPOSE go the selected farmer's records from the createEditFarmer layout. (This is script is identical to the switchFarmer script except for step 1, which is required because the reference field is not available on this layout, and so the user's ID must be taken from the user table, not the reference table.)
+    #PURPOSE merge selected record's time data into one total record and then link these records so that time added in the future to any of the merge records will be automatically added to the one total record.
     #
     #
-    #
-    #basic administration tasks
-    Set Error Capture [ On ]
-    Allow User Abort [ Off ]
-    #
-    #
-    #Loop to correct record. Portal shows up in on each
-    #records layout, so first before the script continues
-    #we need to make sure we are on the record that the user selected.
-    Set Variable [ $userID; Value:steward 2::_lockUser ]
-    Go to Record/Request/Page [ First ]
-    Loop
-    Exit Loop If [ $userID = steward::_lockUser ]
-    Go to Record/Request/Page [ Next ]
-    End Loop
-    #
-    #
+    Set Variable [ $$recordFIXTOMANYVARIABLES; Value:brainstate::_lockBrainstateID ]
+    Set Variable [ $$record; Value:Get (RecordNumber) ]
+    Set Variable [ $$recordnumber; Value:Get ( RecordNumber ) ]
     Freeze Window
-    If [ Get ( SystemPlatform ) ≠ 3 and steward::iPhoneLayout = "" ]
-    // Move/Resize Window [ Current Window; Height: steward::windowSizeAndPlace [1]; Width: steward::windowSizeAndPlace [2]; Top: steward::windowSizeAndPlace [3]; Left: steward::windowSizeAndPlace [4] ]
-    Move/Resize Window [ Current Window; Height: Get (ScreenHeight) - 2 * ( Get (ScreenHeight) * .05 ); Width: Get (ScreenWidth) * .8; Top: Get (ScreenHeight) * .05; Left: Get (ScreenWidth) * .1 ]
-    Else If [ steward::iPhoneLayout ≠ "" ]
-    Move/Resize Window [ Current Window; Height: steward::windowSizeAndPlace [5]; Width: steward::windowSizeAndPlace [6]; Top: steward::windowSizeAndPlace [7]; Left: steward::windowSizeAndPlace [8] ]
+    #needed by folderstopwatchcheck script in case the stopwatch being started or stopped belongs to a total record
+    Set Variable [ $$folderon; Value:brainstate::groupID ]
+    #
+    #
+    #
+    If [ brainstate::sortRetired ≠ "" ]
+    Show Custom Dialog [ Title: "!"; Message: "This record is currently retired. To make it active again, click on the r to the immediate left of the record title (if the edit controls are hidden, then first click the edit button (top left corner of this window)."; Buttons: “OK” ]
+    Halt Script
+    End If
+    If [ brainstate::description = "" ]
+    Exit Script [ ]
     End If
     #
-    #1 capture selected userID, insert it into the referenceID field, then go to layout showing brainstate records.
-    Set Variable [ $userID; Value:steward::_lockUser ]
-    Set Field [ reference::farmerID; $userID ]
-    #
-    #2 find this user's records
-    Perform Script [ “CHUNK_createRecordsForNewUsers” ]
-    #
-    #4 show the user's name
-    Set Field [ reference::farmerName; steward::FirstPlusLast ]
-    #
-    #5 show/hide all records according the user's last settings
-    If [ steward::hideStatus = "" and steward::showORhide = "show" ]
-    Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::hide: “=” ] [ Restore ]
-    Else If [ steward::showStatus ≠ "" and steward::showORhide = "hide" ]
-    Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::groupType: “=” ] [ Restore ]
+    #1 if the view button is showing: determine if the record is total record, and it is show the these linked records, unless the user is on the total record layout in which case halt the script. (From the user's point of view the stopwatch button will say 'view' instead of 'note' if it is a total record, and this part of the script will be activitated.)
+    If [ brainstate::_lockBrainstateID = brainstate::groupID or brainstate::_lockBrainstateID = brainstate::groupOfGroupID ]
+    If [ Left ( Get ( LayoutName ) ; 5 ) = "total" or Left ( Get ( LayoutName ) ; 5 ) = "grand" ]
+    Halt Script
     End If
-    #8 it the user wants retired records hidden then hide these records if any
-    Perform Script [ “CHUNK_retire” ]
+    Set Variable [ $$record; Value:1 ]
+    Perform Script [ “showLinkedRecords” ]
+    Halt Script
+    End If
     #
-    // #6 go to user's chosen day, sort records, and choose last used layout
-    // If [ Left ( steward::chosenLayout ; 2 ) = "01" ]
-    // Perform Script [ “to 1” ]
-    // Else If [ Left ( steward::chosenLayout ; 2 ) = "07" ]
-    // Perform Script [ “to 7” ]
-    // Else If [ Left ( steward::chosenLayout ; 2 ) = "31" ]
-    // Perform Script [ “to 31” ]
+    #1 if the note button is showing first determine if there is a day record to update
+    If [ day1::swSymbols = "" ]
+    Set Variable [ $$stopwatchON; Value:"t" ]
+    #
+    #1 capture record number user is currently on
+    Set Variable [ $record; Value:Get ( RecordNumber ) ]
+    // Go to Record/Request/Page [ $record ] [ No dialog ]
+    #2 if not create a new one for this brainstate record and do it a new window so the user's focus is maintained (just going to the day layout and back resest the scroll bar unfortunately and I can't find away around this, but I want too!)
+    #
+    Set Variable [ $kpnBrainstateID; Value:brainstate::_lockBrainstateID ]
+    Set Variable [ $userID; Value:reference::farmerID ]
+    // New Window [ Name: "!"; Height: 100; Width: 100 ]
+    // Adjust Window [ Hide ]
+    Go to Layout [ “calcDayTable” (day1) ]
+    New Record/Request
+    Set Field [ day1::_keyBrainstate; $kpnBrainstateID ]
+    Set Field [ day1::_keyUser; $userID ]
+    Set Field [ day1::_keyDay; reference::day1 ]
+    #
+    #3 start the timer by inserting the current time in the start field
+    Set Field [ day1::swStart; Get ( CurrentTimeStamp ) ]
+    #this sets a flag for the updateTime script telling it to ignore this stopwatches time for updates to total records because until it is stopped its time has not changed and does not need to be included in an update.
+    Set Field [ day1::updateTimeSymbol; day1::swSymbols ]
+    Set Field [ day1::updateTime; day1::updateTimeCurrentTimeCalc ]
+    Go to Layout [ original layout ]
+    Go to Record/Request/Page [ $record ] [ No dialog ]
+    Perform Script [ “CHUNK_lastDayUsed” ]
+    #
+    // #See if Activity Log window is open and if so
+    // #show user new day record for log.
+    // Select Window [ Name: "Activity Log"; Current file ]
+    // If [ Get (LastError) ≠ 112 //window missing ]
+    // Perform Script [ “ActivityLog!!!!findAllBrainstateLogs” ]
     // End If
-    #
-    #Set window title.
-    Set Window Title [ Current Window; New Title: "Timer" ]
-    #
-    #Size window to 150.
-    Set Zoom Level [ 150% ]
-    #
-    #1 go to user's last layout
-    If [ steward::chosenLayout = "users" ]
-    Go to Layout [ “01Main” (brainstate) ]
-    #NOT TESTED
-    If [ Get ( SystemPlatform ) = 3 or steward::iPhoneLayout ≠ "" ]
-    Go to Layout [ “MainiPhone” (brainstate) ]
-    End If
-    #END NOT TESTED
-    Else If [ steward::chosenLayout ≠ "users" ]
-    Go to Layout [ “01Main” (brainstate) ]
-    #NOT TESTED
-    If [ Get ( SystemPlatform ) = 3 or steward::iPhoneLayout ≠ "" ]
-    Go to Layout [ “MainiPhone” (brainstate) ]
-    End If
-    #END NOT TESTED
-    End If
-    #
-    #2 go to user's chosen day
-    Set Field [ steward::chosenDay; Get ( CurrentDate ) ]
-    Set Field [ reference::day1; steward::chosenDay ]
-    #
-    #3 refresh the layout so that the key fields for each record will be recalculated based on the new day selected. The date and times shown for each record are in a table related to each brainstate record by their dates. The key date fields for all brainstate records are calculations where the value equals the reference field date shown at the top of the screen in the green, red, or yellow box. So when the user changes the date in the reference field (top colored box) and then this script refreshes the database, all the brainstate records including the ones not shown recalculate their key fields, the result being they all take in the new date. This means that the related day records now change too to show the user the day records that match the updated brainstate record keys. (These day fields are locked to their related brainstate records by the brainstate records ID number. Using these to keys, the database is able to return the desired day fields for brainstate record the user elects to view at any one time.)
-    Refresh Window [ Flush cached join results ]
-    #
-    #4 sort records (neccessary because the week and month view usually show more active records than the day view that need to be sorted out of top of list), and go to the first record.
-    Set Variable [ $$stopRecordLoad; Value:1 ]
-    Set Field [ steward::chosenLayout; steward::chosenLayoutMain ]
-    Perform Script [ “sortNumbers” ]
-    #7 go to active brainstate or first brainstate.
-    Go to Record/Request/Page [ First ]
-    Loop
-    Exit Loop If [ day1::swBugField = "veto" ]
-    Go to Record/Request/Page [ Next; Exit after last ]
-    End Loop
-    If [ day1::swBugField ≠ "veto" ]
-    Go to Record/Request/Page [ First ]
-    End If
-    Perform Script [ “openSpecificAction” ]
     Select Window [ Name: "Timer"; Current file ]
-    Set Variable [ $$stopRecordLoad ]
-    Perform Script [ “recordLoad” ]
+    #
+    #4 check if the record belongs to a total record and modify its foldercheck field if so to inform user on main screen that a stopwatch may be activite that is not currently shown
+    Perform Script [ “FolderStopwatchCheck” ]
+    #4 sort the records if the current sort is based on time which will make this record with zero current time shoot the top or bottom of the list depending on how the user is currently shorting time. The point is to keep the focus where the user expects it to be so the sort, which removes the focus from the current record is only done if the user wants the records sorted by time, in which case after the sort the focus is returned to the first record.
+    Perform Script [ “DaySelectSortThenSort” ]
+    Halt Script
+    End If
+    #
+    #5 if the veto button is showing stop the stopwatch and put in the in the time stopped
+    If [ day1::swSymbols = "veto" ]
+    Set Variable [ $$stopwatchON; Value:"f" ]
+    Set Field [ day1::swPause[day1::swOccurances]; Get ( CurrentTimeStamp ) ]
+    #
+    #5 recalculate the time for this record and check and see if is linked to any total records and if so update their time too
+    Perform Script [ “UpdateTime” ]
+    End If
+    #
+    #6 if the note button is showing restart the timer by putting a new start time in next available start field for this day record
+    Set Variable [ $$stopwatchON; Value:"t" ]
+    Set Field [ day1::swStart[day1::swOccurances + 1]; Get ( CurrentTimeStamp ) ]
+    If [ day1::swOccurances = 29 ]
+    Set Field [ day1::swStart[29]; Get ( CurrentTimeStamp ) ]
+    End If
+    #
+    // #See if Activity Log window is open and if so
+    // #show user new time slot ( 0:00 ).
+    // Set Variable [ $$stopRecordLoad; Value:1 ]
+    // Select Window [ Name: "Activity Log"; Current file ]
+    // If [ Get (LastError) ≠ 112 //window missing ]
+    // If [ daylog::swActivityLength[11] ≠ "" ]
+    // Go to Layout [ “logs3rows” (logs) ]
+    // Else If [ daylog::swActivityLength[6] ≠ "" ]
+    // Go to Layout [ “logs2rows” (logs) ]
+    // Else If [ daylog::swActivityLength[6] = "" ]
+    // Go to Layout [ “logs1row” (logs) ]
+    // End If
+    // Refresh Window
+    // End If
+    // Set Variable [ $$stopRecordLoad ]
+    Select Window [ Name: "Timer"; Current file ]
+    #
+    #7 recalculate the pause between stop and start times to show user the amount of time that has passed since the last time this brainstate was active
+    Perform Script [ “UpdatePauseTotals” ]
+    #this sets a flag for the updateTime script telling it to ignore this stopwatches time for updates to total records because until it is stopped its time has not changed and does not need to be included in an update.
+    Set Field [ day1::updateTimeSymbol; day1::swSymbols ]
+    Set Field [ day1::updateTime; day1::updateTimeCurrentTimeCalc ]
+    #4 check if the record belongs to a total record and modify its foldercheck field if so to inform user on main screen that a stopwatch may be activite that is not currently shown
+    Perform Script [ “FolderStopwatchCheck” ]
+    #Go back to original record number so sort script
+    #gets ID number.(Would be better to fix sort
+    #script so it exits rather than halts all scripts.)
+    Go to Record/Request/Page [ $$recordnumber ] [ No dialog ]
+    Perform Script [ “DaySelectSortThenSort” ]
