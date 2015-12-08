@@ -18,7 +18,7 @@
 <td class="chartheadersnobg" width="32%">Tables</td><td class="regularcharttext" width="8%"><a href="#valTablesSectionAnchor_">7</a></td><td class="regularcharttext">&nbsp;</td><td class="chartheadersnobg" width="%26">Default custom menu set</td><td class="regularcharttext" width="33%"><a href="#2CustomMenuSetAnchor_">Custom Menu Set 1</a></td>
 </tr>
 <tr vAlign="top">
-<td class="chartheadersnobg">Relationships</td><td class="regularcharttext"><a href="#valRelationshipsSectionAnchor_">4</a></td><td class="regularcharttext">&nbsp;</td><td class="chartsubheads" colSpan="2">When opening file</td>
+<td class="chartheadersnobg">Relationships</td><td class="regularcharttext"><a href="#valRelationshipsSectionAnchor_">5</a></td><td class="regularcharttext">&nbsp;</td><td class="chartsubheads" colSpan="2">When opening file</td>
 </tr>
 <tr vAlign="top">
 <td class="chartheadersnobg">Layouts</td><td class="regularcharttext"><a href="#valLayoutsSectionAnchor_">8</a></td><td class="regularcharttext">&nbsp;</td><td class="chartheadersnobg" width="%26">Login using</td><td class="regularcharttext" width="33%">Account Name; Account= <a href="#3AccountAnchor_">normal</a></td>
@@ -73,27 +73,27 @@
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32774BaseTableAnchor_">brainstate</a></td><td>
-<div align="left"><a href="#32774BaseTableAnchor_">92 fields</a> defined, 148 records</div>
+<div align="left"><a href="#32774BaseTableAnchor_">93 fields</a> defined, 148 records</div>
 </td><td><a href="#13631531TableAnchor_"><em>brainstate</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32780BaseTableAnchor_">day</a></td><td>
-<div align="left"><a href="#32780BaseTableAnchor_">32 fields</a> defined, 12216 records</div>
+<div align="left"><a href="#32780BaseTableAnchor_">32 fields</a> defined, 14716 records</div>
 </td><td><a href="#13631534TableAnchor_"><em>day</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32796BaseTableAnchor_">backup</a></td><td>
-<div align="left"><a href="#32796BaseTableAnchor_">2 fields</a> defined, 1 record</div>
+<div align="left"><a href="#32796BaseTableAnchor_">2 fields</a> defined, 2 records</div>
 </td><td><a href="#13631550TableAnchor_"><em>backup</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32800BaseTableAnchor_">list</a></td><td>
-<div align="left"><a href="#32800BaseTableAnchor_">24 fields</a> defined, 879 records</div>
-</td><td><a href="#13631556TableAnchor_"><em>issueCategory</em></a>, <a href="#13631554TableAnchor_"><em>list</em></a></td>
+<div align="left"><a href="#32800BaseTableAnchor_">26 fields</a> defined, 979 records</div>
+</td><td><a href="#13631558TableAnchor_"><em>CategoryGroup</em></a>, <a href="#13631556TableAnchor_"><em>issueCategory</em></a>, <a href="#13631554TableAnchor_"><em>list</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32801BaseTableAnchor_">issueTime</a></td><td>
-<div align="left"><a href="#32801BaseTableAnchor_">8 fields</a> defined, 3145 records</div>
+<div align="left"><a href="#32801BaseTableAnchor_">8 fields</a> defined, 3786 records</div>
 </td><td><a href="#13631555TableAnchor_"><em>issueTime</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
@@ -1111,7 +1111,7 @@
 		<table width="100%" border="1">
 <tbody>
 <tr class="privsetfirst" vAlign="top">
-<td colSpan="9">Table Name: <a name="32774BaseTableAnchor_"/>brainstate - 92 Fields</td>
+<td colSpan="9">Table Name: <a name="32774BaseTableAnchor_"/>brainstate - 93 Fields</td>
 </tr>
 <tr class="chartheaders" vAlign="top">
 <td width="8%">Field Name</td><td width="7%">Type</td><td width="14%">Options</td><td width="10%">Comments</td><td width="13%">On Layouts</td><td width="15%">In Relationships</td><td width="22%">In Scripts</td><td width="11%">In Value Lists</td>
@@ -3447,6 +3447,33 @@
 <ul></ul>
 </td>
 </tr>
+			<tr class="regularcharttext" vAlign="top">
+<td><a name="3277433281FieldAnchor_"/>totalTimeLogged</td><td>Normal, Time</td><td><strong>Auto-Enter:</strong>
+<ul>
+<li>Allow editing</li>
+</ul>
+<strong>Validation:</strong>
+<ul>
+<li>Only during data entry</li>
+</ul>
+<strong>Storage:</strong>
+<ul>
+<li>Repetitions: 1</li>
+<li>Indexing: None</li>
+<li>Automatically create indexes as needed</li>
+</ul>
+</td><td></td><td>
+<ul>
+<li><a href="#63LayoutAnchor_">brainstate</a></li>
+</ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td>
+</tr>
 		</tbody>
 </table>
 	<br>
@@ -3559,7 +3586,7 @@
 <td><a name="3278032781FieldAnchor_"/>_Number</td><td>Normal, Number</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
-<li>Serial: Generate: On creation, Next value: 40009, Increment: 1</li>
+<li>Serial: Generate: On creation, Next value: 44751, Increment: 1</li>
 </ul>
 <strong>Validation:</strong>
 <ul>
@@ -4278,8 +4305,7 @@
 <strong>Storage:</strong>
 <ul>
 <li>Repetitions: 1</li>
-<li>Indexing: Minimal</li>
-<li>Automatically create indexes as needed</li>
+<li>Indexing: All</li>
 <li>Index Language: English</li>
 </ul>
 </td><td></td><td>
@@ -4395,7 +4421,7 @@
 		<table width="100%" border="1">
 <tbody>
 <tr class="privsetfirst" vAlign="top">
-<td colSpan="9">Table Name: <a name="32800BaseTableAnchor_"/>list - 24 Fields</td>
+<td colSpan="9">Table Name: <a name="32800BaseTableAnchor_"/>list - 26 Fields</td>
 </tr>
 <tr class="chartheaders" vAlign="top">
 <td width="8%">Field Name</td><td width="7%">Type</td><td width="14%">Options</td><td width="10%">Comments</td><td width="13%">On Layouts</td><td width="15%">In Relationships</td><td width="22%">In Scripts</td><td width="11%">In Value Lists</td>
@@ -4403,6 +4429,7 @@
 			<tr class="regularcharttext" vAlign="top">
 <td><a name="328001FieldAnchor_"/>_LockList</td><td>Normal, Number</td><td><strong>Auto-Enter:</strong>
 <ul>
+<li>Allow editing</li>
 <li>Do not replace existing value for field (if any)</li>
 <li>Context table: <a href="#13631554TableAnchor_"><em>list</em></a><br>Calculation: <strong>Month</strong> ( <strong>Get</strong> ( <strong>CurrentDate</strong> ) ) &amp; 
 (<strong>If</strong> ( <strong>Day</strong> ( <strong>Get</strong> ( <strong>CurrentDate</strong> ) ) &gt; 9 ; <strong>Day</strong> ( <strong>Get</strong> ( <strong>CurrentDate</strong> ) ) ; 0 &amp;  (<strong>Day</strong> ( <strong>Get</strong> ( <strong>CurrentDate</strong> ) ) ) ) )&amp; 
@@ -4433,6 +4460,7 @@
 <ul>
 <li><a href="#list=issueTimeRelationshipAnchor_"><em>list=issueTime</em></a></li>
 <li><a href="#issueCategory=listRelationshipAnchor_"><em>issueCategory=list</em></a></li>
+<li><a href="#CategoryGroup=issueCategoryRelationshipAnchor_"><em>CategoryGroup=issueCategory</em></a></li>
 </ul>
 </td><td>
 <ul></ul>
@@ -4444,7 +4472,7 @@
 <td><a name="3280032781FieldAnchor_"/>_Number</td><td>Normal, Number</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
-<li>Serial: Generate: On creation, Next value: 1546, Increment: 1</li>
+<li>Serial: Generate: On creation, Next value: 1846, Increment: 1</li>
 </ul>
 <strong>Validation:</strong>
 <ul>
@@ -4595,6 +4623,7 @@
 </td><td>
 <ul>
 <li><a href="#issueCategory=listRelationshipAnchor_"><em>issueCategory=list</em></a></li>
+<li><a href="#CategoryGroup=issueCategoryRelationshipAnchor_"><em>CategoryGroup=issueCategory</em></a></li>
 </ul>
 </td><td>
 <ul></ul>
@@ -4682,7 +4711,7 @@
 </td>
 </tr>
 			<tr class="regularcharttext" vAlign="top">
-<td><a name="3280032841FieldAnchor_"/>dateDone</td><td>Normal, Timestamp</td><td><strong>Auto-Enter:</strong>
+<td><a name="3280032841FieldAnchor_"/>dateModified</td><td>Normal, Timestamp</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
 </ul>
@@ -4773,8 +4802,7 @@
 <strong>Storage:</strong>
 <ul>
 <li>Repetitions: 1</li>
-<li>Indexing: Minimal</li>
-<li>Automatically create indexes as needed</li>
+<li>Indexing: All</li>
 <li>Index Language: English</li>
 </ul>
 </td><td>aListOfAllDayTableKeysAndTimeRepititionFieldNumbersWhoseTimeFieldsContributeToAnIssuesTotalTime</td><td>
@@ -4875,7 +4903,7 @@
 <strong>Storage:</strong>
 <ul>
 <li>Repetitions: 1</li>
-<li>Indexing: None</li>
+<li>Indexing: Minimal</li>
 <li>Automatically create indexes as needed</li>
 <li>Index Language: English</li>
 </ul>
@@ -4930,8 +4958,7 @@
 <strong>Storage:</strong>
 <ul>
 <li>Repetitions: 1</li>
-<li>Indexing: None</li>
-<li>Automatically create indexes as needed</li>
+<li>Indexing: All</li>
 </ul>
 </td><td>whenUserSwitchesCategoriesSystemNeedsToKnowOldCategoryToUpdateItsTimeAndThisFieldCapturesTheOldCategoryKey</td><td>
 <ul>
@@ -4976,7 +5003,7 @@
 <td><a name="3280032858FieldAnchor_"/>DisplayDateDone</td><td>Calculated, Date</td><td><strong>Calculation:</strong>
 <ul>
 <li>Context table: <a href="#13631554TableAnchor_"><em>list</em></a></li>
-<li><a href="#3280032841FieldAnchor_"><em>list</em>::dateDone</a></li>
+<li><a href="#3280032841FieldAnchor_"><em>list</em>::dateModified</a></li>
 </ul>
 <strong>Storage:</strong>
 <ul>
@@ -5046,6 +5073,60 @@
 <ul></ul>
 </td>
 </tr>
+			<tr class="regularcharttext" vAlign="top">
+<td><a name="3280032861FieldAnchor_"/>weblink</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
+<ul>
+<li>Allow editing</li>
+</ul>
+<strong>Validation:</strong>
+<ul>
+<li>Only during data entry</li>
+</ul>
+<strong>Storage:</strong>
+<ul>
+<li>Repetitions: 1</li>
+<li>Indexing: None</li>
+<li>Automatically create indexes as needed</li>
+<li>Index Language: English</li>
+</ul>
+</td><td></td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td>
+</tr>
+			<tr class="regularcharttext" vAlign="top">
+<td><a name="3280032863FieldAnchor_"/>groupPLUScategory</td><td>Calculated, Number</td><td><strong>Calculation:</strong>
+<ul>
+<li>Context table: <a href="#13631554TableAnchor_"><em>list</em></a></li>
+<li>
+<strong>Case</strong> ( <strong>Length</strong> (<a href="#3280032788FieldAnchor_"><em>issueCategory</em>::text</a>)  &le; 10 ; <a href="#3280032788FieldAnchor_"><em>issueCategory</em>::text</a> &amp; " | " ;
+<strong>Left</strong> ( <a href="#3280032788FieldAnchor_"><em>issueCategory</em>::text</a> ; 7 ) &amp; "...| " )
+
+ &amp; <strong>Case</strong> ( <strong>Get</strong> ( <strong>WindowWidth</strong> ) &lt; 400 <strong>and</strong> <strong>WordCount</strong> ( <a href="#3280032788FieldAnchor_"><em>list</em>::text</a> ) = 1 <strong>and</strong> <strong>Length</strong> ( <a href="#3280032788FieldAnchor_"><em>list</em>::text</a> )  &gt; 17 ; <strong>Left</strong> ( <a href="#3280032788FieldAnchor_"><em>list</em>::text</a> ; 17 ) &amp; "... "
+  ; <a href="#3280032788FieldAnchor_"><em>list</em>::text</a> )</li>
+</ul>
+<strong>Storage:</strong>
+<ul>
+<li>Repetitions: 1</li>
+<li>Do not store calculation results</li>
+</ul>
+</td><td></td><td>
+<ul>
+<li><a href="#88LayoutAnchor_">list</a></li>
+</ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td>
+</tr>
 		</tbody>
 </table>
 	<br>
@@ -5097,7 +5178,7 @@
 <td><a name="328012FieldAnchor_"/>_Number</td><td>Normal, Number</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
-<li>Serial: Generate: On creation, Next value: 4348, Increment: 1</li>
+<li>Serial: Generate: On creation, Next value: 5326, Increment: 1</li>
 </ul>
 <strong>Validation:</strong>
 <ul>
@@ -5317,6 +5398,41 @@
 <td width="9%">Table Occurrence</td><td width="13%">Source Table</td><td width="11%">Source File</td><td width="16%">In Relationships</td><td width="12%">In Scripts</td><td width="16%">In Field Definitions</td><td width="13%">In Value Lists</td><td width="10%">Associated with layouts</td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
+<td bgColor="#777777"><a name="13631558TableAnchor_"/><em>CategoryGroup</em></td><td><a href="#32800BaseTableAnchor_">list</a></td><td>MyData.fp7</td><td>
+<ul>
+<li><a href="#CategoryGroup=issueCategoryRelationshipAnchor_"><em>CategoryGroup=issueCategory</em></a></li>
+</ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td>
+</tr>
+<tr class="regularcharttext" vAlign="top">
+<td bgColor="#777777"><a name="13631556TableAnchor_"/><em>issueCategory</em></td><td><a href="#32800BaseTableAnchor_">list</a></td><td>MyData.fp7</td><td>
+<ul>
+<li><a href="#issueCategory=listRelationshipAnchor_"><em>issueCategory=list</em></a></li>
+<li><a href="#CategoryGroup=issueCategoryRelationshipAnchor_"><em>CategoryGroup=issueCategory</em></a></li>
+</ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul>
+<li><a href="#3280032863FieldAnchor_"><em>list</em>::groupPLUScategory</a></li>
+</ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul>
+<li><a href="#88LayoutAnchor_">list</a></li>
+</ul>
+</td>
+</tr>
+<tr class="regularcharttext" vAlign="top">
 <td bgColor="#777777">
 
 			<a href="
@@ -5437,23 +5553,6 @@
 </td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
-<td bgColor="#777777"><a name="13631556TableAnchor_"/><em>issueCategory</em></td><td><a href="#32800BaseTableAnchor_">list</a></td><td>MyData.fp7</td><td>
-<ul>
-<li><a href="#issueCategory=listRelationshipAnchor_"><em>issueCategory=list</em></a></li>
-</ul>
-</td><td>
-<ul></ul>
-</td><td>
-<ul></ul>
-</td><td>
-<ul></ul>
-</td><td>
-<ul>
-<li><a href="#88LayoutAnchor_">list</a></li>
-</ul>
-</td>
-</tr>
-<tr class="regularcharttext" vAlign="top">
 <td bgColor="#777777"><a name="13631554TableAnchor_"/><em>list</em></td><td><a href="#32800BaseTableAnchor_">list</a></td><td>MyData.fp7</td><td>
 <ul>
 <li><a href="#list=issueTimeRelationshipAnchor_"><em>list=issueTime</em></a></li>
@@ -5471,6 +5570,7 @@
 <li><a href="#3280032852FieldAnchor_"><em>list</em>::timeTotalSummaryByCategory</a></li>
 <li><a href="#3280032858FieldAnchor_"><em>list</em>::DisplayDateDone</a></li>
 <li><a href="#3280032859FieldAnchor_"><em>list</em>::DisplayDate</a></li>
+<li><a href="#3280032863FieldAnchor_"><em>list</em>::groupPLUScategory</a></li>
 </ul>
 </td><td>
 <ul></ul>
@@ -5699,6 +5799,36 @@
 </tr>
 </tbody>
 </table>
+<p>
+<span class="partheading">Relationship: <a name="CategoryGroup=issueCategoryRelationshipAnchor_"/><em>CategoryGroup=issueCategory</em></span>
+</p>
+<table width="100%" border="1">
+<tbody>
+<tr vAlign="top">
+<td class="chartheadersnobg" width="18%">Table Occurrence</td><td class="regularcharttext" bgColor="#777777"><a href="#13631558TableAnchor_"><em>CategoryGroup</em></a></td><td class="regularcharttext"></td><td class="regularcharttext" bgColor="#777777"><a href="#13631556TableAnchor_"><em>issueCategory</em></a></td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Field</td><td class="regularcharttext"><a href="#328001FieldAnchor_">_LockList</a></td><td class="regularcharttext" align="middle">=</td><td class="regularcharttext"><a href="#3280032839FieldAnchor_">_keyCategory</a></td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Source Table</td><td class="regularcharttext"><a href="#32800BaseTableAnchor_">list</a></td><td class="regularcharttext"></td><td class="regularcharttext"><a href="#32800BaseTableAnchor_">list</a></td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Source File</td><td class="regularcharttext">MyData.fp7</td><td class="regularcharttext"></td><td class="regularcharttext">MyData.fp7</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Allow creation of records via this relationship</td><td class="regularcharttext">Off</td><td class="regularcharttext"></td><td class="regularcharttext">Off</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Delete related records in this table when a record is deleted in the other table</td><td class="regularcharttext">Off</td><td class="regularcharttext"></td><td class="regularcharttext">Off</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Sort records</td><td class="regularcharttext">
+<p>Off</p>
+</td><td class="regularcharttext"></td><td class="regularcharttext">Off</td>
+</tr>
+</tbody>
+</table>
 
 <p>
 <span class="partheading"><a name="valLayoutsSectionAnchor_"/>Layouts</span>
@@ -5723,7 +5853,7 @@
 <tr class="regularcharttext" valign="top">
 <td><a name="63LayoutAnchor_"/>brainstate</td><td>No</td><td>
 <ul>
-<li><a href="#63LayoutObjectsAnchor_Regular Fields">75 Regular Fields</a></li>
+<li><a href="#63LayoutObjectsAnchor_Regular Fields">76 Regular Fields</a></li>
 </ul>
 </td><td><a href="#13631531TableAnchor_"><em>brainstate</em></a></td><td>On</td><td>On</td><td>
 <ul>
@@ -5735,7 +5865,7 @@
 <tr class="regularcharttext" valign="top">
 <td><a name="70LayoutAnchor_"/>day</td><td>No</td><td>
 <ul>
-<li><a href="#70LayoutObjectsAnchor_Regular Fields">28 Regular Fields</a></li>
+<li><a href="#70LayoutObjectsAnchor_Regular Fields">27 Regular Fields</a></li>
 </ul>
 </td><td><a href="#13631534TableAnchor_"><em>day</em></a></td><td>On</td><td>On</td><td>
 <ul>
@@ -5759,14 +5889,14 @@
 <tr class="regularcharttext" valign="top">
 <td><a name="84LayoutAnchor_"/>day Copy</td><td>No</td><td>
 <ul>
-<li><a href="#84LayoutObjectsAnchor_Regular Fields">9 Regular Fields</a></li>
+<li><a href="#84LayoutObjectsAnchor_Regular Fields">10 Regular Fields</a></li>
 </ul>
 </td><td><a href="#13631534TableAnchor_"><em>day</em></a></td><td>On</td><td>On</td><td></td><td>[File Default]</td><td></td>
 </tr>
 <tr class="regularcharttext" valign="top">
 <td><a name="88LayoutAnchor_"/>list</td><td>No</td><td>
 <ul>
-<li><a href="#88LayoutObjectsAnchor_Regular Fields">24 Regular Fields</a></li>
+<li><a href="#88LayoutObjectsAnchor_Regular Fields">25 Regular Fields</a></li>
 </ul>
 </td><td><a href="#13631554TableAnchor_"><em>list</em></a></td><td>On</td><td>On</td><td>
 <ul>
@@ -9284,6 +9414,41 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3277433281FieldAnchor_"><em>brainstate</em>::totalTimeLogged</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="63Field2160.000000138.0000002174.000000259.000000LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#63LayoutAnchor_">brainstate</a></li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 2160 px</li>
+<li>Left: 138 px</li>
+<li>Bottom: 2174 px</li>
+<li>Right: 259 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
 <td colspan="6" class="privsetfirst">Field Name: <a href="#3277433280FieldAnchor_"><em>brainstate</em>::pulldownBrainstate</a></td>
 </tr>
 <tr class="chartsubheads" valign="top">
@@ -10515,44 +10680,6 @@
 </tbody>
 </table>
 <br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: &lt;Missing Field&gt;</td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="70Field 21.000000  0.000000 47.000000 75.000000LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#70LayoutAnchor_">day</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 21 px</li>
-<li>Left: 0 px</li>
-<li>Bottom: 47 px</li>
-<li>Right: 75 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
 <p>
 <span class="partheading">Layout Objects: <a href="#83LayoutAnchor_">backup</a></span>
 </p>
@@ -10924,13 +11051,48 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#32780110FieldAnchor_"><em>day</em>::swTotalActivity</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="84Field 84.0000001008.000000 98.0000001087.000000LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#84LayoutAnchor_">day Copy</a></li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 84 px</li>
+<li>Left: 1008 px</li>
+<li>Bottom: 98 px</li>
+<li>Right: 1087 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
 <td colspan="6" class="privsetfirst">Field Name: <a href="#3278095FieldAnchor_"><em>day</em>::swSymbols</a></td>
 </tr>
 <tr class="chartsubheads" valign="top">
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="84Field 21.0000002719.957031 47.0000002839.957031LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="84Field 21.0000002794.957031 47.0000002914.957031LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#84LayoutAnchor_">day Copy</a></li>
 <p></p>
@@ -10940,9 +11102,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 21 px</li>
-<li>Left: 2719.957031 px</li>
+<li>Left: 2794.957031 px</li>
 <li>Bottom: 47 px</li>
-<li>Right: 2839.957031 px</li>
+<li>Right: 2914.957031 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11178,101 +11340,22 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032847FieldAnchor_"><em>list</em>::timeSegmentKeyList</a></td>
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032863FieldAnchor_"><em>list</em>::groupPLUScategory</a></td>
 </tr>
 <tr class="chartsubheads" valign="top">
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.000000619.507812 55.000000883.523438LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field204.000000138.000000218.000000217.000000LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
 </ul>
 </td><td colspan="1">
 <ul>
-<li>Top: 29 px</li>
-<li>Left: 619.507812 px</li>
-<li>Bottom: 55 px</li>
-<li>Right: 883.523438 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032846FieldAnchor_"><em>list</em>::_keyLogs</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.000000883.523438 55.0000001138.535156LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#88LayoutAnchor_">list</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 29 px</li>
-<li>Left: 883.523438 px</li>
-<li>Bottom: 55 px</li>
-<li>Right: 1138.535156 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032844FieldAnchor_"><em>list</em>::_keyStatus</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000001607.476562 55.0000001884.140625LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#88LayoutAnchor_">list</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 29 px</li>
-<li>Left: 1607.476562 px</li>
-<li>Bottom: 55 px</li>
-<li>Right: 1884.140625 px</li>
+<li>Top: 204 px</li>
+<li>Left: 138 px</li>
+<li>Bottom: 218 px</li>
+<li>Right: 217 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11298,7 +11381,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000001884.140625 55.0000002076.097656LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.000000498.589844 55.000000690.546875LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11308,9 +11391,123 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 1884.140625 px</li>
+<li>Left: 498.589844 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 2076.097656 px</li>
+<li>Right: 690.546875 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032847FieldAnchor_"><em>list</em>::timeSegmentKeyList</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="88Field 29.0000001070.937500 55.0000001334.953125LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#88LayoutAnchor_">list</a></li>
+<p></p>
+<b>Visibility:</b>
+<li>Only visible in Table View</li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 29 px</li>
+<li>Left: 1070.9375 px</li>
+<li>Bottom: 55 px</li>
+<li>Right: 1334.953125 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032846FieldAnchor_"><em>list</em>::_keyLogs</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="88Field 29.0000001334.953125 55.0000001589.964844LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#88LayoutAnchor_">list</a></li>
+<p></p>
+<b>Visibility:</b>
+<li>Only visible in Table View</li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 29 px</li>
+<li>Left: 1334.953125 px</li>
+<li>Bottom: 55 px</li>
+<li>Right: 1589.964844 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032844FieldAnchor_"><em>list</em>::_keyStatus</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="88Field 29.0000001919.199219 55.0000002195.863281LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#88LayoutAnchor_">list</a></li>
+<p></p>
+<b>Visibility:</b>
+<li>Only visible in Table View</li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 29 px</li>
+<li>Left: 1919.199219 px</li>
+<li>Bottom: 55 px</li>
+<li>Right: 2195.863281 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11336,7 +11533,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000002076.097656 55.0000002226.097656LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000002335.570312 55.0000002485.570312LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11346,9 +11543,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 2076.097656 px</li>
+<li>Left: 2335.570312 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 2226.097656 px</li>
+<li>Right: 2485.570312 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11368,13 +11565,13 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032841FieldAnchor_"><em>list</em>::dateDone</a></td>
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032841FieldAnchor_"><em>list</em>::dateModified</a></td>
 </tr>
 <tr class="chartsubheads" valign="top">
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000002226.097656 55.0000002376.097656LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000002485.570312 55.0000002635.570312LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11384,9 +11581,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 2226.097656 px</li>
+<li>Left: 2485.570312 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 2376.097656 px</li>
+<li>Right: 2635.570312 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11412,7 +11609,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000002376.097656 55.0000002536.500000LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000002635.570312 55.0000002795.972656LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11422,9 +11619,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 2376.097656 px</li>
+<li>Left: 2635.570312 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 2536.5 px</li>
+<li>Right: 2795.972656 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11450,7 +11647,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000002536.500000 55.0000002935.207031LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000002795.972656 55.0000003194.679688LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11460,9 +11657,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 2536.5 px</li>
+<li>Left: 2795.972656 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 2935.207031 px</li>
+<li>Right: 3194.679688 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11488,7 +11685,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000002935.207031 55.0000003157.734375LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000003194.679688 55.0000003417.207031LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11498,9 +11695,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 2935.207031 px</li>
+<li>Left: 3194.679688 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 3157.734375 px</li>
+<li>Right: 3417.207031 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11526,7 +11723,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000003157.734375 55.0000003478.898438LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000003417.207031 55.0000003738.371094LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11536,9 +11733,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 3157.734375 px</li>
+<li>Left: 3417.207031 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 3478.898438 px</li>
+<li>Right: 3738.371094 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11564,7 +11761,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000003478.898438 55.0000003698.453125LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000003738.371094 55.0000003957.925781LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11574,9 +11771,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 3478.898438 px</li>
+<li>Left: 3738.371094 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 3698.453125 px</li>
+<li>Right: 3957.925781 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11602,7 +11799,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000003698.453125 55.0000003960.917969LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000003957.925781 55.0000004220.390625LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11612,9 +11809,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 3698.453125 px</li>
+<li>Left: 3957.925781 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 3960.917969 px</li>
+<li>Right: 4220.390625 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11640,7 +11837,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000003960.917969 55.0000004243.335938LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000004220.390625 55.0000004502.808594LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11650,9 +11847,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 3960.917969 px</li>
+<li>Left: 4220.390625 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 4243.335938 px</li>
+<li>Right: 4502.808594 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11678,7 +11875,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000004243.335938 55.0000004515.917969LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000004502.808594 55.0000004861.695312LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11688,9 +11885,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 4243.335938 px</li>
+<li>Left: 4502.808594 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 4515.917969 px</li>
+<li>Right: 4861.695312 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11716,7 +11913,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000004515.917969 55.0000004590.917969LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000004861.695312 55.0000005431.582031LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11726,9 +11923,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 4515.917969 px</li>
+<li>Left: 4861.695312 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 4590.917969 px</li>
+<li>Right: 5431.582031 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11754,7 +11951,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000004590.917969 55.0000004665.917969LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000005431.582031 55.0000005830.894531LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11764,9 +11961,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 4590.917969 px</li>
+<li>Left: 5431.582031 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 4665.917969 px</li>
+<li>Right: 5830.894531 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11792,7 +11989,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000004665.917969 55.0000004740.917969LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000005830.894531 55.0000006061.718750LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11802,9 +11999,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 4665.917969 px</li>
+<li>Left: 5830.894531 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 4740.917969 px</li>
+<li>Right: 6061.71875 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11830,7 +12027,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000004740.917969 55.0000004815.917969LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000006061.718750 55.0000006250.109375LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11840,9 +12037,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 4740.917969 px</li>
+<li>Left: 6061.71875 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 4815.917969 px</li>
+<li>Right: 6250.109375 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -12644,7 +12841,8 @@ Source field 107 import to brainstate::lockObservation
 Source field 108 import to brainstate::lockStatus
 Source field 109 import to brainstate::lockObservationCategory
 Source field 110 import to brainstate::lockPrefix
-Source field 111 import to brainstate::pulldownBrainstate ]
+Source field 111 import to brainstate::pulldownBrainstate
+Source field 112 import to brainstate::totalTimeLogged ]
 [ No dialog ]</li>
 <li>Go to Layout [ &ldquo;day&rdquo; (day) ]</li>
 <li>Show All Records</li>
@@ -12991,7 +13189,8 @@ Source field 107 import to brainstate::lockObservation
 Source field 108 import to brainstate::lockStatus
 Source field 109 import to brainstate::lockObservationCategory
 Source field 110 import to brainstate::lockPrefix
-Source field 111 import to brainstate::pulldownBrainstate ]</li>
+Source field 111 import to brainstate::pulldownBrainstate
+Source field 112 import to brainstate::totalTimeLogged ]</li>
 <li>Go to Layout [ &ldquo;day&rdquo; (day) ]</li>
 <li>Show All Records</li>
 <li>Delete All Records
@@ -13026,7 +13225,7 @@ Source field 5 import to list::order
 Source field 6 import to list::lock
 Source field 7 import to list::_keyCategory
 Source field 8 import to list::date
-Source field 9 import to list::dateDone
+Source field 9 import to list::dateModified
 Source field 10 import to list::status
 Source field 11 import to list::_keyStatus
 Source field 12 import to list::_keyDay
@@ -13037,7 +13236,8 @@ Source field 18 import to list::sortTime
 Source field 19 import to list::timeTotalSumByCat
 Source field 20 import to list::oldCategorykey
 Source field 21 import to list::timeTotalSumByCatSortedByStatus
-Source field 24 import to list::reviewDate ]</li>
+Source field 24 import to list::reviewDate
+Source field 25 import to list::weblink ]</li>
 <li>Set Field [ backup::backup; "" ]</li>
 <li>Close Window [ Current Window ]</li>
 <li>Halt Script</li>
