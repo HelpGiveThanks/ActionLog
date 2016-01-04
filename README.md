@@ -1,7 +1,3 @@
-<a href="https://www.youtube.com/watch?v=o_x2RVnlTZs
-" target="_blank"><img src="http://img.youtube.com/vi/o_x2RVnlTZs/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
-
 {{Use dmy dates|date=October 2013}}
 {{Refimprove|date=December 2013}}
 [[File:Intocht van Sinterklaas in Schiedam 2009 (4102602499) (2).jpg|thumb|Sinterklaas arriving in the Dutch town of [[Schiedam]] in 2009]]
