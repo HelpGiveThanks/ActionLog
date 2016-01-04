@@ -15,9 +15,9 @@ If [ $$logBrainstate ≠ brainstate::_lockBrainstateID ]
 Select Window [ Name: "Specific Action"; Current file ]
 Set Variable [ $name; Value:brainstate::description ]
 Select Window [ Name: "Timer"; Current file ]
-Show Custom Dialog [ Title: "?"; Message: "Specific Action window's timer = " & GetValue ( $name ; 1 )& ¶ & "Timer window's
-timer = " & GetValue ( brainstate::description ; 1 ) &¶ & "Really clear Timer window's — " & GetValue ( brainstate::
-description ; 1 ) & " — timer?"; Buttons: “Cancel”, “OK” ]
+Show Custom Dialog [ Message: "NOTE: Timer and Specific Action windows are focused on different timers: '" & GetValue
+( brainstate::description ; 1 ) & "' and '" & GetValue ( $name; 1) & "'."
+& ¶ & ¶ & " Continue to clear '" & GetValue ( brainstate::description ; 1 ) & "' timer?"; Buttons: “cancel”, “continue” ]
 End If
 If [ Get ( LastMessageChoice ) = 1 ]
 Set Variable [ $$warning ]
@@ -28,5 +28,5 @@ Go to Field [ ]
 Set Variable [ $$warning ]
 Refresh Window
 Set Variable [ $$recordFIXTOMANYVARIABLES; Value:brainstate::_lockBrainstateID ]
-Perform Script [ “clearPart2 (UPDATED)” ]
-December 6, ଘ౮27 20:53:26 ActionLog.fp7 - clearPart1 -1-
+Perform Script [ “clearPart2” ]
+January 3, ଘ౮28 20:07:24 ActionLog.fp7 - clearPart1 -1-
