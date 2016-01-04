@@ -34,17 +34,12 @@ Set Variable [ $$issueLogs; Value:issue::_keyLogs ]
 Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
 Set Variable [ $$stopGroup; Value:1 ]
 Select Window [ Name: "Tag"; Current file ]
-// Go to Object [ Object Name: "group" ]
 Scroll Window
 [ Home ]
-// Go to Portal Row
-[ Last ]
 Go to Record/Request/Page
 [ First ]
 Loop
 Exit Loop If [ category::_LockList = $$group ]
-// Go to Portal Row
-[ Previous; Exit after last ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
@@ -57,8 +52,14 @@ End If
 Go to Field [ ]
 Set Variable [ $$stopGroup ]
 Refresh Window
+#
+#Make sure date button in Specific Action
+#window has the date of the Day window's
+#active record.
 Select Window [ Name: "Day"; Current file ]
+Set Field [ reference::ActivityLogDay; logs::_keyDay ]
 Refresh Window
+#
 Select Window [ Name: "Specific Action"; Current file ]
 Refresh Window
-December 6, ଘ౮27 21:06:37 ActionLog.fp7 - loadIssuerecordID -1-
+January 4, ଘ౮28 3:29:20 ActionLog.fp7 - loadIssuerecordID -1-
