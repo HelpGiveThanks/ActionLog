@@ -65,10 +65,12 @@ End Loop
 #
 Close Window [ Current Window ]
 Set Field [ brainstate::totalTimeLogged; $totalTime ]
-Sort Records [ Specified Sort Order: group::text; ascending
+Sort Records [ Specified Sort Order: issue::order; based on value list: “1-99”
+group::text; ascending
 category::sortTime; ascending
 category::text; ascending ]
 [ Restore; No dialog ]
+Set Field [ reference::tagCatSort; "group" ]
 #
 #
-December 6, ଘ౮27 22:04:53 ActionLog.fp7 - updateTimerTotalTimeInTagWindow -1-
+January 3, ଘ౮28 20:25:38 ActionLog.fp7 - updateTimerTotalTimeInTagWindow -1-

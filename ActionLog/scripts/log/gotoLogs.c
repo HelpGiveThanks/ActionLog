@@ -130,7 +130,7 @@ Go to Record/Request/Page
 [ First ]
 #
 Set Variable [ $$stopSubtotal ]
-Perform Script [ “TsubtotalTimeByGroup (UPDATED)” ]
+Perform Script [ “TsubtotalTimeByGroup” ]
 End If
 #
 Set Variable [ $$issue; Value:issue::_LockList ]
@@ -182,7 +182,8 @@ Go to Layout [ “IssuesAndObservationsTag” (category) ]
 Enter Find Mode [ ]
 Set Field [ brainstate::_lockBrainstateID; $$logBrainstate ]
 Perform Find [ ]
-Sort Records [ Specified Sort Order: group::text; ascending
+Sort Records [ Specified Sort Order: group::order; based on value list: “1-99”
+group::text; ascending
 category::sortTime; ascending
 category::text; ascending ]
 [ Restore; No dialog ]
@@ -191,7 +192,7 @@ category::text; ascending ]
 #when switching specific action timers rather than
 #each time a timer's total is changed due to the
 #amount of time it takes to calculate this total.
-Perform Script [ “updateTimerTotalTimeInTagWindow (NEW)” ]
+Perform Script [ “updateTimerTotalTimeInTagWindow” ]
 #
 #FIX FIX FIX FIX
 #FIX FIX FIX FIX
@@ -199,18 +200,18 @@ Perform Script [ “updateTimerTotalTimeInTagWindow (NEW)” ]
 #FIX FIX FIX FIX
 #FIX FIX FIX FIX
 #
-#Update review dates.
-Go to Object [ Object Name: "status" ]
-Go to Portal Row
+// #Update review dates.
+// Go to Object [ Object Name: "status" ]
+// Go to Portal Row
 [ Select; First ]
-Set Variable [ $reviewNames; Value:"daily" & ¶ &
+// Set Variable [ $reviewNames; Value:"daily" & ¶ &
 "weekly" & ¶ &
 "monthly" & ¶ &
 "1/2 yearly" & ¶ &
 "yearly" & ¶ &
 "complete" & ¶ &
 "discard" ]
-Set Variable [ $reviewDates; Value://daily review
+// Set Variable [ $reviewDates; Value://daily review
 "" & ¶ &
 //weekly review
 Case (
@@ -246,17 +247,17 @@ Day ( Get ( CurrentDate ) ) > 7 ;
 //& ")"
 Month ( Get ( CurrentDate ) ) + 1 & "/" & "1" ;
 Month ( Get ( CurrentDate ) ) & "/" & "1" ) ]
-Set Variable [ $number; Value:1 ]
-If [ status::text = "" ]
-Set Field [ status::status; "Remember existence" & ¶ & "of a specific action..." ]
-Loop
-Set Field [ status::text; GetValue ( $reviewNames ; $number ) ]
-Set Field [ status::reviewDate; GetValue ( $reviewDates ; $number ) ]
-Set Variable [ $number; Value:$number + 1 ]
-Go to Record/Request/Page
+// Set Variable [ $number; Value:1 ]
+// If [ status::text = "" ]
+// Set Field [ status::status; "Remember existence" & ¶ & "of a specific action..." ]
+// Loop
+// Set Field [ status::text; GetValue ( $reviewNames ; $number ) ]
+// Set Field [ status::reviewDate; GetValue ( $reviewDates ; $number ) ]
+// Set Variable [ $number; Value:$number + 1 ]
+// Go to Record/Request/Page
 [ Next; Exit after last ]
-End Loop
-End If
+// End Loop
+// End If
 #
 #Find all groups for this action.
 Go to Layout [ “menuGroups” (issueCategory) ]
@@ -275,6 +276,11 @@ Set Variable [ $groupKey; Value:issueCategory::_LockList ]
 End If
 #
 Go to Layout [ “IssuesAndObservationsTag” (category) ]
+Sort Records [ Specified Sort Order: group::order; based on value list: “1-99”
+group::text; ascending
+category::sortTime; ascending
+category::text; ascending ]
+[ Restore; No dialog ]
 #
 #
 #
@@ -315,5 +321,5 @@ Scroll Window
 #
 #Start load record scripts as needed for normal function.
 Set Variable [ $$stopRecordLoad ]
-Perform Script [ “loadIssuerecordID (UPDATED)” ]
-December 6, ଘ౮27 20:47:52 ActionLog.fp7 - gotoLogs -1-
+Perform Script [ “loadIssuerecordID” ]
+January 3, ଘ౮28 20:31:38 ActionLog.fp7 - gotoLogs -1-

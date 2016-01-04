@@ -25,12 +25,18 @@ Perform Find [ ]
 #Return to tag window.
 Select Window [ Name: "Tag"; Current file ]
 Go to Layout [ “IssuesAndObservationsFIND” (category) ]
-Set Field [ reference::tagCatSort; "group" ]
-Sort Records [ Specified Sort Order: group::text; ascending
+// If [ reference::tagCatSort = "abc" ]
+// Sort Records [ Specified Sort Order: category::text; ascending
+category::sortTime; ascending ]
+[ Restore; No dialog ]
+// Else
+// Sort Records [ Specified Sort Order: group::order; based on value list: “1-99”
+group::text; ascending
 category::sortTime; ascending
 category::text; ascending ]
 [ Restore; No dialog ]
+// End If
 Scroll Window
 [ Home ]
 #
-December 6, ଘ౮27 21:34:47 ActionLog.fp7 - findGroupPart1 -1-
+January 3, ଘ౮28 20:17:29 ActionLog.fp7 - findGroupPart1 -1-

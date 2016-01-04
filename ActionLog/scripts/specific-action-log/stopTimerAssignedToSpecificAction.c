@@ -56,40 +56,43 @@ Perform Script [ “CHUNK_updateIssueCategoryTime” ]
 #
 #
 Close Window [ Current Window ]
-#
-#Go to record time to which time will be added.
-Select Window [ Name: "Specific Action"; Current file ]
-If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") ≠ $$activeTimeSegment & "¶" ]
-Go to Record/Request/Page
+
+#NOTE: This next section can probably be 
+#deleted as it done by the previous script
+#CHUNK... .
+// #Go to record time to which time will be added.
+// Select Window [ Name: "Specific Action"; Current file ]
+// If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") ≠ $$activeTimeSegment & "¶" ]
+// Go to Record/Request/Page
 [ First ]
-Loop
-Exit Loop If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") = $$activeTimeSegment &
-"¶" ]
-Go to Record/Request/Page
+// Loop
+// Exit Loop If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") = $$activeTimeSegment
+& "¶" ]
+// Go to Record/Request/Page
 [ Next; Exit after last ]
-End Loop
-#
-#If record is not showing then find and add it to
-#list of records being shown.
-If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") ≠ $$activeTimeSegment & "¶" ]
-Enter Find Mode [ ]
-Set Field [ issue::timeSegmentKeyList; $$activeTimeSegment & "¶" ]
-Extend Found Set [ ]
-Sort Records [ ]
+// End Loop
+// #
+// #If record is not showing then find and add it to
+// #list of records being shown.
+// If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") ≠ $$activeTimeSegment & "¶" ]
+// Enter Find Mode [ ]
+// Set Field [ issue::timeSegmentKeyList; $$activeTimeSegment & "¶" ]
+// Extend Found Set [ ]
+// Sort Records [ ]
 [ No dialog ]
-Go to Record/Request/Page
+// Go to Record/Request/Page
 [ First ]
-Loop
-Exit Loop If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") = $
+// Loop
+// Exit Loop If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") = $
 $activeTimeSegment & "¶" ]
-Go to Record/Request/Page
+// Go to Record/Request/Page
 [ Next; Exit after last ]
-End Loop
-End If
-Set Variable [ $$stopRecordLoad ]
-Set Variable [ $$TimeAssignedToSpecificAction ]
-Perform Script [ “loadIssuerecordID” ]
-End If
+// End Loop
+// End If
+// Set Variable [ $$stopRecordLoad ]
+// Set Variable [ $$TimeAssignedToSpecificAction ]
+// Perform Script [ “loadIssuerecordID” ]
+// End If
 #
 Set Variable [ $$stopRecordLoad ]
 Set Variable [ $$specificActionTimer ]
@@ -108,4 +111,4 @@ Change this date in the timer window."; Buttons: “OK” ]
 #
 End If
 #
-December 7, ଘ౮27 14:29:04 ActionLog.fp7 - stopTimerAssignedToSpecificAction -1-
+January 3, ଘ౮28 20:21:02 ActionLog.fp7 - stopTimerAssignedToSpecificAction -1-
