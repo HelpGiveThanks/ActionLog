@@ -1,4 +1,4 @@
- specific action log: CHUNK_updateIssueCategoryTime
+specific action log: CHUNK_updateIssueCategoryTime
 #
 #This script is used by the updateTime script
 #and the clear script and the script
@@ -25,6 +25,16 @@ Perform Find [ ]
 If [ Get (LastError) = 401 ]
 Close Window [ Name: "temp"; Current file ]
 Exit Script [ ]
+End If
+#
+#Determine if the Specific Action window is
+#focused on timer being updated by this script.
+#If it is, set a variable to make a note of this for
+#use at the end of this script where the
+#Specifci Action window's conditional
+#formatting is adjusted as needed.
+If [ $$logBrainstate = issue::_keyBrainstate ]
+Set Variable [ $SpecificActionWindowFocusedOnThisIssue; Value:issue::_LockList ]
 End If
 #
 #Make sure user is not in any fields before updating
@@ -87,24 +97,25 @@ Set Variable [ $AllIssueRecordsNeedingUpdate; Value:If ( ValueCount ( $AllIssueR
 Substitute ( $AllIssueRecordsNeedingUpdate ; $issue & "¶" ; "" ) ;
 Substitute ( $AllIssueRecordsNeedingUpdate ; $issue ; "" ) ) ]
 #
-#Find all time segments attributed to this issue.
+#Find all time segments attributed to this
+#issue so their total time can be calculated.
 Go to Layout [ “issueTime” (issueTime) ]
 Enter Find Mode [ ]
 Set Field [ issueTime::_keyIssue; $issue ]
 Perform Find [ ]
 Exit Loop If [ Get (LastError) = 400 ]
-#
-#Get total time for this issue.
 Set Variable [ $totalTime; Value:issueTime::sum ]
 #
-#And update this issue's total time.
+#Update issue's total time field with the
+#re-calculated total time.
 Go to Layout [ “IssuesLayoutForScripts” (issue) ]
 Enter Find Mode [ ]
 Set Field [ issue::_LockList; $issue ]
 Perform Find [ ]
 Set Field [ issue::issueTotalTime; $totalTime ]
 #
-#Add up total time for all actions with this category tag.
+#Re-calculate total time all issues in this issue's
+#issue group shown in the Tag Menu window.
 Set Variable [ $categoryKey; Value:issue::_keyCategory ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyCategory; $categoryKey ]
@@ -206,33 +217,35 @@ Close Window [ Name: "temp"; Current file ]
 #
 #Conditionally format Specific Action record if
 #the current time segement is active and assigned to it.
+#
+#Check if the Specific Action window
+#is focused on this updating timer.
 Select Window [ Name: "Specific Action"; Current file ]
+If [ $SpecificActionWindowFocusedOnThisIssue ≠ "" ]
 #
-#
-#
-If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") ≠ $$activeTimeSegment & "¶" and
-$$timerIDnumber = $$logBrainstate and
-$$activeTimeSegment ≠ "" ]
+#Determine if the issue whose time is being updated
+#is showing in the Specific Action window, and if
+#not then find and show it.
+If [ $SpecificActionWindowFocusedOnThisIssue ≠ issue::_LockList ]
 Go to Record/Request/Page
 [ First ]
 Loop
-Exit Loop If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") = $$activeTimeSegment & "¶" ]
+Exit Loop If [ $SpecificActionWindowFocusedOnThisIssue ≠ issue::_LockList ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
 #
-#If record is not showing then find and add it to
-#list of records being shown.
-If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") ≠ $$activeTimeSegment & "¶" ]
+#If not showing then find, show and focus on it.
+If [ $SpecificActionWindowFocusedOnThisIssue ≠ issue::_LockList ]
 Enter Find Mode [ ]
-Set Field [ issue::timeSegmentKeyList; $$activeTimeSegment & "¶" ]
+Set Field [ issue::_LockList; $SpecificActionWindowFocusedOnThisIssue ]
 Extend Found Set [ ]
 Sort Records [ ]
 [ No dialog ]
 Go to Record/Request/Page
 [ First ]
 Loop
-Exit Loop If [ FilterValues (issue::timeSegmentKeyList ; $$activeTimeSegment & "¶") = $$activeTimeSegment & "¶" ]
+Exit Loop If [ $SpecificActionWindowFocusedOnThisIssue ≠ issue::_LockList ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
@@ -244,7 +257,11 @@ Set Variable [ $$stopRecordLoad; Value:1 ]
 #
 End If
 #
-If [ $$timerIDnumber = $$logBrainstate ]
+#Set ActiveTimeSegment variable to on or off
+#state, which is used by the script
+#stopTimerAssignedToSpecificAction.
+#NOTE: Need to test if this variable is really
+#being used anymore.
 If [ FilterValues (issue::timeSegmentKeyList ; day1::swOccurances & day1::_lockDay & "¶" ) = day1::swOccurances & $$log & "¶"
 and day1::swBugField = "veto" ]
 Set Variable [ $$ActiveTimeSegment; Value:day1::swOccurances & day1::_lockDay ]
@@ -264,13 +281,15 @@ End If
 Select Window [ Name: "Tag"; Current file ]
 Set Variable [ $tagLayoutName; Value:Get (LayoutName) ]
 If [ Get ( LayoutName ) = "IssuesAndObservationsTag" ]
-Sort Records [ Specified Sort Order: group::text; ascending
+Sort Records [ Specified Sort Order: group::order; based on value list: “1-99”
+group::text; ascending
 category::sortTime; ascending
 category::text; ascending ]
 [ Restore; No dialog ]
 Else
 Go to Layout [ “IssuesAndObservationsTag” (category) ]
-Sort Records [ Specified Sort Order: group::text; ascending
+Sort Records [ Specified Sort Order: group::order; based on value list: “1-99”
+group::text; ascending
 category::sortTime; ascending
 category::text; ascending ]
 [ Restore; No dialog ]
@@ -279,4 +298,4 @@ End If
 #
 Select Window [ Name: $UpdateTimewindowName; Current file ]
 Exit Script [ ]
-December 6, ଘ౮27 21:24:24 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -1-
+January 3, ଘ౮28 20:14:48 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -1-
