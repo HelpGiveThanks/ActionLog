@@ -1,14 +1,31 @@
 specific action log: startTimerAssignTimeSegmentToSpecificAction
 #
 #
-If [ Get (FoundCount) = 0 ]
+#Exit the script if there are no records present
+#or if the timer is already running.
+If [ Get (FoundCount) = 0 or day1::swBugField = "veto" ]
 Exit Script [ ]
 End If
 #
+#
 #Only allow timer to be started if it is for today
 #or tomorrow (meaning today after midnight).
-If [ reference::day1 = Get ( CurrentDate ) or reference::day1 = Get ( CurrentDate ) + 1 ]
+If [ reference::day1 = Get ( CurrentDate ) or reference::day1 = Get ( CurrentDate ) - 1 ]
 #
+#
+#If midnight has past, ask user if they want to
+#continue logging time for yesterday's record.
+If [ reference::day1 = Get ( CurrentDate ) - 1 ]
+Show Custom Dialog [ Message: "It is past midnight. Continue to log time for day " & reference::day1 & "?"; Buttons: “yes”,
+“cancel” ]
+If [ Get ( LastMessageChoice ) = 2 ]
+Exit Script [ ]
+End If
+End If
+#
+#Move focus in Day window to most current
+#date. This is done in case this record is the
+#record is today's record.
 If [ reference::day1 ≠ reference::ActivityLogDay ]
 Select Window [ Name: "Day"; Current file ]
 Go to Record/Request/Page
@@ -280,10 +297,10 @@ End If
 Else
 #
 Show Custom Dialog [ Message: "Go to the Timer window to start a timer for a specific action in the past. This button can only
-be used for starting a timer in the present. Timer window date is " & reference::ActivityLogDay & ". Change this date in the
-timer window."; Buttons: “OK” ]
+be used for starting a timer in the present. Timer window date is " & reference::day1 & ". Change this date in the timer
+window."; Buttons: “OK” ]
 #
 #
 #
 End If
-December 6, ଘ౮27 22:07:18 ActionLog.fp7 - startTimerAssignTimeSegmentToSpecificAction -1-
+January 4, ଘ౮28 4:08:49 ActionLog.fp7 - startTimerAssignTimeSegmentToSpecificAction -1-
