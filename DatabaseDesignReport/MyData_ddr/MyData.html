@@ -24,7 +24,7 @@
 <td class="chartheadersnobg">Layouts</td><td class="regularcharttext"><a href="#valLayoutsSectionAnchor_">8</a></td><td class="regularcharttext">&nbsp;</td><td class="chartheadersnobg" width="%26">Login using</td><td class="regularcharttext" width="33%">Account Name; Account= <a href="#3AccountAnchor_">normal</a></td>
 </tr>
 <tr vAlign="top">
-<td class="chartheadersnobg">Scripts</td><td class="regularcharttext"><a href="#valScriptsSectionAnchor_">4</a></td><td class="regularcharttext">&nbsp;</td><td class="chartheadersnobg">Switch to layout</td><td class="regularcharttext">Off</td>
+<td class="chartheadersnobg">Scripts</td><td class="regularcharttext"><a href="#valScriptsSectionAnchor_">5</a></td><td class="regularcharttext">&nbsp;</td><td class="chartheadersnobg">Switch to layout</td><td class="regularcharttext">Off</td>
 </tr>
 <tr vAlign="top">
 <td class="chartheadersnobg">Value Lists</td><td class="regularcharttext"><a href="#valValueListsSectionAnchor_">28</a></td><td class="regularcharttext">&nbsp;</td><td class="chartheadersnobg">Perform script</td><td class="regularcharttext"><a href="#74ScriptAnchor_">open</a></td>
@@ -68,17 +68,17 @@
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32770BaseTableAnchor_">user</a></td><td>
-<div align="left"><a href="#32770BaseTableAnchor_">36 fields</a> defined, 3 records</div>
+<div align="left"><a href="#32770BaseTableAnchor_">37 fields</a> defined, 7 records</div>
 </td><td><a href="#13631529TableAnchor_"><em>user</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32774BaseTableAnchor_">brainstate</a></td><td>
-<div align="left"><a href="#32774BaseTableAnchor_">93 fields</a> defined, 148 records</div>
+<div align="left"><a href="#32774BaseTableAnchor_">95 fields</a> defined, 64 records</div>
 </td><td><a href="#13631531TableAnchor_"><em>brainstate</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32780BaseTableAnchor_">day</a></td><td>
-<div align="left"><a href="#32780BaseTableAnchor_">32 fields</a> defined, 14716 records</div>
+<div align="left"><a href="#32780BaseTableAnchor_">32 fields</a> defined, 37 records</div>
 </td><td><a href="#13631534TableAnchor_"><em>day</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
@@ -88,12 +88,12 @@
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32800BaseTableAnchor_">list</a></td><td>
-<div align="left"><a href="#32800BaseTableAnchor_">26 fields</a> defined, 979 records</div>
+<div align="left"><a href="#32800BaseTableAnchor_">27 fields</a> defined, 119 records</div>
 </td><td><a href="#13631558TableAnchor_"><em>CategoryGroup</em></a>, <a href="#13631556TableAnchor_"><em>issueCategory</em></a>, <a href="#13631554TableAnchor_"><em>list</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32801BaseTableAnchor_">issueTime</a></td><td>
-<div align="left"><a href="#32801BaseTableAnchor_">8 fields</a> defined, 3786 records</div>
+<div align="left"><a href="#32801BaseTableAnchor_">9 fields</a> defined, 3867 records</div>
 </td><td><a href="#13631555TableAnchor_"><em>issueTime</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
@@ -109,7 +109,7 @@
 		<table width="100%" border="1">
 <tbody>
 <tr class="privsetfirst" vAlign="top">
-<td colSpan="9">Table Name: <a name="32770BaseTableAnchor_"/>user - 36 Fields</td>
+<td colSpan="9">Table Name: <a name="32770BaseTableAnchor_"/>user - 37 Fields</td>
 </tr>
 <tr class="chartheaders" vAlign="top">
 <td width="8%">Field Name</td><td width="7%">Type</td><td width="14%">Options</td><td width="10%">Comments</td><td width="13%">On Layouts</td><td width="15%">In Relationships</td><td width="22%">In Scripts</td><td width="11%">In Value Lists</td>
@@ -155,7 +155,7 @@
 <td><a name="3277032770FieldAnchor_"/>_Number</td><td>Normal, Number</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
-<li>Serial: Generate: On creation, Next value: 57, Increment: 1</li>
+<li>Serial: Generate: On creation, Next value: 85, Increment: 1</li>
 </ul>
 <strong>Validation:</strong>
 <ul>
@@ -1105,13 +1105,41 @@
 <ul></ul>
 </td>
 </tr>
+			<tr class="regularcharttext" vAlign="top">
+<td><a name="3277032782FieldAnchor_"/>DefaultSpecificAction</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
+<ul>
+<li>Allow editing</li>
+</ul>
+<strong>Validation:</strong>
+<ul>
+<li>Only during data entry</li>
+</ul>
+<strong>Storage:</strong>
+<ul>
+<li>Repetitions: 1</li>
+<li>Indexing: None</li>
+<li>Automatically create indexes as needed</li>
+<li>Index Language: English</li>
+</ul>
+</td><td>System will load this specific action at startup.</td><td>
+<ul>
+<li><a href="#62LayoutAnchor_">user</a></li>
+</ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td>
+</tr>
 		</tbody>
 </table>
 	<br>
 		<table width="100%" border="1">
 <tbody>
 <tr class="privsetfirst" vAlign="top">
-<td colSpan="9">Table Name: <a name="32774BaseTableAnchor_"/>brainstate - 93 Fields</td>
+<td colSpan="9">Table Name: <a name="32774BaseTableAnchor_"/>brainstate - 95 Fields</td>
 </tr>
 <tr class="chartheaders" vAlign="top">
 <td width="8%">Field Name</td><td width="7%">Type</td><td width="14%">Options</td><td width="10%">Comments</td><td width="13%">On Layouts</td><td width="15%">In Relationships</td><td width="22%">In Scripts</td><td width="11%">In Value Lists</td>
@@ -1120,7 +1148,7 @@
 <td><a name="3277433254FieldAnchor_"/>_Number</td><td>Normal, Number</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
-<li>Serial: Generate: On creation, Next value: 1937, Increment: 1</li>
+<li>Serial: Generate: On creation, Next value: 2182, Increment: 1</li>
 </ul>
 <strong>Validation:</strong>
 <ul>
@@ -3474,6 +3502,58 @@
 <ul></ul>
 </td>
 </tr>
+			<tr class="regularcharttext" vAlign="top">
+<td><a name="3277433282FieldAnchor_"/>HighlightLibraryButton</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
+<ul>
+<li>Allow editing</li>
+</ul>
+<strong>Validation:</strong>
+<ul>
+<li>Only during data entry</li>
+</ul>
+<strong>Storage:</strong>
+<ul>
+<li>Repetitions: 1</li>
+<li>Indexing: None</li>
+<li>Automatically create indexes as needed</li>
+<li>Index Language: English</li>
+</ul>
+</td><td></td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td>
+</tr>
+			<tr class="regularcharttext" vAlign="top">
+<td><a name="3277433283FieldAnchor_"/>HighlightSpecificActionButton</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
+<ul>
+<li>Allow editing</li>
+</ul>
+<strong>Validation:</strong>
+<ul>
+<li>Only during data entry</li>
+</ul>
+<strong>Storage:</strong>
+<ul>
+<li>Repetitions: 1</li>
+<li>Indexing: None</li>
+<li>Automatically create indexes as needed</li>
+<li>Index Language: English</li>
+</ul>
+</td><td></td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td>
+</tr>
 		</tbody>
 </table>
 	<br>
@@ -3573,6 +3653,7 @@
 <ul>
 <li><a href="#70LayoutAnchor_">day</a></li>
 <li><a href="#84LayoutAnchor_">day Copy</a></li>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
 </ul>
 </td><td>
 <ul></ul>
@@ -3586,7 +3667,7 @@
 <td><a name="3278032781FieldAnchor_"/>_Number</td><td>Normal, Number</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
-<li>Serial: Generate: On creation, Next value: 44751, Increment: 1</li>
+<li>Serial: Generate: On creation, Next value: 45245, Increment: 1</li>
 </ul>
 <strong>Validation:</strong>
 <ul>
@@ -3601,6 +3682,7 @@
 <ul>
 <li><a href="#63LayoutAnchor_">brainstate</a></li>
 <li><a href="#70LayoutAnchor_">day</a></li>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
 </ul>
 </td><td>
 <ul></ul>
@@ -3926,7 +4008,9 @@
 <li>Automatically create indexes as needed</li>
 </ul>
 </td><td>PartOfSwatch</td><td>
-<ul></ul>
+<ul>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td><td>
@@ -4421,7 +4505,7 @@
 		<table width="100%" border="1">
 <tbody>
 <tr class="privsetfirst" vAlign="top">
-<td colSpan="9">Table Name: <a name="32800BaseTableAnchor_"/>list - 26 Fields</td>
+<td colSpan="9">Table Name: <a name="32800BaseTableAnchor_"/>list - 27 Fields</td>
 </tr>
 <tr class="chartheaders" vAlign="top">
 <td width="8%">Field Name</td><td width="7%">Type</td><td width="14%">Options</td><td width="10%">Comments</td><td width="13%">On Layouts</td><td width="15%">In Relationships</td><td width="22%">In Scripts</td><td width="11%">In Value Lists</td>
@@ -4463,7 +4547,9 @@
 <li><a href="#CategoryGroup=issueCategoryRelationshipAnchor_"><em>CategoryGroup=issueCategory</em></a></li>
 </ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -4472,7 +4558,7 @@
 <td><a name="3280032781FieldAnchor_"/>_Number</td><td>Normal, Number</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
-<li>Serial: Generate: On creation, Next value: 1846, Increment: 1</li>
+<li>Serial: Generate: On creation, Next value: 1973, Increment: 1</li>
 </ul>
 <strong>Validation:</strong>
 <ul>
@@ -4490,7 +4576,9 @@
 </td><td>
 <ul></ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -4544,7 +4632,9 @@
 </td><td>
 <ul></ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -4678,7 +4768,9 @@
 </td><td>
 <ul></ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -4785,7 +4877,9 @@
 </td><td>
 <ul></ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -4812,7 +4906,9 @@
 </td><td>
 <ul></ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -4839,7 +4935,9 @@
 </td><td>
 <ul></ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -5127,13 +5225,39 @@
 <ul></ul>
 </td>
 </tr>
+			<tr class="regularcharttext" vAlign="top">
+<td><a name="3280032864FieldAnchor_"/>timer</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
+<ul>
+<li>Allow editing</li>
+</ul>
+<strong>Validation:</strong>
+<ul>
+<li>Only during data entry</li>
+</ul>
+<strong>Storage:</strong>
+<ul>
+<li>Repetitions: 1</li>
+<li>Indexing: None</li>
+<li>Automatically create indexes as needed</li>
+<li>Index Language: English</li>
+</ul>
+</td><td></td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td>
+</tr>
 		</tbody>
 </table>
 	<br>
 		<table width="100%" border="1">
 <tbody>
 <tr class="privsetfirst" vAlign="top">
-<td colSpan="9">Table Name: <a name="32801BaseTableAnchor_"/>issueTime - 8 Fields</td>
+<td colSpan="9">Table Name: <a name="32801BaseTableAnchor_"/>issueTime - 9 Fields</td>
 </tr>
 <tr class="chartheaders" vAlign="top">
 <td width="8%">Field Name</td><td width="7%">Type</td><td width="14%">Options</td><td width="10%">Comments</td><td width="13%">On Layouts</td><td width="15%">In Relationships</td><td width="22%">In Scripts</td><td width="11%">In Value Lists</td>
@@ -5178,7 +5302,7 @@
 <td><a name="328012FieldAnchor_"/>_Number</td><td>Normal, Number</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
-<li>Serial: Generate: On creation, Next value: 5326, Increment: 1</li>
+<li>Serial: Generate: On creation, Next value: 5525, Increment: 1</li>
 </ul>
 <strong>Validation:</strong>
 <ul>
@@ -5196,7 +5320,9 @@
 </td><td>
 <ul></ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -5222,7 +5348,9 @@
 </td><td>
 <ul></ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -5250,7 +5378,9 @@
 <li><a href="#day=issueTimeRelationshipAnchor_"><em>day=issueTime</em></a></li>
 </ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -5305,7 +5435,9 @@
 <li><a href="#list=issueTimeRelationshipAnchor_"><em>list=issueTime</em></a></li>
 </ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -5322,11 +5454,15 @@
 <li>Do not store calculation results</li>
 </ul>
 </td><td></td><td>
-<ul></ul>
+<ul>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -5343,11 +5479,43 @@
 <li>Allow editing</li>
 </ul>
 </td><td></td><td>
-<ul></ul>
+<ul>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td><td>
 <ul></ul>
+</td><td>
+<ul></ul>
+</td>
+</tr>
+			<tr class="regularcharttext" vAlign="top">
+<td><a name="3280110FieldAnchor_"/>orphanCheck</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
+<ul>
+<li>Allow editing</li>
+</ul>
+<strong>Validation:</strong>
+<ul>
+<li>Only during data entry</li>
+</ul>
+<strong>Storage:</strong>
+<ul>
+<li>Repetitions: 1</li>
+<li>Indexing: None</li>
+<li>Automatically create indexes as needed</li>
+<li>Index Language: English</li>
+</ul>
+</td><td></td><td>
+<ul>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
+</ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul></ul>
 </td>
@@ -5561,6 +5729,7 @@
 </td><td>
 <ul>
 <li><a href="#74ScriptAnchor_">open</a></li>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
 </ul>
 </td><td>
 <ul>
@@ -5587,7 +5756,9 @@
 <li><a href="#list=issueTimeRelationshipAnchor_"><em>list=issueTime</em></a></li>
 </ul>
 </td><td>
-<ul></ul>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
 </td><td>
 <ul>
 <li><a href="#328011FieldAnchor_"><em>issueTime</em>::_lockIssueTime</a></li>
@@ -5637,6 +5808,7 @@
 <li><a href="#63LayoutAnchor_">brainstate</a></li>
 <li><a href="#70LayoutAnchor_">day</a></li>
 <li><a href="#84LayoutAnchor_">day Copy</a></li>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
 <li><a href="#90LayoutAnchor_">day Copy2</a></li>
 </ul>
 </td>
@@ -5841,7 +6013,7 @@
 <tr class="regularcharttext" valign="top">
 <td><a name="62LayoutAnchor_"/>user</td><td>No</td><td>
 <ul>
-<li><a href="#62LayoutObjectsAnchor_Regular Fields">31 Regular Fields</a></li>
+<li><a href="#62LayoutObjectsAnchor_Regular Fields">32 Regular Fields</a></li>
 </ul>
 </td><td><a href="#13631529TableAnchor_"><em>user</em></a></td><td>On</td><td>On</td><td>
 <ul>
@@ -5901,15 +6073,20 @@
 </td><td><a href="#13631554TableAnchor_"><em>list</em></a></td><td>On</td><td>On</td><td>
 <ul>
 <li><a href="#74ScriptAnchor_">open</a></li>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
 </ul>
 </td><td>[File Default]</td><td></td>
 </tr>
 <tr class="regularcharttext" valign="top">
 <td><a name="89LayoutAnchor_"/>issueTime</td><td>No</td><td>
 <ul>
-<li><a href="#89LayoutObjectsAnchor_Regular Fields">6 Regular Fields</a></li>
+<li><a href="#89LayoutObjectsAnchor_Regular Fields">10 Regular Fields</a></li>
 </ul>
-</td><td><a href="#13631555TableAnchor_"><em>issueTime</em></a></td><td>On</td><td>On</td><td></td><td>[File Default]</td><td></td>
+</td><td><a href="#13631555TableAnchor_"><em>issueTime</em></a></td><td>On</td><td>On</td><td>
+<ul>
+<li><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></li>
+</ul>
+</td><td>[File Default]</td><td></td>
 </tr>
 <tr class="regularcharttext" valign="top">
 <td><a name="90LayoutAnchor_"/>day Copy2</td><td>No</td><td>
@@ -7009,6 +7186,44 @@
 <li>Left: 2652.054688 px</li>
 <li>Bottom: 47 px</li>
 <li>Right: 2772.054688 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3277032782FieldAnchor_"><em>user</em>::DefaultSpecificAction</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="62Field 21.0000003405.054688 47.0000003525.054688LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#62LayoutAnchor_">user</a></li>
+<p></p>
+<b>Visibility:</b>
+<li>Only visible in Table View</li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 21 px</li>
+<li>Left: 3405.054688 px</li>
+<li>Bottom: 47 px</li>
+<li>Right: 3525.054688 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11375,13 +11590,13 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032839FieldAnchor_"><em>list</em>::_keyCategory</a></td>
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032848FieldAnchor_"><em>list</em>::issueTotalTime</a></td>
 </tr>
 <tr class="chartsubheads" valign="top">
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.000000498.589844 55.000000690.546875LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.000000239.117188 55.000000461.644531LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11391,9 +11606,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 498.589844 px</li>
+<li>Left: 239.117188 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 690.546875 px</li>
+<li>Right: 461.644531 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11413,13 +11628,13 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032847FieldAnchor_"><em>list</em>::timeSegmentKeyList</a></td>
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032839FieldAnchor_"><em>list</em>::_keyCategory</a></td>
 </tr>
 <tr class="chartsubheads" valign="top">
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000001070.937500 55.0000001334.953125LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000001026.507812 55.0000001218.464844LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11429,9 +11644,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 1070.9375 px</li>
+<li>Left: 1026.507812 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 1334.953125 px</li>
+<li>Right: 1218.464844 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11457,7 +11672,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000001334.953125 55.0000001589.964844LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000001293.464844 55.0000001548.476562LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11467,9 +11682,47 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 1334.953125 px</li>
+<li>Left: 1293.464844 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 1589.964844 px</li>
+<li>Right: 1548.476562 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032847FieldAnchor_"><em>list</em>::timeSegmentKeyList</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="88Field 29.0000001548.476562 55.0000001812.492188LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#88LayoutAnchor_">list</a></li>
+<p></p>
+<b>Visibility:</b>
+<li>Only visible in Table View</li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 29 px</li>
+<li>Left: 1548.476562 px</li>
+<li>Bottom: 55 px</li>
+<li>Right: 1812.492188 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11495,7 +11748,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000001919.199219 55.0000002195.863281LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000002141.726562 55.0000002418.390625LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11505,9 +11758,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 1919.199219 px</li>
+<li>Left: 2141.726562 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 2195.863281 px</li>
+<li>Right: 2418.390625 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11533,7 +11786,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000002335.570312 55.0000002485.570312LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000002558.097656 55.0000002708.097656LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11543,9 +11796,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 2335.570312 px</li>
+<li>Left: 2558.097656 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 2485.570312 px</li>
+<li>Right: 2708.097656 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11571,7 +11824,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000002485.570312 55.0000002635.570312LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000002708.097656 55.0000002858.097656LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11581,9 +11834,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 2485.570312 px</li>
+<li>Left: 2708.097656 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 2635.570312 px</li>
+<li>Right: 2858.097656 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11609,7 +11862,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000002635.570312 55.0000002795.972656LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000002858.097656 55.0000003018.500000LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11619,9 +11872,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 2635.570312 px</li>
+<li>Left: 2858.097656 px</li>
 <li>Bottom: 55 px</li>
-<li>Right: 2795.972656 px</li>
+<li>Right: 3018.5 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -11647,7 +11900,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000002795.972656 55.0000003194.679688LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="88Field 29.0000003018.500000 55.0000003417.207031LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#88LayoutAnchor_">list</a></li>
 <p></p>
@@ -11657,45 +11910,7 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 29 px</li>
-<li>Left: 2795.972656 px</li>
-<li>Bottom: 55 px</li>
-<li>Right: 3194.679688 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3280032848FieldAnchor_"><em>list</em>::issueTotalTime</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="88Field 29.0000003194.679688 55.0000003417.207031LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#88LayoutAnchor_">list</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 29 px</li>
-<li>Left: 3194.679688 px</li>
+<li>Left: 3018.5 px</li>
 <li>Bottom: 55 px</li>
 <li>Right: 3417.207031 px</li>
 </ul>
@@ -12272,6 +12487,157 @@
 </tbody>
 </table>
 <br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3280110FieldAnchor_"><em>issueTime</em>::orphanCheck</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="89Field204.000000138.000000218.000000391.000000LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 204 px</li>
+<li>Left: 138 px</li>
+<li>Bottom: 218 px</li>
+<li>Right: 391 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#328018FieldAnchor_"><em>issueTime</em>::sum</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="89Field 29.0000001273.625000 55.0000001419.449219LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
+<p></p>
+<b>Visibility:</b>
+<li>Only visible in Table View</li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 29 px</li>
+<li>Left: 1273.625 px</li>
+<li>Bottom: 55 px</li>
+<li>Right: 1419.449219 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#328017FieldAnchor_"><em>issueTime</em>::TimeCalc</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="89Field 29.0000001419.449219 55.0000001595.003906LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
+<p></p>
+<b>Visibility:</b>
+<li>Only visible in Table View</li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 29 px</li>
+<li>Left: 1419.449219 px</li>
+<li>Bottom: 55 px</li>
+<li>Right: 1595.003906 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table width="100%" border="1">
+<tbody>
+<tr class="chartheaders" valign="top">
+<td colspan="6" class="privsetfirst">Field Name: <a href="#32780111FieldAnchor_"><em>day</em>::swTotalSum</a></td>
+</tr>
+<tr class="chartsubheads" valign="top">
+<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
+</tr>
+<tr class="regularcharttext" valign="top">
+<td colspan="2"><a name="89Field 29.0000001595.003906 55.0000001785.218750LayoutObjectAnchor_"/><ul>
+<b>Layout Name:</b>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
+<p></p>
+<b>Visibility:</b>
+<li>Only visible in Table View</li>
+</ul>
+</td><td colspan="1">
+<ul>
+<li>Top: 29 px</li>
+<li>Left: 1595.003906 px</li>
+<li>Bottom: 55 px</li>
+<li>Right: 1785.21875 px</li>
+</ul>
+<ul>
+<li>Anchoring: Left, Top</li>
+</ul>
+</td><td colspan="1">Field Format: <ul>
+<li>Edit Box</li>
+<li>Show repetition: 1 through 1</li>
+<li>Orientation: vertical</li>
+</ul>
+</td><td colspan="2">Field Behavior:<ul>
+<li>Allow field to be entered: In Find mode, In Browse mode</li>
+<li>Go to next field using: Tab key</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
 <p>
 <span class="partheading">Layout Objects: <a href="#90LayoutAnchor_">day Copy2</a></span>
 </p>
@@ -12686,6 +13052,9 @@
 <tr>
 <td class="script_hier"><a name="78ScriptAnchor_toc"></a><a href="#78ScriptAnchor_">showTools</a></td>
 </tr>
+<tr>
+<td class="script_hier"><a name="79ScriptAnchor_toc"></a><a href="#79ScriptAnchor_">Re-link orphaned issuetime records (new)</a></td>
+</tr>
 </tbody>
 </table>
 <br>
@@ -12788,7 +13157,8 @@ Source field 42 import to user::iPhoneLayout
 Source field 43 import to user::windowSizeAndPlace
 Source field 44 import to user::chosenLayoutMain
 Source field 45 import to user::windowZoom
-Source field 46 import to user::chosenTagOrderSort ]
+Source field 46 import to user::chosenTagOrderSort
+Source field 47 import to user::DefaultSpecificAction ]
 [ No dialog ]</li>
 <li>Go to Layout [ &ldquo;brainstate&rdquo; (brainstate) ]</li>
 <li>Show All Records</li>
@@ -12842,7 +13212,9 @@ Source field 108 import to brainstate::lockStatus
 Source field 109 import to brainstate::lockObservationCategory
 Source field 110 import to brainstate::lockPrefix
 Source field 111 import to brainstate::pulldownBrainstate
-Source field 112 import to brainstate::totalTimeLogged ]
+Source field 112 import to brainstate::totalTimeLogged
+Source field 113 import to brainstate::HighlightLibraryButton
+Source field 114 import to brainstate::HighlightSpecificActionButton ]
 [ No dialog ]</li>
 <li>Go to Layout [ &ldquo;day&rdquo; (day) ]</li>
 <li>Show All Records</li>
@@ -13137,7 +13509,8 @@ Source field 42 import to user::iPhoneLayout
 Source field 43 import to user::windowSizeAndPlace
 Source field 44 import to user::chosenLayoutMain
 Source field 45 import to user::windowZoom
-Source field 46 import to user::chosenTagOrderSort ]</li>
+Source field 46 import to user::chosenTagOrderSort
+Source field 47 import to user::DefaultSpecificAction ]</li>
 <li>Go to Layout [ &ldquo;brainstate&rdquo; (brainstate) ]</li>
 <li>Show All Records</li>
 <li>Delete All Records
@@ -13190,7 +13563,9 @@ Source field 108 import to brainstate::lockStatus
 Source field 109 import to brainstate::lockObservationCategory
 Source field 110 import to brainstate::lockPrefix
 Source field 111 import to brainstate::pulldownBrainstate
-Source field 112 import to brainstate::totalTimeLogged ]</li>
+Source field 112 import to brainstate::totalTimeLogged
+Source field 113 import to brainstate::HighlightLibraryButton
+Source field 114 import to brainstate::HighlightSpecificActionButton ]</li>
 <li>Go to Layout [ &ldquo;day&rdquo; (day) ]</li>
 <li>Show All Records</li>
 <li>Delete All Records
@@ -13237,7 +13612,8 @@ Source field 19 import to list::timeTotalSumByCat
 Source field 20 import to list::oldCategorykey
 Source field 21 import to list::timeTotalSumByCatSortedByStatus
 Source field 24 import to list::reviewDate
-Source field 25 import to list::weblink ]</li>
+Source field 25 import to list::weblink
+Source field 27 import to list::timer ]</li>
 <li>Set Field [ backup::backup; "" ]</li>
 <li>Close Window [ Current Window ]</li>
 <li>Halt Script</li>
@@ -13310,7 +13686,7 @@ Source field 25 import to list::weblink ]</li>
 <table class="script_navbar">
 <tbody>
 <tr class="script_navbar">
-<a name="78ScriptAnchor_"></a><td class="script_navbar"><a href="#74ScriptAnchor_"><span>Previous Script: [open]</span></a></td><td class="script_navbar"></td><td class="script_navbar"></td>
+<a name="78ScriptAnchor_"></a><td class="script_navbar"><a href="#74ScriptAnchor_"><span>Previous Script: [open]</span></a></td><td class="script_navbar"></td><td class="script_navbar"><a href="#79ScriptAnchor_"><span>Next Script: [Re-link orphaned issuetime records (new)]</span></a></td>
 </tr>
 </tbody>
 </table>
@@ -13369,6 +13745,185 @@ Source field 25 import to list::weblink ]</li>
 <tr vAlign="top">
 <td class="chartheadersnobg">Table occurrences used by this script</td><td class="regularcharttext">
 <ul></ul>
+</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Custom Functions used by this script</td><td class="regularcharttext">
+<ul></ul>
+</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Custom menu set used by this script</td><td class="regularcharttext">
+<ul></ul>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="script_navbar">
+<tbody>
+<tr class="script_navbar">
+<a name="79ScriptAnchor_"></a><td class="script_navbar"><a href="#78ScriptAnchor_"><span>Previous Script: [showTools]</span></a></td><td class="script_navbar"></td><td class="script_navbar"></td>
+</tr>
+</tbody>
+</table>
+<table width="100%" border="1">
+<tbody>
+<tr class="privsetfirst" vAlign="top">
+<td width="35%">Script Name</td><td width="65%">Re-link orphaned issuetime records (new)</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Run script with full access privileges</td><td class="regularcharttext">Off</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Include In Menu</td><td class="regularcharttext">Yes</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Layouts that use this script</td><td class="regularcharttext">
+<ul></ul>
+</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Scripts that use this script</td><td class="regularcharttext">
+<ul></ul>
+</td>
+</tr>
+<tr vAlign="top">
+<td class="chartsubheads" colSpan="2">Script Definition</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Script Steps</td><td class="regularcharttext">
+<ul>
+<li>#</li>
+<li>Allow User Abort [ Off ]</li>
+<li>Set Error Capture [ On ]</li>
+<li>#</li>
+<li>//  Go to Layout [ &ldquo;issueTime&rdquo; (issueTime) ]</li>
+<li>//  Show All Records</li>
+<li>//  Sort Records [ Specified Sort Order: issueTime::_Number; descending ]
+[ Restore; No dialog ]</li>
+<li>//  #</li>
+<li>//  Go to Record/Request/Page
+[ First ]</li>
+<li>//  Loop</li>
+<li>//  Set Variable [ $issue; Value:issueTime::_keyIssue ]</li>
+<li>//  Set Variable [ $dayLink; Value:issueTime::_keyDay ]</li>
+<li>//  Set Variable [ $timeSegmentLink; Value:issueTime::_keyRepetition &amp; issueTime::_keyDay ]</li>
+<li>//  #</li>
+<li>//  Go to Layout [ &ldquo;list&rdquo; (list) ]</li>
+<li>//  #</li>
+<li>//  Enter Find Mode [  ]</li>
+<li>//  Set Field [ list::_LockList; $issue ]</li>
+<li>//  Perform Find [  ]</li>
+<li>//  #</li>
+<li>//  If [ Get ( LastError ) &ne; 401 ]</li>
+<li>//  #Add day and repetition key to issue if not there.</li>
+<li>//  If [ FilterValues (list::timeSegmentKeyList  ; $timeSegmentLink  &amp; "&para;")   &ne;   $timeSegmentLink &amp; "&para;" ]</li>
+<li>//  Set Variable [ $timeAll; Value:list::timeSegmentKeyList ]</li>
+<li>//  Set Field [ list::timeSegmentKeyList; $timeSegmentLink &amp; &para; &amp; $timeAll ]</li>
+<li>//  End If</li>
+<li>//  #</li>
+<li>//  #Add link to day if not there.</li>
+<li>//  If [ FilterValues (list::_keyLogs  ; $dayLink  &amp; "&para;")   &ne;   $dayLink &amp; "&para;" ]</li>
+<li>//  Set Variable [ $day; Value:list::_keyLogs ]</li>
+<li>//  Set Field [ list::_keyLogs; $dayLink &amp; &para; &amp; $day ]</li>
+<li>//  End If</li>
+<li>//  #</li>
+<li>//  Go to Layout [ &ldquo;issueTime&rdquo; (issueTime) ]</li>
+<li>//  Set Field [ issueTime::orphanCheck; "OK" ]</li>
+<li>//  #</li>
+<li>//  Else</li>
+<li>//  Go to Layout [ &ldquo;issueTime&rdquo; (issueTime) ]</li>
+<li>//  Set Field [ issueTime::orphanCheck; "orphan" ]</li>
+<li>//  End If</li>
+<li>//  #</li>
+<li>//  Go to Record/Request/Page
+[ Next; Exit after last ]</li>
+<li>//  End Loop</li>
+<li>#</li>
+<li>#</li>
+<li>#NOW REDO TIME CALC FOR ALL RECORDS</li>
+<li>#</li>
+<li>Go to Layout [ &ldquo;list&rdquo; (list) ]</li>
+<li>Enter Find Mode [  ]</li>
+<li>Set Field [ list::lock; "issue" ]</li>
+<li>Perform Find [  ]</li>
+<li>#</li>
+<li>Go to Record/Request/Page
+[ First ]</li>
+<li>#</li>
+<li>Loop</li>
+<li>Set Variable [ $issue; Value:list::_LockList ]</li>
+<li>#</li>
+<li>Go to Layout [ &ldquo;issueTime&rdquo; (issueTime) ]</li>
+<li>Enter Find Mode [  ]</li>
+<li>Set Field [ issueTime::_keyIssue; $issue ]</li>
+<li>Perform Find [  ]</li>
+<li>#</li>
+<li>Go to Record/Request/Page
+[ First ]</li>
+<li>Loop</li>
+<li>Set Variable [ $totalTime; Value:issueTime::TimeCalc + $totalTime ]</li>
+<li>Go to Record/Request/Page
+[ Next; Exit after last ]</li>
+<li>End Loop</li>
+<li>#</li>
+<li>Go to Layout [ &ldquo;list&rdquo; (list) ]</li>
+<li>Set Field [ list::issueTotalTime; $totalTime ]</li>
+<li>Set Variable [ $totalTime ]</li>
+<li>Go to Record/Request/Page
+[ Next; Exit after last ]</li>
+<li>End Loop</li>
+<li>#</li>
+<li>Set Window Title [ Current Window; New Title: "backup" ]</li>
+<li>#</li>
+</ul>
+</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Fields used in this script</td><td class="regularcharttext">
+<ul>
+<li><a href="#328012FieldAnchor_"><em>issueTime</em>::_Number</a></li>
+<li><a href="#328016FieldAnchor_"><em>issueTime</em>::_keyIssue</a></li>
+<li><a href="#328014FieldAnchor_"><em>issueTime</em>::_keyDay</a></li>
+<li><a href="#328013FieldAnchor_"><em>issueTime</em>::_keyRepetition</a></li>
+<li><a href="#328001FieldAnchor_"><em>list</em>::_LockList</a></li>
+<li><a href="#3280032847FieldAnchor_"><em>list</em>::timeSegmentKeyList</a></li>
+<li><a href="#3280032846FieldAnchor_"><em>list</em>::_keyLogs</a></li>
+<li><a href="#3280110FieldAnchor_"><em>issueTime</em>::orphanCheck</a></li>
+<li><a href="#3280032838FieldAnchor_"><em>list</em>::lock</a></li>
+<li><a href="#328017FieldAnchor_"><em>issueTime</em>::TimeCalc</a></li>
+<li><a href="#3280032848FieldAnchor_"><em>list</em>::issueTotalTime</a></li>
+</ul>
+</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Scripts used in this script</td><td class="regularcharttext">
+<ul></ul>
+</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Layouts used in this script</td><td class="regularcharttext">
+<ul>
+<li><a href="#89LayoutAnchor_">issueTime</a></li>
+<li><a href="#88LayoutAnchor_">list</a></li>
+</ul>
+</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Tables used in this script</td><td class="regularcharttext">
+<ul>
+<li><a href="#32801BaseTableAnchor_">issueTime</a></li>
+<li><a href="#32800BaseTableAnchor_">list</a></li>
+</ul>
+</td>
+</tr>
+<tr vAlign="top">
+<td class="chartheadersnobg">Table occurrences used by this script</td><td class="regularcharttext">
+<ul>
+<li><a href="#13631555TableAnchor_"><em>issueTime</em></a></li>
+<li><a href="#13631554TableAnchor_"><em>list</em></a></li>
+</ul>
 </td>
 </tr>
 <tr vAlign="top">
