@@ -1,42 +1,173 @@
-navigation: gotoLibraryDatabase
+navigation: gotoSolution (update and name change)
+#
+#!!!!!!!!!! NOTE !!!!!!!!!!!!!
+#!!!!!!!!!! NOTE !!!!!!!!!!!!!
+#!!!!!!!!!! NOTE !!!!!!!!!!!!!
+#This script needs to be kept identical to the
+#same script in the library.
 #
 #
-#Stop script if user is process of picking a specific action group.
-If [ $$pick = 1 ]
-Show Custom Dialog [ Message: "Pick a specific-action tag or click the cancel button in the Tag window. After you do this you can go to
-the library. "; Buttons: “OK” ]
+#Open using this url on iPad/iPhone.
+If [ Get ( SystemPlatform ) = 3 ]
+Set Error Capture [ On ]
+#
+Open URL [ "fmp://%7e/" & Substitute ( MemorySwitch::name ; " " ; "%20" ) ]
+[ No dialog ]
+#
+If [ Get ( LastError ) ≠ 0 ]
+#If the library fails to open inform user why.
+Show Custom Dialog [ Message: "Click the folder icon (top left corner) to start a library and add it to this menu. The one you
+selected is not available on this device or its name was changed so this shortcut is being deleted."; Buttons: “OK” ]
+Delete Portal Row
+[ No dialog ]
+Exit Script [ ]
+End If
+#
+#Close all solutions window if open after selecting a library.
+Close Window [ Name: "All Solutions"; Current file ]
+Set Variable [ $$otherApps ]
+Exit Script [ ]
+#
+End If
+#
+#
+#Because this portal is to external database it is
+#essential to get this record's path info for use in
+#other script steps.
+Set Variable [ $path; Value:MemorySwitch::path ]
+Set Variable [ $name; Value:MemorySwitch::name ]
+#
+#If library path is blank (which should only happen if
+#admin adds library manually with path), then delete
+#this library name from the list.
+If [ MemorySwitch::path = "" ]
+Show Custom Dialog [ Message: "This library file cannot be found under the name " & MemorySwitch::name & ". It will be
+removed from this list. You can add it back by going to its folder on your PC and double clicking on it."; Buttons: “OK” ]
+#
+#This seems to work if just the portal row is
+#deleted. Further testing is needed to confirm.
+Delete Portal Row
+[ No dialog ]
+#
+// #ISSUE: If you have a portal into a table that is more
+// #than one relationship away, and if that related table
+// #exists in an external file, then you cannot delete
+// #the portal row.
+// Go to Portal Row [ $row ]
+[ No dialog ]
+// Delete Record/Request
+[ No dialog ]
+// Delete Portal Row
+[ No dialog ]
+#
+#Because the one step above seems to work, I
+#am disabling these next steps for deleting a
+#portal row.
+// Go to Layout [ “MemorySwitch” (MemorySwitch) ]
+// Show All Records
+// Go to Record/Request/Page
+[ First ]
+// Loop
+// Exit Loop If [ $path = MemorySwitch::path ]
+// Go to Record/Request/Page
+[ Next; Exit after last ]
+// End Loop
+// If [ $path = MemorySwitch::path ]
+// Delete Record/Request
+[ No dialog ]
+// End If
+// Go to Layout [ “users” (steward) ]
 Exit Script [ ]
 End If
 #
 #Select the current library windows if open and selected.
-Select Window [ Name: "Tag Menus" ]
-Select Window [ Name: "Learn" ]
-Select Window [ Name: "Setup" ]
-Select Window [ Name: "Report" ]
-Select Window [ Name: "References" ]
+If [ MemorySwitch::currentLibraryPath = $path ]
+Select Window [ Name: GetValue ( WindowNames ( Case ( Get ( SystemPlatform ) = - 2 ;
+MemorySwitch::name ;
+MemorySwitch::name ) ) ; 1 ) ]
+Select Window [ Name: GetValue ( WindowNames ( Case ( Get ( SystemPlatform ) = - 2 ;
+MemorySwitch::name ;
+MemorySwitch::name ) ) ; 2 ) ]
 Select Window [ Name: MemorySwitch::currentLibraryMainWIndow ]
+End If
 #
-#If no library is open, then open the last library used.
-If [ Get (LastError) = 112 and MemorySwitch::currentLibraryPath ≠ "" ]
+#If the library selected is not open, then close the current
+#library, which means closing all of its windows, and
+#then open the selected library.
+If [ MemorySwitch::currentLibraryPath ≠ $path or Get (LastError) = 112 ]
+#
+Set Variable [ $number; Value:1 ]
+Loop
+Loop
+Close Window [ Name: Case (
+$number = 1 ; "Setup" ;
+$number = 2 ; "References" ;
+$number = 3 ; "Test" ;
+$number = 4 ; "Learn" ;
+$number = 5 ; "Report" ;
+$number = 6 ; "Tag Menus" ) ]
+Exit Loop If [ Get (LastError) = 112 ]
+End Loop
+Set Variable [ $number; Value:$number + 1 ]
+Exit Loop If [ $number = 7 ]
+End Loop
+#
+Set Field [ MemorySwitch::currentLibraryPath; $path ]
+Set Field [ MemorySwitch::currentLibraryName; $name ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
-Substitute (MemorySwitch::currentLibraryPath ; " " ; "%20" ) ;
-Substitute ( Substitute ( MemorySwitch::currentLibraryPath ; "file:/" ; "file://" ) ; " " ; "%20" ) ) ]
+Substitute (MemorySwitch::path ; " " ; "%20" ) ;
+Substitute ( Substitute ( MemorySwitch::path ; "file:/" ; "file://" ) ; " " ; "%20" ) ) ]
 [ No dialog ]
+End If
 #
 #If the path stored for the selected library failed to open
 #the library, then that library is no longer there or its
-#name has been changed, so inform the user of their
-#options.
+#name has been changed, so delete it from the
+#library list.
 If [ Get (LastError) = 5 ]
-Show Custom Dialog [ Message: "Last library used cannot be found as it must have been renamed, moved, or deleted. Find and
-open it manually or click the allsolutions button to select another library."; Buttons: “OK” ]
+Show Custom Dialog [ Message: "This library file cannot be found under the name " & MemorySwitch::name & ". It will be
+removed from this list. You can add it back by going to its folder on your PC and double clicking on it."; Buttons: “OK” ]
+#
+#This seems to work if just the portal row is
+#deleted. Further testing is needed to confirm.
+Delete Portal Row
+[ No dialog ]
+#
+// #ISSUE: If you have a portal into a table that is more
+// #than one relationship away, and if that related table
+// #exists in an external file, then you cannot delete
+// #the portal row.
+// Go to Portal Row [ $row ]
+[ No dialog ]
+// Delete Record/Request
+[ No dialog ]
+// Delete Portal Row
+[ No dialog ]
+#
+#Because the one step above seems to work, I
+#am disabling these next steps for deleting a
+#portal row.
+// Go to Layout [ “MemorySwitch” (MemorySwitch) ]
+// Show All Records
+// Go to Record/Request/Page
+[ First ]
+// Loop
+// Exit Loop If [ $path = MemorySwitch::path ]
+// Go to Record/Request/Page
+[ Next; Exit after last ]
+// End Loop
+// If [ $path = MemorySwitch::path ]
+// Delete Record/Request
+[ No dialog ]
+// End If
+// Go to Layout [ “users” (steward) ]
+Exit Script [ ]
 End If
 #
-#If their are no libraries in the system let the user
-#know how to add new ones.
-Else If [ Get (LastError) = 112 and MemorySwitch::currentLibraryPath = "" ]
-Show Custom Dialog [ Message: "There is no library file in memory. Click on a library file manually and it will be added to memory and
-opened the next time you click the library button."; Buttons: “OK” ]
+#Close other solutions window if open after selecting a library.
+If [ $$otherApps = 1 ]
+Close Window [ Name: "All Solutions"; Current file ]
+Set Variable [ $$otherApps ]
 End If
 #
-December 6, ଘ౮27 20:21:53 ActionLog.fp7 - gotoLibraryDatabase -1-
+July 13, ଘ౮28 13:12:26 ActionLog.fp7 - gotoSolution (update and name change) -1-
