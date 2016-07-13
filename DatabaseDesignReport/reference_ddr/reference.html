@@ -24,7 +24,7 @@
 <td class="chartheadersnobg">Layouts</td><td class="regularcharttext"><a href="#valLayoutsSectionAnchor_">4</a></td><td class="regularcharttext">&nbsp;</td><td class="chartheadersnobg" width="%26">Login using</td><td class="regularcharttext" width="33%">Account Name; Account= <a href="#3AccountAnchor_">normal</a></td>
 </tr>
 <tr vAlign="top">
-<td class="chartheadersnobg">Scripts</td><td class="regularcharttext"><a href="#valScriptsSectionAnchor_">2</a></td><td class="regularcharttext">&nbsp;</td><td class="chartheadersnobg">Switch to layout</td><td class="regularcharttext"><a href="#122LayoutAnchor_">AdminOnly</a></td>
+<td class="chartheadersnobg">Scripts</td><td class="regularcharttext"><a href="#valScriptsSectionAnchor_">1</a></td><td class="regularcharttext">&nbsp;</td><td class="chartheadersnobg">Switch to layout</td><td class="regularcharttext"><a href="#122LayoutAnchor_">AdminOnly</a></td>
 </tr>
 <tr vAlign="top">
 <td class="chartheadersnobg">Value Lists</td><td class="regularcharttext"><a href="#valValueListsSectionAnchor_">38</a></td><td class="regularcharttext">&nbsp;</td><td class="chartheadersnobg">Perform script</td><td class="regularcharttext"><a href="#32772ScriptAnchor_">start</a></td>
@@ -68,7 +68,7 @@
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32784BaseTableAnchor_">reference1</a></td><td>
-<div align="left"><a href="#32784BaseTableAnchor_">98 fields</a> defined, 2 records</div>
+<div align="left"><a href="#32784BaseTableAnchor_">97 fields</a> defined, 2 records</div>
 </td><td><a href="#13631578TableAnchor_"><em>reference1</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
@@ -78,7 +78,7 @@
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32786BaseTableAnchor_">MemorySwitch</a></td><td>
-<div align="left"><a href="#32786BaseTableAnchor_">20 fields</a> defined, 26 records</div>
+<div align="left"><a href="#32786BaseTableAnchor_">19 fields</a> defined, 15 records</div>
 </td><td><a href="#13631607TableAnchor_"><em>MemorySwitch</em></a></td>
 </tr>
 </tbody>
@@ -89,7 +89,7 @@
 		<table width="100%" border="1">
 <tbody>
 <tr class="privsetfirst" vAlign="top">
-<td colSpan="9">Table Name: <a name="32784BaseTableAnchor_"/>reference1 - 98 Fields</td>
+<td colSpan="9">Table Name: <a name="32784BaseTableAnchor_"/>reference1 - 97 Fields</td>
 </tr>
 <tr class="chartheaders" vAlign="top">
 <td width="8%">Field Name</td><td width="7%">Type</td><td width="14%">Options</td><td width="10%">Comments</td><td width="13%">On Layouts</td><td width="15%">In Relationships</td><td width="22%">In Scripts</td><td width="11%">In Value Lists</td>
@@ -2341,30 +2341,6 @@
 </td>
 </tr>
 			<tr class="regularcharttext" vAlign="top">
-<td><a name="3278432776FieldAnchor_"/>ActivityLogDayRecordNumber</td><td>Normal, Number</td><td><strong>Auto-Enter:</strong>
-<ul>
-<li>Allow editing</li>
-</ul>
-<strong>Validation:</strong>
-<ul>
-<li>Only during data entry</li>
-</ul>
-<strong>Storage:</strong>
-<ul>
-<li>Global</li>
-<li>Repetitions: 1</li>
-</ul>
-</td><td>used to determine if record is the first record or most current record.</td><td>
-<ul></ul>
-</td><td>
-<ul></ul>
-</td><td>
-<ul></ul>
-</td><td>
-<ul></ul>
-</td>
-</tr>
-			<tr class="regularcharttext" vAlign="top">
 <td><a name="3278432774FieldAnchor_"/>tagCatSort</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
@@ -2452,7 +2428,7 @@
 		<table width="100%" border="1">
 <tbody>
 <tr class="privsetfirst" vAlign="top">
-<td colSpan="9">Table Name: <a name="32786BaseTableAnchor_"/>MemorySwitch - 20 Fields</td>
+<td colSpan="9">Table Name: <a name="32786BaseTableAnchor_"/>MemorySwitch - 19 Fields</td>
 </tr>
 <tr class="chartheaders" vAlign="top">
 <td width="8%">Field Name</td><td width="7%">Type</td><td width="14%">Options</td><td width="10%">Comments</td><td width="13%">On Layouts</td><td width="15%">In Relationships</td><td width="22%">In Scripts</td><td width="11%">In Value Lists</td>
@@ -2728,23 +2704,11 @@
 <ul>
 <li>Context table: <a href="#13631607TableAnchor_"><em>MemorySwitch</em></a></li>
 <li>
-<strong>Case</strong> ( <strong>Filter</strong> ( <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 4 ) ; "." ) ="." ; 
-
 <strong>Case</strong> ( <strong>Get</strong> ( SystemPlatform ) = - 2 ;
 
 <strong>Substitute</strong> ( <strong>Substitute</strong> ( <strong>Get</strong> (FilePath) ; <strong>Get</strong> (FileName) &amp; <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 4 ) ; "help" &amp; <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 4 )  ) ; " " ; "%20" ) ;
 
-<strong>Substitute</strong> ( <strong>Substitute</strong> ( <strong>Substitute</strong> ( <strong>Get</strong> (FilePath) ; <strong>Get</strong> (FileName) &amp; <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 4 ) ; "help" &amp; <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 4 )  ) ; "file:/" ; "file://" ) ; " " ; "%20" ) )
-
-; 
-
-<strong>Case</strong> ( <strong>Get</strong> ( SystemPlatform ) = - 2 ;
-
-<strong>Substitute</strong> ( <strong>Substitute</strong> ( <strong>Get</strong> (FilePath) ; <strong>Get</strong> (FileName) &amp; <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 5 ) ; "help" &amp; <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 5 )  ) ; " " ; "%20" ) ;
-
-<strong>Substitute</strong> ( <strong>Substitute</strong> ( <strong>Substitute</strong> ( <strong>Get</strong> (FilePath) ; <strong>Get</strong> (FileName) &amp; <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 5 ) ; "help" &amp; <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 5 )  ) ; "file:/" ; "file://" ) ; " " ; "%20" ) )
-
-)</li>
+<strong>Substitute</strong> ( <strong>Substitute</strong> ( <strong>Substitute</strong> ( <strong>Get</strong> (FilePath) ; <strong>Get</strong> (FileName) &amp; <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 4 ) ; "help" &amp; <strong>Right</strong> ( <strong>Get</strong> (FilePath) ; 4 )  ) ; "file:/" ; "file://" ) ; " " ; "%20" ) )</li>
 </ul>
 <strong>Storage:</strong>
 <ul>
@@ -2804,9 +2768,7 @@
 <li>Repetitions: 1</li>
 </ul>
 </td><td>tellsFilemakerWhichSolutionHelpWasOpenedFrom</td><td>
-<ul>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-</ul>
+<ul></ul>
 </td><td>
 <ul></ul>
 </td><td>
@@ -2816,23 +2778,19 @@
 </td>
 </tr>
 			<tr class="regularcharttext" vAlign="top">
-<td><a name="3278614FieldAnchor_"/>versionActionLog</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
+<td><a name="3278614FieldAnchor_"/>versionActionLog</td><td>Calculated, Text</td><td><strong>Calculation:</strong>
 <ul>
-<li>Allow editing</li>
-</ul>
-<strong>Validation:</strong>
-<ul>
-<li>Only during data entry</li>
+<li>Context table: <a href="#13631607TableAnchor_"><em>MemorySwitch</em></a></li>
+<li>"3.0 beta"</li>
 </ul>
 <strong>Storage:</strong>
 <ul>
 <li>Global</li>
 <li>Repetitions: 1</li>
+<li>Index Language: English</li>
 </ul>
 </td><td></td><td>
-<ul>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-</ul>
+<ul></ul>
 </td><td>
 <ul></ul>
 </td><td>
@@ -2858,9 +2816,7 @@
 <li>Index Language: English</li>
 </ul>
 </td><td></td><td>
-<ul>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-</ul>
+<ul></ul>
 </td><td>
 <ul></ul>
 </td><td>
@@ -2884,9 +2840,7 @@
 <li>Repetitions: 1</li>
 </ul>
 </td><td></td><td>
-<ul>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-</ul>
+<ul></ul>
 </td><td>
 <ul></ul>
 </td><td>
@@ -2910,9 +2864,7 @@
 <li>Repetitions: 1</li>
 </ul>
 </td><td></td><td>
-<ul>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-</ul>
+<ul></ul>
 </td><td>
 <ul></ul>
 </td><td>
@@ -2936,9 +2888,7 @@
 <li>Repetitions: 1</li>
 </ul>
 </td><td></td><td>
-<ul>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-</ul>
+<ul></ul>
 </td><td>
 <ul></ul>
 </td><td>
@@ -2962,35 +2912,7 @@
 <li>Repetitions: 1</li>
 </ul>
 </td><td></td><td>
-<ul>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-</ul>
-</td><td>
 <ul></ul>
-</td><td>
-<ul></ul>
-</td><td>
-<ul></ul>
-</td>
-</tr>
-			<tr class="regularcharttext" vAlign="top">
-<td><a name="3278621FieldAnchor_"/>currentLibraryName</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
-<ul>
-<li>Allow editing</li>
-</ul>
-<strong>Validation:</strong>
-<ul>
-<li>Only during data entry</li>
-</ul>
-<strong>Storage:</strong>
-<ul>
-<li>Global</li>
-<li>Repetitions: 1</li>
-</ul>
-</td><td></td><td>
-<ul>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-</ul>
 </td><td>
 <ul></ul>
 </td><td>
@@ -3238,7 +3160,7 @@
 <tr class="regularcharttext" valign="top">
 <td><a name="121LayoutAnchor_"/>MemorySwitch</td><td>No</td><td>
 <ul>
-<li><a href="#121LayoutObjectsAnchor_Regular Fields">20 Regular Fields</a></li>
+<li><a href="#121LayoutObjectsAnchor_Regular Fields">12 Regular Fields</a></li>
 </ul>
 </td><td><a href="#13631607TableAnchor_"><em>MemorySwitch</em></a></td><td>On</td><td>On</td><td></td><td>[File Default]</td><td></td>
 </tr>
@@ -5035,48 +4957,13 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278621FieldAnchor_"><em>MemorySwitch</em>::currentLibraryName</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field150.000000138.000000164.000000391.000000LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 150 px</li>
-<li>Left: 138 px</li>
-<li>Bottom: 164 px</li>
-<li>Right: 391 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
 <td colspan="6" class="privsetfirst">Field Name: <a href="#3278612FieldAnchor_"><em>MemorySwitch</em>::helpObjectName</a></td>
 </tr>
 <tr class="chartsubheads" valign="top">
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.000000331.937500 31.000000483.402344LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="121Field 17.000000211.937500 31.000000331.937500LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
 <p></p>
@@ -5086,9 +4973,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 17 px</li>
-<li>Left: 331.9375 px</li>
+<li>Left: 211.9375 px</li>
 <li>Bottom: 31 px</li>
-<li>Right: 483.402344 px</li>
+<li>Right: 331.9375 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -5114,7 +5001,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000001369.554688 31.0000001489.554688LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="121Field 17.0000001218.089844 31.0000001338.089844LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
 <p></p>
@@ -5124,9 +5011,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 17 px</li>
-<li>Left: 1369.554688 px</li>
+<li>Left: 1218.089844 px</li>
 <li>Bottom: 31 px</li>
-<li>Right: 1489.554688 px</li>
+<li>Right: 1338.089844 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -5152,7 +5039,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000001489.554688 31.0000001609.554688LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="121Field 17.0000001338.089844 31.0000001458.089844LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
 <p></p>
@@ -5162,9 +5049,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 17 px</li>
-<li>Left: 1489.554688 px</li>
+<li>Left: 1338.089844 px</li>
 <li>Bottom: 31 px</li>
-<li>Right: 1609.554688 px</li>
+<li>Right: 1458.089844 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -5190,7 +5077,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000001609.554688 31.0000001729.554688LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="121Field 17.0000001458.089844 31.0000001578.089844LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
 <p></p>
@@ -5200,9 +5087,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 17 px</li>
-<li>Left: 1609.554688 px</li>
+<li>Left: 1458.089844 px</li>
 <li>Bottom: 31 px</li>
-<li>Right: 1729.554688 px</li>
+<li>Right: 1578.089844 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -5228,7 +5115,7 @@
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
 </tr>
 <tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000001729.554688 31.0000001804.554688LayoutObjectAnchor_"/><ul>
+<td colspan="2"><a name="121Field 17.0000001578.089844 31.0000001653.089844LayoutObjectAnchor_"/><ul>
 <b>Layout Name:</b>
 <li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
 <p></p>
@@ -5238,275 +5125,9 @@
 </td><td colspan="1">
 <ul>
 <li>Top: 17 px</li>
-<li>Left: 1729.554688 px</li>
+<li>Left: 1578.089844 px</li>
 <li>Bottom: 31 px</li>
-<li>Right: 1804.554688 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278613FieldAnchor_"><em>MemorySwitch</em>::backToSolution</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000001804.554688 31.0000001924.554688LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 17 px</li>
-<li>Left: 1804.554688 px</li>
-<li>Bottom: 31 px</li>
-<li>Right: 1924.554688 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278614FieldAnchor_"><em>MemorySwitch</em>::versionActionLog</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000001924.554688 31.0000002044.554688LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 17 px</li>
-<li>Left: 1924.554688 px</li>
-<li>Bottom: 31 px</li>
-<li>Right: 2044.554688 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278615FieldAnchor_"><em>MemorySwitch</em>::versionLibrary</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000002044.554688 31.0000002164.554688LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 17 px</li>
-<li>Left: 2044.554688 px</li>
-<li>Bottom: 31 px</li>
-<li>Right: 2164.554688 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278616FieldAnchor_"><em>MemorySwitch</em>::versionBudget</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000002164.554688 31.0000002284.554688LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 17 px</li>
-<li>Left: 2164.554688 px</li>
-<li>Bottom: 31 px</li>
-<li>Right: 2284.554688 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278618FieldAnchor_"><em>MemorySwitch</em>::versionHelp</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000002284.554688 31.0000002404.554688LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 17 px</li>
-<li>Left: 2284.554688 px</li>
-<li>Bottom: 31 px</li>
-<li>Right: 2404.554688 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278619FieldAnchor_"><em>MemorySwitch</em>::versionFMER</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000002404.554688 31.0000002524.554688LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 17 px</li>
-<li>Left: 2404.554688 px</li>
-<li>Bottom: 31 px</li>
-<li>Right: 2524.554688 px</li>
-</ul>
-<ul>
-<li>Anchoring: Left, Top</li>
-</ul>
-</td><td colspan="1">Field Format: <ul>
-<li>Edit Box</li>
-</ul>
-</td><td colspan="2">Field Behavior:<ul>
-<li>Allow field to be entered: In Find mode, In Browse mode</li>
-<li>Go to next field using: Tab key</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table width="100%" border="1">
-<tbody>
-<tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278620FieldAnchor_"><em>MemorySwitch</em>::versionIQ</a></td>
-</tr>
-<tr class="chartsubheads" valign="top">
-<td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
-</tr>
-<tr class="regularcharttext" valign="top">
-<td colspan="2"><a name="121Field 17.0000002524.554688 31.0000002644.554688LayoutObjectAnchor_"/><ul>
-<b>Layout Name:</b>
-<li><a href="#121LayoutAnchor_">MemorySwitch</a></li>
-<p></p>
-<b>Visibility:</b>
-<li>Only visible in Table View</li>
-</ul>
-</td><td colspan="1">
-<ul>
-<li>Top: 17 px</li>
-<li>Left: 2524.554688 px</li>
-<li>Bottom: 31 px</li>
-<li>Right: 2644.554688 px</li>
+<li>Right: 1653.089844 px</li>
 </ul>
 <ul>
 <li>Anchoring: Left, Top</li>
@@ -5912,16 +5533,13 @@
 <tr>
 <td class="script_hier"><a name="32772ScriptAnchor_toc"></a><a href="#32772ScriptAnchor_">start</a></td>
 </tr>
-<tr>
-<td class="script_hier"><a name="32773ScriptAnchor_toc"></a><a href="#32773ScriptAnchor_">show tools (new)</a></td>
-</tr>
 </tbody>
 </table>
 <br>
 <table class="script_navbar">
 <tbody>
 <tr class="script_navbar">
-<a name="32772ScriptAnchor_"></a><td class="script_navbar"></td><td class="script_navbar"></td><td class="script_navbar"><a href="#32773ScriptAnchor_"><span>Next Script: [show tools (new)]</span></a></td>
+<a name="32772ScriptAnchor_"></a><td class="script_navbar"></td><td class="script_navbar"></td><td class="script_navbar"></td>
 </tr>
 </tbody>
 </table>
@@ -5956,83 +5574,6 @@
 [ Lock; Hide ]</li>
 <li>Show/Hide Text Ruler
 [ Hide ]</li>
-</ul>
-</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Fields used in this script</td><td class="regularcharttext">
-<ul></ul>
-</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Scripts used in this script</td><td class="regularcharttext">
-<ul></ul>
-</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Layouts used in this script</td><td class="regularcharttext">
-<ul></ul>
-</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Tables used in this script</td><td class="regularcharttext">
-<ul></ul>
-</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Table occurrences used by this script</td><td class="regularcharttext">
-<ul></ul>
-</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Custom Functions used by this script</td><td class="regularcharttext">
-<ul></ul>
-</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Custom menu set used by this script</td><td class="regularcharttext">
-<ul></ul>
-</td>
-</tr>
-</tbody>
-</table>
-<br>
-<table class="script_navbar">
-<tbody>
-<tr class="script_navbar">
-<a name="32773ScriptAnchor_"></a><td class="script_navbar"><a href="#32772ScriptAnchor_"><span>Previous Script: [start]</span></a></td><td class="script_navbar"></td><td class="script_navbar"></td>
-</tr>
-</tbody>
-</table>
-<table width="100%" border="1">
-<tbody>
-<tr class="privsetfirst" vAlign="top">
-<td width="35%">Script Name</td><td width="65%">show tools (new)</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Run script with full access privileges</td><td class="regularcharttext">Off</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Include In Menu</td><td class="regularcharttext">Yes</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Layouts that use this script</td><td class="regularcharttext">
-<ul></ul>
-</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Scripts that use this script</td><td class="regularcharttext">
-<ul></ul>
-</td>
-</tr>
-<tr vAlign="top">
-<td class="chartsubheads" colSpan="2">Script Definition</td>
-</tr>
-<tr vAlign="top">
-<td class="chartheadersnobg">Script Steps</td><td class="regularcharttext">
-<ul>
-<li>Show/Hide Status Area
-[ Show ]</li>
 </ul>
 </td>
 </tr>
