@@ -1,12 +1,6 @@
 specific action log: stopTimerAssignedToSpecificAction
 #
 #
-#Exit the script if the timer is not running.
-If [ day1::swBugField ≠ "veto" ]
-Exit Script [ ]
-End If
-#
-#
 #Only allow timer to be stopped if it is running today
 #or tomorrow (meaning today after midnight).
 If [ reference::day1 = Get ( CurrentDate ) or reference::day1 + 1 = Get ( CurrentDate ) ]
@@ -62,8 +56,8 @@ Perform Script [ “CHUNK_updateIssueCategoryTime” ]
 #
 #
 Close Window [ Current Window ]
-#
-#NOTE: This next section can probably be
+
+#NOTE: This next section can probably be 
 #deleted as it done by the previous script
 #CHUNK... .
 // #Go to record time to which time will be added.
@@ -117,4 +111,4 @@ Change this date in the timer window."; Buttons: “OK” ]
 #
 End If
 #
-January 4, ଘ౮28 4:11:27 ActionLog.fp7 - stopTimerAssignedToSpecificAction -1-
+January 3, ଘ౮28 20:21:02 ActionLog.fp7 - stopTimerAssignedToSpecificAction -1-
