@@ -13,7 +13,9 @@ Close Window [ Name: "Tag"; Current file ]
 #Set window title.
 Set Window Title [ Current Window; New Title: "HelpGiveThanks Solutions" ]
 #
-#Size window to 100%
+#Size and move window.
 Set Zoom Level
 [ 100% ]
-January 5, 平成26 19:54:33 ActionLog.fp7 - editFarmer -1-
+Move/Resize Window [ Current Window; Width: Get (ScreenWidth) * .8; Top: Get (ScreenHeight) * .05; Left: Get (ScreenWidth)
+* .1 ]
+July 26, ଘ౮28 14:05:35 ActionLog.fp7 - editFarmer -1-

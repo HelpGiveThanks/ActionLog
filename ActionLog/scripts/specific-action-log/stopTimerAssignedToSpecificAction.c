@@ -1,6 +1,22 @@
 specific action log: stopTimerAssignedToSpecificAction
 #
 #
+#Don't allow user to stop the timer if is active
+#a day previous to the day in the Timer window.
+If [ issue::timer = "active" and reference::day1 ≠ Get ( CurrentDate ) and reference::day1 + 1 ≠ Get ( CurrentDate ) ]
+Show Custom Dialog [ Message: "This timer is active on a previous day. To stop it, 1) click the 'day' button above. 2) Scroll to
+the day whose dates are bold font, highlighted green. 3) Click the bolded date, and 4) in the Timer window insert a stop
+time."; Buttons: “OK” ]
+Exit Script [ ]
+End If
+#
+#
+#Exit the script if the timer is not running.
+If [ day1::swBugField ≠ "veto" ]
+Exit Script [ ]
+End If
+#
+#
 #Only allow timer to be stopped if it is running today
 #or tomorrow (meaning today after midnight).
 If [ reference::day1 = Get ( CurrentDate ) or reference::day1 + 1 = Get ( CurrentDate ) ]
@@ -51,13 +67,13 @@ Set Field [ day1::updateTime; day1::updateTimeCurrentTimeCalc ]
 #
 Perform Script [ “updatePauseTotals” ]
 #
+Close Window [ Current Window ]
 #
 Perform Script [ “CHUNK_updateIssueCategoryTime” ]
 #
 #
-Close Window [ Current Window ]
-
-#NOTE: This next section can probably be 
+#
+#NOTE: This next section can probably be
 #deleted as it done by the previous script
 #CHUNK... .
 // #Go to record time to which time will be added.
@@ -98,6 +114,12 @@ Set Variable [ $$stopRecordLoad ]
 Set Variable [ $$specificActionTimer ]
 Set Variable [ $$TimeAssignedToSpecificAction ]
 #
+#Show record has been modified.
+Set Field [ issue::dateModified; Get ( CurrentTimeStamp ) ]
+#
+#Change this specific action timer to inactive.
+Set Field [ issue::timer; "" ]
+#
 Refresh Window
 #
 End If
@@ -105,10 +127,9 @@ End If
 #
 Else
 #
-Show Custom Dialog [ Message: "Go to the Timer window to stop a timer for a specific action taking place in the past. This
-button can only be used for stopping a timer running in the present. Timer window date is " & reference::ActivityLogDay & ".
-Change this date in the timer window."; Buttons: “OK” ]
+Show Custom Dialog [ Message: "This button cannot stop a timer running in the past. To stop a timer running in the past, go to
+the Timer window to insert a stop time for the date " & reference::ActivityLogDay & "."; Buttons: “OK” ]
 #
 End If
 #
-January 3, ଘ౮28 20:21:02 ActionLog.fp7 - stopTimerAssignedToSpecificAction -1-
+July 26, ଘ౮28 15:42:54 ActionLog.fp7 - stopTimerAssignedToSpecificAction -1-

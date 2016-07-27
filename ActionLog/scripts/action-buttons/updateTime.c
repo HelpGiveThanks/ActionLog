@@ -76,7 +76,8 @@ Set Variable [ $removeDayLink; Value:1 ]
 End If
 #
 #Subtract segment key from specific action record.
-New Window [ Height: 1; Width: 1; Top: -10000; Left: -10000 ]
+New Window [ ]
+// New Window [ Height: 1; Width: 1; Top: -10000; Left: -10000 ]
 Go to Layout [ “Issues” (issue) ]
 Enter Find Mode [ ]
 Set Field [ issue::timeSegmentKeyList; $time ]
@@ -125,6 +126,8 @@ Set Variable [ $$TimeAssignedToSpecificAction ]
 Select Window [ Name: "Specific Action"; Current file ]
 Set Variable [ $$ActiveTimeSegment ]
 Set Variable [ $$day1BugField ]
+#UNTESTED!!!!!!!!!!!!!!!
+Set Field [ issue::timer; "" ]
 Refresh Window
 Select Window [ Name: "Timer"; Current file ]
 End If
@@ -303,8 +306,10 @@ End Loop
 #
 #E2) UPDATE the time in any dependent issues.
 If [ $$stopCHUNK_updateIssueCategoryTime ≠ 1 ]
+Set Variable [ $$timeSegment; Value:$time ]
 Set Variable [ $$updateDay; Value:day1::_lockDay ]
-Perform Script [ “CHUNK_updateIssueCategoryTime (Updated)” ]
+Perform Script [ “CHUNK_updateIssueCategoryTime (update)” ]
+Set Variable [ $$timeSegment ]
 Set Variable [ $$updateDay ]
 End If
 #
@@ -601,7 +606,7 @@ Else If [ Left ( $layout ; 5 ) ≠ "Total" ]
 Perform Script [ “goBackButton_FindRecordsChunk” ]
 Perform Script [ “CHUNK_lastDayUsed” ]
 // Perform Script [ “folderStopwatchCheck” ]
-Perform Script [ “DaySelectSortThenSort” ]
+Perform Script [ “DaySelectSortThenSort (Update)” ]
 Halt Script
 End If
 If [ steward::retiredStatus = "r" ]
@@ -610,5 +615,5 @@ Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstat
 End If
 Perform Script [ “CHUNK_lastDayUsed” ]
 // Perform Script [ “folderStopwatchCheck” ]
-Perform Script [ “DaySelectSortThenSort” ]
-December 6, ଘ౮27 20:51:24 ActionLog.fp7 - updateTime -1-
+Perform Script [ “DaySelectSortThenSort (Update)” ]
+July 13, ଘ౮28 19:44:21 ActionLog.fp7 - updateTime -1-

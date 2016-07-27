@@ -3,6 +3,42 @@ log: gotoLogs
 #current record.
 #
 #
+If [ $$logBrainstate ≠ brainstate::_lockBrainstateID and brainstate::HighlightSpecificActionButton ≠ "" ]
+Select Window [ Name: "Specific Action"; Current file ]
+Set Variable [ $name; Value:brainstate::description ]
+Select Window [ Name: "Timer"; Current file ]
+Show Custom Dialog [ Message: //"View '" & GetValue ( $name; 1) & "' timer's specific actions or load '" & GetValue
+( brainstate::description ; 1 ) & "' timer's specific actions?"
+//"Your Specific Action windows = '" & GetValue ( $name; 1) & "'. View '" & GetValue ( $name; 1) & "' or load '" & GetValue
+( brainstate::description ; 1 ) & "' specific actions?"
+"View — specific actions for — " & GetValue ( $name; 1) & ¶ & "or" & ¶ & "Load — specific actions for — " & GetValue
+( brainstate::description ; 1 ); Buttons: “load”, “view” ]
+#
+#
+If [ Get ( LastMessageChoice ) = 2 ]
+If [ Get ( SystemPlatform ) = 3 ]
+Select Window [ Name: "Specific Action"; Current file ]
+Else
+Select Window [ Name: "Tag"; Current file ]
+Select Window [ Name: "Day"; Current file ]
+Select Window [ Name: "Specific Action"; Current file ]
+End If
+Exit Script [ ]
+End If
+#
+Else If [ Right ( Filter ( brainstate::description ; "!" ) ; 1 ) ≠ "!" ]
+#
+If [ Get ( SystemPlatform ) = 3 ]
+Select Window [ Name: "Specific Action"; Current file ]
+Else
+Select Window [ Name: "Tag"; Current file ]
+Select Window [ Name: "Day"; Current file ]
+Select Window [ Name: "Specific Action"; Current file ]
+End If
+Exit Script [ ]
+End If
+#
+#
 #basic administration tasks
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
@@ -16,9 +52,13 @@ Set Variable [ $$stopRecordLoad; Value:1 ]
 Set Variable [ $$stopSubtotal; Value:1 ]
 #
 #I really need to decide on ONE means to store the
-#current brainstate key, isntead of making up a new
-#one for each module because I'm not sure how the
-#others are being used. A definition of each variable
+#current brainstate key, instead of making up a new
+#one for each module. I'm not sure how the
+#others are being used. Perhaps since the
+#current brainstate in the Specific Action log
+#can be different from that in the Timer
+#window, the system reall does require two
+#such keys? A definition of each variable
 #and how it is used would be great!
 Set Variable [ $$logBrainstate; Value:brainstate::_lockBrainstateID ]
 Set Variable [ $day1; Value:reference::day1 ]
@@ -46,10 +86,10 @@ Set Variable [ $$stopRecordLoad ]
 Set Variable [ $$stopSubtotal ]
 Exit Script [ ]
 #
+Else If [ logs::_keyBrainstate = $$logBrainstate and logs::_keyDay ≠ $day1 ]
 #If only a new day has been added, then just update
 #the Day window and show user the rest of the
 #Specific Action windows without changing them.
-Else If [ logs::_keyBrainstate = $$logBrainstate and logs::_keyDay ≠ $day1 ]
 #
 #Find new day record for this timer.
 Go to Layout [ “logs2rows” (logs) ]
@@ -80,22 +120,23 @@ End If
 #system needs to know what IDs are associated with a log record.
 Set Variable [ $$log; Value:logs::_lockDay ]
 Set Variable [ $$logrecordID; Value:Get ( RecordID ) ]
+Set Variable [ $$day1BugField; Value:logs::swBugField ]
 Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
 #
 #Start load record scripts as needed for normal function.
 Set Variable [ $$stopRecordLoad ]
 Set Variable [ $$stopSubtotal ]
 #
-Perform Script [ “loadLogrecordID” ]
-#
 Select Window [ Name: "Tag"; Current file ]
 Select Window [ Name: "Specific Action"; Current file ]
+Refresh Window
 #
 Exit Script [ ]
 #
 End If
 #
-#Find first issue record if there is one and set variable
+#
+#Find first issue record if there is one and set variables
 #to conditionally format times for the first day record.
 Go to Layout [ “Issues” (issue) ]
 #
@@ -133,6 +174,7 @@ Set Variable [ $$stopSubtotal ]
 Perform Script [ “TsubtotalTimeByGroup” ]
 End If
 #
+#Set the variables.
 Set Variable [ $$issue; Value:issue::_LockList ]
 Set Variable [ $$status; Value:issue::_keyStatus ]
 Set Variable [ $$issueLogs; Value:issue::_keyLogs ]
@@ -169,6 +211,7 @@ End If
 #system needs to know what IDs are associated with a log record.
 Set Variable [ $$log; Value:logs::_lockDay ]
 Set Variable [ $$logrecordID; Value:Get ( RecordID ) ]
+Set Variable [ $$day1BugField; Value:logs::swBugField ]
 Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
 #
 Refresh Window
@@ -194,88 +237,46 @@ category::text; ascending ]
 #amount of time it takes to calculate this total.
 Perform Script [ “updateTimerTotalTimeInTagWindow” ]
 #
-#FIX FIX FIX FIX
-#FIX FIX FIX FIX
-#FIX FIX FIX FIX
-#FIX FIX FIX FIX
-#FIX FIX FIX FIX
-#
-// #Update review dates.
-// Go to Object [ Object Name: "status" ]
-// Go to Portal Row
-[ Select; First ]
-// Set Variable [ $reviewNames; Value:"daily" & ¶ &
-"weekly" & ¶ &
-"monthly" & ¶ &
-"1/2 yearly" & ¶ &
-"yearly" & ¶ &
-"complete" & ¶ &
-"discard" ]
-// Set Variable [ $reviewDates; Value://daily review
-"" & ¶ &
-//weekly review
-Case (
-Day ( Get ( CurrentDate ) ) < 8 ;
-Month ( Get ( CurrentDate ) ) - 1 & "/" ;
-Month ( Get ( CurrentDate ) ) & "/" ) &
-Case (
-DayOfWeek ( Get ( CurrentDate ) ) = 1 ; Day ( Get ( CurrentDate ) ) ;
-DayOfWeek ( Get ( CurrentDate ) - 1 ) = 1 ; Day ( Get ( CurrentDate ) - 1 ) ;
-DayOfWeek ( Get ( CurrentDate ) - 2 ) = 1 ; Day ( Get ( CurrentDate ) - 2 ) ;
-DayOfWeek ( Get ( CurrentDate ) - 3 ) = 1 ; Day ( Get ( CurrentDate ) - 3 ) ;
-DayOfWeek ( Get ( CurrentDate ) - 4 ) = 1 ; Day ( Get ( CurrentDate ) - 4 ) ;
-DayOfWeek ( Get ( CurrentDate ) - 5 ) = 1 ; Day ( Get ( CurrentDate ) - 5 ) ;
-DayOfWeek ( Get ( CurrentDate ) - 6 ) = 1 ; Day ( Get ( CurrentDate ) - 6 ) )
-//& " - "
-&
-//Month ( Get ( CurrentDate ) ) & "/" &
-//Case (
-//DayOfWeek ( Get ( CurrentDate ) ) = 7 ; Day ( Get ( CurrentDate ) ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 1 ) = 7 ; Day ( Get ( CurrentDate ) + 1 ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 2 ) = 7 ; Day ( Get ( CurrentDate ) + 2 ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 3 ) = 7 ; Day ( Get ( CurrentDate ) + 3 ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 4 ) = 7 ; Day ( Get ( CurrentDate ) + 4 ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 5 ) = 7 ; Day ( Get ( CurrentDate ) + 5 ) ;
-//DayOfWeek ( Get ( CurrentDate ) + 6 ) = 7 ; Day ( Get ( CurrentDate ) + 6 ) )
-¶ &
-//monthly review
-" " &
-Case (
-Day ( Get ( CurrentDate ) ) > 7 ;
-//MonthName ( Month ( Get ( CurrentDate ) ) + 1 & "/" & 1 & "/" & 2012) ;
-//MonthName ( Month ( Get ( CurrentDate ) ) & "/" & 1 & "/" & 2012) )
-//& ")"
-Month ( Get ( CurrentDate ) ) + 1 & "/" & "1" ;
-Month ( Get ( CurrentDate ) ) & "/" & "1" ) ]
-// Set Variable [ $number; Value:1 ]
-// If [ status::text = "" ]
-// Set Field [ status::status; "Remember existence" & ¶ & "of a specific action..." ]
-// Loop
-// Set Field [ status::text; GetValue ( $reviewNames ; $number ) ]
-// Set Field [ status::reviewDate; GetValue ( $reviewDates ; $number ) ]
-// Set Variable [ $number; Value:$number + 1 ]
-// Go to Record/Request/Page
-[ Next; Exit after last ]
-// End Loop
-// End If
+#Turn this variable back on as it is shut off
+#when the script above was performed.
+Set Variable [ $$stopRecordLoad; Value:1 ]
 #
 #Find all groups for this action.
-Go to Layout [ “menuGroups” (issueCategory) ]
+Go to Layout [ “IssuesAndObservationsTag” (category) ]
 Enter Find Mode [ ]
-Set Field [ issueCategory::_keyBrainstate; $$logBrainstate ]
-Set Field [ issueCategory::lock; "location" ]
+Set Field [ category::_keyBrainstate; $$logBrainstate ]
+Set Field [ category::lock; "location" ]
 Perform Find [ ]
 #
 #If none are found then create one.
 If [ Get ( LastError ) = 401 ]
+Set Variable [ $$TagNameRequired; Value:1 ]
+#
+#Create new group record.
 New Record/Request
-Set Field [ issueCategory::lock; "location" ]
-Set Field [ issueCategory::_keyBrainstate; $$logBrainstate ]
-Set Field [ issueCategory::text; "administration" ]
-Set Variable [ $groupKey; Value:issueCategory::_LockList ]
+Set Field [ category::lock; "group" ]
+Set Field [ category::_keyBrainstate; $$logBrainstate ]
+Set Field [ category::text; "Admin" ]
+Set Variable [ $group; Value:category::_LockList ]
+#
+#Remove it so it only shows up as a header and
+#and not as both a header and a tag.
+Omit Record
+#
+#Create a new tag record and assign it to this new
+#group so the group will show up as its header.
+New Record/Request
+Set Field [ category::lock; "location" ]
+Set Field [ category::_keyBrainstate; $$logBrainstate ]
+Set Field [ category::_keyCategory; $group ]
+Set Field [ category::text; "Administration" ]
+Set Variable [ $groupKey; Value:category::_LockList ]
+#
+#Turn off variable set at start of script.
+Set Variable [ $$TagNameRequired ]
 End If
 #
-Go to Layout [ “IssuesAndObservationsTag” (category) ]
+#Sort records so group headers will show up.
 Sort Records [ Specified Sort Order: group::order; based on value list: “1-99”
 group::text; ascending
 category::sortTime; ascending
@@ -321,5 +322,26 @@ Scroll Window
 #
 #Start load record scripts as needed for normal function.
 Set Variable [ $$stopRecordLoad ]
-Perform Script [ “loadIssuerecordID” ]
-January 3, ଘ౮28 20:31:38 ActionLog.fp7 - gotoLogs -1-
+#
+#Set final variables for navigation to other records.
+Set Field [ brainstate::pulldownBrainstate; issue::_keyBrainstate ]
+Go to Field [ ]
+#
+#If user clicked on the pulldown when the focus
+#of the system was on another record, this
+#variable prevents the pulldown menu from
+#flashing and going away. It needs to be reset
+#when the user navigates to the record other than
+#by click on the pulldown menus so the user
+#doesn't get bumped out of the menu field
+#if the database is focused on the record whose
+#menus the user is trying to access.
+Set Variable [ $$pulldownCheck; Value:Get (RecordID) ]
+#
+#disabled go to field takes a user view out of a
+#a the text field if they entered it to go to this
+#record, which I don't like as a user, so it is off.
+// Go to Field [ ]
+Set Variable [ $$stopIssuePulldownMenus; Value:1 ]
+Refresh Window
+July 13, ଘ౮28 13:38:52 ActionLog.fp7 - gotoLogs -1-

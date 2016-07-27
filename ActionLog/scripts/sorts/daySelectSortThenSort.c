@@ -42,6 +42,7 @@ brainstate::sortCategory; based on value list: “sortAlpha”
 brainstate::description; ascending ]
 [ Restore; No dialog ]
 Set Field [ steward::chosenSort; "number" ]
+Set Variable [ $$stopRecordLoad; Value:1 ]
 Go to Record/Request/Page
 [ First ]
 Loop
@@ -49,18 +50,19 @@ Exit Loop If [ $$recordFIXTOMANYVARIABLES = brainstate::_lockBrainstateID ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
+Set Field [ reference::CurrentRecord; Get ( RecordID ) ]
+Set Variable [ $$timerIDnumber; Value:brainstate::_lockBrainstateID ]
+Set Variable [ $$day1BugField; Value:day1::swBugField ]
 Go to Field [ ]
 Set Variable [ $$record ]
 Set Variable [ $$recordnumber ]
+Set Variable [ $$stopRecordLoad ]
 Set Variable [ $$recordFIXTOMANYVARIABLES ]
-Set Variable [ $$record ]
 #
 #Allows specific action script to continue.
 If [ $$specificActionTimer = 1 ]
 Exit Script [ Result: "note veto view" ]
 Exit Script [ ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -1-
-sorts: DaySelectSortThenSort
 Else
 Halt Script
 End If
@@ -123,8 +125,6 @@ Set Variable [ $$recordnumber ]
 End If
 #
 #Allows specific action script to continue.
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -2-
-sorts: DaySelectSortThenSort
 If [ $$specificActionTimer = 1 ]
 Exit Script [ Result: "note veto view" ]
 Exit Script [ ]
@@ -185,8 +185,6 @@ End If
 #
 #Allows specific action script to continue.
 If [ $$specificActionTimer = 1 ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -3-
-sorts: DaySelectSortThenSort
 Exit Script [ Result: "note veto view" ]
 Exit Script [ ]
 Else
@@ -250,8 +248,6 @@ Exit Loop If [ $$record = brainstate::_lockBrainstateID ]
 Go to Record/Request/Page
 [ Next ]
 End Loop
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -4-
-sorts: DaySelectSortThenSort
 Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
 Scroll Window
@@ -312,8 +308,6 @@ Go to Record/Request/Page
 End Loop
 Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -5-
-sorts: DaySelectSortThenSort
 Scroll Window
 [ Home ]
 Go to Record/Request/Page [ $$recordnumber ]
@@ -375,8 +369,6 @@ Go to Record/Request/Page
 End Loop
 Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -6-
-sorts: DaySelectSortThenSort
 Scroll Window
 [ Home ]
 Go to Record/Request/Page [ $$recordnumber ]
@@ -439,8 +431,6 @@ Exit Loop If [ $$record = brainstate::_lockBrainstateID ]
 Go to Record/Request/Page
 [ Next ]
 End Loop
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -7-
-sorts: DaySelectSortThenSort
 Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
 Scroll Window
@@ -501,8 +491,6 @@ Go to Record/Request/Page
 [ Next ]
 End Loop
 Set Variable [ $$record ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -8-
-sorts: DaySelectSortThenSort
 If [ $$recordnumber ≠ "" ]
 Scroll Window
 [ Home ]
@@ -564,8 +552,6 @@ Go to Record/Request/Page
 End Loop
 Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -9-
-sorts: DaySelectSortThenSort
 Scroll Window
 [ Home ]
 Go to Record/Request/Page [ $$recordnumber ]
@@ -626,8 +612,6 @@ Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
 Scroll Window
 [ Home ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -10-
-sorts: DaySelectSortThenSort
 Go to Record/Request/Page [ $$recordnumber ]
 [ No dialog ]
 Set Variable [ $$recordnumber ]
@@ -689,8 +673,6 @@ Go to Record/Request/Page
 [ Next ]
 End Loop
 Set Variable [ $$record ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -11-
-sorts: DaySelectSortThenSort
 If [ $$recordnumber ≠ "" ]
 Scroll Window
 [ Home ]
@@ -754,9 +736,6 @@ Loop
 Exit Loop If [ $$record = brainstate::_lockBrainstateID ]
 Go to Record/Request/Page
 [ Next ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -12-
-sorts: DaySelectSortThenSort Go to Record/Request/Page
-[ Next ]
 End Loop
 Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
@@ -816,8 +795,6 @@ Loop
 Exit Loop If [ $$record = brainstate::_lockBrainstateID ]
 Go to Record/Request/Page
 [ Next ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -13-
-sorts: DaySelectSortThenSort
 End Loop
 Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
@@ -878,8 +855,6 @@ Go to Record/Request/Page
 [ Next ]
 End Loop
 Set Variable [ $$record ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -14-
-sorts: DaySelectSortThenSort
 If [ $$recordnumber ≠ "" ]
 Scroll Window
 [ Home ]
@@ -940,9 +915,6 @@ End Loop
 Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
 Scroll Window
-[ Home ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -15-
-sorts: DaySelectSortThenSort Scroll Window
 [ Home ]
 Go to Record/Request/Page [ $$recordnumber ]
 [ No dialog ]
@@ -1005,9 +977,6 @@ Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
 Scroll Window
 [ Home ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -16-
-sorts: DaySelectSortThenSort Scroll Window
-[ Home ]
 Go to Record/Request/Page [ $$recordnumber ]
 [ No dialog ]
 Set Variable [ $$recordnumber ]
@@ -1069,9 +1038,6 @@ Go to Record/Request/Page
 [ Next ]
 End Loop
 Set Variable [ $$record ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -17-
-sorts: DaySelectSortThenSort
-Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
 Scroll Window
 [ Home ]
@@ -1131,8 +1097,6 @@ Go to Record/Request/Page
 [ Next ]
 End Loop
 Set Variable [ $$record ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -18-
-sorts: DaySelectSortThenSort
 If [ $$recordnumber ≠ "" ]
 Scroll Window
 [ Home ]
@@ -1194,8 +1158,6 @@ Go to Record/Request/Page
 End Loop
 Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -19-
-sorts: DaySelectSortThenSort
 Scroll Window
 [ Home ]
 Go to Record/Request/Page [ $$recordnumber ]
@@ -1256,8 +1218,6 @@ End Loop
 #
 Set Variable [ $$record ]
 If [ $$recordnumber ≠ "" ]
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -20-
-sorts: DaySelectSortThenSort
 Scroll Window
 [ Home ]
 Go to Record/Request/Page [ $$recordnumber ]
@@ -1265,4 +1225,4 @@ Go to Record/Request/Page [ $$recordnumber ]
 Set Variable [ $$recordnumber ]
 End If
 #
-August 12, 平成27 0:26:36 ActionLog.fp7 - DaySelectSortThenSort -21-
+July 26, ଘ౮28 15:10:42 ActionLog.fp7 - DaySelectSortThenSort -1-

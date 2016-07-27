@@ -2,7 +2,7 @@ triggered scripts: layoutStatus
 #PURPOSE set the layout status field with the layout that triggers this script when it loads
 #
 #
-If [ Get (LayoutName) = $$loglayout or $$otherApps = 1 or $$specificActionTimer = 1 or $$newTimer = 1 ]
+If [ Get (LayoutName) = $$loglayout or $$otherApps = 1 or $$specificActionTimer = 1 or $$newTimer = 1 or $$note = 1 ]
 Exit Script [ ]
 End If
 #
@@ -18,4 +18,4 @@ Set Field [ steward::windowSizeAndPlace[2]; Get ( WindowWidth ) ]
 Set Field [ steward::windowSizeAndPlace[3]; Get ( WindowTop ) ]
 Set Field [ steward::windowSizeAndPlace[4]; Get ( WindowLeft ) ]
 Set Field [ steward::windowZoom; Get ( WindowZoomLevel ) ]
-August 13, 平成27 16:51:48 ActionLog.fp7 - layoutStatus -1-
+July 26, ଘ౮28 15:17:46 ActionLog.fp7 - layoutStatus -1-

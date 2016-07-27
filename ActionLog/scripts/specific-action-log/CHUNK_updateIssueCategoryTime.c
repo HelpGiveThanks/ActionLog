@@ -27,16 +27,6 @@ Close Window [ Name: "temp"; Current file ]
 Exit Script [ ]
 End If
 #
-#Determine if the Specific Action window is
-#focused on timer being updated by this script.
-#If it is, set a variable to make a note of this for
-#use at the end of this script where the
-#Specifci Action window's conditional
-#formatting is adjusted as needed.
-If [ $$logBrainstate = issue::_keyBrainstate ]
-Set Variable [ $SpecificActionWindowFocusedOnThisIssue; Value:issue::_LockList ]
-End If
-#
 #Make sure user is not in any fields before updating
 #as this prevents update of time for the record
 #the user is in (have not tested how yet).
@@ -47,12 +37,34 @@ End If
 #
 Select Window [ Name: "temp"; Current file ]
 #
+#Find and capture ID of the active issue timer.
+Go to Record/Request/Page
+[ First ]
+Loop
+If [ issue::timer = "active" or
+FilterValues ( issue::timeSegmentKeyList ; $$timeSegment & ¶ ) = $$timeSegment & ¶ ]
+Set Variable [ $SpecificActionWindowFocusedOnThisIssue; Value:issue::_LockList ]
+If [ $$day1BugField = "note" ]
+Set Field [ issue::timer; "active" ]
+Else If [ $$day1BugField = "veto" ]
+Set Field [ issue::timer; "" ]
+End If
+End If
+Exit Loop If [ issue::timer = "active" or
+FilterValues ( issue::timeSegmentKeyList ; $$timeSegment & ¶ ) = $$timeSegment & ¶ ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
+End Loop
+#
 #Make a list of them.
 Go to Record/Request/Page
 [ First ]
 Loop
 Set Variable [ $AllIssueRecordsNeedingUpdate; Value:issue::_LockList & "¶" & $issueList ]
 Set Variable [ $issueList; Value:$AllIssueRecordsNeedingUpdate ]
+#
+#Clear all records IF AND ONLY IF 'clearall'
+#button has been clicked.
 If [ $$clear = 1 ]
 #
 #Remove link to log from issue record and update
@@ -217,26 +229,37 @@ Close Window [ Name: "temp"; Current file ]
 #
 #Conditionally format Specific Action record if
 #the current time segement is active and assigned to it.
+Select Window [ Name: "Specific Action"; Current file ]
+#
+#Get selected records number so it can be
+#returned to if no linked record is found.
+Set Variable [ $currentIssueNumber; Value:Get ( RecordNumber ) ]
 #
 #Check if the Specific Action window
 #is focused on this updating timer.
-Select Window [ Name: "Specific Action"; Current file ]
-If [ $SpecificActionWindowFocusedOnThisIssue ≠ "" ]
+#NOTE: See openSpecificAction script for
+#altenate way to accomplish this by sorting
+#most recently modified records to the top in
+#order to speed up looping to active timer if
+#there is one, and stopping looping after the
+#first 10 recently modified records. Not sure
+#if this is faster or not. Need to test.
+If [ issue::timer ≠ "active" ]
 #
 #Determine if the issue whose time is being updated
-#is showing in the Specific Action window, and if
+#is in the set of current found issues, and if
 #not then find and show it.
-If [ $SpecificActionWindowFocusedOnThisIssue ≠ issue::_LockList ]
+If [ issue::timer ≠ "active" ]
 Go to Record/Request/Page
 [ First ]
 Loop
-Exit Loop If [ $SpecificActionWindowFocusedOnThisIssue ≠ issue::_LockList ]
+Exit Loop If [ issue::timer = "active" ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
 #
 #If not showing then find, show and focus on it.
-If [ $SpecificActionWindowFocusedOnThisIssue ≠ issue::_LockList ]
+If [ issue::timer ≠ "active" ]
 Enter Find Mode [ ]
 Set Field [ issue::_LockList; $SpecificActionWindowFocusedOnThisIssue ]
 Extend Found Set [ ]
@@ -245,10 +268,17 @@ Sort Records [ ]
 Go to Record/Request/Page
 [ First ]
 Loop
-Exit Loop If [ $SpecificActionWindowFocusedOnThisIssue ≠ issue::_LockList ]
+Exit Loop If [ $SpecificActionWindowFocusedOnThisIssue = issue::_LockList ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
+End If
+#
+#If no linked record is found return user to
+#selected record.
+If [ $SpecificActionWindowFocusedOnThisIssue ≠ issue::_LockList ]
+Go to Record/Request/Page [ $currentIssueNumber ]
+[ No dialog ]
 End If
 #
 Set Variable [ $$stopRecordLoad ]
@@ -298,4 +328,4 @@ End If
 #
 Select Window [ Name: $UpdateTimewindowName; Current file ]
 Exit Script [ ]
-January 3, ଘ౮28 20:14:48 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -1-
+July 26, ଘ౮28 15:31:35 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -1-

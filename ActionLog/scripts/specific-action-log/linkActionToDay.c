@@ -96,8 +96,8 @@ $$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecord
  or
 $$log & "¶" = FilterValues ( issue::_keyLogs ; $$log & "¶" ) and $$issueRecordID = Get (RecordID)
  and 15 & $$log & "¶" = FilterValues ( $$timeAll ; 15 & $$log & "¶" ) ]
-Show Custom Dialog [ Message: "This action has time from the selected day record assigned to it. Before you can unlink it, click
-on all green time segments in the Day window and remove them from this action."; Buttons: “OK” ]
+Show Custom Dialog [ Message: "This specific action has time from the selected day record assigned to it. Before you can
+unlink it, click on all green time segments in the Day window and remove them from this specific action."; Buttons: “OK” ]
 Exit Script [ ]
 End If
 #
@@ -232,4 +232,4 @@ Set Variable [ $$IssueLogs; Value:issue::_keyLogs ]
 Go to Record/Request/Page [ Get (RecordNumber) ]
 [ No dialog ]
 Set Variable [ $$stopRecordLoad ]
-December 6, ଘ౮27 22:31:09 ActionLog.fp7 - linkActionToDay -1-
+July 26, ଘ౮28 15:24:40 ActionLog.fp7 - linkActionToDay -1-

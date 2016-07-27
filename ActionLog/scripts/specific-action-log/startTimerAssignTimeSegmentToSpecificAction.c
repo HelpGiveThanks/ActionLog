@@ -1,21 +1,130 @@
 specific action log: startTimerAssignTimeSegmentToSpecificAction
 #
 #
-If [ Get (FoundCount) = 0 ]
+#Don't allow user to start the timer if is active.
+If [ issue::timer = "active" ]
+Show Custom Dialog [ Message: "This timer is active in the past. To stop it so you can use it today, 1) click the 'day' button
+above. 2) Scroll to the day whose dates are bold font, highlighted green. 3) Click the bolded date, and 4) in the Timer
+window insert a stop time."; Buttons: “OK” ]
 Exit Script [ ]
 End If
 #
+#Exit the script if there are no records present
+#or if the timer is already running.
+If [ Get (FoundCount) = 0 or day1::swBugField = "veto" ]
+If [ day1::swBugField = "veto" ]
+Show Custom Dialog [ Message: "This button can only turn on one timer at a time, and there is already one running. ";
+Buttons: “OK” ]
+End If
+Exit Script [ ]
+End If
+#
+#Don't allow user to start the timer if is active.
+If [ issue::timer = "active" ]
+Exit Script [ ]
+End If
+#
+// #Allow user to start timer on Day record
+// #number one.
+// Select Window [ Name: "Day"; Current file ]
+// Set Variable [ $dayRecordNumber; Value:Get (RecordNumber) ]
+// Select Window [ Name: "Specific Action"; Current file ]
+// If [ $dayRecordNumber ≠ 1 ]
+// Show Custom Dialog [ Message: "The day selected in the day window is not today, which can extend past midnight. 1) Click
+the 'timer' button above. 2) Go to today's date. 3) Click the 'specificact' button. 4) Click 'start'. "; Buttons: “OK” ]
+// Exit Script [ ]
+// End If
+#
 #Only allow timer to be started if it is for today
 #or tomorrow (meaning today after midnight).
-If [ reference::day1 = Get ( CurrentDate ) or reference::day1 = Get ( CurrentDate ) + 1 ]
+If [ reference::day1 = Get ( CurrentDate ) or reference::day1 = Get ( CurrentDate ) - 1 ]
 #
-If [ reference::day1 ≠ reference::ActivityLogDay ]
+#
+#Decided this info comment was just irritating.
+#FYI: If you turn it on it has to be moved below
+#the next segment of code.
+#
+// #If midnight has past, ask user if they want to
+// #continue logging time for yesterday's record.
+// If [ reference::day1 = Get ( CurrentDate ) - 1 ]
+// Show Custom Dialog [ Message: "It is past midnight. Continue to log time for day " & reference::day1 & "?"; Buttons:
+“yes”, “cancel” ]
+// If [ Get ( LastMessageChoice ) = 2 ]
+// Exit Script [ ]
+// End If
+// End If
+#
+#
+#Insure that user is on the most current day
+#record in the Timer window. So, if there is a
+#record for Today but the user is on Yesterday's
+#record in the Timer window, then stop this
+#script and inform user to move Timer window
+#day record to Today.
 Select Window [ Name: "Day"; Current file ]
+Set Variable [ $$stopRecordLoad; Value:1 ]
+New Window [ ]
 Go to Record/Request/Page
 [ First ]
-Go to Field [ ]
+#
+If [ reference::day1 ≠ reference::ActivityLogDay and reference::ActivityLogDay = Get ( CurrentDate ) ]
+Set Variable [ $$stopRecordLoad ]
 Select Window [ Name: "Specific Action"; Current file ]
+Show Custom Dialog [ Message: "You can use this button after you advance the Timer window to today (" &Get
+( CurrentDate ) & "). 1) Click the 'timer' button above. 2) Go to today's date. 3) Click the 'specificact' button. 4) Click
+'start'."; Buttons: “OK” ]
+Exit Script [ ]
 End If
+#
+#
+#If the Day window is NOT on the most current
+#day record, but the Timer window is (as just
+#determined by the last script segment), then
+#go to this record in the Day window too, before
+#proceeding with turning on Timer in the
+#Specific Action module.
+Close Window [ Current Window ]
+#
+If [ Get (RecordNumber) ≠ 1 ]
+Go to Record/Request/Page
+[ First ]
+#
+#Go to layout displaying all time segements
+#for the selected day record.
+If [ daylog::swActivityLength[11] ≠ "" ]
+Go to Layout [ “logs3rows” (logs) ]
+Else If [ daylog::swActivityLength[6] ≠ "" ]
+Go to Layout [ “logs2rows” (logs) ]
+Else If [ daylog::swActivityLength[6] = "" ]
+Go to Layout [ “logs1row” (logs) ]
+End If
+#
+#Set variables used for attaching Specific Action
+#record IDs to Day records, and for conditionally
+#formatting Day records related to Specific
+#Action records.
+Set Variable [ $$log; Value:logs::_lockDay ]
+Set Variable [ $$logrecordID; Value:Get ( RecordID ) ]
+Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
+Set Variable [ $$day1BugField; Value:logs::swBugField ]
+#
+#Inform other scripts if user is on or not on
+#the Today or Yesterday record. This info will
+#speed them up, since they will not have to
+#check this out for themselves.
+Set Field [ reference::ActivityLogDay; logs::_keyDay ]
+#
+Refresh Window
+Set Variable [ $$stopRecordLoad ]
+Go to Field [ ]
+End If
+#
+#
+#Script can now proceed to turn on the Timer.
+#
+#Change this specific action timer to active.
+Select Window [ Name: "Specific Action"; Current file ]
+Set Field [ issue::timer; "active" ]
 #
 If [ day1::swBugField = "note" ]
 #
@@ -23,6 +132,7 @@ Set Variable [ $$specificActionTimer; Value:1 ]
 Set Variable [ $$stopRecordLoad; Value:1 ]
 #
 New Window [ Height: 1; Width: 1; Top: -10000; Left: -10000 ]
+// New Window [ ]
 Go to Layout [ “01EditTime” (brainstate) ]
 Enter Find Mode [ ]
 Set Field [ brainstate::_lockBrainstateID; $$logBrainstate ]
@@ -133,6 +243,10 @@ Select Window [ Name: "Specific Action"; Current file ]
 // #
 // #END: Script steps copied from script "linkActionToDay."
 #
+#
+#Show record has been modified.
+Set Field [ issue::dateModified; Get ( CurrentTimeStamp ) ]
+#
 Refresh Window
 #
 #
@@ -210,6 +324,11 @@ Set Variable [ $$log; Value:logs::_lockDay ]
 Go to Field [ daylog::swActivityLength[daylog::swOccurances] ]
 [ Select/perform ]
 #
+#TEST TO SEE IF STOP LOAD CAN BE TURNED OFF LATER IN THE SCRIPT!!!!!!!!!
+#TEST TO SEE IF STOP LOAD CAN BE TURNED OFF LATER IN THE SCRIPT!!!!!!!!!
+#TEST TO SEE IF STOP LOAD CAN BE TURNED OFF LATER IN THE SCRIPT!!!!!!!!!
+#TEST TO SEE IF STOP LOAD CAN BE TURNED OFF LATER IN THE SCRIPT!!!!!!!!!
+#TEST TO SEE IF STOP LOAD CAN BE TURNED OFF LATER IN THE SCRIPT!!!!!!!!!
 Set Variable [ $$stopRecordLoad ]
 Set Variable [ $$newTimer ]
 #
@@ -230,15 +349,8 @@ Perform Script [ “DaySelectSortThenSort” ]
 #
 Select Window [ Name: "Day"; Current file ]
 #
-#For attaching issue record IDs to log records, and
-#for conditionally formatting log records related to an issue,
-#system needs to know what IDs are associated with a log record.
-Set Variable [ $$logrecordID; Value:Get ( RecordID ) ]
-Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
-Set Variable [ $$log; Value:logs::_lockDay ]
-Set Field [ reference::ActivityLogDay; logs::_keyDay ]
-Set Variable [ $$day1BugField; Value:logs::swBugField ]
-#
+#Go to layout displaying all time segements
+#for the selected day record.
 If [ daylog::swActivityLength[11] ≠ "" ]
 Go to Layout [ “logs3rows” (logs) ]
 Else If [ daylog::swActivityLength[6] ≠ "" ]
@@ -246,6 +358,22 @@ Go to Layout [ “logs2rows” (logs) ]
 Else If [ daylog::swActivityLength[6] = "" ]
 Go to Layout [ “logs1row” (logs) ]
 End If
+#
+#Set variables used for attaching Specific Action
+#record IDs to Day records, and for conditionally
+#formatting Day records related to Specific
+#Action records.
+Set Variable [ $$log; Value:logs::_lockDay ]
+Set Variable [ $$logrecordID; Value:Get ( RecordID ) ]
+Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
+Set Variable [ $$day1BugField; Value:logs::swBugField ]
+#
+#Inform other scripts if user is on or not on
+#the Today or Yesterday record. This info will
+#speed them up, since they will not have to
+#check this out for themselves.
+Set Field [ reference::ActivityLogDay; logs::_keyDay ]
+Set Field [ reference::ActivityLogDayRecordNumber; Get (RecordNumber) ]
 #
 Move/Resize Window [ Name: "Day"; Current file; Height: 266; Width: 344; Top: 0; Left: 344 ]
 // Refresh Window
@@ -269,6 +397,8 @@ Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
 Set Variable [ $$stopGroup; Value:1 ]
 #
 #
+#Show record has been modified.
+Set Field [ issue::dateModified; Get ( CurrentTimeStamp ) ]
 #
 Refresh Window
 #
@@ -279,11 +409,11 @@ End If
 #
 Else
 #
-Show Custom Dialog [ Message: "Go to the Timer window to start a timer for a specific action in the past. This button can only
-be used for starting a timer in the present. Timer window date is " & reference::ActivityLogDay & ". Change this date in the
-timer window."; Buttons: “OK” ]
+Show Custom Dialog [ Message: "You can use this button after you change the date in the Timer window to today (" &Get
+( CurrentDate ) & "). 1) Click the 'timer' button above. 2) Go to today's date. 3) Click the 'specificact' button. 4) Click
+'start'."; Buttons: “OK” ]
 #
 #
 #
 End If
-December 6, ଘ౮27 22:07:18 ActionLog.fp7 - startTimerAssignTimeSegmentToSpecificAction -1-
+July 26, ଘ౮28 15:39:33 ActionLog.fp7 - startTimerAssignTimeSegmentToSpecificAction -1-

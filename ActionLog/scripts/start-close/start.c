@@ -1,13 +1,27 @@
 start close: start
 #PURPOSE save out graphic objects to external folder for reference in graphs and then go to the user layout
 #
-#test
 #
 #1 save out graphic objects to external folder for reference in graphs
 Set Variable [ $path; Value:"file:" & Get(TemporaryPath) & "1.gif" ]
 Export Field Contents [ reference::gResources; “$path” ]
 Set Variable [ $path; Value:"file:" & Get(TemporaryPath) & "2.gif" ]
 Export Field Contents [ reference::gResources[3]; “$path” ]
+#
+#Recalculate help filepath. To do this,
+#filemaker must create a new record which
+#can then be deleted. The help filepath is a
+#global record, and that means the
+#recaclucated path will now be used for all
+#memoryswitch records and scripts needing
+#this path.
+Go to Layout [ “MemorySwitch” (MemorySwitch) ]
+New Record/Request
+Delete Record/Request
+[ No dialog ]
+#
+#Set version number.
+Set Field [ MemorySwitch::versionActionLog; version::version ]
 #
 #2 go to the user layout
 Go to Layout [ “users” (steward) ]
@@ -47,4 +61,4 @@ Else
 Show/Hide Status Area
 [ Lock; Hide ]
 End If
-December 28, ଘ౮27 12:32:05 ActionLog.fp7 - start -1-
+July 13, ଘ౮28 13:03:19 ActionLog.fp7 - start -1-

@@ -1,4 +1,9 @@
 sorts: issueSortDate
+#
+#Need to look thru the DDR report to see if
+#these variables are being used in any other
+#scripts, and if not, change them to make
+#them more efficient.
 If [ $$issueSort = "date" ]
 Sort Records [ Specified Sort Order: brainstate::description; ascending
 issue::date; ascending
@@ -23,6 +28,7 @@ issueCategory::text; ascending
 issue::order; based on value list: “1-99”
 issue::text; ascending ]
 [ Restore; No dialog ]
+Set Variable [ $$issueSortDate; Value:"created" ]
 Else
 Sort Records [ Specified Sort Order: brainstate::description; ascending
 issue::DisplayDateDone; descending
@@ -33,6 +39,7 @@ issueCategory::text; ascending
 issue::order; based on value list: “1-99”
 issue::text; ascending ]
 [ Restore; No dialog ]
+Set Variable [ $$issueSortDate; Value:"modified" ]
 End If
 Set Variable [ $$issueSort; Value:"etad" ]
-December 6, ଘ౮27 21:00:26 ActionLog.fp7 - issueSortDate -1-
+July 26, ଘ౮28 15:13:41 ActionLog.fp7 - issueSortDate -1-

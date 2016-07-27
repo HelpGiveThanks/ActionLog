@@ -6,8 +6,9 @@ navigation: CHUNK_createRecordsForNewUsers
 #
 #
 #NOTE: the three # symbols set apart chunks of script.
-#NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For this reason,
-they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them apart.
+#NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For
+this reason, they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them
+apart.
 #
 #
 #
@@ -25,31 +26,63 @@ Set Field [ brainstate::_keyUser; $userID ]
 Perform Find [ ]
 #
 #2 if the user has no records, create a new one and assign it to the user so that there name will show up. (All the layouts are tied to the
-brainstate table not the user table. So the only way to show a user name and all the correct formating attributes is to have one user
-record.)
+brainstate table not the user table. So the only way to show a user name and all the correct formating attributes is to have one
+user record.)
 If [ Get ( FoundCount ) = 0 ]
 Set Variable [ $actionNames; Value:"sleep" & ¶ &
+"TQM action" & ¶ &
+"note learning" & ¶ &
+"InBetween/Journal" & ¶ &
+"watch media" & ¶ &
+"break" & ¶ &
 "exercise brain" & ¶ &
 "exercise body" & ¶ &
-"decrease confusion" & ¶ &
-"note learning" & ¶ &
-"break" & ¶ &
-"prepare" & ¶ &
-//"travel" & ¶ &
-"send and receive" & ¶ &
-"study others" & ¶ &
 "new day" & ¶ ]
 Set Variable [ $actionOrderNumber; Value:1 & ¶ &
-2 & ¶ &
 4 & ¶ &
-5 & ¶ &
+4 & ¶ &
 7 & ¶ &
-8 & ¶ &
+7 & ¶ &
+7 & ¶ &
 10 & ¶ &
-//12 & ¶ &
-13 & ¶ &
-15 & ¶ &
-16 & ¶ ]
+10 & ¶ &
+23 & ¶ ]
+Set Variable [ $actionOrderLetter; Value:"a" & ¶ &
+"a" & ¶ &
+"b" & ¶ &
+"a" & ¶ &
+"b" & ¶ &
+"c" & ¶ &
+"a" & ¶ &
+"b" & ¶ &
+"a" & ¶ ]
+Set Variable [ $highlightLibrary; Value:"" & ¶ &
+"" & ¶ &
+"r" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ ]
+Set Variable [ $highlightSpecificAction; Value:"" & ¶ &
+"r" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"r" & ¶ &
+"r" & ¶ &
+"" & ¶ ]
+Set Variable [ $setDefaultSpecificAction; Value:"" & ¶ &
+"1" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ ]
 Set Variable [ $number; Value:1 ]
 Loop
 New Record/Request
@@ -57,25 +90,31 @@ Set Field [ brainstate::_keyUser; $userID ]
 Set Field [ brainstate::hide; "t" & ¶ ]
 Set Field [ brainstate::description; GetValue ( $actionNames ; $number ) ]
 Set Field [ brainstate::sortNumber; GetValue ( $actionOrderNumber ; $number ) ]
+Set Field [ brainstate::sortAlpha; GetValue ( $actionOrderLetter ; $number ) ]
+Set Field [ brainstate::HighlightLibraryButton; GetValue ( $highlightLibrary ; $number ) ]
+Set Field [ brainstate::HighlightSpecificActionButton; GetValue ( $highlightSpecificAction ; $number ) ]
+If [ GetValue ( $setDefaultSpecificAction ; $number ) = 1 ]
+Commit Records/Requests
+Set Field [ steward::DefaultSpecificAction; brainstate::_lockBrainstateID ]
+End If
 Set Variable [ $number; Value:$number + 1 ]
-Exit Loop If [ $number = 11 ]
+Exit Loop If [ $number = 10 ]
 End Loop
 #
 Set Variable [ $kpnBrainstateID; Value:brainstate::_lockBrainstateID ]
-January 5, 平成26 19:14:42 ActionLog.fp7 - CHUNK_createRecordsForNewUsers -1-navigation: CHUNK_createRecordsForNewUsers
 Go to Layout [ “calcDayTable” (day1) ]
 New Record/Request
 Set Field [ day1::_keyBrainstate; $kpnBrainstateID ]
 Set Field [ day1::_keyUser; $userID ]
-// Set Field [ day1::_keyDay; reference::day1 ]
 Set Field [ day1::swStart; Get ( CurrentTimeStamp ) ]
 Set Field [ day1::swPause; Get ( CurrentTimeStamp ) ]
-Show Custom Dialog [ Message: "Enter your date of birth so that this program can calculate your new day number, every day."; Buttons:
-“OK”; Input #1: day1::_keyDay, "use date format: 01/01/1900" ]
+Show Custom Dialog [ Message: "Enter your date of birth so that this program can calculate your new day number, every day.";
+Buttons: “OK”; Input #1: day1::_keyDay, "use date format: 01/01/1900" ]
 Commit Records/Requests
 If [ IsValid ( day1::_keyDay ) ≠ 1 ]
-Show Custom Dialog [ Message: "Enter your date of birth so that this program can calculate your new day number, every day. Use
-must enter a valid date using this format: 00/00/0000."; Buttons: “OK”; Input #1: day1::_keyDay, "use date format: 01/01/1900" ]
+Show Custom Dialog [ Message: "Enter your date of birth so that this program can calculate your new day number, every
+day. Use must enter a valid date using this format: 00/00/0000."; Buttons: “OK”; Input #1: day1::_keyDay, "use date
+format: 01/01/1900" ]
 Commit Records/Requests
 End If
 Set Variable [ $dateOfLastUse; Value:day1::_keyDay ]
@@ -83,4 +122,4 @@ Go to Layout [ “calcBrainstateTable” (brainstate) ]
 Set Field [ brainstate::DateOfLastUse; $dateOfLastUse ]
 End If
 #
-January 5, 平成26 19:14:42 ActionLog.fp7 - CHUNK_createRecordsForNewUsers -2-
+July 13, ଘ౮28 13:32:49 ActionLog.fp7 - CHUNK_createRecordsForNewUsers -1-

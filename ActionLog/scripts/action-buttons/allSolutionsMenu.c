@@ -16,8 +16,13 @@ Adjust Window
 [ Resize to Fit ]
 #
 #
+If [ MemorySwitch::name = "" ]
+Show Custom Dialog [ Message: "Click the folder icon (top left corner) and to start a library and add it to this quick-start menu.";
+Buttons: “OK” ]
+End If
+#
 #Set variable that will close this other apps menu
 #when the user selectes a new database.
 Set Variable [ $$otherApps; Value:1 ]
 Pause/Resume Script [ Indefinitely ]
-February 1, 平成26 18:26:17 ActionLog.fp7 - allSolutionsMenu -1-
+July 26, ଘ౮28 14:07:24 ActionLog.fp7 - allSolutionsMenu -1-

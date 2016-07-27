@@ -1,6 +1,9 @@
 specific action log: toggleViewToSeeAllWindows
 #
 #
+If [ Get ( SystemPlatform ) = 3 ]
+Exit Script [ ]
+End If
 #
 #Only allow timer to be stopped if it is running today
 #or tomorrow (meaning today after midnight).
@@ -52,4 +55,4 @@ End If
 End If
 #
 #
-December 7, ଘ౮27 14:31:48 ActionLog.fp7 - toggleViewToSeeAllWindows -1-
+July 26, ଘ౮28 15:44:19 ActionLog.fp7 - toggleViewToSeeAllWindows -1-

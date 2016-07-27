@@ -3,6 +3,23 @@ action buttons: note veto view
 of the merge records will be automatically added to the one total record.
 #
 #
+If [ $$logBrainstate = brainstate::_lockBrainstateID and brainstate::_lockBrainstateID = steward::DefaultSpecificAction ]
+Show Custom Dialog [ Message: "Select a specific action; then click start or stop. You can always edit its time in the edit-time
+window. NOTE: This general-action timer is your specific action default. Edit it to change the default."; Buttons: “OK” ]
+If [ Get (LastMessageChoice) = 1 ]
+If [ Get ( SystemPlatform ) = 3 ]
+Select Window [ Name: "Specific Action"; Current file ]
+Else
+Select Window [ Name: "Tag"; Current file ]
+Select Window [ Name: "Day"; Current file ]
+Select Window [ Name: "Specific Action"; Current file ]
+End If
+Exit Script [ ]
+End If
+End If
+#
+#
+#
 Set Variable [ $$recordFIXTOMANYVARIABLES; Value:brainstate::_lockBrainstateID ]
 Set Variable [ $$record; Value:Get (RecordNumber) ]
 Set Variable [ $$recordnumber; Value:Get ( RecordNumber ) ]
@@ -68,7 +85,10 @@ Go to Record/Request/Page [ $record ]
 Perform Script [ “CHUNK_lastDayUsed” ]
 #
 #
-#Now find the new log record for this timer.
+#Now find the new log record for this timer if
+#it is currently loaded (the current Specific
+#Action timer showing).
+If [ $$logBrainstate = brainstate::_lockBrainstateID ]
 Select Window [ Name: "Day"; Current file ]
 Set Variable [ $$stopRecordLoad; Value:1 ]
 Go to Layout [ “logs2rows” (logs) ]
@@ -88,6 +108,8 @@ Scroll Window
 [ Home ]
 #
 Select Window [ Name: "Timer"; Current file ]
+End If
+#
 Set Variable [ $$newTimer ]
 #
 #NOTE: The folder or parent and child timer
@@ -110,7 +132,7 @@ Set Variable [ $$newTimer ]
 #record is only done if the user wants the
 #records sorted by time, in which case after
 #the sort the focus is returned to the first record.
-Perform Script [ “DaySelectSortThenSort” ]
+Perform Script [ “DaySelectSortThenSort (Update)” ]
 #
 #Allows specific action script to continue.
 If [ $$specificActionTimer = 1 ]
@@ -132,7 +154,7 @@ Set Variable [ $$TimeAssignedToSpecificAction; Value:issue::_LockList ]
 #5 recalculate the time for this record and
 #check and see if is linked to any total records
 #and if so update their time too.
-Perform Script [ “updateTime” ]
+Perform Script [ “updateTime (update)” ]
 End If
 #
 #6 if the note button is showing restart the
@@ -173,5 +195,5 @@ Set Field [ day1::updateTime; day1::updateTimeCurrentTimeCalc ]
 #script so it exits rather than halts all scripts.)
 Go to Record/Request/Page [ $$recordnumber ]
 [ No dialog ]
-Perform Script [ “DaySelectSortThenSort” ]
-December 7, ଘ౮27 16:22:26 ActionLog.fp7 - note veto view -1-
+Perform Script [ “DaySelectSortThenSort (Update)” ]
+July 13, ଘ౮28 19:42:39 ActionLog.fp7 - note veto view -1-

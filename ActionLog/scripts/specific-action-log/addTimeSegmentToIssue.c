@@ -140,6 +140,11 @@ Go to Field [ ]
 #
 #Go to record time to which time will be added.
 Select Window [ Name: "Specific Action"; Current file ]
+#
+#Get selected records number so it can be
+#returned to if no linked record is found.
+Set Variable [ $currentIssueNumber; Value:Get ( RecordNumber ) ]
+#
 Go to Record/Request/Page
 [ First ]
 Loop
@@ -165,7 +170,15 @@ Go to Record/Request/Page
 End Loop
 End If
 Set Variable [ $$stopRecordLoad ]
+#
+#If no linked record is found return user to
+#selected record.
+If [ FilterValues (issue::timeSegmentKeyList ; $timeSegment & "¶") ≠ $timeSegment & "¶" ]
+Go to Record/Request/Page [ $currentIssueNumber ]
+[ No dialog ]
+End If
 Perform Script [ “loadIssuerecordID” ]
+#
 Exit Script [ ]
 End If
 #
@@ -247,4 +260,4 @@ Set Variable [ $$stopRecordLoad ]
 Select Window [ Name: "Specific Action"; Current file ]
 Perform Script [ “loadIssuerecordID” ]
 Select Window [ Name: "Day"; Current file ]
-December 6, ଘ౮27 21:22:56 ActionLog.fp7 - addTimeSegmentToIssue -1-
+July 26, ଘ౮28 15:30:12 ActionLog.fp7 - addTimeSegmentToIssue -1-

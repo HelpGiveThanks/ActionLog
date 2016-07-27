@@ -53,16 +53,26 @@ Set Field [ MemorySwitch::helpLayoutName; "Specific Action" ]
 Set Field [ MemorySwitch::helpObjectName; "find" ]
 End If
 #
-#Open the help solution and set the help screen to look at.
+#Open the help solution and set the help
+#screen to look at, but not if one iPhone/iPad.
+If [ Get ( SystemPlatform ) ≠ 3 ]
 Open URL [ Case ( Get ( SystemPlatform ) = - 2 ;
-Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" & Right ( Get (FilePath) ; 4 ) ) ; " " ;
-"%20" ) ;
-Substitute ( Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" & Right ( Get (FilePath) ;
-4 ) ) ; "file:/" ; "file://" ) ; " " ; "%20" ) ) ]
+Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" & Right ( Get (FilePath) ; 4 ) ) ; "
+" ; "%20" ) ;
+Substitute ( Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" & Right ( Get
+(FilePath) ; 4 ) ) ; "file:/" ; "file://" ) ; " " ; "%20" ) ) ]
 [ No dialog ]
-Open URL [ Substitute ( Substitute ( Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help" &
-Right ( Get (FilePath) ; 4 ) ) ; "file:/" ; "file://" ) ; " " ; "%20" ) ; "file://" ; "file:///Volumes/" ) ]
+Open URL [ Substitute ( Substitute ( Substitute ( Substitute ( Get (FilePath) ; Get (FileName) & Right ( Get (FilePath) ; 4 ) ; "help"
+& Right ( Get (FilePath) ; 4 ) ) ; "file:/" ; "file://" ) ; " " ; "%20" ) ; "file://" ; "file:///Volumes/" ) ]
 [ No dialog ]
+#
+Else
+#Open using this url on iPad/iPhone.
+Open URL [ "fmp://%7e/Help" ]
+[ No dialog ]
+Exit Script [ ]
+End If
+#
 #
 #If it is already open, then just go the currently open
 #windows of the Help solution.
@@ -70,4 +80,4 @@ Select Window [ Name: "Help" ]
 Select Window [ Name: "Tutorial" ]
 #
 #
-December 6, ଘ౮27 20:27:41 ActionLog.fp7 - gotoHelp -1-
+July 13, ଘ౮28 13:20:16 ActionLog.fp7 - gotoHelp -1-

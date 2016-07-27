@@ -1,4 +1,4 @@
-navigation: gotoSolution (update and name change)
+navigation: gotoSolution
 #
 #!!!!!!!!!! NOTE !!!!!!!!!!!!!
 #!!!!!!!!!! NOTE !!!!!!!!!!!!!
@@ -170,4 +170,4 @@ Close Window [ Name: "All Solutions"; Current file ]
 Set Variable [ $$otherApps ]
 End If
 #
-July 13, ଘ౮28 13:12:26 ActionLog.fp7 - gotoSolution (update and name change) -1-
+July 13, ଘ౮28 13:12:26 ActionLog.fp7 - gotoSolution -1-

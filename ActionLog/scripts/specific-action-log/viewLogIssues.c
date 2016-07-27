@@ -28,6 +28,8 @@ Enter Find Mode [ ]
 Set Field [ issue::_keyLogs; $$log ]
 Perform Find [ ]
 If [ Get (FoundCount) = 0 ]
+Show Custom Dialog [ Message: "No records found linked to this date. All records created thus far will now be found."; Buttons:
+“OK” ]
 Enter Find Mode [ ]
 Set Field [ issue::_keyBrainstate; $$logBrainstate ]
 Set Field [ issue::lock; "issue" ]
@@ -49,5 +51,5 @@ Go to Record/Request/Page
 Set Variable [ $$stopRecordLoad ]
 Perform Script [ “loadIssuerecordID” ]
 Set Variable [ $$stopSubtotal; Value:1 ]
-Perform Script [ “TsubtotalTimeByGroup (UPDATED)” ]
-December 6, ଘ౮27 21:20:26 ActionLog.fp7 - viewLogIssues -1-
+Perform Script [ “TsubtotalTimeByGroup” ]
+July 26, ଘ౮28 15:28:20 ActionLog.fp7 - viewLogIssues -1-

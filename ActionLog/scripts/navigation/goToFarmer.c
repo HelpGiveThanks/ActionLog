@@ -39,7 +39,7 @@ Set Variable [ $userID; Value:steward::_lockUser ]
 Set Field [ reference::farmerID; $userID ]
 #
 #2 find this user's records
-Perform Script [ “CHUNK_createRecordsForNewUsers” ]
+Perform Script [ “CHUNK_createRecordsForNewUsers (update)” ]
 #
 #4 show the user's name
 Set Field [ reference::farmerName; steward::FirstPlusLast ]
@@ -108,20 +108,73 @@ sorted out of top of list), and go to the first record.
 Set Variable [ $$stopRecordLoad; Value:1 ]
 Set Field [ steward::chosenLayout; steward::chosenLayoutMain ]
 Perform Script [ “sortNumbers” ]
-#7 go to active brainstate or first brainstate.
+// #
+// #7 go to active brainstate.
+// Go to Record/Request/Page
+[ First ]
+// Loop
+// Exit Loop If [ day1::swBugField = "veto" ]
+// Go to Record/Request/Page
+[ Next; Exit after last ]
+// End Loop
+#
+#8 Select the default Specific Action timer.
+If [ brainstate::_lockBrainstateID ≠ steward::DefaultSpecificAction ]
+#
 Go to Record/Request/Page
 [ First ]
+Loop
+Exit Loop If [ brainstate::_lockBrainstateID = steward::DefaultSpecificAction ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
+End Loop
+#
+#If no default, go to the first timer.
+If [ brainstate::_lockBrainstateID ≠ steward::DefaultSpecificAction ]
+Go to Record/Request/Page
+[ First ]
+End If
+End If
+#
+#9 Open Specific Action windows for the
+#selected timer.
+Perform Script [ “openSpecificAction (update)” ]
+#
+#10 View all windows.
+If [ Get ( SystemPlatform ) ≠ 3 ]
+Set Variable [ $$toggleSpecificActionView; Value:1 ]
+Move/Resize Window [ Name: "Tag"; Current file; Height: 266; Width: 344; Top: 0; Left: 688 ]
+Move/Resize Window [ Name: "Day"; Current file; Height: 266; Width: 344; Top: 0; Left: 344 ]
+Move/Resize Window [ Name: "Specific Action"; Current file; Height: Get (ScreenHeight); Width: 344; Top: 0; Left: 0 ]
+Move/Resize Window [ Name: "Timer"; Current file; Height: Get (ScreenHeight) - 276; Width: Get (ScreenWidth) - 344; Top: 251;
+Left: 344 ]
+End If
+Select Window [ Name: "Timer"; Current file ]
+#
+#10 If the timer is not active go to the first timer.
+If [ day1::swBugField ≠ "veto" ]
+Go to Record/Request/Page
+[ First ]
+End If
+#
+#7 go to first active timer.
 Loop
 Exit Loop If [ day1::swBugField = "veto" ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
+#
+#10 If the timer is not active go to the first timer.
 If [ day1::swBugField ≠ "veto" ]
 Go to Record/Request/Page
 [ First ]
 End If
-Perform Script [ “openSpecificAction” ]
-Select Window [ Name: "Timer"; Current file ]
+#
+If [ day1::swBugField ≠ "veto" ]
+Go to Record/Request/Page
+[ First ]
+End If
 Set Variable [ $$stopRecordLoad ]
-Perform Script [ “recordLoad” ]
-December 7, ଘ౮27 16:01:26 ActionLog.fp7 - goToFarmer -1-
+Perform Script [ “recordLoad (update)” ]
+#
+July 13, ଘ౮28 13:27:25 ActionLog.fp7 - goToFarmer -1-

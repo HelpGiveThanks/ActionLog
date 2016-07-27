@@ -29,6 +29,7 @@ End If
 #
 Set Variable [ $categoryOLD; Value:issue::oldCategorykey ]
 Set Field [ issue::_keyCategory; $$group ]
+Set Field [ issue::dateModified; Get ( CurrentTimeStamp ) ]
 Commit Records/Requests
 [ Skip data entry validation; No dialog ]
 #
@@ -194,4 +195,4 @@ Scroll Window
 Set Field [ issue::oldCategorykey; $$group ]
 #
 Select Window [ Name: "Tag"; Current file ]
-December 6, ଘ౮27 21:50:55 ActionLog.fp7 - addTagToSpecificActionRecord -1-
+July 26, ଘ౮28 15:38:11 ActionLog.fp7 - addTagToSpecificActionRecord -1-

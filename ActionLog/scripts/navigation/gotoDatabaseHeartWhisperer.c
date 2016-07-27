@@ -1,4 +1,11 @@
 navigation: gotoDatabaseHeartWhisperer
+#
+#Open using this url on iPad/iPhone.
+If [ Get ( SystemPlatform ) = 3 ]
+Open URL [ "fmp://%7e/Heart%20Whisperer" ]
+Exit Script [ ]
+End If
+#
 Select Window [ Name: "Icons" ]
 Select Window [ Name: "Workout Editor" ]
 Select Window [ Name: "Plan Week" ]
@@ -49,9 +56,9 @@ Substitute (Left (Get (FilePath) ; Length ( Get (FilePath) ) - ( Length ( Get (F
 End If
 End If
 #
-#Close other apps window if open after selecting an app.
+#Close all solutions window.
 If [ $$otherApps = 1 ]
 Set Variable [ $$otherApps ]
 Close Window [ Name: "All Solutions"; Current file ]
 End If
-February 4, 平成26 12:21:06 ActionLog.fp7 - gotoDatabaseHeartWhisperer -1-
+July 13, ଘ౮28 13:22:17 ActionLog.fp7 - gotoDatabaseHeartWhisperer -1-

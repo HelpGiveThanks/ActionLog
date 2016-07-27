@@ -1,4 +1,4 @@
-navigation: EditTimePart2
+navigation: editTimePart2
 Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
 #
 #this gotoField removes focus from field if user in a
@@ -8,10 +8,14 @@ Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
 #exited all fields, the scirpt preforms fine. The alternative
 #would be to cancel this script if the user was in a field
 #when it was activited. This essentially does that (
-#cancels the script because the focus will trigger a conﬂicting script).
+#cancels the script because the focus will trigger a conflicting script).
 Go to Field [ ]
 Set Field [ steward::chosenSort; steward::chosenLayoutMain ]
+If [ Get (SystemPlatform) ≠ 3 ]
 Go to Layout [ “01Main” (brainstate) ]
+Else
+Go to Layout [ “MainiPhone” (brainstate) ]
+End If
 #1 set the layout status field
 Set Field [ steward::chosenLayout; Get ( LayoutName ) ]
 Set Field [ steward::chosenSort; "rebmun" ]
@@ -28,4 +32,4 @@ If [ day1::swBugField ≠ "veto" ]
 Go to Record/Request/Page
 [ First ]
 End If
-January 5, 平成26 19:10:19 ActionLog.fp7 - EditTimePart2 -1-
+July 13, ଘ౮28 13:31:12 ActionLog.fp7 - editTimePart2 -1-
