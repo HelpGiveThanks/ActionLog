@@ -3,10 +3,10 @@ Allow User Abort [ Off ]
 Set Error Capture [ On ]
 #
 #
-If [ Get (LayoutTableName) = "category" ]
+If [ Get (LayoutTableName) = "SPAGroupTag" ]
 #
 #Make key to fit this group's lock.
-Set Variable [ $$group; Value:category::_LockList ]
+Set Variable [ $$group; Value:SPAGroupTag::_LockSpecificAction ]
 Go to Field [ ]
 #
 #Remove found specific actions with this key if
@@ -29,14 +29,14 @@ Set Variable [ $$stopRecordLoad; Value:1 ]
 #then find no records.
 Enter Find Mode [ ]
 If [ $valueNumber = 0 ]
-Set Field [ issue::_keyCategory; "none" ]
+Set Field [ specificAction::_keyGroup; "none" ]
 Perform Find [ ]
 Set Variable [ $$stopRecordLoad ]
 Select Window [ Name: "Tag"; Current file ]
 Refresh Window
 Exit Script [ ]
 Else
-Set Field [ issue::_keyCategory; GetValue ( $$found ; $valueNumber ) ]
+Set Field [ specificAction::_keyGroup; GetValue ( $$found ; $valueNumber ) ]
 Perform Find [ ]
 End If
 #
@@ -46,8 +46,8 @@ Enter Find Mode [ ]
 Loop
 Set Variable [ $valueNumber; Value:$valueNumber - 1 ]
 Exit Loop If [ $valueNumber = 0 ]
-Set Field [ issue::_keyCategory; GetValue ( $$found ; $valueNumber ) ]
-Set Field [ issue::_keyBrainstate; $$logBrainstate ]
+Set Field [ specificAction::_keyGroup; GetValue ( $$found ; $valueNumber ) ]
+Set Field [ specificAction::_keyTimer; $$logBrainstate ]
 Extend Found Set [ ]
 End Loop
 #
@@ -59,7 +59,7 @@ End Loop
 // Go to Record/Request/Page
 [ First ]
 // Loop
-// If [ issue::_keyCategory = $$group ]
+// If [ specificAction::_keyGroup = $$group ]
 // Omit Record
 // Else
 // Go to Record/Request/Page
@@ -69,13 +69,13 @@ End Loop
 #
 #
 Set Variable [ $$stopRecordLoad ]
-Sort Records [ Specified Sort Order: brainstate::description; ascending
-issueStatus::order; based on value list: “__-99”
-issueStatus::text; ascending
-issueCategory::order; ascending
-issue::sortTime; ascending
-issue::order; based on value list: “1-99”
-issue::text; ascending ]
+Sort Records [ Specified Sort Order: timer::description; ascending
+SPAStatus::order; based on value list: “__-99”
+SPAStatus::text; ascending
+SPAGroupTag 2::order; ascending
+specificAction::sortTime; ascending
+specificAction::order; based on value list: “1-99”
+specificAction::text; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -85,7 +85,7 @@ Else
 Select Window [ Name: "Specific Action"; Current file ]
 Set Variable [ $$stopRecordLoad; Value:1 ]
 Enter Find Mode [ ]
-Set Field [ issue::_keyCategory; $$group ]
+Set Field [ specificAction::_keyGroup; $$group ]
 Extend Found Set [ ]
 If [ Get (LastError) ≠ 401 ]
 Set Variable [ $$found; Value:$$group & ¶ & $$found ]
@@ -94,13 +94,13 @@ Show Custom Dialog [ Message: "There are no specific actions tagged with this ca
 Set Variable [ $$stopRecordLoad ]
 End If
 Set Variable [ $$stopRecordLoad ]
-Sort Records [ Specified Sort Order: brainstate::description; ascending
-issueStatus::order; based on value list: “__-99”
-issueStatus::text; ascending
-issueCategory::order; ascending
-issue::sortTime; ascending
-issue::order; based on value list: “1-99”
-issue::text; ascending ]
+Sort Records [ Specified Sort Order: timer::description; ascending
+SPAStatus::order; based on value list: “__-99”
+SPAStatus::text; ascending
+SPAGroupTag 2::order; ascending
+specificAction::sortTime; ascending
+specificAction::order; based on value list: “1-99”
+specificAction::text; ascending ]
 [ Restore; No dialog ]
 End If
 Perform Script [ “loadIssuerecordID” ]
@@ -117,7 +117,7 @@ Else
 #
 #
 #Make key to fit this group's lock.
-Set Variable [ $$findStatus; Value:status::_LockList ]
+Set Variable [ $$findStatus; Value:status::_LockSpecificAction ]
 Go to Field [ ]
 #
 #Remove found specific actions with this key if
@@ -140,14 +140,14 @@ Set Variable [ $$stopRecordLoad; Value:1 ]
 #then find no records.
 Enter Find Mode [ ]
 If [ $valueNumber = 0 ]
-Set Field [ issue::_keyStatus; "none" ]
+Set Field [ specificAction::_keyStatus; "none" ]
 Perform Find [ ]
 Set Variable [ $$stopRecordLoad ]
 Select Window [ Name: "Tag"; Current file ]
 Refresh Window
 Exit Script [ ]
 Else
-Set Field [ issue::_keyStatus; GetValue ( $$foundStatus ; $valueNumber ) ]
+Set Field [ specificAction::_keyStatus; GetValue ( $$foundStatus ; $valueNumber ) ]
 Perform Find [ ]
 End If
 #
@@ -156,8 +156,8 @@ End If
 Loop
 Set Variable [ $valueNumber; Value:$valueNumber - 1 ]
 Exit Loop If [ $valueNumber = 0 ]
-Set Field [ issue::_keyStatus; GetValue ( $$foundStatus ; $valueNumber ) ]
-Set Field [ issue::_keyBrainstate; $$logBrainstate ]
+Set Field [ specificAction::_keyStatus; GetValue ( $$foundStatus ; $valueNumber ) ]
+Set Field [ specificAction::_keyTimer; $$logBrainstate ]
 Extend Found Set [ ]
 End Loop
 #
@@ -169,7 +169,7 @@ End Loop
 // Go to Record/Request/Page
 [ First ]
 // Loop
-// If [ issue::_keyStatus = $$findStatus ]
+// If [ specificAction::_keyStatus = $$findStatus ]
 // Omit Record
 // Else
 // Go to Record/Request/Page
@@ -180,13 +180,13 @@ End Loop
 #
 #
 Set Variable [ $$stopRecordLoad ]
-Sort Records [ Specified Sort Order: brainstate::description; ascending
-issueStatus::order; based on value list: “__-99”
-issueStatus::text; ascending
-issueCategory::order; ascending
-issue::sortTime; ascending
-issue::order; based on value list: “1-99”
-issue::text; ascending ]
+Sort Records [ Specified Sort Order: timer::description; ascending
+SPAStatus::order; based on value list: “__-99”
+SPAStatus::text; ascending
+SPAGroupTag 2::order; ascending
+specificAction::sortTime; ascending
+specificAction::order; based on value list: “1-99”
+specificAction::text; ascending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
@@ -196,8 +196,8 @@ Else
 Select Window [ Name: "Specific Action"; Current file ]
 Set Variable [ $$stopRecordLoad; Value:1 ]
 Enter Find Mode [ ]
-Set Field [ issue::_keyStatus; $$findStatus ]
-Set Field [ issue::_keyBrainstate; $$logBrainstate ]
+Set Field [ specificAction::_keyStatus; $$findStatus ]
+Set Field [ specificAction::_keyTimer; $$logBrainstate ]
 Extend Found Set [ ]
 If [ Get (LastError) ≠ 401 ]
 Set Variable [ $$foundStatus; Value:$$findStatus & ¶ & $$foundStatus ]
@@ -206,13 +206,13 @@ Show Custom Dialog [ Message: "There are no specific actions tagged with this st
 Set Variable [ $$stopRecordLoad ]
 End If
 Set Variable [ $$stopRecordLoad ]
-Sort Records [ Specified Sort Order: brainstate::description; ascending
-issueStatus::order; based on value list: “__-99”
-issueStatus::text; ascending
-issueCategory::order; ascending
-issue::sortTime; ascending
-issue::order; based on value list: “1-99”
-issue::text; ascending ]
+Sort Records [ Specified Sort Order: timer::description; ascending
+SPAStatus::order; based on value list: “__-99”
+SPAStatus::text; ascending
+SPAGroupTag 2::order; ascending
+specificAction::sortTime; ascending
+specificAction::order; based on value list: “1-99”
+specificAction::text; ascending ]
 [ Restore; No dialog ]
 End If
 Perform Script [ “loadIssuerecordID” ]
@@ -223,4 +223,4 @@ Select Window [ Name: "Tag"; Current file ]
 Refresh Window
 #
 End If
-December 6, ଘ౮27 21:38:13 ActionLog.fp7 - findGroupPart2 -1-
+December 10, ଘ౮28 23:22:02 ActionLog.fp7 - findGroupPart2 -1-

@@ -1,8 +1,9 @@
 action buttons: CHUNK_lastDayUsed
-#PURPOSE go the selected farmer's records from the createEditFarmer layout. (This is script is identical to the switchFarmer script except for
-step 1, which is required because the reference field is not available on this layout, and so the user's ID must be taken from the user table,
-not the reference table.)
-#
+#PURPOSE calculates last day a timer was used
+#to display next the timer on days it is not in
+#use. Gives the user a sense of how useful a
+#timer is to them, or how long since they last
+#exercised, for example.
 #
 #
 #basic administration tasks
@@ -10,27 +11,26 @@ Set Error Capture [ On ]
 Allow User Abort [ Off ]
 #
 #
-#
-#
-Set Variable [ $brainstateID; Value:brainstate::_lockBrainstateID ]
+Set Variable [ $brainstateID; Value:timer::_lockTimer ]
 Go to Layout [ “logByDate” (logs) ]
 Enter Find Mode [ ]
-Set Field [ logs::_keyBrainstate; $brainstateID ]
+Set Field [ logs::_keyTimer; $brainstateID ]
 Perform Find [ ]
 If [ Get ( LastError ) = 401 ]
 Go to Layout [ original layout ]
+Set Field [ timer::DateOfLastUse; "" ]
 Exit Script [ ]
 End If
 Sort Records [ Specified Sort Order: logs::_keyDay; descending ]
 [ Restore; No dialog ]
 Go to Record/Request/Page
 [ First ]
-Set Field [ brainstate::DateOfLastUse; logs::_keyDay ]
+Set Field [ timer::DateOfLastUse; logs::_keyDay ]
 Set Variable [ $date; Value:logs::_keyDay ]
-If [ brainstate::groupID ≠ "" ]
-Set Variable [ $brainstateID; Value:brainstate::groupID ]
+If [ timer::groupID ≠ "" ]
+Set Variable [ $brainstateID; Value:timer::groupID ]
 Enter Find Mode [ ]
-Set Field [ logs::_keyBrainstate; $brainstateID ]
+Set Field [ logs::_keyTimer; $brainstateID ]
 Perform Find [ ]
 If [ Get ( LastError ) = 401 ]
 Go to Layout [ original layout ]
@@ -41,10 +41,10 @@ Sort Records [ Specified Sort Order: logs::_keyDay; descending ]
 Go to Record/Request/Page
 [ First ]
 If [ reference::day1 ≠ $date ]
-Set Field [ brainstate::DateOfLastUse; logs::_keyDay ]
+Set Field [ timer::DateOfLastUse; logs::_keyDay ]
 Else If [ reference::day1 = $date ]
-Set Field [ brainstate::DateOfLastUse; $date ]
+Set Field [ timer::DateOfLastUse; $date ]
 End If
 End If
 Go to Layout [ original layout ]
-January 5, 平成26 19:39:30 ActionLog.fp7 - CHUNK_lastDayUsed -1-
+December 10, ଘ౮28 20:44:12 ActionLog.fp7 - CHUNK_lastDayUsed -1-

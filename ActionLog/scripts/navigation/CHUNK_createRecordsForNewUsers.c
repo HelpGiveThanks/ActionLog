@@ -1,125 +1,125 @@
-navigation: CHUNK_createRecordsForNewUsers
-#PURPOSE check to make sure that the user has records and if not create a record for the user
-#CHUNK USED BY goBackButton script
-#CHUNK USED BY goToFarmer script
+navigation: CHUNK_loadORcreateTimersForUser
 #
-#
-#
-#NOTE: the three # symbols set apart chunks of script.
-#NOTE: the finish and error script chunks are almost identical (the error message differ in telling where in the script they occur). For
-this reason, they are not numbered as part of a particular chuck of the script, and are separated by three # symbols to set them
-apart.
-#
+#CHUNK USED BY openActionLogs script
 #
 #
 #basic administration tasks
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
-Set Variable [ $userID; Value:reference::farmerID ]
+Set Variable [ $userID; Value:reference::userID ]
 #
-#
-#
-#1 find this user's brainstate records
-Go to Layout [ “calcBrainstateTable” (brainstate) ]
+#Find this user's timer records.
+Go to Layout [ “TimerTable” (timer) ]
 Enter Find Mode [ ]
-Set Field [ brainstate::_keyUser; $userID ]
+Set Field [ timer::_keyUser; $userID ]
 Perform Find [ ]
-#
-#2 if the user has no records, create a new one and assign it to the user so that there name will show up. (All the layouts are tied to the
-brainstate table not the user table. So the only way to show a user name and all the correct formating attributes is to have one
-user record.)
+#If the user has no records, create new ones
+#and assign them to the user so that there
+#name will show up.
 If [ Get ( FoundCount ) = 0 ]
+#
+#First, create a set of variables with 7 values
+#each that will be applied to each of the new 7
+#timers as they are created.
+#
+#Set timer names.
 Set Variable [ $actionNames; Value:"sleep" & ¶ &
-"TQM action" & ¶ &
+"improve quality" & ¶ &
 "note learning" & ¶ &
-"InBetween/Journal" & ¶ &
-"watch media" & ¶ &
-"break" & ¶ &
+"in-between/journal" & ¶ &
 "exercise brain" & ¶ &
 "exercise body" & ¶ &
 "new day" & ¶ ]
+#Set timer order.
 Set Variable [ $actionOrderNumber; Value:1 & ¶ &
 4 & ¶ &
 4 & ¶ &
 7 & ¶ &
-7 & ¶ &
-7 & ¶ &
 10 & ¶ &
 10 & ¶ &
 23 & ¶ ]
+#Set timer alpha order.
 Set Variable [ $actionOrderLetter; Value:"a" & ¶ &
 "a" & ¶ &
 "b" & ¶ &
 "a" & ¶ &
-"b" & ¶ &
-"c" & ¶ &
 "a" & ¶ &
 "b" & ¶ &
 "a" & ¶ ]
+#Set 'in-between/journal' timer to highlight
+#'note' button.
+Set Variable [ $highlightNote; Value:"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"r" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ ]
+#Set 'note learning' timer to highlight
+#'library' button.
 Set Variable [ $highlightLibrary; Value:"" & ¶ &
 "" & ¶ &
 "r" & ¶ &
 "" & ¶ &
 "" & ¶ &
 "" & ¶ &
-"" & ¶ &
-"" & ¶ &
 "" & ¶ ]
+#Set 'improve quality', 'exercise brain', and
+#exercise body' timers to highlight
+#'specificaction' button.
 Set Variable [ $highlightSpecificAction; Value:"" & ¶ &
 "r" & ¶ &
 "" & ¶ &
 "" & ¶ &
-"" & ¶ &
-"" & ¶ &
 "r" & ¶ &
 "r" & ¶ &
 "" & ¶ ]
+#Set 'improve quality' timer to be the default
+#timer which means that its specific actions
+#are loaded at startup.
 Set Variable [ $setDefaultSpecificAction; Value:"" & ¶ &
 "1" & ¶ &
 "" & ¶ &
 "" & ¶ &
 "" & ¶ &
 "" & ¶ &
-"" & ¶ &
-"" & ¶ &
 "" & ¶ ]
+#Set 'new day' timer to only track user's
+#birthday, so it always shows the current day
+#the user is on.
+Set Variable [ $setNewDay; Value:"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"" & ¶ &
+"1" & ¶ ]
+#
+#Now in the second part of timer creation, all
+#these variables are applied to each timer
+#depending on what number it is in the
+#sequence of timers that are now being
+#created.
 Set Variable [ $number; Value:1 ]
 Loop
 New Record/Request
-Set Field [ brainstate::_keyUser; $userID ]
-Set Field [ brainstate::hide; "t" & ¶ ]
-Set Field [ brainstate::description; GetValue ( $actionNames ; $number ) ]
-Set Field [ brainstate::sortNumber; GetValue ( $actionOrderNumber ; $number ) ]
-Set Field [ brainstate::sortAlpha; GetValue ( $actionOrderLetter ; $number ) ]
-Set Field [ brainstate::HighlightLibraryButton; GetValue ( $highlightLibrary ; $number ) ]
-Set Field [ brainstate::HighlightSpecificActionButton; GetValue ( $highlightSpecificAction ; $number ) ]
+Set Field [ timer::_keyUser; $userID ]
+Set Field [ timer::hide; "t" & ¶ ]
+Set Field [ timer::description; GetValue ( $actionNames ; $number ) ]
+Set Field [ timer::sortNumber; GetValue ( $actionOrderNumber ; $number ) ]
+Set Field [ timer::sortAlpha; GetValue ( $actionOrderLetter ; $number ) ]
+Set Field [ timer::HighlightNoteButton; GetValue ( $highlightNote ; $number ) ]
+Set Field [ timer::HighlightLibraryButton; GetValue ( $highlightLibrary ; $number ) ]
+Set Field [ timer::HighlightSpecificActionButton; GetValue ( $highlightSpecificAction ; $number ) ]
+Set Field [ timer::newDayTimer; GetValue ( $setNewDay ; $number ) ]
 If [ GetValue ( $setDefaultSpecificAction ; $number ) = 1 ]
 Commit Records/Requests
-Set Field [ steward::DefaultSpecificAction; brainstate::_lockBrainstateID ]
+Set Field [ user::DefaultSpecificAction; timer::_lockTimer ]
 End If
 Set Variable [ $number; Value:$number + 1 ]
-Exit Loop If [ $number = 10 ]
+Exit Loop If [ $number = 8 ]
 End Loop
-#
-Set Variable [ $kpnBrainstateID; Value:brainstate::_lockBrainstateID ]
-Go to Layout [ “calcDayTable” (day1) ]
-New Record/Request
-Set Field [ day1::_keyBrainstate; $kpnBrainstateID ]
-Set Field [ day1::_keyUser; $userID ]
-Set Field [ day1::swStart; Get ( CurrentTimeStamp ) ]
-Set Field [ day1::swPause; Get ( CurrentTimeStamp ) ]
-Show Custom Dialog [ Message: "Enter your date of birth so that this program can calculate your new day number, every day.";
-Buttons: “OK”; Input #1: day1::_keyDay, "use date format: 01/01/1900" ]
-Commit Records/Requests
-If [ IsValid ( day1::_keyDay ) ≠ 1 ]
-Show Custom Dialog [ Message: "Enter your date of birth so that this program can calculate your new day number, every
-day. Use must enter a valid date using this format: 00/00/0000."; Buttons: “OK”; Input #1: day1::_keyDay, "use date
-format: 01/01/1900" ]
-Commit Records/Requests
-End If
-Set Variable [ $dateOfLastUse; Value:day1::_keyDay ]
-Go to Layout [ “calcBrainstateTable” (brainstate) ]
-Set Field [ brainstate::DateOfLastUse; $dateOfLastUse ]
 End If
 #
-July 13, ଘ౮28 13:32:49 ActionLog.fp7 - CHUNK_createRecordsForNewUsers -1-
+#
+December 11, ଘ౮28 0:36:39 ActionLog.fp7 - CHUNK_loadORcreateTimersForUser -1-

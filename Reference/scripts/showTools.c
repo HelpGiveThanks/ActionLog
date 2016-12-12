@@ -1,4 +1,4 @@
-showTools
+show tools
 Show/Hide Status Area
-[ Lock; Show ]
-January 6, 平成26 13:15:38 MyData.fp7 - showTools -1-
+[ Show ]
+December 11, ଘ౮28 21:00:04 reference.fp7 - show tools -1-

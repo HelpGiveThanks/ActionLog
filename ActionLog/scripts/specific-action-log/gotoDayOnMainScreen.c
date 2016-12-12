@@ -20,16 +20,25 @@ the database is able to return the desired day fields for brainstate record the 
 Refresh Window
 [ Flush cached join results ]
 #
-#3 capture user's current date perference
-Set Field [ steward::chosenDay; reference::day1 ]
+#3 Capture the new day as the user's choosen
+#day, and as Timer window's day.
+Set Field [ user::chosenDay; reference::day1 ]
 #
-#4 sort the records
-Sort Records [ ]
-[ No dialog ]
-#
-#5 take the user the edit time layout if not there.
+#4 Go to the edit time layout if not there.
 If [ Filter ( Get ( LayoutName ) ; "a" ) = "a"
 //Only the "main" layout has an 'a' in it. ]
 Perform Script [ “editTimePart1” ]
+#
+Else
+#4 Sort the records.
+Sort Records [ Specified Sort Order: day1::_keyDay; ascending
+timer::groupType; ascending
+day1::swStart; ascending
+timer::sortNumber; based on value list: “__-99”
+timer::sortAlpha; based on value list: “sortAlpha”
+timer::sortSubNumber; based on value list: “__-99”
+timer::sortCategory; based on value list: “sortAlpha”
+timer::description; ascending ]
+[ Restore; No dialog ]
 End If
-July 26, ଘ౮28 15:22:55 ActionLog.fp7 - gotoDayOnMainScreen -1-
+December 10, ଘ౮28 23:05:46 ActionLog.fp7 - gotoDayOnMainScreen -1-

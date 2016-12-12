@@ -1,8 +1,8 @@
 start close: start
-#PURPOSE save out graphic objects to external folder for reference in graphs and then go to the user layout
 #
 #
-#1 save out graphic objects to external folder for reference in graphs
+#Save out graphic objects to external folder
+#for reference in graphs.
 Set Variable [ $path; Value:"file:" & Get(TemporaryPath) & "1.gif" ]
 Export Field Contents [ reference::gResources; “$path” ]
 Set Variable [ $path; Value:"file:" & Get(TemporaryPath) & "2.gif" ]
@@ -23,22 +23,22 @@ Delete Record/Request
 #Set version number.
 Set Field [ MemorySwitch::versionActionLog; version::version ]
 #
-#2 go to the user layout
-Go to Layout [ “users” (steward) ]
+#Go to the user layout.
+Go to Layout [ “users” (user) ]
 Show All Records
-Sort Records [ Specified Sort Order: steward::FirstName; ascending
-steward::LastName; ascending ]
+Sort Records [ Specified Sort Order: user::FirstName; ascending
+user::LastName; ascending ]
 [ Restore; No dialog ]
-If [ steward::windowZoom = 150 ]
+If [ user::windowZoom = 150 ]
 Set Zoom Level
 [ 100% ]
-Else If [ steward::windowZoom = 200 ]
+Else If [ user::windowZoom = 200 ]
 Set Zoom Level
 [ 100% ]
-Else If [ steward::windowZoom = 300 ]
+Else If [ user::windowZoom = 300 ]
 Set Zoom Level
 [ 100% ]
-Else If [ steward::windowZoom = 400 ]
+Else If [ user::windowZoom = 400 ]
 Set Zoom Level
 [ 100% ]
 End If
@@ -61,4 +61,27 @@ Else
 Show/Hide Status Area
 [ Lock; Hide ]
 End If
-July 13, ଘ౮28 13:03:19 ActionLog.fp7 - start -1-
+#
+#Close Timer, Specific Action, Day, and Tag
+#windows if user is restarting solution.
+Close Window [ Name: "Timer"; Current file ]
+Close Window [ Name: "Specific Action"; Current file ]
+Close Window [ Name: "Day"; Current file ]
+Close Window [ Name: "Tag"; Current file ]
+Close Window [ Name: "Temp"; Current file ]
+Close Window [ Name: ""; Current file ]
+#
+#Insure user is running compatable versiona
+#the reference and MyData files.
+If [ reference::version ≠ "3.2b BETA" ]
+Show Custom Dialog [ Message: "You need to download the file 'reference, version 3.2b BETA' for version 3.2b BETA of the
+ActionLog."; Buttons: “OK” ]
+End If
+#
+If [ backup::version ≠ "3.2b BETA" ]
+Show Custom Dialog [ Message: "You need to download the file 'MyData, version 3.2b BETA' for version 3.2b BETA of the
+ActionLog."; Buttons: “OK” ]
+End If
+#
+#
+December 11, ଘ౮28 21:41:36 ActionLog.fp7 - start -1-

@@ -6,23 +6,33 @@ specific action log: CHUNK_updateIssueCategoryTime
 #
 Allow User Abort [ Off ]
 Set Error Capture [ On ]
+#
 #FIRST capture current window so system can go
 #to it after finished, otherwise
 #UpdateTime script tries to continue in the wrong
 #window, which is showing the wrong layout!
 Set Variable [ $UpdateTimewindowName; Value:Get ( WindowName ) ]
 #
-#Find all issues with this day record's time attributed
-#to them.
-Go to Field [ ]
-#
+#Find all issues with this Day record's time attributed
+#to them. (This chunk script will be repeated
+#for each timer used on this day. It handles
+#one timer's specific actions at a time.)
 New Window [ Name: "temp"; Height: 1; Width: 1; Top: -1000; Left: -1000 ]
 // New Window [ Name: "temp" ]
-Go to Layout [ “IssuesLayoutForScripts” (issue) ]
+Go to Field [ ]
+Go to Layout [ “SpecificActionTable” (specificAction) ]
 Enter Find Mode [ ]
-Set Field [ issue::timeSegmentKeyList; "*" & Replace ( Quote("1") ; 2 ; 1 ; $$updateDay ) ]
+Set Field [ specificAction::timeSegmentKeyList; "*" & Replace ( Quote("1") ; 2 ; 1 ; $$updateDay ) ]
 Perform Find [ ]
 If [ Get (LastError) = 401 ]
+#
+#If none are found, it could mean the SPA
+#record just had its only time segment for the
+#day removed. Run a check on this record to
+#to insure if it was just active that is
+#inactivated, unless it is active on other days.
+#
+#
 Close Window [ Name: "temp"; Current file ]
 Exit Script [ ]
 End If
@@ -35,32 +45,35 @@ If [ Get (LastError) ≠ 112 ]
 Go to Field [ ]
 End If
 #
+#See if any of these Specific Action (issue)
+#records are active on multiple days.
 Select Window [ Name: "temp"; Current file ]
+Perform Script [ “CHUNK_seeIfSPAisActiveOnOtherDays (new)” ]
 #
-#Find and capture ID of the active issue timer.
+#Get the ID of any specific action timer
+#that may just have been turned on, so it
+#can be found and shown at end of this script
+#if it is not currently showing.
 Go to Record/Request/Page
 [ First ]
 Loop
-If [ issue::timer = "active" or
-FilterValues ( issue::timeSegmentKeyList ; $$timeSegment & ¶ ) = $$timeSegment & ¶ ]
-Set Variable [ $SpecificActionWindowFocusedOnThisIssue; Value:issue::_LockList ]
-If [ $$day1BugField = "note" ]
-Set Field [ issue::timer; "active" ]
-Else If [ $$day1BugField = "veto" ]
-Set Field [ issue::timer; "" ]
+If [ $$logBrainstate = timer::_lockTimer ]
+If [ FilterValues (specificAction::timeSegmentKeyList ; day1::swOccurances & day1::_lockDay & "¶" ) = day1::swOccurances
+& day1::_lockDay & "¶" and day1::swBugField = "veto" ]
+Set Variable [ $SpecificActionWindowFocusedOnThisIssue; Value:specificAction::_LockSpecificAction ]
 End If
 End If
-Exit Loop If [ issue::timer = "active" or
-FilterValues ( issue::timeSegmentKeyList ; $$timeSegment & ¶ ) = $$timeSegment & ¶ ]
+Exit Loop If [ $SpecificActionWindowFocusedOnThisIssue ≠ "" ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
 #
-#Make a list of them.
+#Make a list of all Specific Action (issue) records
+#this day-record time segment's are linked to.
 Go to Record/Request/Page
 [ First ]
 Loop
-Set Variable [ $AllIssueRecordsNeedingUpdate; Value:issue::_LockList & "¶" & $issueList ]
+Set Variable [ $AllIssueRecordsNeedingUpdate; Value:specificAction::_LockSpecificAction & "¶" & $issueList ]
 Set Variable [ $issueList; Value:$AllIssueRecordsNeedingUpdate ]
 #
 #Clear all records IF AND ONLY IF 'clearall'
@@ -69,33 +82,48 @@ If [ $$clear = 1 ]
 #
 #Remove link to log from issue record and update
 #the variable containing these links if any.
-Set Field [ issue::_keyLogs; If ( ValueCount ( issue::_keyLogs ) ≠ ValueCount ( Substitute ( issue::_keyLogs ; $$updateDay &
-"¶" ; "" ) ) ;
-Substitute ( issue::_keyLogs ; $$updateDay & "¶" ; "" ) ;
-Substitute ( issue::_keyLogs ; $$updateDay ; "" ) ) ]
-Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
+Set Field [ specificAction::_keyLogs; If ( ValueCount ( specificAction::_keyLogs ) ≠ ValueCount ( Substitute ( specificAction::
+_keyLogs ; $$updateDay & "¶" ; "" ) ) ;
+Substitute ( specificAction::_keyLogs ; $$updateDay & "¶" ; "" ) ;
+Substitute ( specificAction::_keyLogs ; $$updateDay ; "" ) ) ]
+Set Variable [ $$logissues; Value:logs::_keyLogSPAs ]
 #
 #Remove time segment key from list.
 #(the teen numbers must come first otherwise
 #the singly digits will delete 3 in 13 and leave
 #behind an orphaned 1 for example)
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 11 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 12 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 13 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 14 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 15 & $$updateday & "¶" ; "" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 11 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 12 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 13 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 14 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 15 & $$updateday & "¶" ;
+"" ) ]
 #
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 1 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 2 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 3 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 4 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 5 & $$updateday & "¶" ; "" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 1 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 2 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 3 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 4 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 5 & $$updateday & "¶" ;
+"" ) ]
 #
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 6 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 7 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 8 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 9 & $$updateday & "¶" ; "" ) ]
-Set Field [ issue::timeSegmentKeyList; Substitute ( issue::timeSegmentKeyList ; 10 & $$updateday & "¶" ; "" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 6 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 7 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 8 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 9 & $$updateday & "¶" ;
+"" ) ]
+Set Field [ specificAction::timeSegmentKeyList; Substitute ( specificAction::timeSegmentKeyList ; 10 & $$updateday & "¶" ;
+"" ) ]
 End If
 Go to Record/Request/Page
 [ Next; Exit after last ]
@@ -111,28 +139,32 @@ Substitute ( $AllIssueRecordsNeedingUpdate ; $issue ; "" ) ) ]
 #
 #Find all time segments attributed to this
 #issue so their total time can be calculated.
-Go to Layout [ “issueTime” (issueTime) ]
+Go to Layout [ “SPATimeTable” (SPATime) ]
 Enter Find Mode [ ]
-Set Field [ issueTime::_keyIssue; $issue ]
+Set Field [ SPATime::_keySPA; $issue ]
 Perform Find [ ]
+#
+#When there are no more issues to be found
+#(thus, the find criteria are empty = error 400)
+#exit the loop.
 Exit Loop If [ Get (LastError) = 400 ]
-Set Variable [ $totalTime; Value:issueTime::sum ]
+Set Variable [ $totalTime; Value:SPATime::sum ]
 #
 #Update issue's total time field with the
 #re-calculated total time.
-Go to Layout [ “IssuesLayoutForScripts” (issue) ]
+Go to Layout [ “SpecificActionTable” (specificAction) ]
 Enter Find Mode [ ]
-Set Field [ issue::_LockList; $issue ]
+Set Field [ specificAction::_LockSpecificAction; $issue ]
 Perform Find [ ]
-Set Field [ issue::issueTotalTime; $totalTime ]
+Set Field [ specificAction::SPATotalTime; $totalTime ]
 #
 #Re-calculate total time all issues in this issue's
 #issue group shown in the Tag Menu window.
-Set Variable [ $categoryKey; Value:issue::_keyCategory ]
+Set Variable [ $categoryKey; Value:specificAction::_keyGroup ]
 Enter Find Mode [ ]
-Set Field [ issue::_keyCategory; $categoryKey ]
+Set Field [ specificAction::_keyGroup; $categoryKey ]
 Perform Find [ ]
-Sort Records [ Specified Sort Order: issue::_keyCategory; ascending ]
+Sort Records [ Specified Sort Order: specificAction::_keyGroup; ascending ]
 [ Restore; No dialog ]
 #
 #Stop doing this modification of all records tagged
@@ -144,85 +176,14 @@ Sort Records [ Specified Sort Order: issue::_keyCategory; ascending ]
 // Go to Record/Request/Page
 [ First ]
 // Loop
-// Set Field [ issue::timeTotalSumByCat; issue::timeTotalSummaryByCategory ]
+// Set Field [ specificAction::timeTotalSumByGroup; specificAction::timeTotalSummaryByGroup ]
 // Go to Record/Request/Page
 [ Next; Exit after last ]
 // End Loop
 #
 #Set new total time for category tag.
-// Set Field [ issueCategory::issueTotalTime; issue::timeTotalSummaryByCategory ]
-Set Field [ issueCategory::issueTotalTime; GetSummary ( issue::timeSummary ; issue::_keyCategory ) ]
+Set Field [ SPAGroupTag 2::SPATotalTime; GetSummary ( specificAction::timeSummary ; specificAction::_keyGroup ) ]
 #
-#
-#Disabled the next chunk after deciding it was
-#better to use filemaker's subtotal calc rather
-#doing it with this script chunk whose benefit
-#was subtotaling items in a category even when
-#items where divided by status. Filemaker's
-#subtotal calc subtotals at the status and category
-#breaks (essentially all breaks caused by a sort)
-#but I decided to show issue the time by status
-#and category too, so that is why this script chunk
-#is now disabled. The other reason was that it
-#bogged down the system taking a long time to run.
-// #To reset all the category subtotal times, first find
-// #and sort all this issues records.
-// Set Variable [ $brainstateIssues; Value:issue::_keyBrainstate ]
-// Enter Find Mode [ ]
-// Set Field [ issue::_keyBrainstate; $brainstateIssues ]
-// Perform Find [ ]
-// Sort Records [ Specified Sort Order: brainstate::description; ascending
-issueStatus::order; ascending
-issueStatus::text; ascending
-issueCategory::order; ascending
-issue::timeTotalSummaryByCategory; ascending
-issue::order; based on value list: “__-99”
-issue::text; ascending ]
-[ Restore; No dialog ]
-// Go to Record/Request/Page
-[ First ]
-// #
-// #
-// #AddUp total time showing for this subset of
-// #a cateogory broken up into subsets by different
-// #statuses, like the subset of some category's
-// #record that are pending, or completed, etc.
-// Loop
-// Set Variable [ $category; Value:issue::_keyCategory ]
-// Set Variable [ $status; Value:issue::_keyStatus ]
-// Set Variable [ $recordNumber; Value:Get (RecordNumber) ]
-// Set Variable [ $subsetTotal ]
-// Set Variable [ $oldTotal ]
-// #
-// Loop
-// Set Variable [ $subsetTotal; Value:issue::issueTotalTime + $oldTotal ]
-// Set Variable [ $oldTotal; Value:$subsetTotal ]
-// Go to Record/Request/Page
-[ Next; Exit after last ]
-// Exit Loop If [ issue::_keyCategory ≠ $category
-//This next step I thought could happen, but then realized it can nevery happen
-//or
-//issue::_keyCategory = $category and issue::_keyStatus ≠ $status ]
-// End Loop
-// #
-// #Return the first record in this subset and give it
-// #the subset total, then give the subtotal to all
-// #records in this subset.
-// Go to Record/Request/Page [ $recordNumber ]
-[ No dialog ]
-// #
-// Loop
-// Set Field [ issue::timeTotalSumByCatSortedByStatus; $subsetTotal ]
-// Go to Record/Request/Page
-[ Next; Exit after last ]
-// Exit Loop If [ issue::_keyCategory ≠ $category
-//This next step I thought could happen, but then realized it can nevery happen
-//or
-//issue::_keyCategory = $category and issue::_keyStatus ≠ $status ]
-// End Loop
-// #
-// Exit Loop If [ Get (LastError) = 101 ]
-// End Loop
 End Loop
 #
 Close Window [ Name: "temp"; Current file ]
@@ -236,7 +197,25 @@ Select Window [ Name: "Specific Action"; Current file ]
 Set Variable [ $currentIssueNumber; Value:Get ( RecordNumber ) ]
 #
 #Check if the Specific Action window
-#is focused on this updating timer.
+#is showing the active specific action if there
+#is one, and if not showing then find and
+#show it.
+If [ $SpecificActionWindowFocusedOnThisIssue ≠ "" ]
+Set Variable [ $$stopRecordLoad; Value:1 ]
+#
+#Determine if the issue whose time is being updated
+#is in the set of current found issues, and if
+#not then find and show it.
+If [ $SpecificActionWindowFocusedOnThisIssue ≠ specificAction::_LockSpecificAction ]
+Go to Record/Request/Page
+[ First ]
+Loop
+Exit Loop If [ $SpecificActionWindowFocusedOnThisIssue = specificAction::_LockSpecificAction ]
+Go to Record/Request/Page
+[ Next; Exit after last ]
+End Loop
+#
+#If not showing then find, show and focus on it.
 #NOTE: See openSpecificAction script for
 #altenate way to accomplish this by sorting
 #most recently modified records to the top in
@@ -244,88 +223,64 @@ Set Variable [ $currentIssueNumber; Value:Get ( RecordNumber ) ]
 #there is one, and stopping looping after the
 #first 10 recently modified records. Not sure
 #if this is faster or not. Need to test.
-If [ issue::timer ≠ "active" ]
-#
-#Determine if the issue whose time is being updated
-#is in the set of current found issues, and if
-#not then find and show it.
-If [ issue::timer ≠ "active" ]
-Go to Record/Request/Page
-[ First ]
-Loop
-Exit Loop If [ issue::timer = "active" ]
-Go to Record/Request/Page
-[ Next; Exit after last ]
-End Loop
-#
-#If not showing then find, show and focus on it.
-If [ issue::timer ≠ "active" ]
+If [ $SpecificActionWindowFocusedOnThisIssue ≠ specificAction::_LockSpecificAction ]
 Enter Find Mode [ ]
-Set Field [ issue::_LockList; $SpecificActionWindowFocusedOnThisIssue ]
+Set Field [ specificAction::_LockSpecificAction; $SpecificActionWindowFocusedOnThisIssue ]
 Extend Found Set [ ]
 Sort Records [ ]
 [ No dialog ]
 Go to Record/Request/Page
 [ First ]
 Loop
-Exit Loop If [ $SpecificActionWindowFocusedOnThisIssue = issue::_LockList ]
+Exit Loop If [ $SpecificActionWindowFocusedOnThisIssue = specificAction::_LockSpecificAction ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End Loop
 End If
 #
 #If no linked record is found return user to
-#selected record.
-If [ $SpecificActionWindowFocusedOnThisIssue ≠ issue::_LockList ]
+#selected record, but if found then load
+#its variables.
+If [ $SpecificActionWindowFocusedOnThisIssue ≠ specificAction::_LockSpecificAction ]
 Go to Record/Request/Page [ $currentIssueNumber ]
 [ No dialog ]
+Else
+Set Variable [ $$stopRecordLoad ]
+Perform Script [ “loadIssuerecordID” ]
+End If
 End If
 #
 Set Variable [ $$stopRecordLoad ]
-Perform Script [ “loadIssuerecordID” ]
-Set Variable [ $$stopRecordLoad; Value:1 ]
-#
 End If
 #
-#Set ActiveTimeSegment variable to on or off
-#state, which is used by the script
-#stopTimerAssignedToSpecificAction.
-#NOTE: Need to test if this variable is really
-#being used anymore.
-If [ FilterValues (issue::timeSegmentKeyList ; day1::swOccurances & day1::_lockDay & "¶" ) = day1::swOccurances & $$log & "¶"
-and day1::swBugField = "veto" ]
-Set Variable [ $$ActiveTimeSegment; Value:day1::swOccurances & day1::_lockDay ]
-Else If [ day1::swBugField = "note" or day1::swBugField = "" ]
-Set Variable [ $$ActiveTimeSegment ]
-End If
-End If
-#
-If [ FilterValues (issue::timeSegmentKeyList ; day1::swOccurances & day1::_lockDay & "¶" ) = day1::swOccurances & $$log & "¶" and
-day1::swBugField = "veto" ]
+If [ FilterValues (specificAction::timeSegmentKeyList ; day1::swOccurances & day1::_lockDay & "¶" ) = day1::swOccurances & $$log &
+"¶" and day1::swBugField = "veto" ]
 Set Variable [ $$day1BugField; Value:day1::swBugField ]
 Else If [ day1::swBugField = "note" or day1::swBugField = "" ]
 Set Variable [ $$day1BugField ]
 End If
 #
-#Update totals for category tags.
+#Update totals for category tags, which takes
+#a sort of data to return fresh totals.
 Select Window [ Name: "Tag"; Current file ]
 Set Variable [ $tagLayoutName; Value:Get (LayoutName) ]
 If [ Get ( LayoutName ) = "IssuesAndObservationsTag" ]
-Sort Records [ Specified Sort Order: group::order; based on value list: “1-99”
-group::text; ascending
-category::sortTime; ascending
-category::text; ascending ]
+Sort Records [ Specified Sort Order: TagGroup::order; based on value list: “1-99”
+TagGroup::text; ascending
+SPAGroupTag::sortTime; ascending
+SPAGroupTag::text; ascending ]
 [ Restore; No dialog ]
 Else
-Go to Layout [ “IssuesAndObservationsTag” (category) ]
-Sort Records [ Specified Sort Order: group::order; based on value list: “1-99”
-group::text; ascending
-category::sortTime; ascending
-category::text; ascending ]
+Go to Layout [ “IssuesAndObservationsTag” (SPAGroupTag) ]
+Sort Records [ Specified Sort Order: TagGroup::order; based on value list: “1-99”
+TagGroup::text; ascending
+SPAGroupTag::sortTime; ascending
+SPAGroupTag::text; ascending ]
 [ Restore; No dialog ]
 Go to Layout [ $tagLayoutName ]
 End If
 #
 Select Window [ Name: $UpdateTimewindowName; Current file ]
 Exit Script [ ]
-July 26, ଘ౮28 15:31:35 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -1-
+#
+December 10, ଘ౮28 23:13:19 ActionLog.fp7 - CHUNK_updateIssueCategoryTime -1-

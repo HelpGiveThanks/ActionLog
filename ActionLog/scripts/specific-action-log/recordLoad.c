@@ -6,9 +6,8 @@ If [ reference::CurrentRecord = Get (RecordID) ]
 Exit Script [ ]
 End If
 Set Field [ reference::CurrentRecord; Get ( RecordID ) ]
-Set Variable [ $$timerIDnumber; Value:brainstate::_lockBrainstateID ]
-Set Variable [ $$day1BugField; Value:day1::swBugField ]
+Set Variable [ $$timerIDnumber; Value:timer::_lockTimer ]
 If [ Get ( WindowTop ) < 0 ]
 Move/Resize Window [ Current Window; Top: 0 ]
 End If
-July 26, ଘ౮28 15:19:57 ActionLog.fp7 - recordLoad -1-
+December 10, ଘ౮28 20:59:58 ActionLog.fp7 - recordLoad -1-

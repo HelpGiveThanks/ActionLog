@@ -1,11 +1,11 @@
 specific action log: TagNameRequired
 #
-If [ category::text = "" and $$TagNameRequired = "" ]
-Set Field [ category::text; "tag" & category::_LockList ]
+If [ SPAGroupTag::text = "" and $$TagNameRequired = "" ]
+Set Field [ SPAGroupTag::text; "tag" & SPAGroupTag::_LockSpecificAction ]
 End If
 #
 If [ status::text = "" and $$TagNameRequired = "" ]
-Set Field [ status::text; "status" & status::_LockList ]
+Set Field [ status::text; "status" & status::_LockSpecificAction ]
 End If
 #
-December 6, ଘ౮27 21:49:25 ActionLog.fp7 - TagNameRequired -1-
+December 10, ଘ౮28 23:16:48 ActionLog.fp7 - TagNameRequired -1-

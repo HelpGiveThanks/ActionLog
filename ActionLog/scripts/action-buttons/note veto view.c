@@ -1,12 +1,51 @@
 action buttons: note veto view
-#PURPOSE merge selected record's time data into one total record and then link these records so that time added in the future to any
-of the merge records will be automatically added to the one total record.
+#HISTORY AND NEEDED CHANGES: This script
+#used to help the ActionLog keep track of 1)
+#grandtotal records, 2) timer total records,
+#and timer records. In testing, this way of
+#helping the user group activities by time was
+#too imprecise, and so I created the Specific
+#Action module, making 1) timers in the main
+#timer window function as grand total timers,
+#of 2) specific action total group times, and
+#finally 3) specific actions times as the
+#smallest record of user time.
+# The grandtotal and total script steps,
+#layouts, and fields nave never been removed.
+#They will be when timer permits. Use these
+#BEGIN/END statements to flag questionable
+#script steps.
+#BEGIN Cleanup, answer why?, delete unused steps, etc.
+#END Cleanup, answer why?, delete unused steps, etc.
 #
+#Specifically, this script now just turns on and
+#off timers in the main Timer windows.
 #
-If [ $$logBrainstate = brainstate::_lockBrainstateID and brainstate::_lockBrainstateID = steward::DefaultSpecificAction ]
-Show Custom Dialog [ Message: "Select a specific action; then click start or stop. You can always edit its time in the edit-time
-window. NOTE: This general-action timer is your specific action default. Edit it to change the default."; Buttons: “OK” ]
-If [ Get (LastMessageChoice) = 1 ]
+#If the user clicked on the new day timer, tell
+#them how to reset it if it is not set, or set it
+#up for them. Exit when done, either way.
+If [ timer::newDayTimer ≠ "" ]
+If [ timer::DateOfLastUse ≠ "" ]
+Show Custom Dialog [ Message: "This timer shows your current day of life. To change it 1) click '" & timer::
+DaysSinceLastUse & "' to go to your birthday. 2) Click 'cleartime' to clear all time for this day. 3) Click '" & timer::
+description & "' to create a new birth day record. To hide it click 'edit' and then click its retire checkbox."; Buttons: “OK” ]
+Exit Script [ ]
+End If
+Perform Script [ “newDayTimerSetup (new)” ]
+Exit Script [ ]
+End If
+#
+#Stop user from creating future timer records.
+If [ Get ( CurrentDate ) < reference::day1 ]
+Show Custom Dialog [ Message: "Timer records cannot be created for future events."; Buttons: “OK” ]
+Exit Script [ ]
+End If
+#
+#If this timer is loaded in the Specific Action
+#window, then prevent user from activiting it
+#in this window, and take user there to start
+#and stop it.
+If [ $$logBrainstate = timer::_lockTimer // and brainstate::_lockBrainstateID = steward::DefaultSpecificAction ]
 If [ Get ( SystemPlatform ) = 3 ]
 Select Window [ Name: "Specific Action"; Current file ]
 Else
@@ -14,64 +53,59 @@ Select Window [ Name: "Tag"; Current file ]
 Select Window [ Name: "Day"; Current file ]
 Select Window [ Name: "Specific Action"; Current file ]
 End If
+Show Custom Dialog [ Message: "The " & timer::description & " timer is loaded in the Specific Action window (now showing), so
+you must operate it here using the 'start' and 'stop' buttons (until you load up a different timer). Edit any time segements
+started here in the Timer window."; Buttons: “OK” ]
 Exit Script [ ]
 End If
-End If
 #
 #
-#
-Set Variable [ $$recordFIXTOMANYVARIABLES; Value:brainstate::_lockBrainstateID ]
+#BEGIN Cleanup, answer why?, delete unused steps, etc.
+Set Variable [ $$recordFIXTOMANYVARIABLES; Value:timer::_lockTimer ]
 Set Variable [ $$record; Value:Get (RecordNumber) ]
 Set Variable [ $$recordnumber; Value:Get ( RecordNumber ) ]
 Freeze Window
-#needed by folderstopwatchcheck script in case the stopwatch being started or stopped belongs to a total record
-Set Variable [ $$folderon; Value:brainstate::groupID ]
+#END Cleanup, answer why?, delete unused steps, etc.
 #
-#
-#
-If [ brainstate::sortRetired ≠ "" ]
-Show Custom Dialog [ Title: "!"; Message: "This record is currently retired. To make it active again, click on the r to the
-immediate left of the record title (if the edit controls are hidden, then first click the edit button (top left corner of this window).";
-Buttons: “OK” ]
-Halt Script
-End If
-If [ brainstate::description = "" ]
+#Don't start a timer that has no name. Maybe
+#the user wants to create a space between
+#timers, so don't force the user to give timers
+#a name.
+If [ timer::description = "" ]
+Show Custom Dialog [ Message: "Give this timer a name: 1) Click 'edit' and then 2) enter a name in the name field."; Buttons:
+“OK” ]
 Exit Script [ ]
 End If
 #
-#1 if the view button is showing: determine if the record is total record, and it is show the these linked records, unless the user is on the
-total record layout in which case halt the script. (From the user's point of view the stopwatch button will say 'view' instead of 'note'
-if it is a total record, and this part of the script will be activitated.)
-If [ brainstate::_lockBrainstateID = brainstate::groupID or brainstate::_lockBrainstateID = brainstate::groupOfGroupID ]
-If [ Left ( Get ( LayoutName ) ; 5 ) = "total" or Left ( Get ( LayoutName ) ; 5 ) = "grand" ]
-Halt Script
-End If
-Set Variable [ $$record; Value:1 ]
-Perform Script [ “showLinkedRecords” ]
-Halt Script
-End If
 #
-#1 If there is no day record create a new one.
+#BEGIN Start Timer.
+#
+#
+#If a record for this timer (brainstate) has
+#not been created for today, then create one.
 If [ day1::swSymbols = "" ]
 Set Variable [ $$stopwatchON; Value:"t" ]
 Set Variable [ $$newTimer; Value:1 ]
 #
-#1 capture record number user is currently on
+#Capture current timer (brainstate) variables.
 Set Variable [ $record; Value:Get ( RecordNumber ) ]
-#2 if not create a new one for this brainstate record and do it a new window so the user's focus is maintained (just going to the day
-layout and back resest the scroll bar unfortunately and I can't find away around this, but I want too!)
+Set Variable [ $kpnBrainstateID; Value:timer::_lockTimer ]
+Set Variable [ $userID; Value:reference::userID ]
 #
-Set Variable [ $kpnBrainstateID; Value:brainstate::_lockBrainstateID ]
-Set Variable [ $userID; Value:reference::farmerID ]
-Go to Layout [ “calcDayTable” (day1) ]
+#Create new day record and give it keys to
+#this timer (brainstate).
+Go to Layout [ “DayTable” (day1) ]
 New Record/Request
-Set Field [ day1::_keyBrainstate; $kpnBrainstateID ]
+Set Field [ day1::_keyTimer; $kpnBrainstateID ]
 Set Field [ day1::_keyUser; $userID ]
 Set Field [ day1::_keyDay; reference::day1 ]
 #
-#3 start the timer by inserting the current time in the start field
+#Start the timer by inserting the current time
+#into the first start-time field.
 Set Field [ day1::swStart; Get ( CurrentTimeStamp ) ]
 #
+#
+#BEGIN Cleanup, answer why?, delete unused steps, etc.
 #This step sets a flag for the updateTime
 #script telling it to ignore this stopwatches
 #time for updates to total records because
@@ -82,23 +116,22 @@ Set Field [ day1::updateTime; day1::updateTimeCurrentTimeCalc ]
 Go to Layout [ original layout ]
 Go to Record/Request/Page [ $record ]
 [ No dialog ]
-Perform Script [ “CHUNK_lastDayUsed” ]
+Perform Script [ “CHUNK_lastDayUsed (update)” ]
+#END Cleanup, answer why?, delete unused steps, etc.
 #
 #
-#Now find the new log record for this timer if
-#it is currently loaded (the current Specific
-#Action timer showing).
-If [ $$logBrainstate = brainstate::_lockBrainstateID ]
+#Show new day record for this timer if it is
+#currently loaded in the Specific Action window.
+If [ $$logBrainstate = timer::_lockTimer ]
 Select Window [ Name: "Day"; Current file ]
 Set Variable [ $$stopRecordLoad; Value:1 ]
 Go to Layout [ “logs2rows” (logs) ]
+#Find it.
 Enter Find Mode [ ]
-Set Field [ logs::_keyBrainstate; $$logBrainstate ]
+Set Field [ logs::_keyTimer; $$logBrainstate ]
 Perform Find [ ]
-#
-#Sort, turn on load record script to set Day
-#record's variables, and go to first record.
-Sort Records [ Specified Sort Order: logs::_keyBrainstate; descending
+#Sort it to the top and focus window on it.
+Sort Records [ Specified Sort Order: logs::_keyTimer; descending
 logs::_keyDay; descending ]
 [ Restore; No dialog ]
 Set Variable [ $$stopRecordLoad ]
@@ -107,20 +140,28 @@ Go to Record/Request/Page
 Scroll Window
 [ Home ]
 #
+#Set variables used for attaching Specific Action
+#record IDs to Day records, and for conditionally
+#formatting Day records related to Specific
+#Action records.
+Set Variable [ $$log; Value:logs::_lockDay ]
+Set Variable [ $$logrecordID; Value:Get ( RecordID ) ]
+Set Variable [ $$logissues; Value:logs::_keyLogSPAs ]
+#
+#Inform other scripts if user is on or not on
+#the Today or Yesterday record. This info will
+#speed them up, since they will not have to
+#check this out for themselves.
+Set Field [ reference::ActivityLogDay; logs::_keyDay ]
+Set Field [ reference::ActivityLogDayRecordNumber; Get (RecordNumber) ]
+#
+#Return user to the Timer window.
 Select Window [ Name: "Timer"; Current file ]
 End If
 #
+#BEGIN Cleanup, answer why?, delete unused steps, etc.
 Set Variable [ $$newTimer ]
-#
-#NOTE: The folder or parent and child timer
-#scripts and layouts are currently not is use in
-#favor of tracking such parent-child information
-#in the Specific Action module.
-// #4 check if the record belongs to a total
-// #record and modify its foldercheck field if so
-// #to inform user on main screen that a
-// #stopwatch may be activite that is not currently shown.
-// Perform Script [ “folderStopwatchCheck” ]
+#END Cleanup, answer why?, delete unused steps, etc.
 #
 #4 sort the records if the current sort is based
 #on time which will make this record with zero
@@ -132,7 +173,11 @@ Set Variable [ $$newTimer ]
 #record is only done if the user wants the
 #records sorted by time, in which case after
 #the sort the focus is returned to the first record.
-Perform Script [ “DaySelectSortThenSort (Update)” ]
+Perform Script [ “DaySelectSortThenSort (update)” ]
+#
+#BEGIN Cleanup, answer why?, delete unused steps, etc.
+# I think this script is halted by the script
+#above so these steps would never be done?
 #
 #Allows specific action script to continue.
 If [ $$specificActionTimer = 1 ]
@@ -141,37 +186,35 @@ Exit Script [ ]
 Else
 Halt Script
 End If
+#END Cleanup, answer why?, delete unused steps, etc.
 #
 End If
 #
-#5 if the veto button is showing stop the
-#stopwatch and put in the in the time stopped.
-If [ day1::swSymbols = "veto" ]
-Set Variable [ $$stopwatchON; Value:"f" ]
-Set Field [ day1::swPause[day1::swOccurances]; Get ( CurrentTimeStamp ) ]
-Set Variable [ $$TimeAssignedToSpecificAction; Value:issue::_LockList ]
 #
-#5 recalculate the time for this record and
-#check and see if is linked to any total records
-#and if so update their time too.
-Perform Script [ “updateTime (update)” ]
-End If
+#END Start Timer.
 #
-#6 if the note button is showing restart the
-#timer by putting a new start time in next
-#available start field for this day record.
+#
+#
+#
+#BEGIN Restart Timer.
+#
+#
+If [ day1::swSymbols = "note" ]
+#Restart the timer by putting a new start
+#time in the next a available start field.
 Set Variable [ $$stopwatchON; Value:"t" ]
 Set Field [ day1::swStart[day1::swOccurances + 1]; Get ( CurrentTimeStamp ) ]
 If [ day1::swOccurances = 29 ]
 Set Field [ day1::swStart[29]; Get ( CurrentTimeStamp ) ]
 End If
 #
-#7 recalculate the pause between stop and
+#Recalculate the pause between stop and
 #start times to show user the amount of time
 #that has passed since the last time this
-#brainstate was active.
+#timer (brainstate) was active.
 Perform Script [ “updatePauseTotals” ]
 #
+#BEGIN Cleanup, answer why?, delete unused steps, etc.
 #This sets a flag for the updateTime script
 #telling it to ignore this stopwatches time for
 #updates to total records because until it is
@@ -180,20 +223,37 @@ Perform Script [ “updatePauseTotals” ]
 Set Field [ day1::updateTimeSymbol; day1::swSymbols ]
 Set Field [ day1::updateTime; day1::updateTimeCurrentTimeCalc ]
 #
-#NOTE: The folder or parent and child timer
-#scripts and layouts are currently not is use in
-#favor of tracking such parent-child information
-#in the Specific Action module.
-// #4 check if the record belongs to a total
-// #record and modify its foldercheck field if so
-// #to inform user on main screen that a
-// #stopwatch may be activite that is not currently shown.
-// Perform Script [ “folderStopwatchCheck” ]
-#
 #Go back to original record number so sort script
 #gets ID number. (It would be better to fix sort
 #script so it exits rather than halts all scripts.)
 Go to Record/Request/Page [ $$recordnumber ]
 [ No dialog ]
-Perform Script [ “DaySelectSortThenSort (Update)” ]
-July 13, ଘ౮28 19:42:39 ActionLog.fp7 - note veto view -1-
+Perform Script [ “DaySelectSortThenSort (update)” ]
+#END Cleanup, answer why?, delete unused steps, etc.
+#
+End If
+#
+#
+#END Restart Timer.
+#
+#
+#
+#
+#BEGIN Stop Timer.
+#
+#
+#If the timer is running, then stop it.
+If [ day1::swSymbols = "veto" ]
+Set Variable [ $$stopwatchON; Value:"f" ]
+Set Field [ day1::swPause[day1::swOccurances]; Get ( CurrentTimeStamp ) ]
+Set Variable [ $$TimeAssignedToSpecificAction; Value:specificAction::_LockSpecificAction ]
+#
+#Recalculate the time for this timer any
+#specific actions linked to it.
+Perform Script [ “updateTime (update)” ]
+End If
+#
+#
+#END Stop Timer.
+#
+December 10, ଘ౮28 20:37:07 ActionLog.fp7 - note veto view -1-

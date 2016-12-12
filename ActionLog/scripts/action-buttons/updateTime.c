@@ -1,16 +1,28 @@
 action buttons: updateTime
-#PURPOSE update the time paused fields and the total and grand total fields after a user leaves a time field or clicks the veto button.
-They may or may not have done anything, but in case they did this update is performed.
+#HISTORY AND NEEDED CHANGES: This script
+#used to help the ActionLog keep track of 1)
+#grandtotal records, 2) timer total records,
+#and timer records. In testing, this way of
+#helping the user group activities by time was
+#too imprecise, and so I created the Specific
+#Action module, making 1) timers in the main
+#timer window function as grand total timers,
+#of 2) specific action total group times, and
+#finally 3) specific actions times as the
+#smallest record of user time.
+# The grandtotal and total script steps,
+#layouts, and fields nave never been removed.
+#They will be when time permits. These
+#BEGIN and END statements below I am using
+#to flag questionable (deletable?) script steps.
+#BEGIN Cleanup, answer why?, delete unused steps, etc.
+#END Cleanup, answer why?, delete unused steps, etc.
 #
-#If user just clicked into the time field and the clicked
-#out without doing anything then stop this script as
-#there is not time change to update.
-#NEED TO STOP $$FIELDVALUE GETTING CREATED WHEN STOPWATCH BUTTON IS CLICKED, THEN THIS SCRIPT STEP
-SHOULD WORK.
-#SAME TIME INCLUDE VARIABLE TO STOP UPDATE OF ISSUE TIME!
-// If [ $$fieldValue = Get (ActiveFieldContents) ]
-// Exit Script [ ]
-// End If
+#Specifically, this script updates time for all
+#timers because user could have dragged time
+#into timers other than the one they have
+#currently selected.
+#
 #
 #If user clicked the clear button but was in a field
 #the clearPart1 script when it exits this field will
@@ -28,12 +40,12 @@ End If
 Set Variable [ $$stopRecordLoad; Value:1 ]
 #
 #
-#when the user is in the time edit window we want to
+#When the user is in the time edit window we want to
 #use the recordnumber variable to focus on record in
-#in use on this window. But when user goes from this
+#use on this window. But when user goes from this
 #edit window to the main window we want the sort script
-#to find the record to focus by looping through each record's
-#ID number until the correct record is found.
+#to find the record to focus on by looping through each
+#record's ID number until the correct record is found.
 If [ $$sortstatus ≠ "" ]
 Set Variable [ $$recordnumber; Value:Get (RecordNumber) ]
 End If
@@ -58,6 +70,7 @@ End If
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
 #
+#BEGIN: Remove time segment key.
 #If the user has deleted time in a time slot,
 #check if this slot has been assigned
 #to a specific action, and if so, remove its key
@@ -76,74 +89,114 @@ Set Variable [ $removeDayLink; Value:1 ]
 End If
 #
 #Subtract segment key from specific action record.
-New Window [ ]
-// New Window [ Height: 1; Width: 1; Top: -10000; Left: -10000 ]
-Go to Layout [ “Issues” (issue) ]
+New Window [ Name: "Specific Action Table" ]
+// New Window [ Name: "Specific Action Table"; Height: 1; Width: 1; Top: -10000; Left: -10000 ]
+Go to Layout [ “SpecificActionTable” (specificAction) ]
 Enter Find Mode [ ]
-Set Field [ issue::timeSegmentKeyList; $time ]
+Set Field [ specificAction::timeSegmentKeyList; $time ]
 Perform Find [ ]
-Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
-Set Field [ issue::timeSegmentKeyList; //last item in list has no paragraph mark, so a valuecount test needs to be done and if item
-is not removed, then the removal calc without the paragraph mark is used
+Set Variable [ $$timeAll; Value:specificAction::timeSegmentKeyList ]
+Set Field [ specificAction::timeSegmentKeyList; //last item in list has no paragraph mark, so a valuecount test needs to be done
+and if item is not removed, then the removal calc without the paragraph mark is used
 If ( ValueCount ( $$timeAll ) ≠ ValueCount ( Substitute ( $$timeAll ; $time & "¶" ; "" ) ) ;
 Substitute ( $$timeAll ; $time & "¶" ; "" ) ;
 Substitute ( $$timeAll ; $time ; "" )
 ) ]
-Set Variable [ $$timeAll; Value:issue::timeSegmentKeyList ]
+#
+#BUG Sometimes have to go the other window
+#with same layout table open becuase system
+#says the user is using this record being
+#updated, even though the user is in zero
+#fields in that other window.
+If [ Get (LastError) = 301 ]
+Select Window [ Name: "Specific Action"; Current file ]
+Go to Field [ ]
+Select Window [ Name: "Specific Action Table"; Current file ]
+Set Field [ specificAction::timeSegmentKeyList; //last item in list has no paragraph mark, so a valuecount test needs to be
+done and if item is not removed, then the removal calc without the paragraph mark is used
+If ( ValueCount ( $$timeAll ) ≠ ValueCount ( Substitute ( $$timeAll ; $time & "¶" ; "" ) ) ;
+Substitute ( $$timeAll ; $time & "¶" ; "" ) ;
+Substitute ( $$timeAll ; $time ; "" )
+) ]
+End If
+#
+#See if this SPA is still active on other days.
+#NOTE: In the case where there is only one
+#segment for the day linked to an issue that
+#has just been removed, this script must be
+#run here. This script will be run again below
+#on this same issue if it does have more than
+#one segment linked to this day. There has to
+#be a variable that can be created and used,
+#so this does not happen, but I leave it up to a
+#future sprint to discover this efficiency
+#improvement.
+Perform Script [ “CHUNK_seeIfSPAisActiveOnOtherDays (new)” ]
+Set Variable [ $$stopRecordLoad; Value:1 ]
+#
+#Imporant to commit the record now as
+#otherwise the system will retain the old value
+#and it put back in as linked time segement.
+Commit Records/Requests
+Set Variable [ $$timeAll; Value:specificAction::timeSegmentKeyList ]
 Set Field [ day1::swLogTimeAccounting[$RepetitionNumber]; "" ]
 #
 #Remove link to day log from this issue record
 #if day record is being deleted.
 If [ $removeDayLink = 1 ]
-Set Field [ issue::_keyLogs; If ( ValueCount ( issue::_keyLogs ) ≠ ValueCount ( Substitute ( issue::_keyLogs ; $day & "¶" ;
-"" ) ) ;
-Substitute ( issue::_keyLogs ; $day & "¶" ; "" ) ;
-Substitute ( issue::_keyLogs ; $day ; "" ) ) ]
+Set Field [ specificAction::_keyLogs; If ( ValueCount ( specificAction::_keyLogs ) ≠ ValueCount ( Substitute ( specificAction::
+_keyLogs ; $day & "¶" ; "" ) ) ;
+Substitute ( specificAction::_keyLogs ; $day & "¶" ; "" ) ;
+Substitute ( specificAction::_keyLogs ; $day ; "" ) ) ]
 End If
 #
-#See if time segment is already in use by this time segment.
-Go to Layout [ “issueTime” (issueTime) ]
+#See if time segment is in use by any SPA
+#records.
+Go to Layout [ “SPATimeTable” (SPATime) ]
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
 Enter Find Mode [ ]
-Set Field [ issueTime::_keyDay; $day ]
-Set Field [ issueTime::_keyRepetition; $RepetitionNumber ]
+Set Field [ SPATime::_keyDay; $day ]
+Set Field [ SPATime::_keyRepetition; $RepetitionNumber ]
 Perform Find [ ]
 #
-#If it is in use then delete it from this segment.
+#Delete the now deleted time segement from
+#this issue.
 Delete Record/Request
 [ No dialog ]
 #
 Close Window [ Current Window ]
 #
-#Make re-assignable.
-Set Field [ issue::issueTotalTime; $totalTime ]
+#
+#BEGIN Cleanup, answer why?, delete unused steps, etc.
+#
+#The format is now based on an
+#issue field not this variable. Not sure if it is
+#in use elsewhere. Testing required before removing.
 #
 #Conditionally formats text of issue field Timer Green for on.
 Set Variable [ $$TimeAssignedToSpecificAction ]
 #
-#Conditionally formats Day Time Segment Timer Green for on.
-Select Window [ Name: "Specific Action"; Current file ]
-Set Variable [ $$ActiveTimeSegment ]
-Set Variable [ $$day1BugField ]
-#UNTESTED!!!!!!!!!!!!!!!
-Set Field [ issue::timer; "" ]
-Refresh Window
+#END Cleanup, answer why?, delete unused steps, etc.
+#
+#
+#Return to Timer window for next part of script.
 Select Window [ Name: "Timer"; Current file ]
 End If
 Set Variable [ $RepetitionNumber ]
+#END: Remove time segment key.
 #
 #
-Set Variable [ $userID; Value:reference::farmerID ]
-Set Variable [ $mergeID; Value:brainstate::groupID ]
-Set Variable [ $mergeGrandID; Value:brainstate::groupOfGroupID ]
+Set Variable [ $userID; Value:reference::userID ]
+Set Variable [ $mergeID; Value:timer::groupID ]
+Set Variable [ $mergeGrandID; Value:timer::groupOfGroupID ]
 Set Variable [ $layout; Value:Get ( LayoutName ) ]
 Set Variable [ $record; Value:Get (RecordNumber) ]
-Go to Layout [ “calcBrainstateTable” (brainstate) ]
-Set Variable [ $$record; Value:brainstate::_lockBrainstateID ]
-Set Variable [ $$recordFIXTOMANYVARIABLES; Value:brainstate::_lockBrainstateID ]
+Go to Layout [ “TimerTable” (timer) ]
+Set Variable [ $$record; Value:timer::_lockTimer ]
+Set Variable [ $$recordFIXTOMANYVARIABLES; Value:timer::_lockTimer ]
 // #needed by folderstopwatchcheck script in case the stopwatch being started or stopped belongs to a total record
-// Set Variable [ $$folderon; Value:brainstate::groupID ]
+// Set Variable [ $$folderon; Value:timer::groupID ]
 // If [ day1::swSymbols = "veto" ]
 // Set Variable [ $$stopwatchON; Value:"t" ]
 // Set Variable [ $$onoff; Value:"" ]
@@ -169,9 +222,9 @@ Go to Field [ ]
 Go to Record/Request/Page
 [ First ]
 Loop
-If [ day1::_lockDay = "" and brainstate::_lockBrainstateID ≠ brainstate::groupID ]
+If [ day1::_lockDay = "" and timer::_lockTimer ≠ timer::groupID ]
 Omit Record
-Else If [ day1::_lockDay ≠ "" or brainstate::_lockBrainstateID = brainstate::groupID ]
+Else If [ day1::_lockDay ≠ "" or timer::_lockTimer = timer::groupID ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End If
@@ -196,11 +249,11 @@ Set Variable [ $DayID; Value:day1::_lockDay ]
 Set Variable [ $$stopwatchON; Value:"f" ]
 #
 #2 tag the main record as updated so any total and grand totals it is a part of get updated too
-Set Field [ brainstate::groupUpdate; If ( brainstate::groupID ≠ "" ; "u" ; "" ) ]
-Set Field [ brainstate::groupOfGroupUpdate; If ( brainstate::groupOfGroupID ≠ "" ; "u" ; "" ) ]
+Set Field [ timer::groupUpdate; If ( timer::groupID ≠ "" ; "u" ; "" ) ]
+Set Field [ timer::groupOfGroupUpdate; If ( timer::groupOfGroupID ≠ "" ; "u" ; "" ) ]
 #
 #3 find the day record and delete it.
-Go to Layout [ “calcDayTable” (day1) ]
+Go to Layout [ “DayTable” (day1) ]
 Enter Find Mode [ ]
 Set Field [ day1::_lockDay; $DayID ]
 Perform Find [ ]
@@ -213,16 +266,15 @@ Delete Record/Request
 #selected records.
 Set Variable [ $refreshDayCurrentWindow; Value:Get ( WindowName ) ]
 Select Window [ Name: "Day"; Current file ]
-Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
+Set Variable [ $$logissues; Value:logs::_keyLogSPAs ]
 Set Variable [ $$log; Value:logs::_lockDay ]
-Set Variable [ $$day1BugField; Value:logs::swBugField ]
 Refresh Window
 Select Window [ Name: "Specific Action"; Current file ]
-Set Variable [ $$issueLogs; Value:issue::_keyLogs ]
+Set Variable [ $$issueLogs; Value:specificAction::_keyLogs ]
 Refresh Window
 Select Window [ Name: $refreshDayCurrentWindow; Current file ]
 #
-Go to Layout [ “calcBrainstateTable” (brainstate) ]
+Go to Layout [ “TimerTable” (timer) ]
 End If
 #
 #B) END if the user deleted all time, then delete the related day record. (The user may decide they want to begin this timer again,
@@ -230,7 +282,8 @@ but if they don't a blank day record will exist which causes conditional formatt
 #
 #
 #
-#C) START skip the records that have not been changed.
+#C) START skip Timer records' related day
+#records that have not been changed.
 #
 #1 compare the record's total time against the last
 #update time recorded, and if they are the same go
@@ -243,13 +296,13 @@ but if they don't a blank day record will exist which causes conditional formatt
 #User may have used the drag feature to change
 #multiple records and the only way to know what has
 #been changed is to compare these time fields.
-// If [ day1::updateTime ≠ day1::updateTimeCurrentTimeCalc and day1::swBugField = "note" ]
 If [ day1::swSymbols ≠ day1::updateTimeSymbol or day1::updateTime ≠ day1::updateTimeCurrentTimeCalc ]
 #
 #2 if the record is a total or grand total record, go to the next record (these will be updated later in the script).
-If [ brainstate::groupID ≠ brainstate::_lockBrainstateID ]
+If [ timer::groupID ≠ timer::_lockTimer ]
 #
-#C) END skip the records that have not been changed.
+#C) END skip Timer records' related day
+#records that have not been changed.
 #
 #
 #
@@ -259,7 +312,7 @@ If [ brainstate::groupID ≠ brainstate::_lockBrainstateID ]
 Set Field [ day1::updateTime; day1::updateTimeCurrentTimeCalc ]
 #
 #2 flag this record as changed if it belongs to a total record, so later in this script that record's time can be updated
-Set Field [ brainstate::groupUpdate; If ( brainstate::groupID ≠ "" ; "u" ; "" ) ]
+Set Field [ timer::groupUpdate; If ( timer::groupID ≠ "" ; "u" ; "" ) ]
 #
 #D) END update changed record's flags
 #
@@ -267,19 +320,18 @@ Set Field [ brainstate::groupUpdate; If ( brainstate::groupID ≠ "" ; "u" ; "" 
 #
 #E) BEGIN update the pause time fields
 #
-#This script step has been removed. Initially, I thought since most records only have one time event to skip the
-update pause step for these records. However, in testing I found that when a timer is started for a second
-time event a pause time is calculated resulting in a gray bar in the bar chart. If the user then deletes this
-second start time, this now disabled script stops that bar from being removed because when this script gets to
-this step the field is blank and so no calculation is done. I decided to leave this failure in just in case I forgot
-why this doesn't work, try it again, and fail to not perform the correct test, which I did until by accident noticed
-something wrong!
+#This script step has been removed. Initially, I thought since most records only have one time event to skip the update
+pause step for these records. However, in testing I found that when a timer is started for a second time event a
+pause time is calculated resulting in a gray bar in the bar chart. If the user then deletes this second start time, this
+now disabled script stops that bar from being removed because when this script gets to this step the field is blank
+and so no calculation is done. I decided to leave this failure in just in case I forgot why this doesn't work, try it
+again, and fail to not perform the correct test, which I did until by accident noticed something wrong!
 // #1 if there is only one time, skip the following steps to recalculate the time paused between more than one time.
 // If [ day1::swActivityLength[2] ≠ "" ]
 #
-#1 clear all PauseTotal fields, which is necessary because a user may have reduced the number of activity
-times, thus reducing the number of pauses. NOTE: pause field repetition 1 is never used as their is no
-pause between time zero and the first time.
+#1 clear all PauseTotal fields, which is necessary because a user may have reduced the number of activity times,
+thus reducing the number of pauses. NOTE: pause field repetition 1 is never used as their is no pause
+between time zero and the first time.
 Set Variable [ $repetition; Value:2 ]
 Loop
 Set Field [ day1::swPauseLength[$repetition]; Get ( CurrentTime ) ]
@@ -289,10 +341,9 @@ Set Variable [ $repetition; Value:$repetition+1 ]
 Exit Loop If [ $repetition = 31 ]
 End Loop
 #
-#2 calculate all pause times between activity times. This step is stopped when the next time to calculate a
-pause between is blank or when this loop has reached the last repitition (this test is neccessary because
-there are only 30 repetitions, so there will not be a blank 31 to detect, thus reaching 31 has to trigger a
-stop).
+#2 calculate all pause times between activity times. This step is stopped when the next time to calculate a pause
+between is blank or when this loop has reached the last repitition (this test is neccessary because there are
+only 30 repetitions, so there will not be a blank 31 to detect, thus reaching 31 has to trigger a stop).
 Set Variable [ $repetition; Value:2 ]
 Loop
 Set Field [ day1::swPauseLength[$repetition]; day1::swStart[$repetition] - day1::swPause[$repetition-1] ]
@@ -305,7 +356,9 @@ End Loop
 #
 #
 #E2) UPDATE the time in any dependent issues.
-If [ $$stopCHUNK_updateIssueCategoryTime ≠ 1 ]
+#Only perform this update if there are issues
+#linked to this day.
+If [ $$stopCHUNK_updateIssueCategoryTime ≠ 1 and day1::_keyLogSPAs ≠ "" ]
 Set Variable [ $$timeSegment; Value:$time ]
 Set Variable [ $$updateDay; Value:day1::_lockDay ]
 Perform Script [ “CHUNK_updateIssueCategoryTime (update)” ]
@@ -338,8 +391,8 @@ Loop
 #
 #1 find records
 Enter Find Mode [ ]
-Set Field [ brainstate::_keyUser; $user ]
-Set Field [ brainstate::groupUpdate; "u" ]
+Set Field [ timer::_keyUser; $user ]
+Set Field [ timer::groupUpdate; "u" ]
 Perform Find [ ]
 #
 #2 if no records are found go to step
@@ -350,8 +403,8 @@ Exit Loop If [ Get ( LastError ) = 401 ]
 #BEGIN error 1
 If [ Get ( LastError ) ≠ 0 ]
 #tell user the error number
-Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming
-CheckUpdateTime step G1."; Buttons: “OK” ]
+Show Custom Dialog [ Title: "!"; Message: "Unexpected error " & Get ( LastError ) & " peforming CheckUpdateTime
+step G1."; Buttons: “OK” ]
 Go to Record/Request/Page [ $record ]
 [ No dialog ]
 Set Variable [ $$recordnumber ]
@@ -369,12 +422,12 @@ End If
 #H) BEGIN update found record
 #
 #1 unflag this total record for total update
-Clear [ brainstate::groupUpdate ]
+Clear [ timer::groupUpdate ]
 [ Select ]
 #
 #1b set variables so total record's conditional formatting will match that of the stopwatch being updated.
 If [ day1::swSymbols ≠ day1::updateTimeSymbol or $$onoff = "note" ]
-Set Variable [ $$folderon; Value:brainstate::groupID ]
+Set Variable [ $$folderon; Value:timer::groupID ]
 If [ day1::swSymbols = "veto" ]
 Set Variable [ $$stopwatchON; Value:"t" ]
 Set Variable [ $$onoff; Value:"" ]
@@ -386,42 +439,42 @@ End If
 Set Field [ day1::updateTimeSymbol; day1::swSymbols ]
 #
 #2 find its linked records
-Set Variable [ $mergeto; Value:brainstate::groupID ]
-Go to Layout [ “calcBrainstateTable” (brainstate) ]
+Set Variable [ $mergeto; Value:timer::groupID ]
+Go to Layout [ “TimerTable” (timer) ]
 Enter Find Mode [ ]
-Set Field [ brainstate::groupID; $mergeto ]
-// Set Field [ brainstate::sortRetired; "=" ]
+Set Field [ timer::groupID; $mergeto ]
+// Set Field [ timer::sortRetired; "=" ]
 Perform Find [ ]
 Perform Script [ “folderStopwatchCheck” ]
 #3 go to the first record
 Loop
-If [ day1::swStart = "" and brainstate::_lockBrainstateID ≠ brainstate::groupID ]
+If [ day1::swStart = "" and timer::_lockTimer ≠ timer::groupID ]
 Omit Record
-Else If [ day1::swStart ≠ "" or brainstate::_lockBrainstateID = brainstate::groupID ]
+Else If [ day1::swStart ≠ "" or timer::_lockTimer = timer::groupID ]
 Go to Record/Request/Page
 [ Next; Exit after last ]
 End If
 End Loop
 #
-Sort Records [ Specified Sort Order: brainstate::groupType; based on value list: “MergeSort”
-brainstate::description; ascending ]
+Sort Records [ Specified Sort Order: timer::groupType; based on value list: “MergeSort”
+timer::description; ascending ]
 [ Restore; No dialog ]
 #
 #3 flag for grand total update
 Go to Record/Request/Page
 [ First ]
-Set Field [ brainstate::groupOfGroupUpdate; If ( brainstate::groupOfGroupID ≠ "" ; "u" ; "" ) ]
+Set Field [ timer::groupOfGroupUpdate; If ( timer::groupOfGroupID ≠ "" ; "u" ; "" ) ]
 #
-#4 if linked records are found, first reset the total record's time to zero in case the amount of time has decreased
-(essentially by deleting its current day record and creating a new blank one).
+#4 if linked records are found, first reset the total record's time to zero in case the amount of time has decreased (essentially
+by deleting its current day record and creating a new blank one).
 If [ day1::_keyDay = "" ]
-Set Variable [ $BrainstateID; Value:brainstate::_lockBrainstateID ]
-Go to Layout [ “calcDayTable” (day1) ]
+Set Variable [ $BrainstateID; Value:timer::_lockTimer ]
+Go to Layout [ “DayTable” (day1) ]
 New Record/Request
-Set Field [ day1::_keyBrainstate; $BrainstateID ]
+Set Field [ day1::_keyTimer; $BrainstateID ]
 Insert Calculated Result [ day1::_keyDay; reference::day1 ]
 [ Select ]
-Go to Layout [ “calcBrainstateTable” (brainstate) ]
+Go to Layout [ “TimerTable” (timer) ]
 End If
 Set Field [ day1::swStart; day1::_keyDay & " 0:00:00" ]
 Set Field [ day1::swPause; day1::_keyDay & " 0:00:00" ]
@@ -432,25 +485,24 @@ Loop
 Go to Record/Request/Page
 [ Last ]
 #
-#6 if there are no records to add then delete the just created related day record for this total record (this action
-would be caused by the user deleting all the time in the linked records).
-If [ brainstate::_lockBrainstateID = brainstate::groupID ]
+#6 if there are no records to add then delete the just created related day record for this total record (this action would be
+caused by the user deleting all the time in the linked records).
+If [ timer::_lockTimer = timer::groupID ]
 If [ day1::swTotalActivity = "0:00:00" ]
 Set Variable [ $dayID; Value:day1::_lockDay ]
-Go to Layout [ “calcDayTable” (day1) ]
+Go to Layout [ “DayTable” (day1) ]
 Enter Find Mode [ ]
 Set Field [ day1::_lockDay; $dayID ]
 Perform Find [ ]
 Delete Record/Request
 [ No dialog ]
-Go to Layout [ “calcBrainstateTable” (brainstate) ]
+Go to Layout [ “TimerTable” (timer) ]
 End If
 #
 #7 go the next part of the script once there are no more records to add
-Exit Loop If [ brainstate::_lockBrainstateID = brainstate::groupID ]
+Exit Loop If [ timer::_lockTimer = timer::groupID ]
 #
-#8 if there is a record to add capture its total time, omit it, go the first record and add this time to current total
-time.
+#8 if there is a record to add capture its total time, omit it, go the first record and add this time to current total time.
 Else If [ day1::_keyDay = "" ]
 Omit Record
 Else If [ day1::_keyDay ≠ "" ]
@@ -462,8 +514,8 @@ Insert Calculated Result [ day1::swPause; Case (
 $TotalActivity + day1::swTotalActivity > Time ( 23 ; 59 ; 59 ) ; day1::_keyDay & " 24:00:00" ;
 $TotalActivity + day1::swTotalActivity < Time ( 0 ; 0 ; 0 ) ; day1::_keyDay & " 00:00:00" ;
 day1::_keyDay & " " & ($TotalActivity + day1::swTotalActivity) )
-//insures that no more than 24 hours will be put into a day and that a day with negative time does not
-cause an error. ]
+//insures that no more than 24 hours will be put into a day and that a day with negative time does not cause an
+error. ]
 [ Select ]
 End If
 End Loop
@@ -478,8 +530,8 @@ Loop
 #
 #1 find records
 Enter Find Mode [ ]
-Set Field [ brainstate::_keyUser; $user ]
-Set Field [ brainstate::groupOfGroupUpdate; "u" ]
+Set Field [ timer::_keyUser; $user ]
+Set Field [ timer::groupOfGroupUpdate; "u" ]
 Perform Find [ ]
 #
 #2 if no records are found go to step
@@ -510,16 +562,16 @@ End If
 #J) BEGIN update found record
 #
 #1 unflag this total record for grand total update
-Clear [ brainstate::groupOfGroupUpdate ]
+Clear [ timer::groupOfGroupUpdate ]
 [ Select ]
 #
 #2 find its linked records
-Set Variable [ $mergeto; Value:brainstate::groupOfGroupID ]
-Go to Layout [ “calcBrainstateTable” (brainstate) ]
+Set Variable [ $mergeto; Value:timer::groupOfGroupID ]
+Go to Layout [ “TimerTable” (timer) ]
 Enter Find Mode [ ]
-Set Field [ brainstate::groupOfGroupID; $mergeto ]
+Set Field [ timer::groupOfGroupID; $mergeto ]
 Perform Find [ ]
-Sort Records [ Specified Sort Order: brainstate::groupType; based on value list: “MergeSort” ]
+Sort Records [ Specified Sort Order: timer::groupType; based on value list: “MergeSort” ]
 [ Restore; No dialog ]
 #
 #3 if linked records are found, first reset the total record's time to zero in case the amount of time has decreased
@@ -527,13 +579,13 @@ Sort Records [ Specified Sort Order: brainstate::groupType; based on value list:
 Go to Record/Request/Page
 [ First ]
 If [ day1::_keyDay = "" ]
-Set Variable [ $BrainstateID; Value:brainstate::_lockBrainstateID ]
-Go to Layout [ “calcDayTable” (day1) ]
+Set Variable [ $BrainstateID; Value:timer::_lockTimer ]
+Go to Layout [ “DayTable” (day1) ]
 New Record/Request
-Set Field [ day1::_keyBrainstate; $BrainstateID ]
+Set Field [ day1::_keyTimer; $BrainstateID ]
 Insert Calculated Result [ day1::_keyDay; reference::day1 ]
 [ Select ]
-Go to Layout [ “calcBrainstateTable” (brainstate) ]
+Go to Layout [ “TimerTable” (timer) ]
 End If
 Set Field [ day1::swStart; day1::_keyDay & " 0:00:00" ]
 Set Field [ day1::swPause; day1::_keyDay & " 0:00:00" ]
@@ -546,23 +598,23 @@ Go to Record/Request/Page
 #
 #5 if there are no records to add then delete the just created related day record for this total record (this action
 would be caused by the user deleting all the time in the linked records).
-If [ brainstate::_lockBrainstateID = brainstate::groupOfGroupID ]
+If [ timer::_lockTimer = timer::groupOfGroupID ]
 If [ day1::swTotalActivity = "0:00:00" ]
 Set Variable [ $dayID; Value:day1::_lockDay ]
-Go to Layout [ “calcDayTable” (day1) ]
+Go to Layout [ “DayTable” (day1) ]
 Enter Find Mode [ ]
 Set Field [ day1::_lockDay; $dayID ]
 Perform Find [ ]
 Delete Record/Request
 [ No dialog ]
-Go to Layout [ “calcBrainstateTable” (brainstate) ]
+Go to Layout [ “TimerTable” (timer) ]
 End If
 #
 #6 go the next part of the script once there are no more records to add
-Exit Loop If [ brainstate::_lockBrainstateID = brainstate::groupOfGroupID ]
+Exit Loop If [ timer::_lockTimer = timer::groupOfGroupID ]
 #
-#7 if there is a record to add capture its total time, omit it, go the first record and add this time to current
-total time.
+#7 if there is a record to add capture its total time, omit it, go the first record and add this time to current total
+time.
 Else If [ day1::_keyDay = "" ]
 Omit Record
 Else If [ day1::_keyDay ≠ "" ]
@@ -590,30 +642,40 @@ End Loop
 #Have to go back to orginal layout, otherwise Hide Window step causes the data to be delayed showing up after the next
 interation of the stopwatch script runs thru.
 Enter Find Mode [ ]
-Set Field [ brainstate::_lockBrainstateID; $$record ]
+Set Field [ timer::_lockTimer; $$record ]
 Perform Find [ ]
 Go to Layout [ $layout ]
 Set Variable [ $$stopRecordLoad ]
 If [ $mergeID ≠ "" and Left ( $layout ; 5 ) = "Total" ]
 Enter Find Mode [ ]
-Set Field [ brainstate::groupID; $mergeID ]
+Set Field [ timer::groupID; $mergeID ]
 Perform Find [ ]
 Else If [ $mergeGrandID ≠ "" and Left ( $layout ; 5 ) = "Grand" ]
 Enter Find Mode [ ]
-Set Field [ brainstate::groupOfGroupID; $mergeGrandID ]
+Set Field [ timer::groupOfGroupID; $mergeGrandID ]
 Perform Find [ ]
 Else If [ Left ( $layout ; 5 ) ≠ "Total" ]
 Perform Script [ “goBackButton_FindRecordsChunk” ]
-Perform Script [ “CHUNK_lastDayUsed” ]
-// Perform Script [ “folderStopwatchCheck” ]
-Perform Script [ “DaySelectSortThenSort (Update)” ]
+Perform Script [ “CHUNK_lastDayUsed (update)” ]
+Perform Script [ “DaySelectSortThenSort (update)” ]
+#
+#The user entered a time segment in
+#the Timer window, dragged its time to
+#another time segement, and has not yet
+#exited the entered time segment. They then
+#went to the Specific Action window and
+#clicked the 'start' button, which set this
+#variable and started this script.
+If [ $$timerWindowCheck = 1 ]
+Exit Script [ ]
+Else
 Halt Script
 End If
-If [ steward::retiredStatus = "r" ]
-Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: brainstate::sortRetired: “r” ]
+End If
+If [ user::retiredStatus = "r" ]
+Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: timer::sortRetired: “r” ]
 [ Restore ]
 End If
-Perform Script [ “CHUNK_lastDayUsed” ]
-// Perform Script [ “folderStopwatchCheck” ]
-Perform Script [ “DaySelectSortThenSort (Update)” ]
-July 13, ଘ౮28 19:44:21 ActionLog.fp7 - updateTime -1-
+Perform Script [ “CHUNK_lastDayUsed (update)” ]
+Perform Script [ “DaySelectSortThenSort (update)” ]
+December 10, ଘ౮28 20:38:30 ActionLog.fp7 - updateTime -1-

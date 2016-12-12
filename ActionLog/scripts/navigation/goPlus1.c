@@ -3,10 +3,10 @@ navigation: goPlus1
 #
 #
 #
-#1 add one the current date.
+#Add 1 to the current date.
 Set Field [ reference::day1; reference::day1 + 1 ]
 #
-#2 refresh the layout so that the key fields for each
+#Refresh the layout so that the key fields for each
 #record will be recalculated based on the new day
 #selected. The date and times shown for each
 #record are in a table related to each brainstate
@@ -30,31 +30,29 @@ Set Field [ reference::day1; reference::day1 + 1 ]
 Refresh Window
 [ Flush cached join results ]
 #
-#3 capture user's current date perference
-Set Field [ steward::chosenDay; reference::day1 ]
+#Capture the new day as the user's choosen
+#day, and as Timer window's day.
+Set Field [ user::chosenDay; reference::day1 ]
 #
-// #4 sort the records if the current sort is based on time so if any time is changed it goes up or down the current set of records according to its
-time value. The point is to keep the focus where the user expects it to be so the sort, which removes the focus from the current record is
-only done if the user wants the records sorted by time, in which case after the sort the focus is returned to the first record.
-// Perform Script [ “sortRestoreAfterScript” ]
-#
-#4 sort the records
-If [ Get ( LayoutName ) = "01EditTime" ]
-Sort Records [ Specified Sort Order: day1::_keyDay; ascending
-brainstate::groupType; ascending
-day1::swStart; ascending
-brainstate::sortNumber; based on value list: “__-99”
-brainstate::sortAlpha; based on value list: “sortAlpha”
-brainstate::sortSubNumber; based on value list: “__-99”
-brainstate::sortCategory; based on value list: “sortAlpha”
-brainstate::description; ascending ]
+#Sort the records.
+If [ Filter ( Get ( LayoutName ) ; "a" ) = "a"
+//Only the "main" layout has an 'a' in it. ]
+Sort Records [ Specified Sort Order: timer::sortNumber; based on value list: “__-99”
+timer::sortAlpha; based on value list: “sortAlpha”
+timer::sortSubNumber; based on value list: “__-99”
+timer::sortCategory; based on value list: “sortAlpha”
+timer::description; ascending ]
 [ Restore; No dialog ]
 Else
-Sort Records [ Specified Sort Order: brainstate::sortNumber; based on value list: “__-99”
-brainstate::sortAlpha; based on value list: “sortAlpha”
-brainstate::sortSubNumber; based on value list: “__-99”
-brainstate::sortCategory; based on value list: “sortAlpha”
-brainstate::description; ascending ]
+Sort Records [ Specified Sort Order: day1::_keyDay; ascending
+timer::groupType; ascending
+day1::swStart; ascending
+timer::sortNumber; based on value list: “__-99”
+timer::sortAlpha; based on value list: “sortAlpha”
+timer::sortSubNumber; based on value list: “__-99”
+timer::sortCategory; based on value list: “sortAlpha”
+timer::description; ascending ]
 [ Restore; No dialog ]
 End If
-February 6, 平成26 12:33:09 ActionLog.fp7 - goPlus1 -1-
+#
+December 10, ଘ౮28 20:00:04 ActionLog.fp7 - goPlus1 -1-

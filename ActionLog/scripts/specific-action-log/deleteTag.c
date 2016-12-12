@@ -10,22 +10,22 @@ End If
 #
 #Not sure about this step, but would guess
 #that if the record is not a tag then don't delete it.
-If [ category::_LockList = "" ]
+If [ SPAGroupTag::_LockSpecificAction = "" ]
 Go to Field [ ]
 Exit Script [ ]
 End If
 #
 #Capture essential information.
 Go to Field [ ]
-Set Variable [ $group; Value:category::_keyCategory ]
-Set Variable [ $delete; Value:category::_LockList ]
-Set Variable [ $name; Value:category::text ]
+Set Variable [ $groupKey; Value:SPAGroupTag::_keyGroup ]
+Set Variable [ $delete; Value:SPAGroupTag::_LockSpecificAction ]
+Set Variable [ $name; Value:SPAGroupTag::text ]
 #
 #See if any specific actions are tagged with this tag.
 New Window [ ]
-Go to Layout [ “IssuesAndObservations Copy” (issue) ]
+Go to Layout [ “IssuesAndObservations Copy” (specificAction) ]
 Enter Find Mode [ ]
-Set Field [ issue::_keyCategory; $delete ]
+Set Field [ specificAction::_keyGroup; $delete ]
 Perform Find [ ]
 Set Variable [ $error; Value:Get (LastError) ]
 Set Variable [ $foundcount; Value:Get ( FoundCount ) ]
@@ -33,9 +33,9 @@ Set Variable [ $foundcount; Value:Get ( FoundCount ) ]
 #If it tags nothing, then check if it is the last tag
 #in its group.
 If [ $foundcount = 0 ]
-Go to Layout [ “category data” (category) ]
+Go to Layout [ “category data” (SPAGroupTag) ]
 Enter Find Mode [ ]
-Set Field [ category::_keyCategory; $group ]
+Set Field [ SPAGroupTag::_keyGroup; $groupKey ]
 Perform Find [ ]
 Set Variable [ $tagsingroup; Value:Get (FoundCount) ]
 End If
@@ -48,15 +48,13 @@ Close Window [ Current Window ]
 If [ $error ≠ 401 ]
 Set Variable [ $delete ]
 Show Custom Dialog [ Message: Case ( $foundcount ≠ 1 ;
-"'" & $name & "'" & " can be deleted once the " & $foundcount & " specific issues tagged with it are tagged with a different tag. To find
-these " & $foundcount & ", click the 'find' button (above) and then this tag's button." ;
-"'" & $name & "'" & " can be deleted once the 1 specific issue tagged with it is tagged with a different tag. To find it, click the 'find'
-button above and then this tag's button." ); Buttons: “OK” ]
+"'" & $name & "'" & " can be deleted once the " & $foundcount & " specific issues tagged with it are tagged with a different
+tag. To find these " & $foundcount & ", click the 'find' button (above) and then this tag's button." ;
+"'" & $name & "'" & " can be deleted once the 1 specific issue tagged with it is tagged with a different tag. To find it, click the
+'find' button above and then this tag's button." ); Buttons: “OK” ]
 Exit Script [ ]
 End If
 #
-December 6, ଘ౮27 21:17:11 ActionLog.fp7 - deleteTag -1-
-specific action log: deleteTag
 #If none are found then ask user if they really want
 #to delete this tag.
 Refresh Window
@@ -76,10 +74,10 @@ If [ Get ( LastMessageChoice ) = 2 ]
 #If it is the last tag in the group inform the user
 #and make sure they still want to delete tag and group.
 If [ $tagsingroup = 1 ]
-Set Variable [ $groupName; Value:group::text ]
+Set Variable [ $groupName; Value:TagGroup::text ]
 Refresh Window
-Show Custom Dialog [ Message: "The tag group — " & $groupName & " — will also be deleted because tag " & $name & " is the last
-tag in it."; Buttons: “OK”, “cancel” ]
+Show Custom Dialog [ Message: "The tag group — " & $groupName & " — will also be deleted because tag " & $name & "
+is the last tag in it."; Buttons: “OK”, “cancel” ]
 #
 #If they don't, then stop the script.
 If [ Get ( LastMessageChoice ) = 2 ]
@@ -92,9 +90,9 @@ End If
 #
 #If they do the first find and delete the group.
 New Window [ ]
-Go to Layout [ “category data” (category) ]
+Go to Layout [ “category data” (SPAGroupTag) ]
 Enter Find Mode [ ]
-Set Field [ category::_LockList; $group ]
+Set Field [ SPAGroupTag::_LockSpecificAction; $groupKey ]
 Perform Find [ ]
 Delete Record/Request
 [ No dialog ]
@@ -111,4 +109,4 @@ End If
 Set Variable [ $delete ]
 Go to Field [ ]
 Refresh Window
-December 6, ଘ౮27 21:17:11 ActionLog.fp7 - deleteTag -2-
+December 10, ଘ౮28 23:04:12 ActionLog.fp7 - deleteTag -1-

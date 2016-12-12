@@ -1,5 +1,9 @@
 specific action log: loadLogrecordID
 #
+#NOTE: Need at some point to stop using log
+#in favor of day, which this script loads: Day
+#Window records.
+#
 If [ $$stopRecordLoad = 1 ]
 Exit Script [ ]
 End If
@@ -10,8 +14,7 @@ End If
 #Action records.
 Set Variable [ $$log; Value:logs::_lockDay ]
 Set Variable [ $$logrecordID; Value:Get ( RecordID ) ]
-Set Variable [ $$logissues; Value:logs::_keyLogIssues ]
-Set Variable [ $$day1BugField; Value:logs::swBugField ]
+Set Variable [ $$logissues; Value:logs::_keyLogSPAs ]
 #
 #Inform other scripts if user is on or not on
 #the Today or Yesterday record. This info will
@@ -42,4 +45,4 @@ Refresh Window
 Set Variable [ $$stopRecordLoad ]
 Go to Field [ ]
 #
-July 26, ଘ౮28 15:21:25 ActionLog.fp7 - loadLogrecordID -1-
+December 10, ଘ౮28 21:04:40 ActionLog.fp7 - loadLogrecordID -1-
