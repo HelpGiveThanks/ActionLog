@@ -68,7 +68,7 @@
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32784BaseTableAnchor_">reference1</a></td><td>
-<div align="left"><a href="#32784BaseTableAnchor_">98 fields</a> defined, 2 records</div>
+<div align="left"><a href="#32784BaseTableAnchor_">99 fields</a> defined, 2 records</div>
 </td><td><a href="#13631578TableAnchor_"><em>reference1</em></a></td>
 </tr>
 <tr class="regularcharttext" vAlign="top">
@@ -78,7 +78,7 @@
 </tr>
 <tr class="regularcharttext" vAlign="top">
 <td><a href="#32786BaseTableAnchor_">MemorySwitch</a></td><td>
-<div align="left"><a href="#32786BaseTableAnchor_">20 fields</a> defined, 6 records</div>
+<div align="left"><a href="#32786BaseTableAnchor_">20 fields</a> defined, 13 records</div>
 </td><td><a href="#13631607TableAnchor_"><em>MemorySwitch</em></a></td>
 </tr>
 </tbody>
@@ -89,7 +89,7 @@
 		<table width="100%" border="1">
 <tbody>
 <tr class="privsetfirst" vAlign="top">
-<td colSpan="9">Table Name: <a name="32784BaseTableAnchor_"/>reference1 - 98 Fields</td>
+<td colSpan="9">Table Name: <a name="32784BaseTableAnchor_"/>reference1 - 99 Fields</td>
 </tr>
 <tr class="chartheaders" vAlign="top">
 <td width="8%">Field Name</td><td width="7%">Type</td><td width="14%">Options</td><td width="10%">Comments</td><td width="13%">On Layouts</td><td width="15%">In Relationships</td><td width="22%">In Scripts</td><td width="11%">In Value Lists</td>
@@ -127,7 +127,7 @@
 </td>
 </tr>
 			<tr class="regularcharttext" vAlign="top">
-<td><a name="3278422FieldAnchor_"/>_kfbrainstateID</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
+<td><a name="3278422FieldAnchor_"/>_ktimerID</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
 </ul>
@@ -479,7 +479,7 @@
 </td>
 </tr>
 			<tr class="regularcharttext" vAlign="top">
-<td><a name="3278491FieldAnchor_"/>farmerID</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
+<td><a name="3278491FieldAnchor_"/>userID</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
 </ul>
@@ -507,7 +507,7 @@
 </td>
 </tr>
 			<tr class="regularcharttext" vAlign="top">
-<td><a name="3278492FieldAnchor_"/>farmerName</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
+<td><a name="3278492FieldAnchor_"/>userName</td><td>Normal, Text</td><td><strong>Auto-Enter:</strong>
 <ul>
 <li>Allow editing</li>
 </ul>
@@ -2266,7 +2266,7 @@
 </td>
 </tr>
 			<tr class="regularcharttext" vAlign="top">
-<td><a name="3278432771FieldAnchor_"/>farmerInitials</td><td>Calculated, Text</td><td><strong>Calculation:</strong>
+<td><a name="3278432771FieldAnchor_"/>userInitials</td><td>Calculated, Text</td><td><strong>Calculation:</strong>
 <ul>
 <li>Context table: <a href="#13631578TableAnchor_"><em>reference1</em></a></li>
 <li>
@@ -2403,6 +2403,33 @@
 <li>Repetitions: 1</li>
 </ul>
 </td><td>used to determine current sort applied to category tags</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td><td>
+<ul></ul>
+</td>
+</tr>
+			<tr class="regularcharttext" vAlign="top">
+<td><a name="3278432778FieldAnchor_"/>version</td><td>Calculated, Text</td><td><strong>Calculation:</strong>
+<ul>
+<li>Context table: <a href="#13631578TableAnchor_"><em>reference1</em></a></li>
+<li>"3.2b BETA"</li>
+</ul>
+<strong>Auto-Enter:</strong>
+<ul>
+<li>Always evaluate</li>
+</ul>
+<strong>Storage:</strong>
+<ul>
+<li>Repetitions: 1</li>
+<li>Indexing: None</li>
+<li>Automatically create indexes as needed</li>
+<li>Index Language: English</li>
+</ul>
+</td><td></td><td>
 <ul></ul>
 </td><td>
 <ul></ul>
@@ -3050,7 +3077,7 @@
 <ul></ul>
 </td><td>
 <ul>
-<li><a href="#3278432771FieldAnchor_"><em>reference1</em>::farmerInitials</a></li>
+<li><a href="#3278432771FieldAnchor_"><em>reference1</em>::userInitials</a></li>
 </ul>
 </td><td>
 <ul></ul>
@@ -3170,7 +3197,7 @@
 		</td>
 </tr>
 <tr vAlign="top">
-<td class="chartheadersnobg">Field</td><td class="regularcharttext"><a href="#3278491FieldAnchor_">farmerID</a></td><td class="regularcharttext" align="middle">=</td><td class="regularcharttext">
+<td class="chartheadersnobg">Field</td><td class="regularcharttext"><a href="#3278491FieldAnchor_">userID</a></td><td class="regularcharttext" align="middle">=</td><td class="regularcharttext">
 
 			<a href="
 
@@ -3433,7 +3460,7 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278491FieldAnchor_"><em>reference1</em>::farmerID</a></td>
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3278491FieldAnchor_"><em>reference1</em>::userID</a></td>
 </tr>
 <tr class="chartsubheads" valign="top">
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
@@ -3468,7 +3495,7 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278492FieldAnchor_"><em>reference1</em>::farmerName</a></td>
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3278492FieldAnchor_"><em>reference1</em>::userName</a></td>
 </tr>
 <tr class="chartsubheads" valign="top">
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
@@ -4524,7 +4551,7 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="chartheaders" valign="top">
-<td colspan="6" class="privsetfirst">Field Name: <a href="#3278432771FieldAnchor_"><em>reference1</em>::farmerInitials</a></td>
+<td colspan="6" class="privsetfirst">Field Name: <a href="#3278432771FieldAnchor_"><em>reference1</em>::userInitials</a></td>
 </tr>
 <tr class="chartsubheads" valign="top">
 <td class="chartheaders" colspan="2">Field Properties</td><td class="chartheaders" width="14%" colspan="1">Coordinates</td><td class="chartheaders" width="17%" colspan="1">Field Format</td><td class="chartheaders" width="40%" colspan="2">Field Behavior</td>
@@ -5913,7 +5940,7 @@
 <td class="script_hier"><a name="32772ScriptAnchor_toc"></a><a href="#32772ScriptAnchor_">start</a></td>
 </tr>
 <tr>
-<td class="script_hier"><a name="32773ScriptAnchor_toc"></a><a href="#32773ScriptAnchor_">show tools (new)</a></td>
+<td class="script_hier"><a name="32773ScriptAnchor_toc"></a><a href="#32773ScriptAnchor_">show tools</a></td>
 </tr>
 </tbody>
 </table>
@@ -5921,7 +5948,7 @@
 <table class="script_navbar">
 <tbody>
 <tr class="script_navbar">
-<a name="32772ScriptAnchor_"></a><td class="script_navbar"></td><td class="script_navbar"></td><td class="script_navbar"><a href="#32773ScriptAnchor_"><span>Next Script: [show tools (new)]</span></a></td>
+<a name="32772ScriptAnchor_"></a><td class="script_navbar"></td><td class="script_navbar"></td><td class="script_navbar"><a href="#32773ScriptAnchor_"><span>Next Script: [show tools]</span></a></td>
 </tr>
 </tbody>
 </table>
@@ -6007,7 +6034,7 @@
 <table width="100%" border="1">
 <tbody>
 <tr class="privsetfirst" vAlign="top">
-<td width="35%">Script Name</td><td width="65%">show tools (new)</td>
+<td width="35%">Script Name</td><td width="65%">show tools</td>
 </tr>
 <tr vAlign="top">
 <td class="chartheadersnobg">Run script with full access privileges</td><td class="regularcharttext">Off</td>

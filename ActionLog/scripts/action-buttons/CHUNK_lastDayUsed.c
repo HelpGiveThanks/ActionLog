@@ -1,9 +1,10 @@
 action buttons: CHUNK_lastDayUsed
 #PURPOSE calculates last day a timer was used
-#to display next the timer on days it is not in
-#use. Gives the user a sense of how useful a
-#timer is to them, or how long since they last
-#exercised, for example.
+#so on days when a timer is not in use, this
+#number can be shown to users letting them
+#know how long since they last used a timer,
+#or how long since they last exercised,
+#for example.
 #
 #
 #basic administration tasks
@@ -47,4 +48,4 @@ Set Field [ timer::DateOfLastUse; $date ]
 End If
 End If
 Go to Layout [ original layout ]
-December 10, ଘ౮28 20:44:12 ActionLog.fp7 - CHUNK_lastDayUsed -1-
+December 12, ଘ౮28 11:31:41 ActionLog.fp7 - CHUNK_lastDayUsed -1-
