@@ -108,11 +108,31 @@ Exit Script [ ]
 End If
 #
 #Don't allow user to start the timer if it is
-#active in the past.
-If [ specificAction::timer = "active" ]
-Show Custom Dialog [ Message: "Active in the past. To make 'start' work 1) go to the day window (click the 'day' button above).
-2) Scroll to each day whose text area is highlighted, and date is bolded. 3) Click their bolded dates, and 4) in the Timer
-window insert a stop time."; Buttons: “OK” ]
+#active in the past by ...
+Set Variable [ $$stopRecordLoad; Value:1 ]
+Set Variable [ $$specificActionTimer; Value:1 ]
+New Window [ ]
+Allow User Abort [ Off ]
+Set Error Capture [ On ]
+#
+#...finding all Specific Action records assigned
+#to this timer that are active, and ...
+Enter Find Mode [ ]
+Set Field [ specificAction::timer; "active" ]
+#(Need to eventual change variable name to $$SPAtimer)
+Set Field [ specificAction::_keyTimer; $$logBrainstate ]
+Perform Find [ ]
+Set Variable [ $activeRecordsFound; Value:Get (FoundCount) ]
+#
+#... telling user why they cannot start timer if
+#it is active in the past.
+Close Window [ Current Window ]
+Set Variable [ $$stopRecordLoad ]
+Set Variable [ $$specificActionTimer ]
+If [ $activeRecordsFound ≠ 0 ]
+Show Custom Dialog [ Message: "Active in the past. 'Start' button will work after you 1) click the 'day' button/go to the Day
+window. 2) Scroll to each day whose date is highlighted and bolded. 3) Click each bolded date, and 4) in the Timer window,
+insert a stop time for each one."; Buttons: “OK” ]
 Exit Script [ ]
 End If
 #
@@ -317,6 +337,20 @@ Scroll Window
 #
 #END Run copied "note veto view" script steps.
 #
+#Sort Timer window if on an edit time layout.
+Select Window [ Name: "Timer"; Current file ]
+If [ Get ( LayoutName ) = "EditTimeiPhone" or Get ( LayoutName ) = "01EditTime" ]
+Sort Records [ Specified Sort Order: day1::_keyDay; ascending
+timer::groupType; ascending
+day1::swStart; ascending
+timer::sortNumber; based on value list: “__-99”
+timer::sortAlpha; based on value list: “sortAlpha”
+timer::sortSubNumber; based on value list: “__-99”
+timer::sortCategory; based on value list: “sortAlpha”
+timer::description; ascending ]
+[ Restore; No dialog ]
+End If
+#
 #
 End If
 #
@@ -441,4 +475,4 @@ Refresh Window
 #
 #END Add newly created time segement to SPA.
 #
-December 10, ଘ౮28 23:23:21 ActionLog.fp7 - startTimerAssignTimeSegmentToSpecificAction -1-
+December 16, ଘ౮28 14:59:10 ActionLog.fp7 - startTimerAssignTimeSegmentToSpecificAction -1-

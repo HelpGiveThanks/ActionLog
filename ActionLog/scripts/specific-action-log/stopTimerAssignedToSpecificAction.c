@@ -49,7 +49,6 @@ If [ day1::swBugField ≠ "veto" and $active = "" ]
 If [ $timerWindowRecordNumber ≠ "" ]
 Go to Record/Request/Page [ $timerWindowRecordNumber ]
 [ No dialog ]
-Set Variable [ $$stopRecordLoad ]
 End If
 #
 #Return to the Specific Action window.
@@ -61,44 +60,18 @@ Select Window [ Name: "Day"; Current file ]
 Select Window [ Name: "Specific Action"; Current file ]
 End If
 #
-Exit Script [ ]
-End If
-#
-#Only allow timer in the main Timer window
-#to be stopped if it is running today or
-#yesterday (in case the user's day goes into
-#the morning hours of the next day).
-If [ //reference::day1 = date of main Timer window
-reference::day1 ≠ Get ( CurrentDate ) and Get ( CurrentDate ) - 1 > reference::day1 ]
-#
-#Return user to record they where focused on
-#before this script started.
-If [ $timerWindowRecordNumber ≠ "" ]
-Go to Record/Request/Page [ $timerWindowRecordNumber ]
-[ No dialog ]
 Set Variable [ $$stopRecordLoad ]
-End If
-#
-#Return to the Specific Action window.
-If [ Get ( SystemPlatform ) = 3 ]
-Select Window [ Name: "Specific Action"; Current file ]
-Else
-Select Window [ Name: "Tag"; Current file ]
-Select Window [ Name: "Day"; Current file ]
-Select Window [ Name: "Specific Action"; Current file ]
-End If
-#
-#Inform user why the can't use the button.
-Show Custom Dialog [ Message: "The 'stop' button cannot stop timers running in the past. To stop this " & reference::
-ActivityLogDay & " timer: 1) click the 'timer' button above. 2) Go to the edit-time view. 3) Insert a stop time for it."; Buttons:
-“OK” ]
 Exit Script [ ]
 End If
 #
-#If the Timer window is focused on yesterday,
-#make sure there are no Timers running today.
-If [ //day1 is yesterday = true or 1.
- ( reference::day1 = Get ( CurrentDate ) - 1 ) = 1 ]
+#Make sure there are no Timers running today
+#if the Timer window is focused on yesterday,
+#or further back into the past. This info will
+#drive helpful messages to the user about
+#what date to advance the timer to, since the
+#users current day could be either the current
+#date or the current date minus one day.
+If [ reference::day1 ≠ Get ( CurrentDate ) ]
 Set Variable [ $$specificActionTimer; Value:1 ]
 New Window [ ]
 Go to Layout [ “DayTable” (day1) ]
@@ -117,12 +90,52 @@ Close Window [ Current Window ]
 Set Variable [ $$specificActionTimer ]
 End If
 #
+#Only allow timer in the main Timer window
+#to be stopped if it is running today or
+#yesterday (in case the user's day goes into
+#the morning hours of the next day).
+If [ //reference::day1 = date of main Timer window
+reference::day1 ≠ Get ( CurrentDate ) and Get ( CurrentDate ) - 1 > reference::day1 ]
+#
 #Return user to record they where focused on
 #before this script started.
 If [ $timerWindowRecordNumber ≠ "" ]
 Go to Record/Request/Page [ $timerWindowRecordNumber ]
 [ No dialog ]
+End If
+#
+#Return to the Specific Action window.
+If [ Get ( SystemPlatform ) = 3 ]
+Select Window [ Name: "Specific Action"; Current file ]
+Else
+Select Window [ Name: "Tag"; Current file ]
+Select Window [ Name: "Day"; Current file ]
+Select Window [ Name: "Specific Action"; Current file ]
+End If
+#
+#Inform user why the can't use the button.
+If [ $todayExists = 1 ]
+Show Custom Dialog [ Message: "To use the 'stop' button move the Timer window forward to " & Get ( CurrentDate ) & ". 1)
+Click the 'timer' button above. 2) Move its date forward to" & Get ( CurrentDate ) & "."; Buttons: “OK” ]
+Show Custom Dialog [ Message: "To stop timers further back in the past 1) click the 'day' button/go the the Day window. 2)
+Scroll to each day whose date is highlighted and bolded. 3) Click each bolded date, and 4) in the Timer window, insert a
+stop time for each one."; Buttons: “OK” ]
+Else
+Show Custom Dialog [ Message: "To use the 'stop' button move the Timer window forward to " & Get ( CurrentDate ) - 1 & ".
+1) Click the 'timer' button above. 2) Move its date forward to" & Get ( CurrentDate ) - 1 & "."; Buttons: “OK” ]
+Show Custom Dialog [ Message: "To stop timers further back in the past 1) click the 'day' button/go the the Day window. 2)
+Scroll to each day whose date is highlighted and bolded. 3) Click each bolded date, and 4) in the Timer window, insert a
+stop time for each one."; Buttons: “OK” ]
+End If
 Set Variable [ $$stopRecordLoad ]
+Exit Script [ ]
+End If
+#
+#Return user to record they where focused on
+#before this script started.
+If [ $timerWindowRecordNumber ≠ "" ]
+Go to Record/Request/Page [ $timerWindowRecordNumber ]
+[ No dialog ]
 End If
 #
 #Return to the Specific Action window.
@@ -140,6 +153,7 @@ If [ //reference::day1 = date of timer window.
 Get (CurrentDate) < reference::day1 ]
 Show Custom Dialog [ Message: "Timer window is in the future. Return the timer window to today. 1) Go to the Timer window
 (click the 'timer' button above). 2) Move the Timer window date back to today."; Buttons: “OK” ]
+Set Variable [ $$stopRecordLoad ]
 Exit Script [ ]
 End If
 #
@@ -154,6 +168,7 @@ If [ //1) day1 is today = false or 0, and
 Show Custom Dialog [ Message: "The 'stop' button cannot stop timer's in the past, which " & Get ( CurrentDate ) - 1 & " became
 once a " & Get ( CurrentDate ) & " timer was started. To stop yesterday's timer: 1) click the 'timer' button above. 2) Go to the
 edit-time view. 3) Insert a stop time for this timer."; Buttons: “OK” ]
+Set Variable [ $$stopRecordLoad ]
 Exit Script [ ]
 End If
 #
@@ -164,6 +179,7 @@ reference::ActivityLogDay < reference::day1 and specificAction::timer = "active"
 Show Custom Dialog [ Message: "Timer window is one day ahead. To stop this timer 1) go to the Timer window (click the 'timer'
 button above). 2) Move the Timer window date one day back. 3) Insert a stop time OR try clicking the 'stop' button again.";
 Buttons: “OK” ]
+Set Variable [ $$stopRecordLoad ]
 Exit Script [ ]
 End If
 #
@@ -175,6 +191,42 @@ Go to Record/Request/Page
 [ First ]
 Go to Field [ ]
 Select Window [ Name: "Specific Action"; Current file ]
+End If
+#
+#Don't allow user to stop the timer if it is
+#active in the past by ...
+Set Variable [ $$stopRecordLoad; Value:1 ]
+Set Variable [ $$specificActionTimer; Value:1 ]
+New Window [ ]
+Allow User Abort [ Off ]
+Set Error Capture [ On ]
+#
+#...finding all Specific Action records assigned
+#to this timer that are active, and ...
+Enter Find Mode [ ]
+Set Field [ specificAction::timer; "active" ]
+#(Need to eventual change variable name to $$SPAtimer)
+Set Field [ specificAction::_keyTimer; $$logBrainstate ]
+Perform Find [ ]
+If [ //1) day1 is today and there is only 1 active record or
+ reference::day1 = Get ( CurrentDate ) and Get(FoundCount) = 1 or
+//2) day1 is yesterday and there are no records for today and there is only 1 active record.
+ reference::day1 = Get ( CurrentDate ) - 1 and $todayExists ≠ 1 and Get(FoundCount) = 1 ]
+Set Variable [ $activeRecordsFound; Value:0 ]
+Else
+Set Variable [ $activeRecordsFound; Value:Get (FoundCount) ]
+End If
+#
+#... telling user why they cannot stop timer if
+#it is active in the past.
+Close Window [ Current Window ]
+Set Variable [ $$stopRecordLoad ]
+Set Variable [ $$specificActionTimer ]
+If [ $activeRecordsFound ≠ 0 ]
+Show Custom Dialog [ Message: "To stop timers in the past 1) click the 'day' button/go the the Day window. 2) Scroll to each day
+whose date is highlighted and bolded. 3) Click each bolded date, and 4) in the Timer window, insert a stop time for each
+one."; Buttons: “OK” ]
+Exit Script [ ]
 End If
 #
 #Stop timer.
@@ -226,4 +278,6 @@ Refresh Window
 #
 End If
 #
-December 10, ଘ౮28 23:24:21 ActionLog.fp7 - stopTimerAssignedToSpecificAction -1-
+Set Variable [ $$stopRecordLoad ]
+#
+December 16, ଘ౮28 15:02:11 ActionLog.fp7 - stopTimerAssignedToSpecificAction -1-

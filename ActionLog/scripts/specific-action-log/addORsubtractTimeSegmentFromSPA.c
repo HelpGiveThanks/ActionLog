@@ -12,22 +12,25 @@ End If
 #Exit script if user has not exited a Timer
 #window field, which can prevent linking
 #of records.
-If [ Get ( SystemPlatform ) ≠ 3 ]
 Select Window [ Name: "Timer"; Current file ]
 If [ Get (ActiveFieldName) ≠ "" ]
 Select Window [ Name: "Tag"; Current file ]
 Select Window [ Name: "Specific Action"; Current file ]
 Select Window [ Name: "Day"; Current file ]
 Go to Field [ ]
-Show Custom Dialog [ Message: "You are in a field in the Timer window which you must exit before assigning time
-segements to specific actions. 1) Click 'timer' above. 2) Exit the field."; Buttons: “OK” ]
+Show Custom Dialog [ Message: "You are in a field in the Timer window which you must exit before assigning time segements
+to specific actions. 1) Click 'timer' above. 2) Exit the field."; Buttons: “OK” ]
 Exit Script [ ]
 End If
 Select Window [ Name: "Day"; Current file ]
-End If
 #
 #Get segment ID information.
 Set Variable [ $timeSegment; Value:Get ( ActiveRepetitionNumber ) & logs::_lockDay ]
+#
+#Get last segment ID information (to
+#determine later on if segment being
+#added is active).
+Set Variable [ $lastSegment; Value:logs::swOccurances & logs::_lockDay ]
 #
 #Prevent windows from flashing and script from slowing
 #by stopping strobe effect caused by going back and
@@ -133,7 +136,7 @@ Set Field [ daylog::swLogTimeAccounting[$repetition]; $$issue ]
 #been added to it, then link it.
 Select Window [ Name: "Specific Action"; Current file ]
 If [ specificAction::_LockSpecificAction & "¶" ≠ FilterValues ( $$logIssues ; specificAction::_LockSpecificAction & "¶" ) ]
-Perform Script [ “SpecificActionLinkToDayRecordToggle (name change from linkActionToDay )” ]
+Perform Script [ “SpecificActionLinkToDayRecordToggle” ]
 End If
 #
 #If this Specific Action/issue record has the
@@ -141,8 +144,7 @@ End If
 #this Day's timer is active, then conditional
 #format this Specific Action (issue) record
 #'active'.
-If [ FilterValues (specificAction::timeSegmentKeyList ; $repetition & $day & "¶" ) = $repetition & $day & "¶" and $noteOrVeto =
-"veto" ]
+If [ FilterValues (specificAction::timeSegmentKeyList ; $repetition & $day & "¶" ) = $lastSegment & "¶" and $noteOrVeto = "veto" ]
 Set Field [ specificAction::timer; "active" ]
 End If
 #
@@ -343,7 +345,7 @@ Enter Find Mode [ ]
 Set Field [ specificAction::_LockSpecificAction; $issue ]
 Perform Find [ ]
 #... by running this next script.
-Perform Script [ “CHUNK_seeIfSPAisActiveOnOtherDays (new)” ]
+Perform Script [ “CHUNK_seeIfSPAisActiveOnOtherDays” ]
 Close Window [ Current Window ]
 #
 #Return user to Day layout they where on at
@@ -362,4 +364,4 @@ Go to Field [ ]
 #
 #END Go to linked SPA or subtract time segment.
 #
-December 10, ଘ౮28 23:09:55 ActionLog.fp7 - addORsubtractTimeSegmentFromSPA -1-
+December 16, ଘ౮28 1:02:38 ActionLog.fp7 - addORsubtractTimeSegmentFromSPA -1-

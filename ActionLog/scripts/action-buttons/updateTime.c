@@ -32,13 +32,6 @@ If [ $$warning ≠ "" ]
 Exit Script [ ]
 End If
 #
-If [ $$iphoneStop ≠ "" ]
-Set Variable [ $$iphoneStop ]
-Exit Script [ ]
-End If
-#
-Set Variable [ $$stopRecordLoad; Value:1 ]
-#
 #
 #When the user is in the time edit window we want to
 #use the recordnumber variable to focus on record in
@@ -69,6 +62,10 @@ End If
 #basic administration tasks
 Set Error Capture [ On ]
 Allow User Abort [ Off ]
+#
+#Prevent records loading during loops thru
+#them to speed up scripts.
+Set Variable [ $$stopRecordLoad; Value:1 ]
 #
 #BEGIN: Remove time segment key.
 #If the user has deleted time in a time slot,
@@ -131,7 +128,7 @@ End If
 #so this does not happen, but I leave it up to a
 #future sprint to discover this efficiency
 #improvement.
-Perform Script [ “CHUNK_seeIfSPAisActiveOnOtherDays (new)” ]
+Perform Script [ “CHUNK_seeIfSPAisActiveOnOtherDays” ]
 Set Variable [ $$stopRecordLoad; Value:1 ]
 #
 #Imporant to commit the record now as
@@ -266,9 +263,28 @@ Delete Record/Request
 #selected records.
 Set Variable [ $refreshDayCurrentWindow; Value:Get ( WindowName ) ]
 Select Window [ Name: "Day"; Current file ]
-Set Variable [ $$logissues; Value:logs::_keyLogSPAs ]
 Set Variable [ $$log; Value:logs::_lockDay ]
+Set Variable [ $$logrecordID; Value:Get ( RecordID ) ]
+Set Variable [ $$logissues; Value:logs::_keyLogSPAs ]
+#
+#Inform other scripts if user is on or not on
+#the Today or Yesterday record. This info will
+#speed them up, since they will not have to
+#check this out for themselves.
+Set Field [ reference::ActivityLogDay; logs::_keyDay ]
+Set Field [ reference::ActivityLogDayRecordNumber; Get (RecordNumber) ]
+#
+#Go to layout displaying all time segements
+#for the selected day record.
+If [ daylog::swActivityLength[11] ≠ "" ]
+Go to Layout [ “logs3rows” (logs) ]
+Else If [ daylog::swActivityLength[6] ≠ "" ]
+Go to Layout [ “logs2rows” (logs) ]
+Else If [ daylog::swActivityLength[6] = "" ]
+Go to Layout [ “logs1row” (logs) ]
+End If
 Refresh Window
+#
 Select Window [ Name: "Specific Action"; Current file ]
 Set Variable [ $$issueLogs; Value:specificAction::_keyLogs ]
 Refresh Window
@@ -361,7 +377,7 @@ End Loop
 If [ $$stopCHUNK_updateIssueCategoryTime ≠ 1 and day1::_keyLogSPAs ≠ "" ]
 Set Variable [ $$timeSegment; Value:$time ]
 Set Variable [ $$updateDay; Value:day1::_lockDay ]
-Perform Script [ “CHUNK_updateIssueCategoryTime (update)” ]
+Perform Script [ “CHUNK_updateIssueCategoryTime” ]
 Set Variable [ $$timeSegment ]
 Set Variable [ $$updateDay ]
 End If
@@ -656,8 +672,8 @@ Set Field [ timer::groupOfGroupID; $mergeGrandID ]
 Perform Find [ ]
 Else If [ Left ( $layout ; 5 ) ≠ "Total" ]
 Perform Script [ “goBackButton_FindRecordsChunk” ]
-Perform Script [ “CHUNK_lastDayUsed (update)” ]
-Perform Script [ “DaySelectSortThenSort (update)” ]
+Perform Script [ “CHUNK_lastDayUsed” ]
+Perform Script [ “DaySelectSortThenSort” ]
 #
 #The user entered a time segment in
 #the Timer window, dragged its time to
@@ -676,6 +692,6 @@ If [ user::retiredStatus = "r" ]
 Constrain Found Set [ Specified Find Requests: Omit Records; Criteria: timer::sortRetired: “r” ]
 [ Restore ]
 End If
-Perform Script [ “CHUNK_lastDayUsed (update)” ]
-Perform Script [ “DaySelectSortThenSort (update)” ]
-December 10, ଘ౮28 20:38:30 ActionLog.fp7 - updateTime -1-
+Perform Script [ “CHUNK_lastDayUsed” ]
+Perform Script [ “DaySelectSortThenSort” ]
+December 16, ଘ౮28 14:55:56 ActionLog.fp7 - updateTime -1-
